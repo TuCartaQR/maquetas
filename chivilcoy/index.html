@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulonera Chivilcoy | Potencia y Precisión Industrial</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': '#002D62', /* Azul logo Chivilcoy */
+                        'brand-secondary': '#1A1A1B', /* Negro logo Chivilcoy */
+                        'brand-accent': '#3B82F6', /* Azul vibrante para acentos */
+                        'brand-light': '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-pattern {
+            background-color: #002D62;
+            background-image: linear-gradient(rgba(0, 45, 98, 0.85), rgba(0, 45, 98, 0.95)), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 18px; /* Cuadrado con bordes redondeados */
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        /* Asegurar visibilidad de iconos Lucide */
+        svg.lucide {
+            stroke: currentColor;
+            stroke-width: 2px;
+            fill: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- Barra Superior -->
+    <div class="bg-brand-primary text-white text-sm py-2 px-4 hidden md:block border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> Av. Bernardo de Irigoyen esq. Salta, Chivilcoy</span>
+                <span class="flex items-center"><i data-lucide="clock" class="w-4 h-4 mr-1"></i> Lun a Vie: 8:00 a 12:00 | 14:00 a 18:30 | Sáb: 8:30 a 12:30</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://www.facebook.com/bulonera.chivilcoy.5" target="_blank" class="hover:text-blue-300 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/bulonera.chivilcoy/" target="_blank" class="hover:text-blue-300 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <span class="flex items-center font-bold"><i data-lucide="phone" class="w-4 h-4 mr-1"></i> (02346) 42-8780</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center h-20 overflow-hidden">
+                        <img src="images/logo.png" alt="Logo Bulonera Chivilcoy" class="h-16 w-auto object-contain">
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-xs font-bold uppercase tracking-widest">
+                    <a href="#inicio" class="text-gray-600 hover:text-brand-primary transition">Inicio</a>
+                    <a href="#productos" class="text-gray-600 hover:text-brand-primary transition">Productos</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-brand-primary transition">Servicios</a>
+                    <a href="#contacto" class="bg-brand-primary text-white px-6 py-3 rounded-md font-bold hover:bg-blue-900 transition shadow-lg">Pedir Presupuesto</a>
+                </div>
+                <!-- Menú Móvil -->
+                <div class="flex items-center md:hidden">
+                    <button class="text-gray-600 hover:text-brand-primary focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal (Hero) -->
+    <section id="inicio" class="hero-pattern py-20 lg:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 text-white">
+                <div class="inline-block bg-white/10 backdrop-blur-md px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase border border-white/20 mb-6">
+                    Suministros Industriales de Élite
+                </div>
+                <h1 class="font-heading text-4xl md:text-6xl font-extrabold mb-4 uppercase leading-tight">
+                    RESISTENCIA QUE <span class="text-brand-accent italic">FORJA</span> EL MUNDO
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-200">
+                    Todo para tu taller, industria y maquinaria. Medidas especiales en bulones y herramientas rúnicas para los proyectos más exigentes de Chivilcoy.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#productos" class="bg-white text-brand-primary hover:bg-slate-100 font-bold py-3 px-8 rounded-md text-lg transition shadow-lg text-center flex items-center justify-center uppercase text-sm">
+                        <i data-lucide="package-search" class="mr-2 w-5 h-5"></i> Explorar Catálogo
+                    </a>
+                    <a href="#contacto" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-primary text-white font-bold py-3 px-8 rounded-md text-lg transition text-center flex items-center justify-center uppercase text-sm">
+                        Visitar Local Central
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center hidden md:flex">
+                <div class="w-3/4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500 flex flex-col justify-center items-center text-white">
+                     <i data-lucide="award" class="w-20 h-20 text-brand-accent mb-4"></i>
+                     <h3 class="font-heading text-3xl font-bold text-center">Calidad Certificada</h3>
+                     <p class="text-center mt-3 text-lg">Solo trabajamos con materiales que cumplen los más altos estándares de seguridad industrial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ventajas Competitivas -->
+    <section class="py-12 bg-white relative -mt-12 mx-4 md:mx-auto max-w-6xl rounded-xl shadow-xl z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+            <div class="flex flex-col items-center text-center p-4">
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
+                    <i data-lucide="truck" class="w-10 h-10 text-brand-primary"></i>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Logística Veloz</h3>
+                <p class="text-gray-600">Entregas programadas en Chivilcoy y zona de influencia para que tu obra nunca se detenga.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4 md:border-x border-gray-200">
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
+                    <i data-lucide="brain" class="w-10 h-10 text-brand-primary"></i>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Sabiduría Técnica</h3>
+                <p class="text-gray-600">Personal con décadas de experiencia para asesorarte en la solución de fijación perfecta.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4">
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
+                    <i data-lucide="shield-check" class="w-10 h-10 text-brand-primary"></i>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Garantía Real</h3>
+                <p class="text-gray-600">Respaldo oficial de las marcas líderes para asegurar la durabilidad de tus proyectos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías de Productos -->
+    <section id="productos" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-extrabold text-brand-primary mb-4 uppercase tracking-tight">Inventario Industrial</h2>
+                <div class="w-24 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Fijaciones técnicas, herramientas de potencia e insumos de alta gama.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Categoría 1: Bulonería -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/bulones.png" alt="Bulones y tuercas" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-primary bg-opacity-10 group-hover:bg-opacity-0 transition"></div>
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Fijación</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Pernos y Tuercas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Medidas especiales en bulones, allen, espárragos, prisioneros, seger, alemites y varillas roscadas hasta 2" y MM.</p>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Consultar Stock <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categoría 2: Herramientas Manuales -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/manuales.png" alt="Herramientas manuales" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Manuales</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Herramientas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Línea profesional de llaves, pinzas y destornilladores de marcas líderes mundiales.</p>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Ver Marcas <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categoría 3: Herramientas Eléctricas -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/electricas.png" alt="Herramientas eléctricas" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Potencia</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Electromecánicas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Taladros, amoladoras y llaves de impacto con tecnología de punta y garantía oficial.</p>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Ver Modelos <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categoría 4: Insumos Industriales -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/seguridad.png" alt="Seguridad e insumos" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Insumos</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Seguridad y Corte</h3>
+                        <p class="text-gray-600 text-sm mb-4">Discos de corte, abrasivos, lubricantes y Elementos de Protección Personal (EPP).</p>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Pedir Presupuesto <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-14">
+                <a href="https://wa.me/5492346501680" target="_blank" class="bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-bold py-3 px-8 rounded-md transition duration-300 shadow-sm inline-flex items-center mx-auto uppercase text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg> Consultar WhatsApp para Lista de Precios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marcas Destacadas -->
+    <div class="bg-white border-y border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-center text-[10px] font-black tracking-[0.3em] uppercase text-slate-400 mb-10">Aliados Estratégicos en Calidad Industrial</p>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center justify-items-center opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                <span class="text-2xl font-black italic text-brand-primary">BOSCH</span>
+                <span class="text-2xl font-black italic text-brand-primary">STANLEY</span>
+                <span class="text-2xl font-black italic text-brand-primary">DEWALT</span>
+                <span class="text-2xl font-black italic text-brand-primary">BAHCO</span>
+                <span class="text-2xl font-black italic text-brand-primary">IRWIN</span>
+                <span class="text-2xl font-black italic text-brand-primary">SKIL</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="py-20 bg-brand-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-extrabold mb-4 uppercase tracking-tight">Soluciones Corporativas</h2>
+                <div class="w-24 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-blue-100 max-w-2xl mx-auto">Optimizamos tu cadena de suministro con servicios diseñados para la industria nacional.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Servicio 1 -->
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
+                        <i data-lucide="file-text" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Cuentas Corrientes</h3>
+                        <p class="text-blue-100/70 leading-relaxed text-sm">Gestión de compras mensuales con condiciones flexibles para pymes e industrias, incluyendo Facturación A.</p>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
+                        <i data-lucide="truck" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Logística Integrada</h3>
+                        <p class="text-blue-100/70 leading-relaxed text-sm">Reparto diario directamente en tu planta o taller en Chivilcoy y zona, asegurando la continuidad de tu producción.</p>
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
+                        <i data-lucide="wrench" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Asesoría en Planta</h3>
+                        <p class="text-blue-100/70 leading-relaxed text-sm">Visitamos tu industria para relevar necesidades específicas y recomendarte las mejores soluciones técnicas.</p>
+                    </div>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
+                        <i data-lucide="warehouse" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Acopio de Materiales</h3>
+                        <p class="text-blue-100/70 leading-relaxed text-sm">Congelá precios comprando hoy y retirando a medida que tu producción lo requiera, optimizando tus costos operativos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto y Presupuesto -->
+    <section id="contacto" class="py-20 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-0 bg-white rounded-xl shadow-2xl overflow-hidden text-gray-800 border border-gray-100">
+                <!-- Info de contacto -->
+                <div class="lg:w-2/5 bg-brand-primary p-10 text-white flex flex-col justify-center">
+                    <div>
+                        <h2 class="font-heading text-3xl font-extrabold mb-4 uppercase tracking-tight">Local Central</h2>
+                        <p class="mb-8 text-blue-100 leading-relaxed">Encontrá asesoramiento profesional en nuestro local principal de Chivilcoy.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-blue-900 p-2 rounded-lg mr-4 mt-1">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-brand-accent"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg uppercase tracking-wider">Ubicación</h4>
+                                    <p class="text-blue-100 text-sm mt-1">Av. Bernardo de Irigoyen esq. Salta<br>Chivilcoy, Buenos Aires</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-900 p-2 rounded-lg mr-4 mt-1">
+                                    <i data-lucide="phone" class="w-5 h-5 text-brand-accent"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg uppercase tracking-wider">Contacto</h4>
+                                    <p class="text-blue-100 text-sm mt-1">02346-428780<br>+54 9 2346 501680 (WhatsApp)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-900 p-2 rounded-lg mr-4 mt-1">
+                                    <i data-lucide="mail" class="w-5 h-5 text-brand-accent"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg uppercase tracking-wider">Escribinos</h4>
+                                    <p class="text-blue-100 text-sm mt-1">ventas@bulonerachivilcoy.com.ar</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-10">
+                            <a href="https://www.facebook.com/bulonera.chivilcoy.5" target="_blank" class="bg-blue-900 p-3 rounded-xl hover:bg-brand-accent transition text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                            </a>
+                            <a href="https://www.instagram.com/bulonera.chivilcoy/" target="_blank" class="bg-blue-900 p-3 rounded-xl hover:bg-brand-accent transition text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario -->
+                <div class="lg:w-3/5 p-10 lg:p-12 bg-gray-50">
+                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Solicitud enviada. Nos comunicaremos a la brevedad.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Nombre o Empresa *</label>
+                                <input type="text" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white" required placeholder="Ej: Talleres Chivilcoy">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">WhatsApp *</label>
+                                <input type="tel" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white" required placeholder="2346-XXXXXX">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Correo Electrónico</label>
+                            <input type="email" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white" placeholder="ejemplo@empresa.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Pedido o Consulta *</label>
+                            <textarea rows="5" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white resize-none" required placeholder="Detalle cantidad, medidas y materiales..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-primary hover:bg-blue-900 text-white font-bold py-4 px-4 rounded-md transition shadow-md text-sm uppercase tracking-widest mt-2 flex justify-center items-center">
+                            Enviar Solicitud <i data-lucide="send" class="w-5 h-5 ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-slate-500 py-16 border-t border-brand-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center mb-6 h-16 overflow-hidden">
+                    <img src="images/logo.png" alt="Logo Bulonera Chivilcoy" class="h-12 w-auto object-contain grayscale brightness-200 invert">
+                </div>
+                <p class="text-sm mb-8 leading-relaxed">Forjando soluciones para la industria nacional con la precisión y confianza que tu trabajo merece en Chivilcoy y toda la región.</p>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/bulonera.chivilcoy.5" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition group" title="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white group-hover:scale-110 transition"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="https://www.instagram.com/bulonera.chivilcoy/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition group" title="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white group-hover:scale-110 transition"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Accesos Directos</h4>
+                <ul class="space-y-4 text-sm font-medium">
+                    <li><a href="#inicio" class="hover:text-brand-accent transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Inicio</a></li>
+                    <li><a href="#productos" class="hover:text-brand-accent transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Inventario de Productos</a></li>
+                    <li><a href="#contacto" class="hover:text-brand-accent transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Solicitar Presupuesto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Horarios de Forja</h4>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex justify-between border-b border-white/5 pb-3"><span>Lunes a Viernes</span> <span class="text-gray-300">08:00 - 12:00 / 14:00 - 18:30</span></li>
+                    <li class="flex justify-between border-b border-white/5 pb-3"><span>Sábados</span> <span class="text-gray-300">08:30 - 12:30</span></li>
+                    <li class="flex justify-between text-brand-accent font-bold"><span>Domingos</span> <span>Cerrado</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-white/5 text-[10px] uppercase tracking-[0.2em] flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-slate-500">&copy; 2026 Bulonera Chivilcoy. Todos los derechos reservados.</p>
+            <p class="text-slate-500">Potencia y Precisión Industrial.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/5492346501680" target="_blank" class="whatsapp-float" title="Comunicate por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+    </a>
+
+    <!-- Script para inicializar iconos -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
