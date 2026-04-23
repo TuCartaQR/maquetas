@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulonera Reconquista | Soluciones en Fijación y Herramientas</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#E62E2D', /* Rojo vibrante del logo */
+                        'brand-blue': '#1D3557', /* Azul cobalto */
+                        'brand-light': '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-pattern {
+            background-color: #1D3557;
+            /* Fondo principal actualizado con una imagen real de taller/herramientas */
+            background-image: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.95)), url('https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- Barra Superior -->
+    <div class="bg-brand-red text-white text-sm py-2 px-4 hidden md:block">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> Bv. Hipólito Yrigoyen 1234, Reconquista, Santa Fe</span>
+                <span class="flex items-center"><i data-lucide="clock" class="w-4 h-4 mr-1"></i> Lun a Vie: 8:00 a 17:00hs | Sáb: 8:00 a 12:30hs</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://www.facebook.com/bulonerarec" target="_blank" class="hover:text-gray-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <span class="flex items-center font-bold"><i data-lucide="phone" class="w-4 h-4 mr-1"></i> (03482) 42-XXXX</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <!-- Espacio preparado para el Logo Generado -->
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <div class="w-12 h-12 flex items-center justify-center">
+                            <!-- Nota para el desarrollador: Reemplazar el ícono de abajo con <img src="ruta_del_logo_generado.png" alt="Logo Bulonera Reconquista" class="w-full h-full object-contain"> -->
+                            <i data-lucide="hexagon" class="text-brand-blue w-10 h-10"></i>
+                        </div>
+                        <div class="flex flex-col justify-center leading-none">
+                            <span class="font-heading text-2xl font-bold text-brand-red tracking-wider transform -skew-y-3">BULONERA</span>
+                            <span class="font-heading text-xl font-bold text-brand-blue tracking-widest transform -skew-y-3">RECONQUISTA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-brand-red font-medium transition">Inicio</a>
+                    <a href="#productos" class="text-gray-600 hover:text-brand-red font-medium transition">Productos</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-brand-red font-medium transition">Servicios</a>
+                    <a href="#contacto" class="bg-brand-blue text-white px-6 py-2 rounded-md font-bold hover:bg-blue-900 transition shadow-lg">Pedir Presupuesto</a>
+                </div>
+                <!-- Menú Móvil -->
+                <div class="flex items-center md:hidden">
+                    <button class="text-gray-600 hover:text-brand-blue focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal (Hero) -->
+    <section id="inicio" class="hero-pattern py-20 lg:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 text-white">
+                <h1 class="font-heading text-4xl md:text-6xl font-bold mb-4 uppercase leading-tight">
+                    Tu socio estratégico en <span class="text-brand-red">industria</span> y <span class="text-brand-red">construcción</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-200">
+                    El mayor stock en bulonería, herramientas y elementos de sujeción del norte santafesino. Calidad, precio y asesoramiento técnico especializado.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#productos" class="bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-md text-lg transition shadow-lg text-center flex items-center justify-center">
+                        <i data-lucide="package-search" class="mr-2 w-5 h-5"></i> Ver Catálogo
+                    </a>
+                    <a href="#contacto" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-blue text-white font-bold py-3 px-8 rounded-md text-lg transition text-center flex items-center justify-center">
+                        Contactar a un Vendedor
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center hidden md:flex">
+                <!-- Tarjeta de valor agregado -->
+                <div class="w-3/4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500 flex flex-col justify-center items-center text-white">
+                     <i data-lucide="shield-check" class="w-20 h-20 text-brand-red mb-4"></i>
+                     <h3 class="font-heading text-3xl font-bold text-center">Garantía de Calidad</h3>
+                     <p class="text-center mt-3 text-lg">Trabajamos con las mejores marcas del mercado nacional e internacional para asegurar tu trabajo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ventajas Competitivas -->
+    <section class="py-12 bg-white relative -mt-12 mx-4 md:mx-auto max-w-6xl rounded-xl shadow-xl z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+            <div class="flex flex-col items-center text-center p-4">
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
+                    <i data-lucide="boxes" class="w-10 h-10 text-brand-blue"></i>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2">Stock Permanente</h3>
+                <p class="text-gray-600">Miles de artículos disponibles para entrega inmediata. Si existe, lo tenemos.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4 md:border-x border-gray-200">
+                <div class="bg-red-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
+                    <i data-lucide="truck" class="w-10 h-10 text-brand-red"></i>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2">Envíos a la Zona</h3>
+                <p class="text-gray-600">Logística propia para asegurar que tu pedido llegue a obra o taller a tiempo.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4">
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
+                    <i data-lucide="users" class="w-10 h-10 text-brand-blue"></i>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2">Asesoramiento Técnico</h3>
+                <p class="text-gray-600">No solo vendemos, te ayudamos a encontrar la solución exacta para tu proyecto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías de Productos con Imágenes Reales -->
+    <section id="productos" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-brand-blue mb-4">Nuestros Productos</h2>
+                <div class="w-24 h-1 bg-brand-red mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Explorá nuestras principales líneas de comercialización enfocadas en el profesional de Reconquista y zona.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Categoría 1: Bulonería -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <!-- Foto de bulones/tuercas -->
+                        <img src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=800&auto=format&fit=crop" alt="Bulonería y tornillos" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-blue bg-opacity-10 group-hover:bg-opacity-0 transition"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Bulonería General</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tornillos, tuercas, arandelas y varillas roscadas en hierro, acero y bronce de alta resistencia.</p>
+                        <a href="#" class="text-brand-red font-semibold flex items-center hover:text-red-700">Consultar stock <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categoría 2: Herramientas Manuales -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <!-- Foto de herramientas manuales -->
+                        <img src="https://images.unsplash.com/photo-1540104539488-92a51bbc0410?q=80&w=800&auto=format&fit=crop" alt="Herramientas manuales" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Herramientas Manuales</h3>
+                        <p class="text-gray-600 text-sm mb-4">Juegos de llaves, pinzas, destornilladores y kits completos para mecánicos, talleres y obra.</p>
+                        <a href="#" class="text-brand-red font-semibold flex items-center hover:text-red-700">Consultar marcas <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categoría 3: Herramientas Eléctricas -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <!-- Foto de amoladora/herramienta eléctrica -->
+                        <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?q=80&w=800&auto=format&fit=crop" alt="Herramientas eléctricas y amoladoras" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Herramientas Eléctricas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Amoladoras, taladros, atornilladores y soldadoras de primeras marcas con garantía oficial.</p>
+                        <a href="#" class="text-brand-red font-semibold flex items-center hover:text-red-700">Consultar línea <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Categoría 4: Insumos Industriales -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <!-- Foto de protección/máscara de soldar/insumos -->
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop" alt="Insumos industriales y seguridad" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Insumos y Seguridad</h3>
+                        <p class="text-gray-600 text-sm mb-4">Discos de corte, abrasivos, lubricantes y Elementos de Protección Personal (EPP).</p>
+                        <a href="#" class="text-brand-red font-semibold flex items-center hover:text-red-700">Ver catálogo <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-14">
+                <button class="bg-white border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold py-3 px-8 rounded-md transition duration-300 shadow-sm flex items-center mx-auto">
+                    <i data-lucide="download" class="w-5 h-5 mr-2"></i> Descargar Lista de Precios Completa
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-brand-blue mb-4">Servicios Corporativos</h2>
+                <div class="w-24 h-1 bg-brand-red mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Entendemos los tiempos de la industria y la construcción. Por eso, ofrecemos soluciones integrales para optimizar tu cadena de suministro.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Servicio 1 -->
+                <div class="flex items-start p-6 border border-gray-100 rounded-xl hover:shadow-lg transition bg-gray-50 group">
+                    <div class="bg-blue-100 p-4 rounded-lg text-brand-blue mr-5 group-hover:bg-brand-blue group-hover:text-white transition">
+                        <i data-lucide="file-text" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Cuentas Corrientes para Empresas</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm">Ofrecemos apertura de cuentas con condiciones flexibles para pymes, industrias y contratistas de la región, facilitando la gestión de compras mensuales con Facturación A.</p>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="flex items-start p-6 border border-gray-100 rounded-xl hover:shadow-lg transition bg-gray-50 group">
+                    <div class="bg-red-100 p-4 rounded-lg text-brand-red mr-5 group-hover:bg-brand-red group-hover:text-white transition">
+                        <i data-lucide="truck" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Logística y Entregas en Obra</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm">Contamos con reparto diario para realizar entregas programadas directamente en tu planta, taller u obra, asegurando que los materiales lleguen en tiempo y forma.</p>
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="flex items-start p-6 border border-gray-100 rounded-xl hover:shadow-lg transition bg-gray-50 group">
+                    <div class="bg-blue-100 p-4 rounded-lg text-brand-blue mr-5 group-hover:bg-brand-blue group-hover:text-white transition">
+                        <i data-lucide="wrench" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Asesoramiento Técnico Especializado</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm">Nuestro equipo comercial visita tu fábrica para relevar necesidades y recomendarte las mejores soluciones en fijación y maquinarias para tus proyectos específicos.</p>
+                    </div>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="flex items-start p-6 border border-gray-100 rounded-xl hover:shadow-lg transition bg-gray-50 group">
+                    <div class="bg-red-100 p-4 rounded-lg text-brand-red mr-5 group-hover:bg-brand-red group-hover:text-white transition">
+                        <i data-lucide="warehouse" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-brand-blue">Acopio de Materiales</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm">Congelá el precio de tus insumos. Comprá hoy y retirá a medida que la obra o la producción avanza, optimizando tus costos y evitando problemas de almacenamiento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto y Presupuesto -->
+    <section id="contacto" class="py-20 bg-brand-blue text-white relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 opacity-10">
+            <i data-lucide="settings" class="w-96 h-96 animate-spin-slow"></i>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-0 bg-white rounded-xl shadow-2xl overflow-hidden text-gray-800 border border-gray-100">
+                <!-- Info de contacto -->
+                <div class="lg:w-2/5 bg-brand-red p-10 text-white flex flex-col justify-center">
+                    <div>
+                        <h2 class="font-heading text-3xl font-bold mb-4">Solicitar Presupuesto</h2>
+                        <p class="mb-8 text-red-100 leading-relaxed">Completá el formulario detallando los materiales que necesitás y nuestro equipo de ventas se comunicará a la brevedad con una cotización a medida.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-red-800 p-2 rounded-lg mr-4 mt-1">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Visitanos</h4>
+                                    <p class="text-red-100 text-sm mt-1">Bv. Hipólito Yrigoyen 1234<br>Reconquista, Santa Fe</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-red-800 p-2 rounded-lg mr-4 mt-1">
+                                    <i data-lucide="phone" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Llamanos</h4>
+                                    <p class="text-red-100 text-sm mt-1">(03482) 42-XXXX<br>+54 9 3482 XX-XXXX (WhatsApp)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-red-800 p-2 rounded-lg mr-4 mt-1">
+                                    <i data-lucide="mail" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Escribinos</h4>
+                                    <p class="text-red-100 text-sm mt-1">ventas@bulonerareconquista.com.ar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario -->
+                <div class="lg:w-3/5 p-10 lg:p-12 bg-white">
+                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Este es un formulario de demostración. En la web real, esto enviará un email directamente al sector de ventas o CRM.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Nombre o Empresa *</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none bg-gray-50" required placeholder="Ej: Metalúrgica Juan">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Teléfono / WhatsApp *</label>
+                                <input type="tel" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none bg-gray-50" required placeholder="Código de área + Número">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Correo Electrónico</label>
+                            <input type="email" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none bg-gray-50" placeholder="tucorreo@empresa.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Detalle del Pedido o Consulta *</label>
+                            <textarea rows="5" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none bg-gray-50 resize-none" required placeholder="Especificar cantidad, medidas, materiales (ej. 100 Bulones cabeza hexagonal 1/2 x 2' zincados)..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-blue hover:bg-blue-900 text-white font-bold py-4 px-4 rounded-md transition shadow-md text-lg mt-2 flex justify-center items-center">
+                            Enviar Solicitud <i data-lucide="send" class="w-5 h-5 ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t-4 border-brand-red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="hexagon" class="text-brand-red w-8 h-8"></i>
+                    <span class="font-heading text-xl font-bold text-white tracking-wider">BULONERA RECONQUISTA</span>
+                </div>
+                <p class="text-sm mb-6 leading-relaxed">Soluciones integrales para la industria, el campo y la construcción. Calidad y confianza desde hace años acompañando tu trabajo en el norte santafesino.</p>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/bulonerarec" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#1877F2] hover:text-white text-gray-400 transition" title="Seguinos en Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wide text-sm">Accesos Rápidos</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#inicio" class="hover:text-brand-red transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-1"></i> Inicio</a></li>
+                    <li><a href="#productos" class="hover:text-brand-red transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-1"></i> Catálogo de Productos</a></li>
+                    <li><a href="#contacto" class="hover:text-brand-red transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-1"></i> Solicitar Presupuesto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wide text-sm">Horarios de Atención</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>Lunes a Viernes</span> <span class="text-gray-300">08:00 - 12:00 / 15:30 - 19:30</span></li>
+                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>Sábados</span> <span class="text-gray-300">08:00 - 12:30</span></li>
+                    <li class="flex justify-between text-brand-red font-medium"><span>Domingos y Feriados</span> <span>Cerrado</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-sm text-center flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2026 Bulonera Reconquista. Todos los derechos reservados.</p>
+            <p class="mt-2 md:mt-0 text-gray-500">Diseño web orientado a ventas industriales.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/5493482000000" target="_blank" class="whatsapp-float" title="Comunicate por WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- Script para inicializar iconos y animaciones -->
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+        
+        // Efecto de rotación lenta para el engranaje de fondo
+        document.addEventListener('DOMContentLoaded', () => {
+            const spinEl = document.querySelector('.animate-spin-slow');
+            if(spinEl){
+                let deg = 0;
+                setInterval(() => {
+                    deg += 0.2;
+                    spinEl.style.transform = `rotate(${deg}deg)`;
+                }, 20);
+            }
+        });
+    </script>
+</body>
+</html>
