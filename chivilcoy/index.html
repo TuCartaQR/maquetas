@@ -27,9 +27,6 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
         html { scroll-behavior: smooth; }
         .hero-pattern {
@@ -59,11 +56,21 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
-        /* Asegurar visibilidad de iconos Lucide */
-        svg.lucide {
+        /* Asegurar visibilidad de iconos */
+        svg {
             stroke: currentColor;
-            stroke-width: 2px;
             fill: none;
+        }
+        .mobile-menu-overlay {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .mobile-menu-overlay.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
         }
     </style>
 </head>
@@ -73,17 +80,26 @@
     <div class="bg-brand-primary text-white text-sm py-2 px-4 hidden md:block border-b border-white/10">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> Av. Bernardo de Irigoyen esq. Salta, Chivilcoy</span>
-                <span class="flex items-center"><i data-lucide="clock" class="w-4 h-4 mr-1"></i> Lun a Vie: 8:00 a 12:00 | 14:00 a 18:30 | Sáb: 8:30 a 12:30</span>
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Av. Bernardo de Irigoyen esq. Salta, Chivilcoy
+                </span>
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Lun a Vie: 8:00 a 12:00 | 14:00 a 18:30 | Sáb: 8:30 a 12:30
+                </span>
             </div>
             <div class="flex items-center space-x-4">
                 <a href="https://www.facebook.com/bulonera.chivilcoy.5" target="_blank" class="hover:text-blue-300 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
                 <a href="https://www.instagram.com/bulonera.chivilcoy/" target="_blank" class="hover:text-blue-300 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <span class="flex items-center font-bold"><i data-lucide="phone" class="w-4 h-4 mr-1"></i> (02346) 42-8780</span>
+                <span class="flex items-center font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    (02346) 42-8780
+                </span>
             </div>
         </div>
     </div>
@@ -105,10 +121,20 @@
                 </div>
                 <!-- Menú Móvil -->
                 <div class="flex items-center md:hidden">
-                    <button class="text-gray-600 hover:text-brand-primary focus:outline-none">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-brand-primary focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                     </button>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Overlay Menú Móvil -->
+        <div id="mobile-menu" class="mobile-menu-overlay absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 md:hidden overflow-hidden">
+            <div class="flex flex-col p-6 space-y-4 text-sm font-bold uppercase tracking-widest text-center">
+                <a href="#inicio" class="text-gray-600 hover:text-brand-primary py-2 border-b border-gray-50">Inicio</a>
+                <a href="#productos" class="text-gray-600 hover:text-brand-primary py-2 border-b border-gray-50">Productos</a>
+                <a href="#servicios" class="text-gray-600 hover:text-brand-primary py-2 border-b border-gray-50">Servicios</a>
+                <a href="#contacto" class="bg-brand-primary text-white py-4 rounded-md">Pedir Presupuesto</a>
             </div>
         </div>
     </nav>
@@ -128,7 +154,8 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#productos" class="bg-white text-brand-primary hover:bg-slate-100 font-bold py-3 px-8 rounded-md text-lg transition shadow-lg text-center flex items-center justify-center uppercase text-sm">
-                        <i data-lucide="package-search" class="mr-2 w-5 h-5"></i> Explorar Catálogo
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+                        Explorar Catálogo
                     </a>
                     <a href="#contacto" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-primary text-white font-bold py-3 px-8 rounded-md text-lg transition text-center flex items-center justify-center uppercase text-sm">
                         Visitar Local Central
@@ -137,7 +164,7 @@
             </div>
             <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center hidden md:flex">
                 <div class="w-3/4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500 flex flex-col justify-center items-center text-white">
-                     <i data-lucide="award" class="w-20 h-20 text-brand-accent mb-4"></i>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent mb-4"><path d="M8 21s-4-3-4-9 4-9 4-9 4 3 4 9-4 9-4 9Z"></path><path d="M16 21s4-3 4-9-4-9-4-9-4 3-4 9 4 9 4 9Z"></path></svg>
                      <h3 class="font-heading text-3xl font-bold text-center">Calidad Certificada</h3>
                      <p class="text-center mt-3 text-lg">Solo trabajamos con materiales que cumplen los más altos estándares de seguridad industrial.</p>
                 </div>
@@ -149,22 +176,22 @@
     <section class="py-12 bg-white relative -mt-12 mx-4 md:mx-auto max-w-6xl rounded-xl shadow-xl z-20">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
             <div class="flex flex-col items-center text-center p-4">
-                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
-                    <i data-lucide="truck" class="w-10 h-10 text-brand-primary"></i>
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2 text-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"></path><path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
                 </div>
                 <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Logística Veloz</h3>
                 <p class="text-gray-600">Entregas programadas en Chivilcoy y zona de influencia para que tu obra nunca se detenga.</p>
             </div>
             <div class="flex flex-col items-center text-center p-4 md:border-x border-gray-200">
-                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
-                    <i data-lucide="brain" class="w-10 h-10 text-brand-primary"></i>
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2 text-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.48Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.48Z"></path></svg>
                 </div>
                 <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Sabiduría Técnica</h3>
                 <p class="text-gray-600">Personal con décadas de experiencia para asesorarte en la solución de fijación perfecta.</p>
             </div>
             <div class="flex flex-col items-center text-center p-4">
-                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2">
-                    <i data-lucide="shield-check" class="w-10 h-10 text-brand-primary"></i>
+                <div class="bg-blue-50 p-4 rounded-full mb-4 transition transform hover:-translate-y-2 text-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
                 </div>
                 <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Garantía Real</h3>
                 <p class="text-gray-600">Respaldo oficial de las marcas líderes para asegurar la durabilidad de tus proyectos.</p>
@@ -194,7 +221,10 @@
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Pernos y Tuercas</h3>
                         <p class="text-gray-600 text-sm mb-4">Medidas especiales en bulones, allen, espárragos, prisioneros, seger, alemites y varillas roscadas hasta 2" y MM.</p>
-                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Consultar Stock <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">
+                            Consultar Stock 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
                     </div>
                 </div>
 
@@ -209,7 +239,10 @@
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Herramientas</h3>
                         <p class="text-gray-600 text-sm mb-4">Línea profesional de llaves, pinzas y destornilladores de marcas líderes mundiales.</p>
-                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Ver Marcas <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">
+                            Ver Marcas 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
                     </div>
                 </div>
 
@@ -224,7 +257,10 @@
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Electromecánicas</h3>
                         <p class="text-gray-600 text-sm mb-4">Taladros, amoladoras y llaves de impacto con tecnología de punta y garantía oficial.</p>
-                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Ver Modelos <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">
+                            Ver Modelos 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
                     </div>
                 </div>
 
@@ -239,14 +275,18 @@
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Seguridad y Corte</h3>
                         <p class="text-gray-600 text-sm mb-4">Discos de corte, abrasivos, lubricantes y Elementos de Protección Personal (EPP).</p>
-                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">Pedir Presupuesto <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i></a>
+                        <a href="#contacto" class="text-brand-accent font-semibold flex items-center hover:text-blue-700 text-sm">
+                            Pedir Presupuesto 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-14">
                 <a href="https://wa.me/5492346501680" target="_blank" class="bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-bold py-3 px-8 rounded-md transition duration-300 shadow-sm inline-flex items-center mx-auto uppercase text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg> Consultar WhatsApp para Lista de Precios
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg> 
+                    Consultar WhatsApp para Lista de Precios
                 </a>
             </div>
         </div>
@@ -280,7 +320,7 @@
                 <!-- Servicio 1 -->
                 <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
                     <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <i data-lucide="file-text" class="w-8 h-8"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
                     </div>
                     <div>
                         <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Cuentas Corrientes</h3>
@@ -291,7 +331,7 @@
                 <!-- Servicio 2 -->
                 <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
                     <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <i data-lucide="truck" class="w-8 h-8"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"></path><path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
                     </div>
                     <div>
                         <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Logística Integrada</h3>
@@ -302,7 +342,7 @@
                 <!-- Servicio 3 -->
                 <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
                     <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <i data-lucide="wrench" class="w-8 h-8"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
                     </div>
                     <div>
                         <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Asesoría en Planta</h3>
@@ -313,7 +353,7 @@
                 <!-- Servicio 4 -->
                 <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
                     <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <i data-lucide="warehouse" class="w-8 h-8"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4"></path><path d="M5 21V10.85"></path><path d="M19 21V10.85"></path><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"></path></svg>
                     </div>
                     <div>
                         <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Acopio de Materiales</h3>
@@ -337,7 +377,7 @@
                         <div class="space-y-6">
                             <div class="flex items-start">
                                 <div class="bg-blue-900 p-2 rounded-lg mr-4 mt-1">
-                                    <i data-lucide="map-pin" class="w-5 h-5 text-brand-accent"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-lg uppercase tracking-wider">Ubicación</h4>
@@ -346,7 +386,7 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="bg-blue-900 p-2 rounded-lg mr-4 mt-1">
-                                    <i data-lucide="phone" class="w-5 h-5 text-brand-accent"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-lg uppercase tracking-wider">Contacto</h4>
@@ -355,7 +395,7 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="bg-blue-900 p-2 rounded-lg mr-4 mt-1">
-                                    <i data-lucide="mail" class="w-5 h-5 text-brand-accent"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-lg uppercase tracking-wider">Escribinos</h4>
@@ -397,7 +437,8 @@
                             <textarea rows="5" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white resize-none" required placeholder="Detalle cantidad, medidas y materiales..."></textarea>
                         </div>
                         <button type="submit" class="w-full bg-brand-primary hover:bg-blue-900 text-white font-bold py-4 px-4 rounded-md transition shadow-md text-sm uppercase tracking-widest mt-2 flex justify-center items-center">
-                            Enviar Solicitud <i data-lucide="send" class="w-5 h-5 ml-2"></i>
+                            Enviar Solicitud 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                         </button>
                     </form>
                 </div>
@@ -425,9 +466,18 @@
             <div>
                 <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Accesos Directos</h4>
                 <ul class="space-y-4 text-sm font-medium">
-                    <li><a href="#inicio" class="hover:text-brand-accent transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Inicio</a></li>
-                    <li><a href="#productos" class="hover:text-brand-accent transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Inventario de Productos</a></li>
-                    <li><a href="#contacto" class="hover:text-brand-accent transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Solicitar Presupuesto</a></li>
+                    <li><a href="#inicio" class="hover:text-brand-accent transition flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m9 18 6-6-6-6"></path></svg>
+                        Inicio
+                    </a></li>
+                    <li><a href="#productos" class="hover:text-brand-accent transition flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m9 18 6-6-6-6"></path></svg>
+                        Inventario de Productos
+                    </a></li>
+                    <li><a href="#contacto" class="hover:text-brand-accent transition flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m9 18 6-6-6-6"></path></svg>
+                        Solicitar Presupuesto
+                    </a></li>
                 </ul>
             </div>
             <div>
@@ -450,9 +500,34 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
     </a>
 
-    <!-- Script para inicializar iconos -->
+    <!-- Script para Menú Móvil -->
     <script>
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            
+            if (menuBtn && menu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    menu.classList.toggle('active');
+                });
+
+                // Cerrar al hacer click en un link
+                const links = menu.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.remove('active');
+                    });
+                });
+
+                // Cerrar al hacer click fuera
+                document.addEventListener('click', (e) => {
+                    if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        menu.classList.remove('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
