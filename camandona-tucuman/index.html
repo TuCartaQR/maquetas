@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería y Bulonería Camandona | San Miguel de Tucumán</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': '#00A89E', /* Teal Camandona */
+                        'brand-secondary': '#1A1A1B',
+                        'brand-accent': '#FFD700', /* Amarillo acento */
+                        'brand-light': '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-pattern {
+            background-color: #00A89E;
+            background-image: linear-gradient(rgba(0, 168, 158, 0.5), rgba(0, 0, 0, 0.8)), url('images/manuales.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 18px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        svg {
+            stroke: currentColor;
+            fill: none;
+        }
+        .mobile-menu-overlay {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .mobile-menu-overlay.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        /* Efecto Sticky Header Shrink */
+        nav { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); height: 8rem; } /* h-32 */
+        nav.scrolled { height: 5rem; shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); } /* h-20 */
+        #nav-logo { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); height: 6rem; } /* h-24 */
+        nav.scrolled #nav-logo { height: 3.5rem; } /* h-14 */
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- Barra Superior -->
+    <div class="bg-brand-primary text-white text-[10px] py-2 px-4 border-b border-white/10 uppercase tracking-widest font-medium">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex flex-col md:flex-row items-center md:space-x-6 gap-2 text-center md:text-left text-white/90">
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Provincia de Córdoba 968, Tucumán
+                </span>
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Lun a Vie: 09:00-13:30, 17:00-20:30 | Sáb: 09:00-14:00
+                </span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://www.instagram.com/ferreteriabuloneria_camandona/" target="_blank" class="hover:text-yellow-300 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.facebook.com/FerreteriayBuloneriaCamandona" target="_blank" class="hover:text-yellow-300 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <span class="flex items-center font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    0381 234-0922
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav id="main-nav" class="bg-brand-primary shadow-md sticky top-0 z-50 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex justify-between items-center w-full">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center overflow-hidden">
+                        <img src="images/logo.png" alt="Logo Camandona" id="nav-logo" class="w-auto object-contain">
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-xs font-bold uppercase tracking-widest">
+                    <a href="#inicio" class="text-white/90 hover:text-white transition">Inicio</a>
+                    <a href="#productos" class="text-white/90 hover:text-white transition">Productos</a>
+                    <a href="#servicios" class="text-white/90 hover:text-white transition">Servicios</a>
+                    <a href="#contacto" class="bg-brand-accent text-slate-900 px-6 py-3 rounded-md font-bold hover:bg-yellow-400 transition shadow-lg">Pedir Presupuesto</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-yellow-300 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Overlay Menú Móvil -->
+        <div id="mobile-menu" class="mobile-menu-overlay absolute top-full left-0 w-full bg-brand-primary shadow-xl border-t border-white/10 md:hidden overflow-hidden">
+            <div class="flex flex-col p-6 space-y-4 text-sm font-bold uppercase tracking-widest text-center">
+                <a href="#inicio" class="text-white/90 hover:text-white py-2 border-b border-white/5">Inicio</a>
+                <a href="#productos" class="text-white/90 hover:text-white py-2 border-b border-white/5">Productos</a>
+                <a href="#servicios" class="text-white/90 hover:text-white py-2 border-b border-white/5">Servicios</a>
+                <a href="#contacto" class="bg-brand-accent text-slate-900 py-4 rounded-md font-bold">Pedir Presupuesto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero-pattern py-20 lg:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 text-white">
+                <div class="inline-block bg-white/10 backdrop-blur-md px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase border border-white/20 mb-6">
+                    Ferretería y Bulonería en Tucumán
+                </div>
+                <h1 class="font-heading text-4xl md:text-6xl font-extrabold mb-4 uppercase leading-tight">
+                    Tu Aliado en <span class="text-brand-accent">Suministros</span> y Herramientas
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-white/90">
+                    Amplio stock en bulonería, herramientas para el hogar e industriales, electricidad, plomería y más.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#productos" class="bg-brand-accent text-slate-900 hover:bg-yellow-400 font-bold py-3 px-8 rounded-md text-lg transition shadow-lg text-center flex items-center justify-center uppercase text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+                        Ver Catálogo
+                    </a>
+                    <a href="#contacto" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-primary text-white font-bold py-3 px-8 rounded-md text-lg transition text-center flex items-center justify-center uppercase text-sm">
+                        Visitar Local
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center hidden md:flex">
+                <div class="w-3/4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500 flex flex-col justify-center items-center text-white">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+                     <h3 class="font-heading text-3xl font-bold text-center">Confianza Local</h3>
+                     <p class="text-center mt-3 text-lg">Garantía de calidad y variedad en cada artículo que necesitás.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ventajas -->
+    <section class="py-12 bg-white relative -mt-12 mx-4 md:mx-auto max-w-6xl rounded-xl shadow-xl z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+            <div class="flex flex-col items-center text-center p-4">
+                <div class="bg-teal-50 p-4 rounded-full mb-4 text-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Ubicación Central</h3>
+                <p class="text-gray-600">Encontranos en Provincia de Córdoba 968, San Miguel de Tucumán.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4 md:border-x border-gray-200">
+                <div class="bg-teal-50 p-4 rounded-full mb-4 text-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Rubros Integrales</h3>
+                <p class="text-gray-600">Bulonería, plomería, gas, electricidad, pinturas y herramientas.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4">
+                <div class="bg-teal-50 p-4 rounded-full mb-4 text-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="font-heading font-bold text-xl mb-2 uppercase tracking-wide">Asesoramiento</h3>
+                <p class="text-gray-600">Atención personalizada y experta para ayudarte en tu compra.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos -->
+    <section id="productos" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-extrabold text-brand-primary mb-4 uppercase tracking-tight">Nuestro Catálogo</h2>
+                <div class="w-24 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Una solución para cada necesidad, con marcas líderes del mercado.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Bulones -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/bulones.png" alt="Bulones y tornillos" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Fijación</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Bulonería</h3>
+                        <p class="text-gray-600 text-sm mb-4">Pernos, tuercas, arandelas y tornillos en todas las medidas estándar y especiales.</p>
+                        <a href="#contacto" class="text-brand-primary font-semibold flex items-center hover:text-teal-800 text-sm">
+                            Consultar Stock 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Herramientas Manuales -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/manuales.png" alt="Herramientas manuales" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Profesional</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Herramientas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Líneas completas de destornilladores, llaves, pinzas y más para taller o industria.</p>
+                        <a href="#contacto" class="text-brand-primary font-semibold flex items-center hover:text-teal-800 text-sm">
+                            Ver Marcas 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Instalaciones -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/electricas.png" alt="Electricidad y plomería" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Servicios</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Hogar y Obra</h3>
+                        <p class="text-gray-600 text-sm mb-4">Insumos completos para gas, plomería, electricidad y cerrajería en general.</p>
+                        <a href="#contacto" class="text-brand-primary font-semibold flex items-center hover:text-teal-800 text-sm">
+                            Ver Modelos 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pinturería -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group border border-slate-100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="images/seguridad.png" alt="Pinturas y accesorios" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2">
+                            <span class="bg-brand-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Terminaciones</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-brand-primary uppercase tracking-tight">Pinturas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Línea de esmaltes, pinceles, rodillos y accesorios para renovar tus espacios.</p>
+                        <a href="#contacto" class="text-brand-primary font-semibold flex items-center hover:text-teal-800 text-sm">
+                            Pedir Presupuesto 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-14">
+                <a href="https://wa.me/5493816831370" target="_blank" class="bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-bold py-3 px-8 rounded-md transition duration-300 shadow-sm inline-flex items-center mx-auto uppercase text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg> 
+                    Consultar Precios por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aliados -->
+    <div class="bg-white border-y border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-center text-[10px] font-black tracking-[0.3em] uppercase text-slate-400 mb-10">Marcas de primer nivel</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-items-center opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                <span class="text-2xl font-black italic text-brand-primary">BAHCO</span>
+                <span class="text-2xl font-black italic text-brand-primary">STANLEY</span>
+                <span class="text-2xl font-black italic text-brand-primary">BOSCH</span>
+                <span class="text-2xl font-black italic text-brand-primary">SKIL</span>
+                <span class="text-2xl font-black italic text-brand-primary">DURACELL</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-20 bg-brand-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-extrabold mb-4 uppercase tracking-tight">Por qué elegir Camandona</h2>
+                <div class="w-24 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-teal-50 max-w-2xl mx-auto">Experiencia y atención para todo tipo de proyectos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-slate-900 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Variedad en Stock</h3>
+                        <p class="text-white/80 leading-relaxed text-sm">Disponibilidad inmediata de insumos básicos y especiales para construcción y arreglos.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-slate-900 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14h6"></path><path d="M9 18h6"></path><path d="M9 10h6"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Atención Comercial</h3>
+                        <p class="text-teal-50/70 leading-relaxed text-sm">Comunicate con nosotros para cotizaciones rápidas para empresas y comercios.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-slate-900 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Atención Técnica</h3>
+                        <p class="text-teal-50/70 leading-relaxed text-sm">Te ayudamos a resolver dudas sobre instalaciones eléctricas, de gas o plomería.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start p-6 border border-white/10 rounded-xl hover:bg-white/5 transition group">
+                    <div class="bg-white/10 p-4 rounded-lg text-brand-accent mr-5 group-hover:bg-brand-accent group-hover:text-slate-900 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 uppercase tracking-wide">Punto de Retiro</h3>
+                        <p class="text-teal-50/70 leading-relaxed text-sm">Realizá tu pedido por WhatsApp y retirá sin demoras en nuestro local.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-0 bg-white rounded-xl shadow-2xl overflow-hidden text-gray-800 border border-gray-100">
+                <div class="lg:w-2/5 bg-brand-primary p-10 text-white flex flex-col justify-center">
+                    <div>
+                        <h2 class="font-heading text-3xl font-extrabold mb-4 uppercase tracking-tight">Atención Central</h2>
+                        <p class="mb-8 text-teal-50 leading-relaxed">Visitanos en nuestro local en Tucumán para un asesoramiento directo.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-teal-800 p-2 rounded-lg mr-4 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg uppercase tracking-wider">Ubicación</h4>
+                                    <p class="text-teal-50 text-sm mt-1">Provincia de Córdoba 968<br>T4000 San Miguel de Tucumán</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-teal-800 p-2 rounded-lg mr-4 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg uppercase tracking-wider">Teléfono / WhatsApp</h4>
+                                    <p class="text-teal-50 text-sm mt-1">0381 234-0922<br>+54 9 381 683-1370 (WhatsApp)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-teal-800 p-2 rounded-lg mr-4 mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg uppercase tracking-wider">Email</h4>
+                                    <p class="text-teal-50 text-sm mt-1">camandona.tuc@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-10">
+                            <a href="https://www.instagram.com/ferreteriabuloneria_camandona/" target="_blank" class="bg-teal-800 p-3 rounded-xl hover:bg-white hover:text-brand-primary transition text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </a>
+                            <a href="https://www.facebook.com/FerreteriayBuloneriaCamandona" target="_blank" class="bg-teal-800 p-3 rounded-xl hover:bg-white hover:text-brand-primary transition text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5 p-10 lg:p-12 bg-gray-50">
+                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Solicitud enviada. Nos comunicaremos a la brevedad.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Nombre o Empresa *</label>
+                                <input type="text" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white" required placeholder="Tu nombre">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">WhatsApp *</label>
+                                <input type="tel" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white" required placeholder="Tu número">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Pedido o Consulta *</label>
+                            <textarea rows="5" class="w-full border border-gray-200 rounded-md px-4 py-3 focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none bg-white resize-none" required placeholder="Detalle cantidad, marcas, medidas..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-primary hover:bg-teal-800 text-white font-bold py-4 px-4 rounded-md transition shadow-md text-sm uppercase tracking-widest mt-2 flex justify-center items-center">
+                            Enviar Solicitud 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-primary text-white py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center mb-6 h-auto bg-white p-3 rounded-lg shadow-sm max-w-[250px]">
+                    <img src="images/logo.png" alt="Logo Camandona" class="h-16 w-auto object-contain">
+                </div>
+                <p class="text-sm mb-8 leading-relaxed text-white/90">Suministros técnicos, herramientas y bulonería en San Miguel de Tucumán. Calidad y variedad para la industria y el hogar.</p>
+                <div class="flex space-x-4">
+                    <a href="https://www.instagram.com/ferreteriabuloneria_camandona/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-primary transition group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white group-hover:text-brand-primary group-hover:scale-110 transition"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.facebook.com/FerreteriayBuloneriaCamandona" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-primary transition group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white group-hover:text-brand-primary group-hover:scale-110 transition"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Accesos Directos</h4>
+                <ul class="space-y-4 text-sm font-medium">
+                    <li><a href="#inicio" class="hover:text-gray-200 transition flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m9 18 6-6-6-6"></path></svg>
+                        Inicio
+                    </a></li>
+                    <li><a href="#productos" class="hover:text-gray-200 transition flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m9 18 6-6-6-6"></path></svg>
+                        Productos
+                    </a></li>
+                    <li><a href="#contacto" class="hover:text-gray-200 transition flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m9 18 6-6-6-6"></path></svg>
+                        Contacto
+                    </a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Horarios de Atención</h4>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex justify-between border-b border-white/5 pb-3"><span class="text-white/80">Lunes a Viernes</span> <span class="text-white font-medium">09:00-13:30 / 17:00-20:30</span></li>
+                    <li class="flex justify-between border-b border-white/5 pb-3"><span class="text-white/80">Sábados</span> <span class="text-white font-medium">09:00 - 14:00</span></li>
+                    <li class="flex justify-between text-yellow-300 font-bold"><span>Domingos</span> <span>Cerrado</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-white/5 text-[10px] uppercase tracking-[0.2em] flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-teal-100/50">&copy; 2026 Camandona. Todos los derechos reservados.</p>
+            <p class="text-teal-100/50">San Miguel de Tucumán, Argentina.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/5493816831370" target="_blank" class="whatsapp-float" title="Comunicate por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+    </a>
+
+    <!-- Script Menú Móvil -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.getElementById('main-nav');
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            
+            // Scroll Effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            if (menuBtn && menu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    menu.classList.toggle('active');
+                });
+
+                const links = menu.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.remove('active');
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        menu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
