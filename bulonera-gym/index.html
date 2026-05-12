@@ -87,23 +87,6 @@
             border-radius: 2px;
         }
 
-        .footer-logo-monochrome {
-            filter: invert(1) brightness(0.8);
-            mix-blend-mode: screen;
-            transition: all 0.4s ease;
-        }
-        .footer-logo-monochrome:hover {
-            filter: invert(1) brightness(1);
-            transform: scale(1.05);
-        }
-
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(to right, #00d4ff, #004a99) border-box;
-            border: 2px solid transparent;
-        }
-
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -184,12 +167,6 @@
     <header id="inicio" class="relative min-h-[95vh] flex items-center overflow-hidden">
         <div class="absolute inset-0 hero-gradient z-0"></div>
         <div class="absolute inset-0 stripe-pattern z-0 opacity-20"></div>
-        
-        <!-- Floating Particles (Decorative) -->
-        <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
-            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-accent rounded-full blur-[120px] animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-primary rounded-full blur-[150px] animate-pulse" style="animation-delay: 2s"></div>
-        </div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div class="max-w-4xl">
@@ -437,9 +414,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-20 mb-24">
                 <div class="md:col-span-2">
-                    <!-- Logo del footer con filtros corregidos para evitar el recuadro plano -->
                     <div class="mb-10">
-                        <img src="images/logo.png" alt="Logo" class="h-20 w-auto footer-logo-monochrome">
+                        <!-- Logo original sin filtros -->
+                        <img src="images/logo.png" alt="Logo" class="h-24 w-auto drop-shadow-lg">
                     </div>
                     <p class="text-white/50 max-w-md leading-relaxed text-lg font-light">Especialistas en soluciones de fijación técnica y herramientas de alta gama para la industria pesada. Más de 20 años de trayectoria garantizando calidad en cada pieza.</p>
                 </div>
