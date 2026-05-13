@@ -94,15 +94,12 @@
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
         .mobile-menu-overlay {
-            transition: all 0.3s ease-in-out;
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
         }
         .mobile-menu-overlay.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
+            max-height: 400px;
         }
     </style>
 </head>
