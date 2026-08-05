@@ -56,11 +56,16 @@
 
         /* Dashboard */
         .grid-ecosistemas { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
-        .card-eco { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; }
+        .card-eco { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; display: flex; flex-direction: column; justify-content: space-between; }
         .card-eco:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color: var(--accent); }
         .card-eco h3 { margin-bottom: 8px; color: var(--primary); font-size: 1.05rem; }
         .card-eco p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
         .card-eco .badge { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; margin-top: 12px; font-weight: 600; }
+        .badge-danger { background: #fee2e2 !important; color: #991b1b !important; }
+
+        .card-eco-body { flex: 1; }
+        .card-eco-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--border); }
+        .card-eco.repo-suspended-card { border-color: #fca5a5; background-color: #fffbfb; }
 
         /* Form Builder Table */
         .builder-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -221,7 +226,7 @@
     <!-- FORM BUILDER VIEW -->
     <section id="view-builder" class="view">
         <div class="panel">
-            <div class="panel-title">Diseñador de Formularios y Atributos EAV</div>
+            <div class="panel-title" id="builder-title">Diseñador de Formularios y Atributos EAV</div>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">
                 Especifique los datos básicos del repositorio y defina los campos. Use las flechas (&uarr; / &darr;) para fijar el orden de visualización único.
             </p>
@@ -309,7 +314,8 @@
         <div class="panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <div class="panel-title" style="margin:0;" id="current-repo-title">Repositorio: Personal</div>
-                <div style="display: flex; gap: 8px;">
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" onclick="editCurrentRepository()">Modificar Estructura</button>
                     <button class="btn btn-secondary" id="btn-toggle-search" onclick="toggleSearchPanel()">🔍 Mostrar Buscador</button>
                     <button class="btn btn-primary" onclick="openModal('new')">+ Nuevo Registro</button>
                 </div>
@@ -360,7 +366,7 @@
                 <ul class="manual-index-list">
                     <li><a href="#m-intro">1. Introducción al SRF</a></li>
                     <li><a href="#m-roles">2. Roles y Accesos</a></li>
-                    <li><a href="#m-crear">3. Crear Repositorio (EAV)</a></li>
+                    <li><a href="#m-crear">3. Crear, Modificar y Suspender Repositorios</a></li>
                     <li><a href="#m-buscador">4. Buscador y Columnas</a></li>
                     <li><a href="#m-registros">5. Operatoria de Registros</a></li>
                     <li><a href="#m-versionado">6. Versionado e Historial</a></li>
@@ -374,7 +380,7 @@
                 <!-- Sección 1 -->
                 <div class="manual-card" id="m-intro">
                     <h3>🏛️ 1. Introducción al Sistema de Registros Flexibles (SRF)</h3>
-                    <p>El <strong>SRF</strong> es una herramienta institucional diseñada para reemplazar definitivamente las planillas de cálculo (Excel) fragmentadas mediante repositorios estructurados con **autonomía por área, auditoría inmutable de cambios y multi-tenencia aislada**.</p>
+                    <p>El <strong>SRF</strong> es una herramienta institucional diseñada para reemplazar definitivamente las planillas de cálculo (Excel) fragmentadas mediante repositorios estructurados con <strong>autonomía por área, auditoría inmutable de cambios y multi-tenencia aislada</strong>.</p>
                     <div class="tip-box">
                         <strong>📌 Anclaje Institucional:</strong> Integrado de forma nativa al SSO de MiPortal en <code>srf.miportal.gob.ar</code>. No requiere recordar contraseñas adicionales.
                     </div>
@@ -385,9 +391,9 @@
                     <h3>👥 2. Roles de Usuario y Niveles de Permiso</h3>
                     <p>El acceso al sistema se organiza mediante el directorio único del SSO por número de CUIL/DNI:</p>
                     <ul>
-                        <li><strong>Superadministrador (Equipo Técnico Central):**</strong> Crea los ecosistemas (Tenants) y asigna el Administrador inicial de cada área.</li>
-                        <li><strong>Administrador Departamental:**</strong> Diseña nuevos repositorios, configura los atributos EAV y asocia usuarios habilitando permisos específicos por repositorio.</li>
-                        <li><strong>Usuario Operador:**</strong> Accede a los repositorios de su órbita con alguno de los siguientes niveles de permiso:
+                        <li><strong>Superadministrador (Equipo Técnico Central):</strong> Crea los ecosistemas (Tenants) y asigna el Administrador inicial de cada área.</li>
+                        <li><strong>Administrador Departamental:</strong> Diseña nuevos repositorios, modifica estructuras existentes, suspende o reactiva repositorios y asocia usuarios habilitando permisos específicos por repositorio.</li>
+                        <li><strong>Usuario Operador:</strong> Accede a los repositorios de su órbita con alguno de los siguientes niveles de permiso:
                             <ul>
                                 <li><code>Lectura (Consulta):</code> Permite explorar y visualizar las fichas completas.</li>
                                 <li><code>Lectura y Carga:</code> Permite agregar nuevos registros (sin modificar los existentes).</li>
@@ -399,21 +405,22 @@
 
                 <!-- Sección 3 -->
                 <div class="manual-card" id="m-crear">
-                    <h3>⚙️ 3. Guía Paso a Paso: Crear un Repositorio (EAV)</h3>
-                    <p>Desde la pestaña <strong>⚙️ Crear Repositorio</strong>, el Administrador Departamental define la estructura del nuevo registro sin necesidad de solicitar desarrollos a informática:</p>
+                    <h3>⚙️ 3. Guía Paso a Paso: Crear, Modificar y Suspender Repositorios</h3>
+                    <p>Desde la pestaña <strong>Crear Repositorio</strong> (o desde la opción <code>Modificar</code> en el pie de tarjeta del Dashboard o <code>Modificar Estructura</code> en el listado), el Administrador Departamental gestiona la estructura de los datos:</p>
                     <ol>
-                        <li><span class="step-badge">1</span><strong>Identificación:</strong> Ingrese el Nombre del Repositorio y su descripción u objetivo institucional.</li>
-                        <li><span class="step-badge">2</span><strong>Agregar Atributos:</strong> Presione el botón <code>+ Agregar Campo</code> para sumar preguntas a la plantilla.</li>
+                        <li><span class="step-badge">1</span><strong>Identificación:</strong> Ingrese o actualice el Nombre del Repositorio y su descripción u objetivo institucional.</li>
+                        <li><span class="step-badge">2</span><strong>Agregar / Reorganizar Atributos:</strong> Presione el botón <code>+ Agregar Campo</code> para sumar atributos, o reordene los existentes usando las flechas <code>&uarr;</code> (arriba) y <code>&darr;</code> (abajo).</li>
                         <li><span class="step-badge">3</span><strong>Configuración de Atributos:</strong>
                             <ul>
-                                <li><strong>Nombre del Campo:</strong> Título visible que tendrá el atributo.</li>
-                                <li><strong>Tipo de Dato:</strong> Seleccione entre Texto Corto, Número, Fecha o Lista (Select). Si elige Lista, ingrese las opciones separadas por coma.</li>
-                                <li><strong>Obligatorio:</strong> Marque la casilla si el dato no puede quedar vacío.</li>
-                                <li><strong>🔍 Buscable:</strong> Marque esta casilla si desea que este campo esté disponible como filtro en el Buscador Avanzado.</li>
+                                <li><strong>Nombre del Campo:</strong> Título visible del atributo.</li>
+                                <li><strong>Tipo de Dato:</strong> Seleccione entre Texto Corto, Número, Fecha o Lista (Select).</li>
+                                <li><strong>Obligatorio:</strong> Marque la casilla si el dato es requerido para guardar.</li>
+                                <li><strong>🔍 Buscable:</strong> Habilite esta casilla para incluir el campo en el Buscador Avanzado y optimizar su indexación.</li>
                             </ul>
                         </li>
-                        <li><span class="step-badge">4</span><strong>Fijar Orden Único (&uarr; / &darr;):</strong> Use los botones de flecha para ordenar los atributos. El primer campo no tiene flecha arriba y el último no tiene flecha abajo. <em>Este orden será el mismo en la tabla de listado y en el formulario modal.</em></li>
-                        <li><span class="step-badge">5</span><strong>Publicación:</strong> Presione <code>💾 Guardar y Publicar Repositorio</code> y confirme la acción en el mensaje flotante.</li>
+                        <li><span class="step-badge">4</span><strong>Fijar Orden Único (&uarr; / &darr;):</strong> Utilice los controles de ordenamiento. El primer campo oculta la flecha hacia arriba (`&uarr;`) y el último oculta la flecha hacia abajo (`&darr;`). <em>Este orden maestro se aplica de forma uniforme en la tabla del listado y en el formulario modal.</em></li>
+                        <li><span class="step-badge">5</span><strong>Publicación o Guardado:</strong> Presione <code>💾 Guardar y Publicar Repositorio</code> o <code>💾 Guardar Cambios</code> y confirme en la ventana emergente.</li>
+                        <li><span class="step-badge">6</span><strong>Suspender / Reactivar Repositorio:</strong> En el Dashboard, los botones del pie de tarjeta permiten presionar <code>Suspender</code> para pausar temporalmente la carga de nuevos datos. Para habilitarlo nuevamente, presione <code>Reactivar</code>.</li>
                     </ol>
                 </div>
 
@@ -422,7 +429,7 @@
                     <h3>🔍 4. Consulta Avanzada y Personalización del Listado</h3>
                     <p>En el listado principal del repositorio dispone de herramientas avanzadas para localizar información rápidamente:</p>
                     <ul>
-                        <li><strong>Buscador Avanzado (Colapsable):**</strong> Presione <code>🔍 Mostrar Buscador</code> para desplegar los 3 niveles de filtrado.
+                        <li><strong>Buscador Avanzado (Colapsable):</strong> Presione <code>🔍 Mostrar Buscador</code> para desplegar los 3 niveles de filtrado.
                             <ul>
                                 <li>Cada desplegable ofrece únicamente los campos configurados como <strong>🔍 Buscable</strong>.</li>
                                 <li>Los campos seleccionados en una fila se excluyen automáticamente de los demás desplegables.</li>
@@ -431,8 +438,8 @@
                                 <li>La búsqueda se ejecuta de manera explícita al hacer clic en el botón <code>Buscar</code>.</li>
                             </ul>
                         </li>
-                        <li><strong>Botonera de Columnas Visibles (`+` / `-`):**</strong>
-                            Haga clic en los botones superiores para ocultar (<code>-</code>) o mostrar (<code>+</code>) columnas en la tabla. Sus preferencias se guardan de forma independiente.
+                        <li><strong>Botonera de Columnas Visibles (`+` / `-`):</strong>
+                            Haga clic en los botones superiores para ocultar (<code>-</code>) o mostrar (<code>+</code>) columnas en la tabla. Sus preferencias se guardan de forma independiente por usuario y repositorio.
                         </li>
                     </ul>
                 </div>
@@ -440,11 +447,11 @@
                 <!-- Sección 5 -->
                 <div class="manual-card" id="m-registros">
                     <h3>📋 5. Operatoria de Registros y Ficha Completa</h3>
-                    <p>Para simplificar la visualización y evitar errores accidentales, las filas de la tabla presentan únicamente el botón <code>Ver</code>:</p>
+                    <p>Para simplificar la visualización y evitar errores accidentales, las filas de la tabla presentan únicamente el botón <code>Ver</code>. Todas las acciones operativas se centralizan en el pie del modal:</p>
                     <ul>
                         <li><strong>Ver Ficha Completa:</strong> Al presionar <code>Ver</code>, se despliega una ventana modal ampliada al 50% con todos los campos distribuidos consecutivamente en dos columnas.</li>
                         <li><strong>Cargar Nuevo Registro:</strong> Presione <code>+ Nuevo Registro</code>. Complete los datos obligatorios marcados con asterisco (*). El botón de acción indicará <code>Crear</code> y solicitará confirmación.</li>
-                        <li><strong>Editar Registro:</strong> Desde el modal desplegado con <code>Ver</code>, presione el botón <code>Editar</code>. Los campos se habilitarán para su modificación. Al presionar <code>Guardar</code>, el sistema solicitará confirmación e incrementará la versión a `vN+1` solo si hubo cambios reales.</li>
+                        <li><strong>Editar Registro:</strong> Desde el modal desplegado con <code>Ver</code>, presione el botón <code>Editar</code> al pie de la ventana. Los campos se habilitarán para su modificación. Al presionar <code>Guardar</code>, el sistema solicitará confirmación e incrementará la versión a `vN+1` solo si hubo cambios reales.</li>
                         <li><strong>Baja Lógica y Restauración:</strong>
                             <ul>
                                 <li>Para dar de baja un registro, presione <code>Bajar</code> en el pie del modal y confirme la acción. El registro no se borra de la base de datos.</li>
@@ -452,6 +459,7 @@
                                 <li>Al abrir un registro eliminado con <code>Ver</code>, el botón del modal ofrecerá la opción <code>Restaurar / Activar</code>.</li>
                             </ul>
                         </li>
+                        <li><strong>Confirmación Obligatoria:</strong> Todas las operaciones que producen modificaciones (creación, edición, baja, restauración y suspensión) requieren confirmación explícita mediante diálogo modal.</li>
                     </ul>
                 </div>
 
@@ -488,7 +496,10 @@
                     El sistema compara los datos nuevos contra los actuales. Si no se detectan cambios, no se genera una nueva versión innecesaria.</p>
 
                     <p><strong>¿Puedo cambiar el orden de los campos después de crear el repositorio?</strong><br>
-                    Sí. El Administrador Departamental puede ingresar al diseñador y reorganizar los atributos usando las flechas <code>&uarr;</code> y <code>&darr;</code>.</p>
+                    Sí. El Administrador Departamental puede ingresar a "Modificar" desde la tarjeta o "Modificar Estructura" en el listado y reorganizar los atributos usando las flechas <code>&uarr;</code> y <code>&darr;</code>.</p>
+
+                    <p><strong>¿Qué ocurre cuando se suspende un repositorio?</strong><br>
+                    Al presionar "Suspender" en el pie de tarjeta del Dashboard, el repositorio queda protegido en modo consulta. Se impide la carga de nuevos registros y ediciones hasta que el Administrador presione "Reactivar".</p>
                 </div>
             </div>
         </div>
@@ -534,6 +545,7 @@
             id: 'repo-personal',
             name: 'Personal (Condición Laboral)',
             desc: 'Registros históricos de agentes, altas, bajas y condiciones de contratación.',
+            suspended: false,
             columns: [
                 { id: 'apellido', name: 'Apellido', type: 'text', required: true, searchable: true },
                 { id: 'nombre', name: 'Nombre', type: 'text', required: true, searchable: true },
@@ -564,6 +576,7 @@
     ];
 
     let currentRepoId = 'repo-personal';
+    let editingRepoId = null;
     let userColumnPreferences = {};
 
     let searchState = [
@@ -616,7 +629,7 @@
         setTimeout(() => { toast.style.display = 'none'; }, 3500);
     }
 
-    function switchView(viewName) {
+    function switchView(viewName, param = null) {
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
@@ -627,7 +640,7 @@
         } else if(viewName === 'builder') {
             document.getElementById('view-builder').classList.add('active');
             document.querySelectorAll('.tab-btn')[1].classList.add('active');
-            initBuilder();
+            initBuilder(param);
         } else if(viewName === 'listado') {
             document.getElementById('view-listado').classList.add('active');
             document.querySelectorAll('.tab-btn')[2].classList.add('active');
@@ -650,6 +663,10 @@
         switchView('listado');
     }
 
+    function editCurrentRepository() {
+        switchView('builder', currentRepoId);
+    }
+
     function getActiveRepo() {
         return repositories.find(r => r.id === currentRepoId);
     }
@@ -661,36 +678,95 @@
 
         repositories.forEach(repo => {
             const card = document.createElement('div');
-            card.className = 'card-eco';
+            card.className = 'card-eco' + (repo.suspended ? ' repo-suspended-card' : '');
             card.onclick = () => selectRepository(repo.id);
             card.innerHTML = `
-                <h3>📋 ${repo.name}</h3>
-                <p>${repo.desc || 'Sin descripción'}</p>
-                <span class="badge">${repo.columns.length} Campos configurados</span>
+                <div class="card-eco-body">
+                    <h3>📋 ${repo.name}</h3>
+                    <p>${repo.desc || 'Sin descripción'}</p>
+                    <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span class="badge">${repo.columns.length} Campos configurados</span>
+                        ${repo.suspended ? '<span class="badge badge-danger">Suspendido</span>' : ''}
+                    </div>
+                </div>
+                <div class="card-eco-footer">
+                    <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); switchView('builder', '${repo.id}')" title="Modificar estructura del repositorio">Modificar</button>
+                    <button class="btn ${repo.suspended ? 'btn-success' : 'btn-danger'} btn-sm" onclick="event.stopPropagation(); toggleSuspendRepository('${repo.id}')" title="${repo.suspended ? 'Reactivar uso del repositorio' : 'Suspender uso del repositorio'}">${repo.suspended ? 'Reactivar' : 'Suspender'}</button>
+                </div>
             `;
             container.appendChild(card);
         });
     }
 
-    function initBuilder() {
+    function toggleSuspendRepository(repoId) {
+        const repo = repositories.find(r => r.id === repoId);
+        if (!repo) return;
+        const isSuspended = repo.suspended;
+        const confirmTitle = isSuspended ? 'Reactivar Repositorio' : 'Suspender Repositorio';
+        const confirmMsg = isSuspended 
+            ? `¿Desea reactivar el uso del repositorio "${repo.name}"?`
+            : `¿Desea suspender el uso del repositorio "${repo.name}"? No se podrán realizar cargas ni ediciones mientras esté suspendido.`;
+
+        showConfirmModal(
+            confirmTitle,
+            confirmMsg,
+            () => {
+                repo.suspended = !isSuspended;
+                showToast(`Repositorio "${repo.name}" ${isSuspended ? 'reactivado' : 'suspendido'} exitosamente.`);
+                renderDashboard();
+                if (currentRepoId === repoId) {
+                    initListadoView();
+                }
+            },
+            isSuspended ? 'btn-success' : 'btn-danger',
+            isSuspended ? 'Sí, Reactivar' : 'Sí, Suspender'
+        );
+    }
+
+    function initBuilder(repoId = null) {
+        editingRepoId = repoId;
         const form = document.getElementById('builder-form');
         if (form) form.reset();
         const container = document.getElementById('builder-fields-container');
         if (container) container.innerHTML = '';
+        const titleEl = document.getElementById('builder-title');
 
+        if (repoId) {
+            const repo = repositories.find(r => r.id === repoId);
+            if (repo) {
+                if (titleEl) titleEl.textContent = `Modificar Estructura: ${repo.name}`;
+                document.getElementById('repo-name').value = repo.name;
+                document.getElementById('repo-desc').value = repo.desc || '';
+                
+                repo.columns.forEach(col => {
+                    addBuilderField(
+                        col.name,
+                        col.type,
+                        col.required,
+                        (col.options || []).join(', '),
+                        col.searchable !== false,
+                        col.id
+                    );
+                });
+                return;
+            }
+        }
+
+        if (titleEl) titleEl.textContent = 'Diseñador de Formularios y Atributos EAV';
         addBuilderField('Apellido', 'text', true, '', true);
         addBuilderField('Nombre', 'text', true, '', true);
         addBuilderField('Estado', 'select', false, 'Activo, Inactivo, Pendiente', true);
     }
 
-    function addBuilderField(name = '', type = 'text', required = false, options = '', searchable = true) {
+    function addBuilderField(name = '', type = 'text', required = false, options = '', searchable = true, existingColId = null) {
         const container = document.getElementById('builder-fields-container');
         if (!container) return;
-        const fieldId = 'field_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+        const fieldId = existingColId || ('col_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4));
 
         const row = document.createElement('tr');
         row.className = 'builder-field-row';
-        row.id = fieldId;
+        row.id = 'field_row_' + fieldId;
+        row.dataset.colId = fieldId;
 
         row.innerHTML = `
             <td>
@@ -720,7 +796,7 @@
                 <input type="checkbox" class="field-search-chk" ${searchable ? 'checked' : ''} style="transform: scale(1.25); cursor: pointer;" title="Buscable en Buscador Avanzado">
             </td>
             <td style="text-align: center;">
-                <button type="button" class="btn btn-danger btn-sm" onclick="document.getElementById('${fieldId}').remove(); updateReorderButtons();" title="Eliminar atributo">✕</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="document.getElementById('${row.id}').remove(); updateReorderButtons();" title="Eliminar atributo">✕</button>
             </td>
         `;
 
@@ -790,11 +866,12 @@
             const isReq = row.querySelector('.field-req-chk').checked;
             const isSearchable = row.querySelector('.field-search-chk').checked;
             const optionsVal = row.querySelector('.options-input').value.trim();
+            const colId = row.dataset.colId || ('col_' + index + '_' + fieldName.toLowerCase().replace(/[^a-z0-9]/g, '_'));
 
             if (!fieldName) valid = false;
 
             const colObj = {
-                id: 'col_' + index + '_' + fieldName.toLowerCase().replace(/[^a-z0-9]/g, '_'),
+                id: colId,
                 name: fieldName,
                 type: fieldType,
                 required: isReq,
@@ -811,6 +888,26 @@
         if (!valid) {
             showToast('Todos los campos agregados deben tener un nombre.', true);
             return;
+        }
+
+        if (editingRepoId) {
+            const repo = repositories.find(r => r.id === editingRepoId);
+            if (repo) {
+                showConfirmModal(
+                    'Guardar Cambios en Repositorio',
+                    `¿Desea actualizar la estructura del repositorio "${name}"?`,
+                    () => {
+                        repo.name = name;
+                        repo.desc = desc;
+                        repo.columns = newColumns;
+                        showToast('Estructura del repositorio actualizada con éxito.');
+                        selectRepository(editingRepoId);
+                    },
+                    'btn-success',
+                    'Sí, Actualizar'
+                );
+                return;
+            }
         }
 
         showConfirmModal(
@@ -839,7 +936,9 @@
         const repo = getActiveRepo();
         if (repo) {
             const titleEl = document.getElementById('current-repo-title');
-            if (titleEl) titleEl.textContent = `Repositorio: ${repo.name}`;
+            if (titleEl) {
+                titleEl.innerHTML = `Repositorio: ${repo.name} ${repo.suspended ? '<span class="badge badge-danger" style="margin-left: 8px; vertical-align: middle;">SUSPENDIDO</span>' : ''}`;
+            }
             if (Object.keys(userColumnPreferences).length === 0) {
                 repo.columns.forEach((c, index) => {
                     userColumnPreferences[c.id] = index < 4;
@@ -1095,6 +1194,12 @@
     function openModal(mode, recordId = null) {
         const repo = getActiveRepo();
         if (!repo) return;
+
+        if (mode === 'new' && repo.suspended) {
+            showToast('El repositorio se encuentra suspendido. Reactívelo para realizar nuevas cargas.', true);
+            return;
+        }
+
         activeRecordId = recordId;
         currentModalMode = mode;
         
