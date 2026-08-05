@@ -132,7 +132,33 @@
         .version-item:hover { border-color: var(--accent); background: #f0f9ff; }
         .version-item.active-version { border-left: 4px solid var(--accent); font-weight: 700; background: #f8fafc; }
 
-        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+        /* Manual de Usuario Styles */
+        .manual-hero { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; padding: 22px 25px; border-radius: 8px; margin-bottom: 20px; }
+        .manual-hero h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; color: #f8fafc; }
+        .manual-hero p { color: #cbd5e1; font-size: 0.88rem; line-height: 1.5; margin: 0; }
+        
+        .manual-grid { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
+        @media (max-width: 768px) { .manual-grid { grid-template-columns: 1fr; } }
+        
+        .manual-index { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px; height: fit-content; position: sticky; top: 20px; }
+        .manual-index-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px; }
+        .manual-index-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+        .manual-index-list a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; padding: 7px 10px; border-radius: 6px; display: block; font-weight: 500; transition: all 0.15s; }
+        .manual-index-list a:hover { background: #f0f9ff; color: var(--accent); }
+        
+        .manual-content-section { display: flex; flex-direction: column; gap: 20px; }
+        .manual-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+        .manual-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .manual-card p, .manual-card li { font-size: 0.88rem; color: var(--text-main); line-height: 1.55; }
+        .manual-card ul, .manual-card ol { padding-left: 20px; margin-top: 8px; margin-bottom: 8px; }
+        .manual-card li { margin-bottom: 6px; }
+
+        .step-badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.75rem; font-weight: 700; margin-right: 6px; }
+        
+        .tip-box { background: #f0f9ff; border-left: 4px solid var(--accent); padding: 12px 15px; border-radius: 0 6px 6px 0; font-size: 0.85rem; margin-top: 12px; color: #0369a1; line-height: 1.45; }
+        .warn-box { background: #fef2f2; border-left: 4px solid var(--danger); padding: 12px 15px; border-radius: 0 6px 6px 0; font-size: 0.85rem; margin-top: 12px; color: #991b1b; line-height: 1.45; }
 
         /* Responsive & Mobile Adaptation Query Breakpoints */
         @media (max-width: 768px) {
@@ -175,6 +201,7 @@
             <button class="tab-btn active" onclick="switchView('dashboard')">1. Dashboard</button>
             <button class="tab-btn" onclick="switchView('builder')">⚙️ Crear Repositorio</button>
             <button class="tab-btn" onclick="switchView('listado')">2. Listado y Buscador</button>
+            <button class="tab-btn" onclick="switchView('manual')">📖 Manual de Usuario</button>
         </div>
     </header>
 
@@ -318,7 +345,154 @@
             </div>
         </div>
     </section>
-</div>
+
+    <!-- MANUAL DE USUARIO VIEW -->
+    <section id="view-manual" class="view">
+        <div class="manual-hero">
+            <h2>📖 Manual Operativo de Usuario</h2>
+            <p>Guía integral para la configuración de repositorios, consulta avanzada, carga transaccional y auditoría de versionado en el <strong>Sistema de Registros Flexibles (SRF)</strong> — Módulo nativo <code>srf.miportal.gob.ar</code>.</p>
+        </div>
+
+        <div class="manual-grid">
+            <!-- Índice Flotante -->
+            <nav class="manual-index">
+                <div class="manual-index-title">Índice del Manual</div>
+                <ul class="manual-index-list">
+                    <li><a href="#m-intro">1. Introducción al SRF</a></li>
+                    <li><a href="#m-roles">2. Roles y Accesos</a></li>
+                    <li><a href="#m-crear">3. Crear Repositorio (EAV)</a></li>
+                    <li><a href="#m-buscador">4. Buscador y Columnas</a></li>
+                    <li><a href="#m-registros">5. Operatoria de Registros</a></li>
+                    <li><a href="#m-versionado">6. Versionado e Historial</a></li>
+                    <li><a href="#m-excel">7. Importación y Exportación</a></li>
+                    <li><a href="#m-faq">8. Preguntas Frecuentes</a></li>
+                </ul>
+            </nav>
+
+            <!-- Contenido del Manual -->
+            <div class="manual-content-section">
+                <!-- Sección 1 -->
+                <div class="manual-card" id="m-intro">
+                    <h3>🏛️ 1. Introducción al Sistema de Registros Flexibles (SRF)</h3>
+                    <p>El <strong>SRF</strong> es una herramienta institucional diseñada para reemplazar definitivamente las planillas de cálculo (Excel) fragmentadas mediante repositorios estructurados con **autonomía por área, auditoría inmutable de cambios y multi-tenencia aislada**.</p>
+                    <div class="tip-box">
+                        <strong>📌 Anclaje Institucional:</strong> Integrado de forma nativa al SSO de MiPortal en <code>srf.miportal.gob.ar</code>. No requiere recordar contraseñas adicionales.
+                    </div>
+                </div>
+
+                <!-- Sección 2 -->
+                <div class="manual-card" id="m-roles">
+                    <h3>👥 2. Roles de Usuario y Niveles de Permiso</h3>
+                    <p>El acceso al sistema se organiza mediante el directorio único del SSO por número de CUIL/DNI:</p>
+                    <ul>
+                        <li><strong>Superadministrador (Equipo Técnico Central):**</strong> Crea los ecosistemas (Tenants) y asigna el Administrador inicial de cada área.</li>
+                        <li><strong>Administrador Departamental:**</strong> Diseña nuevos repositorios, configura los atributos EAV y asocia usuarios habilitando permisos específicos por repositorio.</li>
+                        <li><strong>Usuario Operador:**</strong> Accede a los repositorios de su órbita con alguno de los siguientes niveles de permiso:
+                            <ul>
+                                <li><code>Lectura (Consulta):</code> Permite explorar y visualizar las fichas completas.</li>
+                                <li><code>Lectura y Carga:</code> Permite agregar nuevos registros (sin modificar los existentes).</li>
+                                <li><code>Escritura Total:</code> Permite cargar, editar (generando versiones `vN`), dar de baja lógicamente y restaurar registros.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sección 3 -->
+                <div class="manual-card" id="m-crear">
+                    <h3>⚙️ 3. Guía Paso a Paso: Crear un Repositorio (EAV)</h3>
+                    <p>Desde la pestaña <strong>⚙️ Crear Repositorio</strong>, el Administrador Departamental define la estructura del nuevo registro sin necesidad de solicitar desarrollos a informática:</p>
+                    <ol>
+                        <li><span class="step-badge">1</span><strong>Identificación:</strong> Ingrese el Nombre del Repositorio y su descripción u objetivo institucional.</li>
+                        <li><span class="step-badge">2</span><strong>Agregar Atributos:</strong> Presione el botón <code>+ Agregar Campo</code> para sumar preguntas a la plantilla.</li>
+                        <li><span class="step-badge">3</span><strong>Configuración de Atributos:</strong>
+                            <ul>
+                                <li><strong>Nombre del Campo:</strong> Título visible que tendrá el atributo.</li>
+                                <li><strong>Tipo de Dato:</strong> Seleccione entre Texto Corto, Número, Fecha o Lista (Select). Si elige Lista, ingrese las opciones separadas por coma.</li>
+                                <li><strong>Obligatorio:</strong> Marque la casilla si el dato no puede quedar vacío.</li>
+                                <li><strong>🔍 Buscable:</strong> Marque esta casilla si desea que este campo esté disponible como filtro en el Buscador Avanzado.</li>
+                            </ul>
+                        </li>
+                        <li><span class="step-badge">4</span><strong>Fijar Orden Único (&uarr; / &darr;):</strong> Use los botones de flecha para ordenar los atributos. El primer campo no tiene flecha arriba y el último no tiene flecha abajo. <em>Este orden será el mismo en la tabla de listado y en el formulario modal.</em></li>
+                        <li><span class="step-badge">5</span><strong>Publicación:</strong> Presione <code>💾 Guardar y Publicar Repositorio</code> y confirme la acción en el mensaje flotante.</li>
+                    </ol>
+                </div>
+
+                <!-- Sección 4 -->
+                <div class="manual-card" id="m-buscador">
+                    <h3>🔍 4. Consulta Avanzada y Personalización del Listado</h3>
+                    <p>En el listado principal del repositorio dispone de herramientas avanzadas para localizar información rápidamente:</p>
+                    <ul>
+                        <li><strong>Buscador Avanzado (Colapsable):**</strong> Presione <code>🔍 Mostrar Buscador</code> para desplegar los 3 niveles de filtrado.
+                            <ul>
+                                <li>Cada desplegable ofrece únicamente los campos configurados como <strong>🔍 Buscable</strong>.</li>
+                                <li>Los campos seleccionados en una fila se excluyen automáticamente de los demás desplegables.</li>
+                                <li>Al cambiar de campo, el casillero de búsqueda se limpia automáticamente y ajusta su tipo (ej: calendario para fecha).</li>
+                                <li><strong>Operadores:</strong> Por defecto aplica la condición <code>OR</code> (cualquier coincidencia). Marque la casilla <em>"Aplicar todas las condiciones (AND)"</em> si requiere que se cumplan todos los criterios simultáneamente.</li>
+                                <li>La búsqueda se ejecuta de manera explícita al hacer clic en el botón <code>Buscar</code>.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Botonera de Columnas Visibles (`+` / `-`):**</strong>
+                            Haga clic en los botones superiores para ocultar (<code>-</code>) o mostrar (<code>+</code>) columnas en la tabla. Sus preferencias se guardan de forma independiente.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sección 5 -->
+                <div class="manual-card" id="m-registros">
+                    <h3>📋 5. Operatoria de Registros y Ficha Completa</h3>
+                    <p>Para simplificar la visualización y evitar errores accidentales, las filas de la tabla presentan únicamente el botón <code>Ver</code>:</p>
+                    <ul>
+                        <li><strong>Ver Ficha Completa:</strong> Al presionar <code>Ver</code>, se despliega una ventana modal ampliada al 50% con todos los campos distribuidos consecutivamente en dos columnas.</li>
+                        <li><strong>Cargar Nuevo Registro:</strong> Presione <code>+ Nuevo Registro</code>. Complete los datos obligatorios marcados con asterisco (*). El botón de acción indicará <code>Crear</code> y solicitará confirmación.</li>
+                        <li><strong>Editar Registro:</strong> Desde el modal desplegado con <code>Ver</code>, presione el botón <code>Editar</code>. Los campos se habilitarán para su modificación. Al presionar <code>Guardar</code>, el sistema solicitará confirmación e incrementará la versión a `vN+1` solo si hubo cambios reales.</li>
+                        <li><strong>Baja Lógica y Restauración:</strong>
+                            <ul>
+                                <li>Para dar de baja un registro, presione <code>Bajar</code> en el pie del modal y confirme la acción. El registro no se borra de la base de datos.</li>
+                                <li>Para consultar eliminados, active la casilla <code>Incluir eliminados</code> en el pie de la tabla. Las filas dadas de baja se mostrarán atenuadas en gris.</li>
+                                <li>Al abrir un registro eliminado con <code>Ver</code>, el botón del modal ofrecerá la opción <code>Restaurar / Activar</code>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sección 6 -->
+                <div class="manual-card" id="m-versionado">
+                    <h3>📜 6. Versionado Histórico de Registros</h3>
+                    <p>Todas las modificaciones sobre un registro quedan grabadas de forma inmutable. Los registros modificados muestran una insignia azul (ej: <span class="version-badge">v2</span>) en el primer campo de la tabla.</p>
+                    <p>En la sección inferior del modal se despliega la lista descendente de versiones:</p>
+                    <ul>
+                        <li>Haga clic en cualquier versión anterior para visualizar los datos históricos en modo solo lectura.</li>
+                        <li>Haga clic en la versión actual (ubicada en la parte superior del listado) para retornar al modo edición.</li>
+                    </ul>
+                    <div class="warn-box">
+                        <strong>⚠️ Trazabilidad Legal:</strong> Las versiones históricas son de consulta inalterable. Ningún usuario ni administrador puede sobrescribir o eliminar datos del historial.
+                    </div>
+                </div>
+
+                <!-- Sección 7 -->
+                <div class="manual-card" id="m-excel">
+                    <h3>📊 7. Interoperabilidad con Hojas de Cálculo (Excel)</h3>
+                    <ul>
+                        <li><strong>Importación de Datos Históricos:</strong> Disponible mediante proceso asistido por el equipo técnico. Se aplica validación posicional estricta "todo o nada": si una sola fila posee un dato inválido o incompleto, el lote entero se rechaza hasta su corrección.</li>
+                        <li><strong>Exportación a Excel:</strong> Permite descargar los datos del repositorio respetando los filtros aplicados en el buscador y las columnas visibles configuradas.</li>
+                    </ul>
+                </div>
+
+                <!-- Sección 8 -->
+                <div class="manual-card" id="m-faq">
+                    <h3>❓ 8. Preguntas Frecuentes (FAQ)</h3>
+                    <p><strong>¿Puedo recuperar un registro dado de baja por error?</strong><br>
+                    Sí. Active la casilla "Incluir eliminados" en el listado, abra la ficha con el botón "Ver" y presione "Restaurar / Activar".</p>
+                    
+                    <p><strong>¿Qué sucede si edito un registro pero no cambio ningún dato?</strong><br>
+                    El sistema compara los datos nuevos contra los actuales. Si no se detectan cambios, no se genera una nueva versión innecesaria.</p>
+
+                    <p><strong>¿Puedo cambiar el orden de los campos después de crear el repositorio?</strong><br>
+                    Sí. El Administrador Departamental puede ingresar al diseñador y reorganizar los atributos usando las flechas <code>&uarr;</code> y <code>&darr;</code>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <!-- EDITOR & DETAIL MODAL -->
 <div class="modal-overlay" id="modal-editor">
@@ -338,9 +512,18 @@
             <div class="version-list" id="version-list"></div>
         </div>
 
-        <div class="modal-actions">
-            <button class="btn btn-secondary" id="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
-            <button class="btn btn-primary" id="btn-modal-action" onclick="saveRecord()"></button>
+        <div class="modal-actions" id="modal-actions"></div>
+    </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal-overlay" id="modal-confirm" style="z-index: 2100;">
+    <div class="modal-card" style="max-width: 440px; text-align: center; padding: 25px 20px;">
+        <h3 id="confirm-title" style="margin-bottom: 10px; color: var(--primary); font-size: 1.15rem;">Confirmación</h3>
+        <p id="confirm-message" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4;"></p>
+        <div style="display: flex; justify-content: center; gap: 12px; margin-top: 15px;">
+            <button class="btn btn-secondary" onclick="closeConfirmModal()">Cancelar</button>
+            <button class="btn btn-primary" id="btn-confirm-accept">Confirmar</button>
         </div>
     </div>
 </div>
@@ -391,6 +574,38 @@
 
     let activeRecordId = null;
     let selectedVersionNumber = null;
+    let currentModalMode = 'view'; // 'view', 'edit', 'new'
+    let confirmCallback = null;
+
+    function showConfirmModal(title, message, onConfirm, btnClass = 'btn-primary', btnText = 'Confirmar') {
+        const modal = document.getElementById('modal-confirm');
+        const titleEl = document.getElementById('confirm-title');
+        const msgEl = document.getElementById('confirm-message');
+        const acceptBtn = document.getElementById('btn-confirm-accept');
+
+        if (!modal || !titleEl || !msgEl || !acceptBtn) return;
+
+        titleEl.textContent = title;
+        msgEl.textContent = message;
+        acceptBtn.className = `btn ${btnClass}`;
+        acceptBtn.textContent = btnText;
+        confirmCallback = onConfirm;
+
+        acceptBtn.onclick = () => {
+            closeConfirmModal();
+            if (typeof confirmCallback === 'function') {
+                confirmCallback();
+            }
+        };
+
+        modal.classList.add('active');
+    }
+
+    function closeConfirmModal() {
+        const modal = document.getElementById('modal-confirm');
+        if (modal) modal.classList.remove('active');
+        confirmCallback = null;
+    }
 
     function showToast(message, isError = false) {
         const toast = document.getElementById('toast-banner');
@@ -417,6 +632,9 @@
             document.getElementById('view-listado').classList.add('active');
             document.querySelectorAll('.tab-btn')[2].classList.add('active');
             initListadoView();
+        } else if(viewName === 'manual') {
+            document.getElementById('view-manual').classList.add('active');
+            document.querySelectorAll('.tab-btn')[3].classList.add('active');
         }
     }
 
@@ -595,18 +813,26 @@
             return;
         }
 
-        const newRepoId = 'repo-' + Date.now();
-        const newRepo = {
-            id: newRepoId,
-            name: name,
-            desc: desc,
-            columns: newColumns,
-            records: []
-        };
+        showConfirmModal(
+            'Publicar Repositorio',
+            `¿Desea crear y publicar el repositorio "${name}" con ${newColumns.length} atributos?`,
+            () => {
+                const newRepoId = 'repo-' + Date.now();
+                const newRepo = {
+                    id: newRepoId,
+                    name: name,
+                    desc: desc,
+                    columns: newColumns,
+                    records: []
+                };
 
-        repositories.push(newRepo);
-        showToast('¡Repositorio creado y publicado con éxito!');
-        selectRepository(newRepoId);
+                repositories.push(newRepo);
+                showToast('¡Repositorio creado y publicado con éxito!');
+                selectRepository(newRepoId);
+            },
+            'btn-success',
+            'Sí, Publicar'
+        );
     }
 
     function initListadoView() {
@@ -761,7 +987,7 @@
             th.textContent = col.name;
             thead.appendChild(th);
         });
-        thead.innerHTML += '<th style="text-align:right;">Acciones</th>';
+        thead.innerHTML += '<th style="text-align:right;">Acción</th>';
 
         let filtered = repo.records.filter(r => showDeleted || !r.deleted);
 
@@ -807,21 +1033,10 @@
                 tr.appendChild(td);
             });
 
+            // Listing table now displays strictly the "Ver" button
             const tdActions = document.createElement('td');
             tdActions.style.textAlign = 'right';
-
-            if (!record.deleted) {
-                tdActions.innerHTML = `
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('view', ${record.id})">Ver</button>
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit', ${record.id})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteRecord(${record.id})">Bajar</button>
-                `;
-            } else {
-                tdActions.innerHTML = `
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('view', ${record.id})">Ver</button>
-                    <button class="btn btn-primary btn-sm" onclick="openModal('edit', ${record.id})">Editar / Restaurar</button>
-                `;
-            }
+            tdActions.innerHTML = `<button class="btn btn-secondary btn-sm" onclick="openModal('view', ${record.id})">Ver</button>`;
 
             tr.appendChild(tdActions);
             tbody.appendChild(tr);
@@ -833,8 +1048,46 @@
         if (!repo) return;
         const rec = repo.records.find(r => r.id === id);
         if (rec) {
-            rec.deleted = true;
-            showToast('Registro dado de baja lógicamente.');
+            showConfirmModal(
+                'Confirmar Baja Lógica',
+                `¿Está seguro de que desea dar de baja el registro #${id}?`,
+                () => {
+                    rec.deleted = true;
+                    showToast('Registro dado de baja lógicamente.');
+                    renderTable();
+                },
+                'btn-danger',
+                'Sí, Bajar'
+            );
+        }
+    }
+
+    function restoreRecord(id) {
+        const repo = getActiveRepo();
+        if (!repo) return;
+        const rec = repo.records.find(r => r.id === id);
+        if (rec) {
+            showConfirmModal(
+                'Confirmar Restauración',
+                `¿Está seguro de que desea reactivar el registro #${id}?`,
+                () => {
+                    rec.deleted = false;
+                    showToast('Registro reactivado exitosamente.');
+                    renderTable();
+                },
+                'btn-primary',
+                'Sí, Activar'
+            );
+        }
+    }
+
+    function restoreRecord(id) {
+        const repo = getActiveRepo();
+        if (!repo) return;
+        const rec = repo.records.find(r => r.id === id);
+        if (rec) {
+            rec.deleted = false;
+            showToast('Registro reactivado exitosamente.');
             renderTable();
         }
     }
@@ -843,23 +1096,26 @@
         const repo = getActiveRepo();
         if (!repo) return;
         activeRecordId = recordId;
+        currentModalMode = mode;
         
         const modal = document.getElementById('modal-editor');
-        const btnAction = document.getElementById('btn-modal-action');
-        const btnCancel = document.getElementById('btn-modal-cancel');
         const historySection = document.getElementById('history-section');
         const form = document.getElementById('record-form');
+        const modalActions = document.getElementById('modal-actions');
         
         clearValidations();
         renderDynamicModalFields(repo);
 
         if (mode === 'new') {
             document.getElementById('modal-title').innerHTML = `Nuevo Registro en ${repo.name}`;
-            btnAction.style.display = 'inline-block';
-            btnAction.textContent = 'Crear';
-            btnCancel.textContent = 'Cancelar';
             form.reset();
             historySection.style.display = 'none';
+
+            // Modal actions footer for New record
+            modalActions.innerHTML = `
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveRecord()">Crear</button>
+            `;
         } else if (mode === 'view') {
             const rec = repo.records.find(r => r.id === recordId);
             selectedVersionNumber = rec.currentVersion;
@@ -868,11 +1124,9 @@
                 ? `<span class="version-badge">v${rec.currentVersion}</span>` 
                 : `<span class="version-badge" style="background:#f1f5f9;color:#64748b;border-color:#cbd5e1;">v1</span>`;
 
-            document.getElementById('modal-title').innerHTML = `Detalle del Registro #${rec.id} ${badgeHtml}`;
+            const deletedStatus = rec.deleted ? ' <span style="color:var(--danger);font-size:0.8rem;font-weight:bold;">(Eliminado)</span>' : '';
+            document.getElementById('modal-title').innerHTML = `Detalle del Registro #${rec.id} ${badgeHtml}${deletedStatus}`;
             historySection.style.display = 'block';
-
-            btnAction.style.display = 'none';
-            btnCancel.textContent = 'Cerrar';
 
             loadVersionIntoForm(rec, rec.currentVersion);
             repo.columns.forEach(col => {
@@ -881,7 +1135,21 @@
             });
 
             renderVersionList(rec);
-        } else {
+
+            // Modal actions footer for View mode (all management actions live here)
+            if (!rec.deleted) {
+                modalActions.innerHTML = `
+                    <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>
+                    <button class="btn btn-danger" onclick="deleteRecordFromModal(${rec.id})">Bajar</button>
+                    <button class="btn btn-primary" onclick="openModal('edit', ${rec.id})">Editar</button>
+                `;
+            } else {
+                modalActions.innerHTML = `
+                    <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>
+                    <button class="btn btn-primary" onclick="restoreRecordFromModal(${rec.id})">Restaurar / Activar</button>
+                `;
+            }
+        } else if (mode === 'edit') {
             const rec = repo.records.find(r => r.id === recordId);
             selectedVersionNumber = rec.currentVersion;
 
@@ -892,15 +1160,27 @@
             document.getElementById('modal-title').innerHTML = `Editar Registro #${rec.id} ${badgeHtml}`;
             historySection.style.display = 'block';
 
-            btnAction.style.display = 'inline-block';
-            btnAction.textContent = rec.deleted ? 'Activar' : 'Guardar';
-            btnCancel.textContent = 'Cancelar';
-
             loadVersionIntoForm(rec, rec.currentVersion);
             renderVersionList(rec);
+
+            // Modal actions footer for Edit mode
+            modalActions.innerHTML = `
+                <button class="btn btn-secondary" onclick="openModal('view', ${rec.id})">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveRecord()">${rec.deleted ? 'Activar' : 'Guardar'}</button>
+            `;
         }
 
         if (modal) modal.classList.add('active');
+    }
+
+    function deleteRecordFromModal(id) {
+        deleteRecord(id);
+        closeModal();
+    }
+
+    function restoreRecordFromModal(id) {
+        restoreRecord(id);
+        closeModal();
     }
 
     function renderDynamicModalFields(repo) {
@@ -951,7 +1231,7 @@
         const repo = getActiveRepo();
         if (!repo) return;
         const verData = record.versions.find(v => v.version === versionNumber).data;
-        const isLatest = versionNumber === record.currentVersion;
+        const isLatest = versionNumber === record.currentVersion && currentModalMode === 'edit';
 
         repo.columns.forEach(col => {
             const field = document.getElementById(`field-${col.id}`);
@@ -1018,47 +1298,68 @@
         }
 
         if (!activeRecordId) {
-            const newId = repo.records.length + 1;
-            repo.records.unshift({
-                id: newId,
-                deleted: false,
-                currentVersion: 1,
-                versions: [{
-                    version: 1,
-                    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
-                    user: 'usuario_sso',
-                    data: formData
-                }]
-            });
-            showToast('Registro creado exitosamente.');
+            showConfirmModal(
+                'Crear Registro',
+                `¿Está seguro de que desea guardar este nuevo registro en "${repo.name}"?`,
+                () => {
+                    const newId = repo.records.length + 1;
+                    repo.records.unshift({
+                        id: newId,
+                        deleted: false,
+                        currentVersion: 1,
+                        versions: [{
+                            version: 1,
+                            date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                            user: 'usuario_sso',
+                            data: formData
+                        }]
+                    });
+                    showToast('Registro creado exitosamente.');
+                    closeModal();
+                    renderTable();
+                },
+                'btn-primary',
+                'Sí, Crear'
+            );
         } else {
             const rec = repo.records.find(r => r.id === activeRecordId);
             const currentData = rec.versions.find(v => v.version === rec.currentVersion).data;
 
             const hasChanges = JSON.stringify(currentData) !== JSON.stringify(formData);
 
-            if (hasChanges) {
-                const newVerNum = rec.currentVersion + 1;
-                rec.versions.unshift({
-                    version: newVerNum,
-                    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
-                    user: 'usuario_sso',
-                    data: formData
-                });
-                rec.currentVersion = newVerNum;
-                showToast(`Se guardaron los cambios (Versión ${newVerNum}).`);
-            } else if (rec.deleted) {
-                showToast('Registro reactivado exitosamente.');
-            }
+            const confirmMsg = rec.deleted
+                ? `¿Desea restaurar y activar el registro #${rec.id}?`
+                : (hasChanges ? `¿Desea guardar los cambios en el registro #${rec.id}? Se generará la Versión ${rec.currentVersion + 1}.` : `¿Desea confirmar los datos del registro #${rec.id}?`);
 
-            if (rec.deleted) rec.deleted = false;
+            showConfirmModal(
+                rec.deleted ? 'Activar Registro' : 'Guardar Cambios',
+                confirmMsg,
+                () => {
+                    if (hasChanges) {
+                        const newVerNum = rec.currentVersion + 1;
+                        rec.versions.unshift({
+                            version: newVerNum,
+                            date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                            user: 'usuario_sso',
+                            data: formData
+                        });
+                        rec.currentVersion = newVerNum;
+                        showToast(`Se guardaron los cambios (Versión ${newVerNum}).`);
+                    } else if (rec.deleted) {
+                        showToast('Registro reactivado exitosamente.');
+                    }
+
+                    if (rec.deleted) rec.deleted = false;
+                    closeModal();
+                    renderTable();
+                },
+                'btn-primary',
+                rec.deleted ? 'Sí, Activar' : 'Sí, Guardar'
+            );
         }
-
-        closeModal();
-        renderTable();
     }
 
-    // Startup
+    // Startup Initialization
     renderDashboard();
 </script>
 </body>
