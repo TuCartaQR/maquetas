@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registros Flexibles (SRF) - Plataforma Estatal</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --primary-hover: #0f172a;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --disabled-row: #f1f5f9;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Header / Navigation */
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tab-btn { padding: 8px 14px; border: 1px solid var(--border); background: #fff; cursor: pointer; border-radius: 6px; font-weight: 500; font-size: 0.85rem; transition: all 0.2s; }
+        .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        /* Notification Banner */
+        .toast-notification {
+            position: fixed; top: 20px; right: 20px; z-index: 2000;
+            padding: 12px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; color: #fff;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .toast-success { background: var(--success); }
+        .toast-error { background: var(--danger); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Views */
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* Dashboard */
+        .grid-ecosistemas { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
+        .card-eco { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+        .card-eco:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--accent); }
+        .card-eco h3 { margin-bottom: 8px; color: var(--primary); font-size: 1.05rem; }
+        .card-eco p { font-size: 0.85rem; color: var(--text-muted); }
+        .card-eco .badge { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-top: 10px; font-weight: 600; }
+
+        /* Panels */
+        .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .panel-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: var(--primary); }
+
+        /* Dynamic Search */
+        .search-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .search-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .search-row select, .search-row input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; }
+        .search-row select { flex: 1; min-width: 180px; }
+        .search-row input { flex: 2; min-width: 200px; }
+        
+        .search-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 10px; }
+        .checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; }
+        .btn-group { display: flex; gap: 10px; }
+
+        /* Column Selector Toolbar */
+        .columns-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .btn-col { padding: 4px 10px; font-size: 0.8rem; border-radius: 20px; border: 1px solid var(--border); background: #f8fafc; cursor: pointer; transition: all 0.2s; }
+        .btn-col.visible { background: #e0f2fe; border-color: #38bdf8; color: #0369a1; }
+        .btn-col.hidden-col { background: #f1f5f9; color: #94a3b8; }
+
+        /* Data Table */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+        th, td { padding: 12px; border-bottom: 1px solid var(--border); }
+        th { background: #f8fafc; font-weight: 600; color: var(--text-muted); }
+        
+        /* Soft Delete Style */
+        tr.row-deleted { background-color: var(--disabled-row); opacity: 0.65; }
+        tr.row-deleted td { text-decoration: line-through; }
+        tr.row-deleted td:last-child { text-decoration: none; }
+
+        /* Buttons */
+        .btn { padding: 8px 16px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; font-size: 0.85rem; transition: background-color 0.2s; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary { background: #e2e8f0; color: var(--text-main); }
+        .btn-secondary:hover { background: #cbd5e1; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-success { background: var(--success); color: #fff; }
+        .btn-sm { padding: 4px 8px; font-size: 0.75rem; }
+
+        /* Table Footer & Pagination */
+        .table-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px; }
+
+        /* Modal & Versioning */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-overlay.active { display: flex; }
+        .modal-card { background: #fff; border-radius: 8px; width: 90%; max-width: 650px; max-height: 90vh; overflow-y: auto; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        .error-summary { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; padding: 10px 15px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 15px; display: none; }
+        .field-group { margin-bottom: 15px; }
+        .field-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; }
+        .field-group input, .field-group select { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; }
+        .field-group.has-error input, .field-group.has-error select { border-color: var(--danger); background-color: #fff5f5; }
+
+        .history-section { margin-top: 25px; border-top: 2px dashed var(--border); padding-top: 15px; }
+        .version-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; max-height: 150px; overflow-y: auto; }
+        .version-item { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.8rem; display: flex; justify-content: space-between; cursor: pointer; background: #fff; }
+        .version-item:hover { border-color: var(--accent); background: #f0f9ff; }
+        .version-item.active-version { border-left: 4px solid var(--accent); font-weight: 600; }
+
+        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+        /* Form Builder UI Header & Grid Table */
+        .builder-table-wrapper { overflow-x: auto; margin-top: 10px; border: 1px solid var(--border); border-radius: 8px; }
+        .builder-header {
+            display: grid;
+            grid-template-columns: 65px 2fr 1.5fr 2fr 90px 90px 50px;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 12px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 750px;
+        }
+        .builder-header .text-center { text-align: center; }
+
+        .builder-field-row {
+            display: grid;
+            grid-template-columns: 65px 2fr 1.5fr 2fr 90px 90px 50px;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 12px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            min-width: 750px;
+        }
+        .builder-field-row:last-child { border-bottom: none; }
+        .builder-field-row input[type="text"] { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.85rem; }
+        .builder-field-row select { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.85rem; }
+        .reorder-btns { display: flex; gap: 3px; justify-content: center; }
+    </style>
+</head>
+<body>
+
+<div class="toast-notification" id="toast-banner"></div>
+
+<div class="container">
+    <!-- Header / Nav -->
+    <header>
+        <div>
+            <h2 style="color: var(--primary);">Sistema de Registros Flexibles (SRF)</h2>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Ecosistema Activo: <strong>Dirección de Recursos Humanos</strong> | <code>srf.miportal.gob.ar</code></span>
+        </div>
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchView('dashboard')">1. Dashboard</button>
+            <button class="tab-btn" onclick="switchView('builder')">⚙️ Diseñar Repositorio</button>
+            <button class="tab-btn" onclick="switchView('listado')">2. Listado y Buscador</button>
+        </div>
+    </header>
+
+    <section id="view-dashboard" class="view active">
+        <div class="panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                <div class="panel-title" style="margin:0;">Repositorios / Formularios del Ecosistema</div>
+                <button class="btn btn-primary" onclick="switchView('builder')">+ Diseñar Nuevo Repositorio</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Seleccione un repositorio para consultar, cargar o gestionar registros.</p>
+            
+            <div class="grid-ecosistemas" id="repo-cards-container">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section id="view-builder" class="view">
+        <div class="panel">
+            <div class="panel-title">Diseñador de Formularios / Repositorios</div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">
+                Complete la definición del repositorio, agregue y ordene los atributos. El orden establecido aquí determinará la disposición de las columnas en las tablas y el orden de los campos en el formulario de carga/edición.
+            </p>
+
+            <form id="builder-form" onsubmit="event.preventDefault();">
+                <div class="field-group">
+                    <label>Nombre del Repositorio *</label>
+                    <input type="text" id="repo-name" placeholder="Ej: Registro de Inspectores, Inventario de Laptops...">
+                </div>
+                <div class="field-group">
+                    <label>Descripción / Objetivo</label>
+                    <input type="text" id="repo-desc" placeholder="Breve descripción del propósito de este registro...">
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <h4 style="font-size: 0.95rem; color: var(--primary);">Atributos / Campos del Formulario</h4>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="addBuilderField()">+ Agregar Campo</button>
+                </div>
+
+                <!-- Builder Table Header & Rows Container -->
+                <div class="builder-table-wrapper">
+                    <div class="builder-header">
+                        <div class="text-center">Orden</div>
+                        <div>Nombre del Campo</div>
+                        <div>Tipo de Dato</div>
+                        <div>Opciones (Select)</div>
+                        <div class="text-center">Obligatorio</div>
+                        <div class="text-center">🔍 Buscable</div>
+                        <div class="text-center">Acción</div>
+                    </div>
+                    <div id="builder-fields-container"></div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" onclick="switchView('dashboard')">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="saveNewRepository()">💾 Guardar y Publicar Repositorio</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="view-listado" class="view">
+        
+        <!-- 3-Level Dynamic Search (Hidden by default) -->
+        <div class="panel" id="search-panel" style="display: none;">
+            <div class="panel-title">Buscador Avanzado</div>
+            <div class="search-grid">
+                <!-- Level 1 -->
+                <div class="search-row">
+                    <select id="search-col-0" onchange="handleSearchSelectChange(0)"></select>
+                    <div id="search-input-container-0" style="flex:2;">
+                        <input type="text" id="search-val-0" placeholder="Ingrese valor a buscar...">
+                    </div>
+                </div>
+                <!-- Level 2 -->
+                <div class="search-row">
+                    <select id="search-col-1" onchange="handleSearchSelectChange(1)"></select>
+                    <div id="search-input-container-1" style="flex:2;">
+                        <input type="text" id="search-val-1" placeholder="Ingrese valor a buscar...">
+                    </div>
+                </div>
+                <!-- Level 3 -->
+                <div class="search-row">
+                    <select id="search-col-2" onchange="handleSearchSelectChange(2)"></select>
+                    <div id="search-input-container-2" style="flex:2;">
+                        <input type="text" id="search-val-2" placeholder="Ingrese valor a buscar...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-controls">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="chk-and-or"> Aplicar todas las condiciones (AND)
+                </label>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="resetSearch()">Limpiar</button>
+                    <button class="btn btn-primary" onclick="executeSearch()">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table and Controls -->
+        <div class="panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                <div class="panel-title" style="margin:0;" id="current-repo-title">Repositorio: Personal</div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" id="btn-toggle-search" onclick="toggleSearchPanel()">🔍 Mostrar Buscador</button>
+                    <button class="btn btn-primary" onclick="openModal('new')">+ Nuevo Registro</button>
+                </div>
+            </div>
+
+            <!-- Column Visibility Buttons -->
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px;">Columnas visibles en tabla (clic para ocultar/mostrar):</p>
+            <div class="columns-toolbar" id="columns-toolbar"></div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr id="table-header"></tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Table Footer -->
+            <div class="table-footer">
+                <div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="chk-deleted" onchange="renderTable()"> Incluir eliminados
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem;">
+                    <span>Mostrar:</span>
+                    <select style="padding: 4px;" onchange="renderTable()">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                    </select>
+                    <span>registros</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="modal-overlay" id="modal-editor">
+    <div class="modal-card">
+        <h3 id="modal-title" style="margin-bottom: 15px; color: var(--primary);">Formulario de Registro</h3>
+        
+        <!-- Validation Error Banner -->
+        <div class="error-summary" id="error-summary">
+            ⚠️ <strong>Atención:</strong> Por favor revise los campos marcados en rojo antes de continuar.
+        </div>
+
+        <!-- Dynamic Form -->
+        <form id="record-form" onsubmit="event.preventDefault();"></form>
+
+        <!-- Version History -->
+        <div class="history-section" id="history-section">
+            <h4 style="font-size: 0.9rem; color: var(--primary);">Historial de Versiones (Orden Descendente)</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Haga clic en una versión para ver sus datos históricos en modo solo lectura.</p>
+            
+            <div class="version-list" id="version-list"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+            <button class="btn btn-primary" id="btn-modal-action" onclick="saveRecord()"></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* Application State (Mock DB) */
+    let repositories = [
+        {
+            id: 'repo-personal',
+            name: 'Personal (Condición Laboral)',
+            desc: 'Registros históricos de agentes, altas, bajas y condiciones de contratación.',
+            columns: [
+                { id: 'apellido', name: 'Apellido', type: 'text', required: true, searchable: true },
+                { id: 'nombre', name: 'Nombre', type: 'text', required: true, searchable: true },
+                { id: 'dni', name: 'DNI', type: 'text', required: true, searchable: true },
+                { id: 'condicion', name: 'Condición', type: 'select', options: ['Planta Permanente', 'Contratado', 'Interino'], required: false, searchable: true },
+                { id: 'fecha_reg', name: 'Fecha Registración', type: 'date', required: false, searchable: false }
+            ],
+            records: [
+                {
+                    id: 1,
+                    deleted: false,
+                    currentVersion: 2,
+                    versions: [
+                        { version: 2, date: '2026-03-01 10:15', user: 'mperez', data: { apellido: 'Gómez', nombre: 'Roberto', dni: '24111222', condicion: 'Planta Permanente', fecha_reg: '1995-04-12' } },
+                        { version: 1, date: '1995-04-12 08:30', user: 'historico_import', data: { apellido: 'Gómez', nombre: 'Roberto', dni: '24111222', condicion: 'Contratado', fecha_reg: '1995-04-12' } }
+                    ]
+                },
+                {
+                    id: 2,
+                    deleted: true,
+                    currentVersion: 1,
+                    versions: [
+                        { version: 1, date: '2001-11-20 14:00', user: 'jrgongora', data: { apellido: 'Fernández', nombre: 'Maria', dni: '28999000', condicion: 'Interino', fecha_reg: '2001-11-20' } }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    let currentRepoId = 'repo-personal';
+    let userColumnPreferences = {};
+
+    let searchState = [
+        { col: '', val: '' },
+        { col: '', val: '' },
+        { col: '', val: '' }
+    ];
+
+    let activeRecordId = null;
+    let selectedVersionNumber = null;
+
+    /* Helper: In-App Toast Messages (replacing alert) */
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast-banner');
+        toast.textContent = message;
+        toast.className = `toast-notification ${isError ? 'toast-error' : 'toast-success'}`;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3500);
+    }
+
+    /* View Switcher */
+    function switchView(viewName) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+        if(viewName === 'dashboard') {
+            document.getElementById('view-dashboard').classList.add('active');
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            renderDashboard();
+        } else if(viewName === 'builder') {
+            document.getElementById('view-builder').classList.add('active');
+            document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            initBuilder();
+        } else if(viewName === 'listado') {
+            document.getElementById('view-listado').classList.add('active');
+            document.querySelectorAll('.tab-btn')[2].classList.add('active');
+            initListadoView();
+        }
+    }
+
+    function selectRepository(repoId) {
+        currentRepoId = repoId;
+        const repo = getActiveRepo();
+        userColumnPreferences = {};
+        repo.columns.forEach((c, index) => {
+            userColumnPreferences[c.id] = index < 4;
+        });
+        switchView('listado');
+    }
+
+    function getActiveRepo() {
+        return repositories.find(r => r.id === currentRepoId);
+    }
+
+    /* Dashboard Logic */
+    function renderDashboard() {
+        const container = document.getElementById('repo-cards-container');
+        container.innerHTML = '';
+
+        repositories.forEach(repo => {
+            const card = document.createElement('div');
+            card.className = 'card-eco';
+            card.onclick = () => selectRepository(repo.id);
+            card.innerHTML = `
+                <h3>📋 ${repo.name}</h3>
+                <p>${repo.desc || 'Sin descripción'}</p>
+                <span class="badge">${repo.columns.length} Campos configurados</span>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function initBuilder() {
+        document.getElementById('builder-form').reset();
+        const container = document.getElementById('builder-fields-container');
+        container.innerHTML = '';
+
+        addBuilderField('Apellido', 'text', true, '', true);
+        addBuilderField('Nombre', 'text', true, '', true);
+        addBuilderField('Estado', 'select', false, 'Activo, Inactivo, Pendiente', true);
+    }
+
+    function addBuilderField(name = '', type = 'text', required = false, options = '', searchable = true) {
+        const container = document.getElementById('builder-fields-container');
+        const fieldId = 'field_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+
+        const row = document.createElement('div');
+        row.className = 'builder-field-row';
+        row.id = fieldId;
+
+        row.innerHTML = `
+            <div class="reorder-btns">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="moveFieldUp(this)" title="Mover arriba">⬆️</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="moveFieldDown(this)" title="Mover abajo">⬇️</button>
+            </div>
+            <div>
+                <input type="text" placeholder="Ej: DNI, Legajo..." value="${name}" class="field-name-input">
+            </div>
+            <div>
+                <select onchange="toggleOptionsInput(this)" class="field-type-select">
+                    <option value="text" ${type === 'text' ? 'selected' : ''}>Texto Corto</option>
+                    <option value="number" ${type === 'number' ? 'selected' : ''}>Número</option>
+                    <option value="date" ${type === 'date' ? 'selected' : ''}>Fecha</option>
+                    <option value="select" ${type === 'select' ? 'selected' : ''}>Lista (Select)</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" placeholder="Opción 1, Opción 2..." value="${options}" class="options-input" style="visibility: ${type === 'select' ? 'visible' : 'hidden'};">
+            </div>
+            <div style="text-align: center;">
+                <input type="checkbox" class="field-req-chk" ${required ? 'checked' : ''} style="transform: scale(1.25); cursor: pointer;" title="Obligatorio">
+            </div>
+            <div style="text-align: center;">
+                <input type="checkbox" class="field-search-chk" ${searchable ? 'checked' : ''} style="transform: scale(1.25); cursor: pointer;" title="Buscable en Buscador Avanzado">
+            </div>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-danger btn-sm" onclick="document.getElementById('${fieldId}').remove()" title="Eliminar atributo">✕</button>
+            </div>
+        `;
+
+        container.appendChild(row);
+    }
+
+    function moveFieldUp(btn) {
+        const row = btn.closest('.builder-field-row');
+        if (row && row.previousElementSibling) {
+            row.parentElement.insertBefore(row, row.previousElementSibling);
+        }
+    }
+
+    function moveFieldDown(btn) {
+        const row = btn.closest('.builder-field-row');
+        if (row && row.nextElementSibling) {
+            row.parentElement.insertBefore(row.nextElementSibling, row);
+        }
+    }
+
+    function toggleOptionsInput(selectEl) {
+        const row = selectEl.closest('.builder-field-row');
+        const optionsInput = row.querySelector('.options-input');
+        if (optionsInput) {
+            optionsInput.style.visibility = selectEl.value === 'select' ? 'visible' : 'hidden';
+        }
+    }
+
+    function saveNewRepository() {
+        const name = document.getElementById('repo-name').value.trim();
+        const desc = document.getElementById('repo-desc').value.trim();
+
+        if (!name) {
+            showToast('Por favor, ingrese el nombre del repositorio.', true);
+            return;
+        }
+
+        const fieldRows = document.querySelectorAll('.builder-field-row');
+        if (fieldRows.length === 0) {
+            showToast('Debe agregar al menos un campo al formulario.', true);
+            return;
+        }
+
+        const newColumns = [];
+        let valid = true;
+
+        fieldRows.forEach((row, index) => {
+            const fieldName = row.querySelector('.field-name-input').value.trim();
+            const fieldType = row.querySelector('.field-type-select').value;
+            const isReq = row.querySelector('.field-req-chk').checked;
+            const isSearchable = row.querySelector('.field-search-chk').checked;
+            const optionsVal = row.querySelector('.options-input').value.trim();
+
+            if (!fieldName) valid = false;
+
+            const colObj = {
+                id: 'col_' + index + '_' + fieldName.toLowerCase().replace(/[^a-z0-9]/g, '_'),
+                name: fieldName,
+                type: fieldType,
+                required: isReq,
+                searchable: isSearchable
+            };
+
+            if (fieldType === 'select') {
+                colObj.options = optionsVal ? optionsVal.split(',').map(o => o.trim()) : ['Opción 1', 'Opción 2'];
+            }
+
+            newColumns.push(colObj);
+        });
+
+        if (!valid) {
+            showToast('Todos los campos agregados deben tener un nombre.', true);
+            return;
+        }
+
+        const newRepoId = 'repo-' + Date.now();
+        const newRepo = {
+            id: newRepoId,
+            name: name,
+            desc: desc,
+            columns: newColumns,
+            records: []
+        };
+
+        repositories.push(newRepo);
+        showToast('¡Repositorio creado con éxito!');
+        selectRepository(newRepoId);
+    }
+
+    function initListadoView() {
+        const repo = getActiveRepo();
+        document.getElementById('current-repo-title').textContent = `Repositorio: ${repo.name}`;
+        
+        // Reset search panel visibility
+        const searchPanel = document.getElementById('search-panel');
+        const btnToggle = document.getElementById('btn-toggle-search');
+        if (searchPanel && btnToggle) {
+            searchPanel.style.display = 'none';
+            btnToggle.textContent = '🔍 Mostrar Buscador';
+            btnToggle.className = 'btn btn-secondary';
+        }
+
+        resetSearch();
+        renderColumnToolbar();
+        renderTable();
+    }
+
+    /* Toggle Search Panel Visibility */
+    function toggleSearchPanel() {
+        const panel = document.getElementById('search-panel');
+        const btn = document.getElementById('btn-toggle-search');
+        if (panel.style.display === 'none' || panel.style.display === '') {
+            panel.style.display = 'block';
+            btn.textContent = '✕ Ocultar Buscador';
+            btn.className = 'btn btn-primary';
+        } else {
+            panel.style.display = 'none';
+            btn.textContent = '🔍 Mostrar Buscador';
+            btn.className = 'btn btn-secondary';
+        }
+    }
+
+    function renderSearchRows() {
+        const repo = getActiveRepo();
+        for (let i = 0; i < 3; i++) {
+            const select = document.getElementById(`search-col-${i}`);
+            const selectedVal = searchState[i].col;
+            select.innerHTML = '<option value="">-- Seleccionar Campo --</option>';
+
+            // Filtrar y desplegar solo los campos marcados como 'buscable'
+            repo.columns.filter(col => col.searchable !== false).forEach(col => {
+                const isUsedInOtherRow = searchState.some((s, index) => index !== i && s.col === col.id);
+                if (!isUsedInOtherRow) {
+                    const opt = document.createElement('option');
+                    opt.value = col.id;
+                    opt.textContent = col.name;
+                    if (col.id === selectedVal) opt.selected = true;
+                    select.appendChild(opt);
+                }
+            });
+        }
+    }
+
+    function handleSearchSelectChange(rowIndex) {
+        const select = document.getElementById(`search-col-${rowIndex}`);
+        const colId = select.value;
+        const repo = getActiveRepo();
+
+        searchState[rowIndex].col = colId;
+        searchState[rowIndex].val = '';
+
+        const container = document.getElementById(`search-input-container-${rowIndex}`);
+        const columnDef = repo.columns.find(c => c.id === colId);
+
+        if (columnDef && columnDef.type === 'select') {
+            let optionsHtml = columnDef.options.map(o => `<option value="${o}">${o}</option>`).join('');
+            container.innerHTML = `<select id="search-val-${rowIndex}" onchange="searchState[${rowIndex}].val = this.value"><option value="">-- Todos --</option>${optionsHtml}</select>`;
+        } else if (columnDef && columnDef.type === 'date') {
+            container.innerHTML = `<input type="date" id="search-val-${rowIndex}" onchange="searchState[${rowIndex}].val = this.value">`;
+        } else if (columnDef && columnDef.type === 'number') {
+            container.innerHTML = `<input type="number" id="search-val-${rowIndex}" placeholder="Ingrese número..." oninput="searchState[${rowIndex}].val = this.value">`;
+        } else {
+            container.innerHTML = `<input type="text" id="search-val-${rowIndex}" placeholder="Ingrese valor a buscar..." oninput="searchState[${rowIndex}].val = this.value">`;
+        }
+
+        renderSearchRows();
+    }
+
+    function resetSearch() {
+        searchState = [{ col: '', val: '' }, { col: '', val: '' }, { col: '', val: '' }];
+        document.getElementById('chk-and-or').checked = false;
+        renderSearchRows();
+        for (let i = 0; i < 3; i++) {
+            document.getElementById(`search-input-container-${i}`).innerHTML = `<input type="text" id="search-val-${i}" placeholder="Ingrese valor a buscar...">`;
+        }
+        renderTable();
+    }
+
+    function executeSearch() {
+        renderTable();
+    }
+
+    function renderColumnToolbar() {
+        const repo = getActiveRepo();
+        const container = document.getElementById('columns-toolbar');
+        container.innerHTML = '';
+
+        repo.columns.forEach(col => {
+            const isVisible = userColumnPreferences[col.id] !== false;
+            const btn = document.createElement('button');
+            btn.className = `btn-col ${isVisible ? 'visible' : 'hidden-col'}`;
+            btn.textContent = `${isVisible ? '-' : '+'} ${col.name}`;
+            btn.onclick = () => {
+                userColumnPreferences[col.id] = !isVisible;
+                renderColumnToolbar();
+                renderTable();
+            };
+            container.appendChild(btn);
+        });
+    }
+
+    function renderTable() {
+        const repo = getActiveRepo();
+        const thead = document.getElementById('table-header');
+        const tbody = document.getElementById('table-body');
+        const showDeleted = document.getElementById('chk-deleted').checked;
+
+        thead.innerHTML = '';
+        tbody.innerHTML = '';
+
+        const activeCols = repo.columns.filter(c => userColumnPreferences[c.id] !== false);
+        activeCols.forEach(col => {
+            const th = document.createElement('th');
+            th.textContent = col.name;
+            thead.appendChild(th);
+        });
+        thead.innerHTML += '<th style="text-align:right;">Acciones</th>';
+
+        let filtered = repo.records.filter(r => showDeleted || !r.deleted);
+
+        filtered.forEach(record => {
+            const currentData = record.versions.find(v => v.version === record.currentVersion).data;
+            const tr = document.createElement('tr');
+            if (record.deleted) tr.className = 'row-deleted';
+
+            activeCols.forEach(col => {
+                const td = document.createElement('td');
+                td.textContent = currentData[col.id] || '-';
+                tr.appendChild(td);
+            });
+
+            const tdActions = document.createElement('td');
+            tdActions.style.textAlign = 'right';
+
+            if (!record.deleted) {
+                tdActions.innerHTML = `
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit', ${record.id})">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteRecord(${record.id})">Bajar</button>
+                `;
+            } else {
+                tdActions.innerHTML = `
+                    <button class="btn btn-primary btn-sm" onclick="openModal('edit', ${record.id})">Editar / Restaurar</button>
+                `;
+            }
+
+            tr.appendChild(tdActions);
+            tbody.appendChild(tr);
+        });
+    }
+
+    function deleteRecord(id) {
+        const repo = getActiveRepo();
+        const rec = repo.records.find(r => r.id === id);
+        if (rec) {
+            rec.deleted = true;
+            showToast('Registro dado de baja lógicamente.');
+            renderTable();
+        }
+    }
+
+    function openModal(mode, recordId = null) {
+        const repo = getActiveRepo();
+        activeRecordId = recordId;
+        
+        const modal = document.getElementById('modal-editor');
+        const btnAction = document.getElementById('btn-modal-action');
+        const historySection = document.getElementById('history-section');
+        const form = document.getElementById('record-form');
+        
+        clearValidations();
+        renderDynamicModalFields(repo);
+
+        if (mode === 'new') {
+            document.getElementById('modal-title').textContent = `Nuevo Registro en ${repo.name}`;
+            btnAction.textContent = 'Crear';
+            form.reset();
+            historySection.style.display = 'none';
+        } else {
+            const rec = repo.records.find(r => r.id === recordId);
+            selectedVersionNumber = rec.currentVersion;
+
+            document.getElementById('modal-title').textContent = `Editar Registro #${rec.id}`;
+            historySection.style.display = 'block';
+
+            btnAction.textContent = rec.deleted ? 'Activar' : 'Guardar';
+
+            loadVersionIntoForm(rec, rec.currentVersion);
+            renderVersionList(rec);
+        }
+
+        modal.classList.add('active');
+    }
+
+    function renderDynamicModalFields(repo) {
+        const form = document.getElementById('record-form');
+        form.innerHTML = '';
+
+        repo.columns.forEach(col => {
+            const group = document.createElement('div');
+            group.className = 'field-group';
+            group.id = `group-${col.id}`;
+
+            const label = document.createElement('label');
+            label.textContent = `${col.name} ${col.required ? '*' : ''}`;
+            group.appendChild(label);
+
+            let input;
+            if (col.type === 'select') {
+                input = document.createElement('select');
+                input.id = `field-${col.id}`;
+                input.innerHTML = `<option value="">-- Seleccionar --</option>` + 
+                    col.options.map(o => `<option value="${o}">${o}</option>`).join('');
+            } else if (col.type === 'date') {
+                input = document.createElement('input');
+                input.type = 'date';
+                input.id = `field-${col.id}`;
+            } else if (col.type === 'number') {
+                input = document.createElement('input');
+                input.type = 'number';
+                input.id = `field-${col.id}`;
+            } else {
+                input = document.createElement('input');
+                input.type = 'text';
+                input.id = `field-${col.id}`;
+            }
+
+            group.appendChild(input);
+            form.appendChild(group);
+        });
+    }
+
+    function closeModal() {
+        document.getElementById('modal-editor').classList.remove('active');
+    }
+
+    function loadVersionIntoForm(record, versionNumber) {
+        const repo = getActiveRepo();
+        const verData = record.versions.find(v => v.version === versionNumber).data;
+        const isLatest = versionNumber === record.currentVersion;
+
+        repo.columns.forEach(col => {
+            const field = document.getElementById(`field-${col.id}`);
+            if (field) {
+                field.value = verData[col.id] || '';
+                field.disabled = !isLatest;
+            }
+        });
+    }
+
+    function renderVersionList(record) {
+        const container = document.getElementById('version-list');
+        container.innerHTML = '';
+
+        const sortedVersions = [...record.versions].sort((a,b) => b.version - a.version);
+
+        sortedVersions.forEach(v => {
+            const div = document.createElement('div');
+            div.className = `version-item ${v.version === selectedVersionNumber ? 'active-version' : ''}`;
+            div.innerHTML = `
+                <span><strong>Versión ${v.version}</strong> ${v.version === record.currentVersion ? '(Actual)' : ''}</span>
+                <span>${v.date} - ${v.user}</span>
+            `;
+            div.onclick = () => {
+                selectedVersionNumber = v.version;
+                loadVersionIntoForm(record, v.version);
+                renderVersionList(record);
+            };
+            container.appendChild(div);
+        });
+    }
+
+    function clearValidations() {
+        document.getElementById('error-summary').style.display = 'none';
+        document.querySelectorAll('.field-group').forEach(g => g.classList.remove('has-error'));
+    }
+
+    function saveRecord() {
+        const repo = getActiveRepo();
+        clearValidations();
+        
+        let hasError = false;
+        const formData = {};
+
+        repo.columns.forEach(col => {
+            const field = document.getElementById(`field-${col.id}`);
+            const val = field ? field.value.trim() : '';
+
+            if (col.required && !val) {
+                document.getElementById(`group-${col.id}`).classList.add('has-error');
+                hasError = true;
+            }
+            formData[col.id] = val;
+        });
+
+        if (hasError) {
+            document.getElementById('error-summary').style.display = 'block';
+            return;
+        }
+
+        if (!activeRecordId) {
+            const newId = repo.records.length + 1;
+            repo.records.unshift({
+                id: newId,
+                deleted: false,
+                currentVersion: 1,
+                versions: [{
+                    version: 1,
+                    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                    user: 'usuario_sso',
+                    data: formData
+                }]
+            });
+            showToast('Registro creado exitosamente.');
+        } else {
+            const rec = repo.records.find(r => r.id === activeRecordId);
+            const currentData = rec.versions.find(v => v.version === rec.currentVersion).data;
+
+            const hasChanges = JSON.stringify(currentData) !== JSON.stringify(formData);
+
+            if (hasChanges) {
+                const newVerNum = rec.currentVersion + 1;
+                rec.versions.unshift({
+                    version: newVerNum,
+                    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                    user: 'usuario_sso',
+                    data: formData
+                });
+                rec.currentVersion = newVerNum;
+                showToast(`Se guardaron los cambios (Versión ${newVerNum}).`);
+            } else if (rec.deleted) {
+                showToast('Registro reactivado exitosamente.');
+            }
+
+            if (rec.deleted) rec.deleted = false;
+        }
+
+        closeModal();
+        renderTable();
+    }
+
+    // Startup
+    renderDashboard();
+</script>
+</body>
+</html>
