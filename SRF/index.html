@@ -6,13 +6,17 @@
     <title>Sistema de Registros Flexibles (SRF)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Montserrat (Párrafos) y Lora (Títulos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        body, input, select, button, textarea {
+            font-family: 'Montserrat', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Lora', serif;
         }
 
         /* Contenedor flexible de tablas */
@@ -396,24 +400,21 @@
                     <p class="text-xs text-slate-500">Documentación integral sobre estructuración EAV, versionado, bajas lógicas y operabilidad de la plataforma SRF.</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-5">
-                    <!-- Índice Rápido -->
-                    <div class="lg:col-span-1 bg-white p-4 rounded-xl border border-slate-200 shadow-sm h-fit sticky top-6">
-                        <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Índice del Manual</h3>
-                        <ul class="space-y-2 text-xs font-medium text-slate-600">
-                            <li><a href="#m-roles" class="hover:text-slate-900 block py-1">1. Roles y Permisos</a></li>
-                            <li><a href="#m-dash" class="hover:text-slate-900 block py-1">2. Dashboard y Tarjetas</a></li>
-                            <li><a href="#m-crear" class="hover:text-slate-900 block py-1">3. Diseñador y Modificación</a></li>
-                            <li><a href="#m-eav" class="hover:text-slate-900 block py-1">4. Modelo EAV y Búsquedas</a></li>
-                            <li><a href="#m-operacion" class="hover:text-slate-900 block py-1">5. Ficha Completa y Versionado</a></li>
-                            <li><a href="#m-faq" class="hover:text-slate-900 block py-1">6. Preguntas Frecuentes</a></li>
-                        </ul>
-                    </div>
+                <!-- Índice Rápido Horizontal Flotante Compacto -->
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm sticky top-2 z-10 flex flex-wrap items-center gap-2 text-xs">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-1">Índice:</span>
+                    <a href="#m-roles" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">1. Roles</a>
+                    <a href="#m-dash" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">2. Dashboard</a>
+                    <a href="#m-crear" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">3. Diseñador</a>
+                    <a href="#m-eav" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">4. Modelo</a>
+                    <a href="#m-operacion" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">5. Ficha</a>
+                    <a href="#m-faq" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">6. Preguntas</a>
+                </div>
 
-                    <!-- Contenido del Manual -->
-                    <div class="lg:col-span-3 space-y-4">
-                        <div class="manual-card" id="m-roles">
-                            <h3>👤 1. Roles y Niveles de Acceso</h3>
+                <!-- Contenido del Manual -->
+                <div class="space-y-4">
+                    <div class="manual-card" id="m-roles">
+                        <h3>👤 1. Roles y Niveles de Acceso</h3>
                             <p>El Sistema de Registros Flexibles (SRF) contempla una estructura jerárquica de permisos:</p>
                             <ul>
                                 <li><strong>Administrador Super:</strong> Acceso total, gestión de usuarios globales y auditoría general.</li>
@@ -458,11 +459,11 @@
                         </div>
 
                         <div class="manual-card" id="m-operacion">
-                            <h3>📜 5. Acceso Único mediante 'Ver', Ficha Modal al 50% y Versionado</h3>
+                            <h3>📜 5. Acceso Único mediante 'Ver', Ficha Completa y Versionado</h3>
                             <p>En las tablas de listado, cada registro muestra únicamente el botón <code>Ver</code>:</p>
                             <ul>
                                 <li>Al pulsar <code>Ver</code>, se abre la ficha completa en un modal que se amplía en un 50% respecto al tamaño estándar, organizando los atributos consecutivamente en 2 columnas paralelas.</li>
-                                <li>El modal exhibe la insignia de versionado sobria (ejemplo: <code>v2</code>) si el dato sufrió modificaciones pasadas.</li>
+                                <li>El modal exhibe la insignia de versionado sobria (ejemplo: <code>v2</code>) si el dato sufrió modificaciones pasadas y despliega la trazabilidad histórica completa.</li>
                                 <li>En el pie del modal se encuentran centralizadas las acciones de <code>Cerrar</code>, <code>Bajar</code> (inactivación) y <code>Editar</code>. Toda modificación requiere confirmación previa y genera una nueva versión.</li>
                             </ul>
                         </div>
@@ -541,7 +542,7 @@
             modalRecordId: null,
             modalMode: 'view', // 'view', 'edit', 'create'
             searchFilters: {},
-            hiddenColumns: {}, // Registro de columnas ocultas por repo: { 'repo-1': { 'f3': true } }
+            hiddenColumns: {}, // Registro de columnas ocultas por repo
             searchOperator: 'AND',
             repositories: [
                 {
@@ -557,7 +558,20 @@
                     ],
                     records: [
                         { id: 'r1', version: 1, active: true, values: { f1: 'Gómez, Carlos Eduardo', f2: 'Planta Permanente', f3: '4021', f4: '2021-03-15' } },
-                        { id: 'r2', version: 2, active: true, values: { f1: 'Rodríguez, María Florencia', f2: 'Contratado', f3: '4022', f4: '2022-01-10' } },
+                        { 
+                            id: 'r2', 
+                            version: 2, 
+                            active: true, 
+                            values: { f1: 'Rodríguez, María Florencia', f2: 'Contratado', f3: '4022', f4: '2022-01-10' },
+                            history: [
+                                {
+                                    version: 1,
+                                    date: '14/11/2023 09:30',
+                                    user: 'mrodriguez_admin',
+                                    values: { f1: 'Rodríguez, María', f2: 'Pasante', f3: '4022', f4: '2021-06-01' }
+                                }
+                            ]
+                        },
                         { id: 'r3', version: 1, active: false, values: { f1: 'Álvarez, Roberto', f2: 'Gabinete', f3: '3089', f4: '2019-11-20' } }
                     ]
                 },
@@ -586,7 +600,7 @@
             renderListadoView();
         };
 
-        // NAVEGACIÓN ENTRE PESTAÑAS (PILLS STYLE)
+        // NAVEGACIÓN ENTRE PESTAÑAS
         function switchTab(tabId) {
             ['dashboard', 'builder', 'listado', 'manual'].forEach(t => {
                 const el = document.getElementById(`view-${t}`);
@@ -681,34 +695,47 @@
 
             const hiddenMap = state.hiddenColumns[repo.id] || {};
 
-            repo.fields.forEach((f, idx) => {
+            repo.fields.forEach((f) => {
                 const isHidden = !!hiddenMap[f.id];
-                const isPrimary = (idx === 0);
+                const isSearchable = !!f.searchable; // Atributos buscables NO se pueden ocultar
 
-                const label = document.createElement('label');
-                label.className = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer transition ${
-                    isHidden 
-                        ? 'bg-slate-50 text-slate-400 border-slate-200' 
-                        : 'bg-slate-100 text-slate-800 border-slate-300 shadow-sm'
-                }`;
+                const btn = document.createElement('button');
+                btn.type = 'button';
 
-                label.innerHTML = `
-                    <input type="checkbox" ${!isHidden ? 'checked' : ''} ${isPrimary ? 'disabled' : ''} onchange="toggleSingleColumn('${f.id}', this.checked)" class="rounded text-slate-900 focus:ring-slate-400">
-                    <span>${f.name}</span>
-                    <span class="text-[10px] font-bold ${isHidden ? 'text-slate-400' : 'text-emerald-600'}">${!isHidden ? '(+)' : '(-)'}</span>
-                `;
-                container.appendChild(label);
+                if (isSearchable) {
+                    btn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium bg-slate-100 text-slate-800 border-slate-300 shadow-sm opacity-90 cursor-not-allowed";
+                    btn.disabled = true;
+                    btn.title = "Los atributos marcados como Buscables (🔍) son obligatorios en la vista de tabla.";
+                    btn.innerHTML = `
+                        <span>🔍 ${f.name}</span>
+                        <span class="text-[10px] font-bold text-emerald-600">(+)</span>
+                    `;
+                } else {
+                    btn.className = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer transition ${
+                        !isHidden 
+                            ? 'bg-slate-100 text-slate-800 border-slate-300 shadow-sm' 
+                            : 'bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100'
+                    }`;
+                    // Al hacer clic, si estaba oculto (isHidden=true) la pasa a visible (true), y viceversa
+                    btn.onclick = () => toggleSingleColumn(f.id, isHidden);
+                    btn.innerHTML = `
+                        <span>${f.name}</span>
+                        <span class="text-[10px] font-bold ${!isHidden ? 'text-emerald-600' : 'text-slate-400'}">${!isHidden ? '(+)' : '(-)'}</span>
+                    `;
+                }
+
+                container.appendChild(btn);
             });
         }
 
-        function toggleSingleColumn(fieldId, isVisible) {
+        function toggleSingleColumn(fieldId, shouldShow) {
             const repoId = state.activeRepoId;
             if (!state.hiddenColumns[repoId]) state.hiddenColumns[repoId] = {};
 
-            if (isVisible) {
-                delete state.hiddenColumns[repoId][fieldId];
+            if (shouldShow) {
+                delete state.hiddenColumns[repoId][fieldId]; // ON (+)
             } else {
-                state.hiddenColumns[repoId][fieldId] = true;
+                state.hiddenColumns[repoId][fieldId] = true; // OFF (-)
             }
 
             renderColumnCheckboxes();
@@ -721,12 +748,12 @@
 
             if (!state.hiddenColumns[repo.id]) state.hiddenColumns[repo.id] = {};
 
-            repo.fields.forEach((f, idx) => {
-                if (idx === 0) return; // Mantener siempre la columna principal visible
+            repo.fields.forEach((f) => {
+                if (f.searchable) return; // Las buscables siempre permanecen activas
                 if (showAll) {
-                    delete state.hiddenColumns[repo.id][f.id];
+                    delete state.hiddenColumns[repo.id][f.id]; // ON (+)
                 } else {
-                    state.hiddenColumns[repo.id][f.id] = true;
+                    state.hiddenColumns[repo.id][f.id] = true; // OFF (-)
                 }
             });
 
@@ -777,7 +804,7 @@
             prepareEditRepo(state.activeRepoId);
         }
 
-        // AGREGAR FILA AL DISEÑADOR (ESTÉTICA DE LA IMAGEN)
+        // AGREGAR FILA AL DISEÑADOR
         function addBuilderFieldRow(name = '', type = 'text', options = [], required = false, searchable = true) {
             const container = document.getElementById('builder-fields-container');
             const rowId = 'builder-row-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
@@ -823,7 +850,7 @@
             updateReorderButtons();
         }
 
-        // CONFIRMAR REMOVER CAMPO CON ADVERTENCIA DE AUDITORÍA
+        // CONFIRMAR REMOVER CAMPO
         function confirmRemoveBuilderField(rowId, fieldName) {
             const displayName = fieldName.trim() || 'este campo';
             showConfirmModal(
@@ -849,7 +876,7 @@
             }
         }
 
-        // MOVER Y REORDENAR ATRIBUTOS (&uarr; / &darr;)
+        // MOVER Y REORDENAR ATRIBUTOS
         function moveBuilderField(rowId, direction) {
             const container = document.getElementById('builder-fields-container');
             const row = document.getElementById(rowId);
@@ -1052,7 +1079,8 @@
             tbody.innerHTML = '';
 
             const hiddenMap = state.hiddenColumns[repo.id] || {};
-            const visibleFields = repo.fields.filter(f => !hiddenMap[f.id]);
+            // Las columnas visibles son aquellas que son Buscables (🔍) O que no hayan sido ocultadas manualmente
+            const visibleFields = repo.fields.filter(f => f.searchable || !hiddenMap[f.id]);
 
             // Cabecera basada en los atributos visibles
             const trHead = document.createElement('tr');
@@ -1128,7 +1156,7 @@
             document.getElementById('records-counter-info').innerText = `Mostrando ${filteredRecords.length} de ${repo.records.length} registros`;
         }
 
-        // MODAL DE REGISTRO (BOTÓN ÚNICO 'VER' Y 2 COLUMNAS)
+        // MODAL DE REGISTRO
         function openRecordModalForView(recordId) {
             const repo = state.repositories.find(r => r.id === state.activeRepoId);
             const rec = repo.records.find(r => r.id === recordId);
@@ -1193,53 +1221,90 @@
                 `;
                 form.appendChild(div);
             });
+
+            // SECCIÓN DE HISTORIAL DE VERSIONES ANTERIORES
+            if (rec && rec.history && rec.history.length > 0) {
+                const historyDiv = document.createElement('div');
+                historyDiv.className = "col-span-1 md:col-span-2 mt-4 pt-4 border-t border-slate-200 space-y-3";
+
+                let historyCardsHtml = '';
+                rec.history.forEach(h => {
+                    let fieldListHtml = repo.fields.map(f => {
+                        const hVal = h.values[f.id] || '-';
+                        return `<span class="inline-block bg-slate-100 px-2 py-1 rounded text-[11px] text-slate-700 mr-2 mb-1"><strong>${f.name}:</strong> ${hVal}</span>`;
+                    }).join('');
+
+                    historyCardsHtml += `
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1.5">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700">
+                                <span class="flex items-center gap-1.5"><span class="version-badge">v${h.version}</span> Snapshot Registral</span>
+                                <span class="text-slate-400 text-[11px]">${h.date} (${h.user || 'Sistema'})</span>
+                            </div>
+                            <div class="pt-1">${fieldListHtml}</div>
+                        </div>
+                    `;
+                });
+
+                historyDiv.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                            📜 Historial de Versiones Anteriores (${rec.history.length})
+                        </h4>
+                    </div>
+                    <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                        ${historyCardsHtml}
+                    </div>
+                `;
+                form.appendChild(historyDiv);
+            }
         }
 
+        // ACCIONES DEL PIE DEL MODAL DE REGISTRO
         function renderModalFooterActions(rec) {
             const footer = document.getElementById('modal-record-footer');
             footer.innerHTML = '';
 
             if (state.modalMode === 'view') {
-                if (rec.active) {
+                if (rec && rec.active) {
                     footer.innerHTML = `
-                        <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100 transition">
+                        <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
                             Cerrar
                         </button>
                         <div class="flex items-center gap-2">
-                            <button type="button" onclick="confirmDeactivateRecord('${rec.id}')" class="px-4 py-2 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded-lg text-xs font-bold transition">
+                            <button type="button" onclick="confirmDeactivateRecord('${rec.id}')" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg text-xs font-medium transition">
                                 Bajar
                             </button>
-                            <button type="button" onclick="switchToEditMode()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                            <button type="button" onclick="switchToEditMode()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
                                 Editar
                             </button>
                         </div>
                     `;
-                } else {
+                } else if (rec && !rec.active) {
                     footer.innerHTML = `
-                        <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100 transition">
+                        <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
                             Cerrar
                         </button>
-                        <button type="button" onclick="confirmRestoreRecord('${rec.id}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                        <button type="button" onclick="confirmRestoreRecord('${rec.id}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition shadow-sm">
                             Restaurar / Activar
                         </button>
                     `;
                 }
             } else if (state.modalMode === 'edit') {
                 footer.innerHTML = `
-                    <button type="button" onclick="openRecordModalForView('${rec.id}')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100 transition">
-                        Cancelar Edición
+                    <button type="button" onclick="openRecordModalForView('${rec.id}')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
+                        Cancelar
                     </button>
-                    <button type="button" onclick="submitRecordForm()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm">
-                        Guardar Cambios (v${rec.version + 1})
+                    <button type="button" onclick="submitRecordForm()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                        Guardar Versión v${rec.version + 1}
                     </button>
                 `;
             } else if (state.modalMode === 'create') {
                 footer.innerHTML = `
-                    <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100 transition">
+                    <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
                         Cancelar
                     </button>
-                    <button type="button" onclick="submitRecordForm()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition shadow-sm">
-                        Crear Registro
+                    <button type="button" onclick="submitRecordForm()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                        Guardar Registro
                     </button>
                 `;
             }
@@ -1291,6 +1356,14 @@
                     'Guardar Nueva Versión',
                     `¿Desea guardar los cambios en el registro #${rec.id.replace('r', '')}? Se incrementará la versión a v${rec.version + 1} resguardando la auditoría.`,
                     () => {
+                        if (!rec.history) rec.history = [];
+                        rec.history.unshift({
+                            version: rec.version,
+                            date: new Date().toLocaleString('es-AR', { dateStyle: 'short', timeStyle: 'short' }),
+                            user: 'operador_srf',
+                            values: { ...rec.values }
+                        });
+
                         rec.values = newValues;
                         rec.version += 1;
                         closeRecordModal();
@@ -1308,7 +1381,8 @@
                             id: newId,
                             version: 1,
                             active: true,
-                            values: newValues
+                            values: newValues,
+                            history: []
                         });
                         closeRecordModal();
                         renderListadoView();
@@ -1351,7 +1425,7 @@
             );
         }
 
-        // MODAL DE CONFIRMACIÓN PERSONALIZADO (SIN Usar alert/confirm)
+        // MODAL DE CONFIRMACIÓN PERSONALIZADO
         function showConfirmModal(title, message, onConfirm, actionBtnClass = 'btn-primary', actionBtnText = 'Aceptar') {
             document.getElementById('confirm-modal-title').innerText = title;
             document.getElementById('confirm-modal-message').innerText = message;
