@@ -1,241 +1,1497 @@
 <!DOCTYPE html>
 <html lang="es">
+<!--1243 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Maquetas | Proyectos Landing Page</title>
+    <title>Sistema de Registros Flexibles (SRF)</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Montserrat (Párrafos) y Lora (Títulos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .heading-font { font-family: 'Oswald', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
-        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        body, input, select, button, textarea {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Lora', serif;
+        }
+
+        /* Contenedor flexible de tablas */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Diseñador de Formulario EAV */
+        .builder-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .builder-table th {
+            color: #64748b;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .builder-table td {
+            padding: 0.5rem 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Botones de reordenamiento estéticos */
+        .reorder-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 0.375rem;
+            background-color: #e2e8f0;
+            color: #475569;
+            font-weight: bold;
+            font-size: 0.875rem;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .reorder-btn:hover {
+            background-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .reorder-btn.disabled {
+            opacity: 0.15;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Modal al 50% más ancho */
+        .modal-wide {
+            width: 96%;
+            max-width: 1020px;
+            max-height: 90vh;
+        }
+
+        .modal-backdrop {
+            background-color: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(2px);
+        }
+
+        /* Insignia de versión sobria */
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+            margin-left: 0.375rem;
+        }
+
+        /* Card Manual */
+        .manual-card {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.25rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .manual-card h3 {
+            color: #0f172a;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .manual-card p, .manual-card li {
+            color: #334155;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .manual-card ul, .manual-card ol {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .manual-card li {
+            margin-bottom: 0.375rem;
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.35rem;
+            height: 1.35rem;
+            background-color: #1e293b;
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        /* Transición de Toasts */
+        #toast {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen">
+<body class="min-h-screen flex flex-col justify-between p-3 sm:p-6">
 
-    <header class="bg-slate-900 py-12 mb-12">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="heading-font text-4xl md:text-5xl font-bold text-white uppercase tracking-wider mb-2">Panel de Control</h1>
-            <p class="text-slate-400 uppercase text-xs tracking-[0.3em]">Acceso Directo a Maquetas Finalizadas</p>
+    <div class="max-w-7xl mx-auto w-full space-y-5">
+        
+        <!-- ENCABEZADO ESTÉTICA LIMPIA / MIPORTAL -->
+        <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-2">
+            <div>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Sistema de Registros Flexibles (SRF)</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Módulo Nativo MiPortal — <span class="text-slate-600 font-medium">srf.miportal.gob.ar</span></p>
+            </div>
+
+            <!-- Navegación por Botones Pills -->
+            <nav class="flex items-center gap-2 overflow-x-auto pb-1">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-slate-900 text-white border-slate-900 shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    1. Dashboard
+                </button>
+                <button onclick="switchTab('builder')" id="tab-builder" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
+                    <span id="tab-builder-icon">⚙️</span> <span id="tab-builder-title">Crear Repositorio</span>
+                </button>
+                <button onclick="switchTab('listado')" id="tab-listado" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
+                    2. Listado y Buscador
+                </button>
+                <button onclick="switchTab('manual')" id="tab-manual" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
+                    📖 Manual de Usuario
+                </button>
+            </nav>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL EN TARJETAS LIMPIAS -->
+        <main>
+            <!-- VISTA 1: DASHBOARD DE REPOSITORIOS -->
+            <section id="view-dashboard" class="space-y-5">
+                <!-- Métricas Estadísticas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Repositorios Totales</p>
+                        <p class="text-2xl font-bold text-slate-900 mt-1" id="dash-total-repos">2</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Registros Almacenados</p>
+                        <p class="text-2xl font-bold text-blue-600 mt-1" id="dash-total-records">1,483</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Atributos Configurados</p>
+                        <p class="text-2xl font-bold text-emerald-600 mt-1" id="dash-total-fields">7</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Estado de Base de Datos</p>
+                        <p class="text-xs font-semibold text-slate-700 mt-2 flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Operativo MariaDB EAV
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cabecera de Sección -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900">Colecciones y Repositorios Activos</h2>
+                        <p class="text-xs text-slate-500">Seleccione un repositorio para ingresar a sus registros o modificar su estructura de atributos.</p>
+                    </div>
+                    <button onclick="prepareNewRepo()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-1.5">
+                        <span>+</span> Nuevo Repositorio
+                    </button>
+                </div>
+
+                <!-- Grilla de Tarjetas de Repositorio -->
+                <div id="repo-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Dinámico vía JS -->
+                </div>
+            </section>
+
+            <!-- VISTA 2: CREADOR / MODIFICADOR DE REPOSITORIO -->
+            <section id="view-builder" class="hidden space-y-5">
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900" id="builder-main-heading">Modificar Estructura: Personal</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Especifique los datos básicos del repositorio y defina los campos. Use las flechas (&uarr; / &darr;) para fijar el orden de visualización único.</p>
+                    </div>
+
+                    <form id="form-builder" onsubmit="saveRepository(event)" class="space-y-5">
+                        <input type="hidden" id="builder-repo-id" value="">
+
+                        <!-- Identificación Básica -->
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Repositorio *</label>
+                                <input type="text" id="builder-repo-name" required placeholder="Ej: Personal" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Descripción / Objetivo</label>
+                                <input type="text" id="builder-repo-desc" placeholder="Registros históricos de agentes, altas, bajas y condiciones de contratación." class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Tabla de Atributos EAV con Estética de la Imagen -->
+                        <div class="pt-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xs font-bold text-slate-800">Definición de Atributos</h3>
+                                <button type="button" onclick="addBuilderFieldRow()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-xs transition border border-slate-200">
+                                    + Agregar Campo
+                                </button>
+                            </div>
+
+                            <div class="table-container">
+                                <table class="builder-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 80px; text-align: center;">Orden</th>
+                                            <th>Nombre del Campo</th>
+                                            <th style="width: 170px;">Tipo de Dato</th>
+                                            <th style="width: 240px;">Opciones (Select)</th>
+                                            <th style="width: 90px; text-align: center;">Obligatorio</th>
+                                            <th style="width: 90px; text-align: center;">🔍 Buscable</th>
+                                            <th style="width: 70px; text-align: center;">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="builder-fields-container">
+                                        <!-- Filas dinámicas -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Acciones del Diseñador -->
+                        <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+                            <button type="button" onclick="switchTab('dashboard')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition">
+                                Guardar Repositorio
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- VISTA 3: LISTADO Y GESTIÓN DE REGISTROS -->
+            <section id="view-listado" class="hidden space-y-5">
+                <!-- Barra Superior de Repositorio Seleccionado -->
+                <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-bold text-slate-900" id="list-repo-title">Repositorio</h2>
+                            <span id="list-repo-status-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Activo</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5" id="list-repo-desc">Descripción del repositorio</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button onclick="toggleSearchPanel()" class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
+                            <span>🔍</span> <span id="search-toggle-text">Mostrar Buscador</span>
+                        </button>
+                        <button onclick="toggleColumnPanel()" class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
+                            <span>👁️</span> <span>Columnas (+ / -)</span>
+                        </button>
+                        <button onclick="modifyCurrentRepoFromList()" class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition shadow-sm">
+                            Modificar Estructura
+                        </button>
+                        <button id="btn-new-record" onclick="openRecordModalForCreate()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-xs transition shadow-sm">
+                            + Nuevo Registro
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Panel de Selección de Columnas Visibles (+/-) -->
+                <div id="column-panel" class="hidden bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                            👁️ Columnas Visibles en Tabla (+ / -)
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <button onclick="setAllColumnsVisible(true)" class="text-xs text-blue-600 hover:underline font-semibold">+ Mostrar Todas</button>
+                            <span class="text-slate-300">|</span>
+                            <button onclick="setAllColumnsVisible(false)" class="text-xs text-slate-500 hover:underline font-semibold">- Ocultar Opcionales</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5" id="column-checkboxes-container">
+                        <!-- Checkboxes dinámicos por columna -->
+                    </div>
+                </div>
+
+                <!-- Panel del Buscador Avanzado (Colapsable) -->
+                <div id="search-panel" class="hidden bg-slate-900 text-white p-5 rounded-xl border border-slate-800 shadow-md space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                            <span>🔍</span> Buscador Avanzado por Atributos Indexados
+                        </h3>
+                        <span class="text-xs text-slate-400">Filtrado activo únicamente en atributos marcados como "Buscable"</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="search-filters-container">
+                        <!-- Filtros dinámicos -->
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-800">
+                        <div class="flex items-center gap-4 text-xs text-slate-300">
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="search-operator" value="AND" checked class="text-blue-500"> Coincidir Todos (AND)
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="search-operator" value="OR" class="text-blue-500"> Coincidir Cualquier (OR)
+                            </label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="resetSearchFilters()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition">Limpiar</button>
+                            <button onclick="applySearchFilters()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition shadow-sm">Ejecutar Búsqueda</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla Principal de Registros -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="table-container">
+                        <table class="min-w-full divide-y divide-slate-200 text-xs sm:text-sm">
+                            <thead class="bg-slate-50" id="records-table-head">
+                                <!-- Cabecera dinámica -->
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white" id="records-table-body">
+                                <!-- Filas dinámicas -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                        <span id="records-counter-info">Mostrando 0 registros</span>
+                        <span>Doble confirmación requerida en operaciones estructurales.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA 4: MANUAL DE USUARIO -->
+            <section id="view-manual" class="hidden space-y-5">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-1">
+                    <h2 class="text-xl font-bold text-slate-900">📖 Manual Operativo y Guía del Usuario</h2>
+                    <p class="text-xs text-slate-500">Documentación integral sobre estructuración EAV, versionado, bajas lógicas y operabilidad de la plataforma SRF.</p>
+                </div>
+
+                <!-- Índice Rápido Horizontal Flotante Compacto -->
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm sticky top-2 z-10 flex flex-wrap items-center gap-2 text-xs">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-1">Índice:</span>
+                    <a href="#m-roles" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">1. Roles</a>
+                    <a href="#m-dash" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">2. Dashboard</a>
+                    <a href="#m-crear" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">3. Diseñador</a>
+                    <a href="#m-eav" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">4. Modelo</a>
+                    <a href="#m-operacion" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">5. Ficha</a>
+                    <a href="#m-faq" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">6. Preguntas</a>
+                </div>
+
+                <!-- Contenido del Manual -->
+                <div class="space-y-4">
+                    <div class="manual-card" id="m-roles">
+                        <h3>👤 1. Roles y Niveles de Acceso</h3>
+                            <p>El Sistema de Registros Flexibles (SRF) contempla una estructura jerárquica de permisos:</p>
+                            <ul>
+                                <li><strong>Administrador Super:</strong> Acceso total, gestión de usuarios globales y auditoría general.</li>
+                                <li><strong>Administrador Departamental:</strong> Diseña, modifica y suspende repositorios de su área de competencia.</li>
+                                <li><strong>Operador de Carga:</strong> Registra nuevos datos, consulta fichas mediante el botón <code>Ver</code> y aplica modificaciones con registro de versionado.</li>
+                            </ul>
+                        </div>
+
+                        <div class="manual-card" id="m-dash">
+                            <h3>📊 2. Dashboard y Control Institucional</h3>
+                            <p>Muestra las tarjetas de repositorios asignados a su departamento. Cada tarjeta ofrece resúmenes de registros y una botonera inferior de control:</p>
+                            <ul>
+                                <li><code>Ingresar</code>: Abre el listado de datos del repositorio.</li>
+                                <li><code>Modificar</code>: Abre el diseñador para reorganizar campos o agregar nuevos atributos.</li>
+                                <li><code>Suspender / Reactivar</code>: Pausa temporalmente la carga de nuevos registros sin afectar las lecturas.</li>
+                            </ul>
+                        </div>
+
+                        <div class="manual-card" id="m-crear">
+                            <h3>⚙️ 3. Guía Paso a Paso: Crear, Modificar y Suspender Repositorios</h3>
+                            <p>Desde la pestaña <strong>Crear Repositorio</strong> (o desde la opción <code>Modificar</code> en el pie de tarjeta del Dashboard o <code>Modificar Estructura</code> en el listado), el Administrador gestiona la estructura de datos:</p>
+                            <ol>
+                                <li><span class="step-badge">1</span><strong>Identificación:</strong> Ingrese o actualice el Nombre del Repositorio y su descripción u objetivo institucional.</li>
+                                <li><span class="step-badge">2</span><strong>Agregar / Reorganizar Atributos:</strong> Presione el botón <code>+ Agregar Campo</code> para sumar atributos, o reordene los existentes usando las flechas <code>&uarr;</code> (arriba) y <code>&darr;</code> (abajo).</li>
+                                <li><span class="step-badge">3</span><strong>Configuración de Atributos:</strong>
+                                    <ul>
+                                        <li><strong>Nombre del Campo:</strong> Título visible del atributo.</li>
+                                        <li><strong>Tipo de Dato:</strong> Seleccione entre Texto Corto, Número, Fecha, Booleano (Sí/No) o Lista (Select).</li>
+                                        <li><strong>Obligatorio:</strong> Marque la casilla si el dato es requerido para guardar.</li>
+                                        <li><strong>🔍 Buscable:</strong> Habilite esta casilla para incluir el campo en el Buscador Avanzado.</li>
+                                    </ul>
+                                </li>
+                                <li><span class="step-badge">4</span><strong>Fijar Orden Único (&uarr; / &darr;):</strong> Utilice los controles de ordenamiento. El primer campo oculta la flecha hacia arriba (`&uarr;`) y el último oculta la flecha hacia abajo (`&darr;`).</li>
+                                <li><span class="step-badge">5</span><strong>Protección de Datos Históricos (Inactivación de Atributos):</strong> Si remueve un campo mediante el botón <code>✕</code>, el sistema solicitará confirmación. Si el campo posee datos registrados previamente, estos <strong>nunca se borran físicamente de la base de datos</strong>. El atributo pasa a estado inactivo para resguardar la validez y trazabilidad legal.</li>
+                                <li><span class="step-badge">6</span><strong>Guardar Repositorio:</strong> Presione <code>Guardar Repositorio</code> y confirme en la ventana emergente.</li>
+                            </ol>
+                        </div>
+
+                        <div class="manual-card" id="m-eav">
+                            <h3>🔍 4. Modelo EAV y Buscador Avanzado</h3>
+                            <p>Gracias al modelo Entidad-Atributo-Valor, la base de datos almacena la información de forma totalmente flexible. Los campos marcados como <code>🔍 Buscable</code> generan índices y columnas virtuales que permiten realizar búsquedas complejas con operadores AND/OR sin penalizar el rendimiento.</p>
+                        </div>
+
+                        <div class="manual-card" id="m-operacion">
+                            <h3>📜 5. Acceso Único mediante 'Ver', Ficha Completa y Versionado</h3>
+                            <p>En las tablas de listado, cada registro muestra únicamente el botón <code>Ver</code>:</p>
+                            <ul>
+                                <li>Al pulsar <code>Ver</code>, se abre la ficha completa en un modal que se amplía en un 50% respecto al tamaño estándar, organizando los atributos consecutivamente en 2 columnas paralelas.</li>
+                                <li>El modal exhibe la insignia de versionado sobria (ejemplo: <code>v2</code>) si el dato sufrió modificaciones pasadas y despliega la trazabilidad histórica completa.</li>
+                                <li>En el pie del modal se encuentran centralizadas las acciones de <code>Cerrar</code>, <code>Bajar</code> (inactivación) y <code>Editar</code>. Toda modificación requiere confirmación previa y genera una nueva versión.</li>
+                            </ul>
+                        </div>
+
+                        <div class="manual-card" id="m-faq">
+                            <h3>❓ 6. Preguntas Frecuentes</h3>
+                            <p><strong>¿Qué ocurre si suspendo un repositorio?</strong><br>
+                            Los datos existentes siguen estando disponibles para lectura y consulta, pero el botón <code>+ Nuevo Registro</code> queda inhabilitado hasta que presione <code>Reactivar</code>.</p>
+                            <p class="mt-2"><strong>¿Puedo recuperar un registro dado de baja?</strong><br>
+                            Sí, abriendo la ficha del registro inactivo mediante el botón <code>Ver</code> y presionando la opción <code>Restaurar / Activar</code> al pie del modal.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL 1: VER / EDITAR / CREAR REGISTRO (Ancho al 50% en 2 Columnas) -->
+    <div id="modal-record" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="fixed inset-0 modal-backdrop" onclick="closeRecordModal()"></div>
+        <div class="bg-white rounded-xl shadow-2xl z-10 modal-wide flex flex-col overflow-hidden transform transition-all border border-slate-200">
+            <!-- Cabecera del Modal -->
+            <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <h3 class="text-base font-bold" id="modal-record-title">Ficha Completa del Registro</h3>
+                    <span id="modal-record-version-badge" class="version-badge">v1</span>
+                </div>
+                <button onclick="closeRecordModal()" class="text-slate-400 hover:text-white font-bold text-xl leading-none">&times;</button>
+            </div>
+
+            <!-- Cuerpo del Modal (Grilla de 2 Columnas Consecutivas) -->
+            <div class="p-6 overflow-y-auto max-h-[70vh]">
+                <form id="form-record-modal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Dinámico vía JS -->
+                </form>
+            </div>
+
+            <!-- Pie del Modal con Acciones Únicas -->
+            <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2" id="modal-record-footer">
+                <!-- Dinámico según estado (Ver / Editar / Inactivo) -->
+            </div>
         </div>
-    </header>
+    </div>
 
-    <main class="max-w-7xl mx-auto px-4 pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Bulonera Chivilcoy -->
-            <a href="chivilcoy/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-blue-50 transition">
-                        <img src="chivilcoy/images/logo.png" alt="Logo Chivilcoy" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulonera Chivilcoy</h2>
-                        <p class="text-slate-500 text-sm">Chivilcoy, Buenos Aires</p>
-                        <div class="mt-6 flex items-center text-blue-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Bulones Almafuerte -->
-            <a href="almafuerte/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-indigo-50 transition">
-                        <img src="almafuerte/images/logo.png" alt="Logo Almafuerte" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulones Almafuerte</h2>
-                        <p class="text-slate-500 text-sm">Carmen de Areco, Buenos Aires</p>
-                        <div class="mt-6 flex items-center text-indigo-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Bulonería López -->
-            <a href="lopez-lincoln/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-blue-50 transition">
-                        <img src="lopez-lincoln/images/logo.png" alt="Logo López" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulonería López</h2>
-                        <p class="text-slate-500 text-sm">Lincoln, Buenos Aires</p>
-                        <div class="mt-6 flex items-center text-blue-700 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Ruralmec -->
-            <a href="ruralmec/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-orange-50 transition">
-                        <img src="ruralmec/images/logo.png" alt="Logo Ruralmec" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Ruralmec</h2>
-                        <p class="text-slate-500 text-sm">Curuzú Cuatiá, Corrientes</p>
-                        <div class="mt-6 flex items-center text-orange-700 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Bulonera Reconquista -->
-            <a href="reconquista/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-red-50 transition">
-                        <img src="reconquista/images/logo.png" alt="Logo Reconquista" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulonera Reconquista</h2>
-                        <p class="text-slate-500 text-sm">Reconquista, Santa Fe</p>
-                        <div class="mt-6 flex items-center text-red-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- TKTec Río Cuarto -->
-            <a href="tktec-riocuarto/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-teal-50 transition">
-                        <img src="tktec-riocuarto/images/logo.png" alt="Logo TKTec" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">TKTec</h2>
-                        <p class="text-slate-500 text-sm">Río Cuarto, Córdoba</p>
-                        <div class="mt-6 flex items-center text-teal-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Ferretería y Bulonería Camandona -->
-            <a href="camandona-tucuman/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-teal-50 transition">
-                        <img src="camandona-tucuman/images/logo.png" alt="Logo Camandona" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Ferretería Camandona</h2>
-                        <p class="text-slate-500 text-sm">San Miguel de Tucumán</p>
-                        <div class="mt-6 flex items-center text-teal-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Bulonera La Comarca Viedma -->
-            <a href="la-comarca-viedma/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-orange-50 transition">
-                        <img src="la-comarca-viedma/images/logo.png" alt="Logo La Comarca" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulonera La Comarca</h2>
-                        <p class="text-slate-500 text-sm">Viedma, Río Negro</p>
-                        <div class="mt-6 flex items-center text-orange-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Sánchez Bulones Posadas -->
-            <a href="sanchez-posadas/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-blue-50 transition">
-                        <img src="sanchez-posadas/images/logo.png" alt="Logo Sánchez" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Sánchez Bulones</h2>
-                        <p class="text-slate-500 text-sm">Posadas, Misiones</p>
-                        <div class="mt-6 flex items-center text-blue-700 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Bulonera Sur San Nicolás -->
-            <a href="sur-san-nicolas/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-red-50 transition">
-                        <img src="sur-san-nicolas/images/logocristal.png" alt="Logo Sur" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulonera Sur</h2>
-                        <p class="text-slate-500 text-sm">San Nicolás, Buenos Aires</p>
-                        <div class="mt-6 flex items-center text-red-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Bulonera Industrial G y M -->
-            <a href="bulonera-gym/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-blue-50 transition">
-                        <img src="bulonera-gym/images/logo.png" alt="Logo GYM" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Bulonera Industrial G y M</h2>
-                        <p class="text-slate-500 text-sm">Marcos Juárez, Córdoba</p>
-                        <div class="mt-6 flex items-center text-blue-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Comercial Bulonera SRL -->
-            <a href="comercial-bulonera-riosegundo/index.html" class="group card-hover">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
-                    <div class="h-40 bg-slate-50 flex items-center justify-center p-8 group-hover:bg-red-50 transition">
-                        <img src="comercial-bulonera-riosegundo/images/logo.png" alt="Logo Comercial Bulonera" class="max-h-full w-auto object-contain">
-                    </div>
-                    <div class="p-6">
-                        <h2 class="heading-font text-xl font-bold text-slate-800 uppercase mb-2">Comercial Bulonera SRL</h2>
-                        <p class="text-slate-500 text-sm">Río Segundo, Córdoba</p>
-                        <div class="mt-6 flex items-center text-red-600 font-bold text-xs uppercase tracking-widest">
-                            Ver Maqueta 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 group-hover:translate-x-1 transition"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
+    <!-- MODAL 2: DIÁLOGO DE CONFIRMACIÓN NATIVO (Reemplazo de alert/confirm) -->
+    <div id="modal-confirm" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="fixed inset-0 modal-backdrop" onclick="closeConfirmModal()"></div>
+        <div class="bg-white rounded-xl shadow-2xl z-10 max-w-md w-full p-6 space-y-4 border border-slate-200">
+            <div class="flex items-center gap-3 text-amber-600">
+                <span class="text-2xl">⚠️</span>
+                <h3 class="text-base font-bold text-slate-800" id="confirm-modal-title">Confirmar Acción</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed" id="confirm-modal-message">¿Está seguro de realizar esta operación?</p>
+            <div class="flex justify-end gap-3 pt-2">
+                <button onclick="closeConfirmModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition">
+                    Cancelar
+                </button>
+                <button id="confirm-modal-action-btn" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition">
+                    Aceptar
+                </button>
+            </div>
         </div>
-    </main>
+    </div>
 
-    <footer class="bg-slate-200 py-6 text-center text-slate-500 text-xs uppercase tracking-widest flex flex-col gap-2 items-center justify-center">
-        <span>Desarrollado para el Ecosistema de Maquetas de Bulonerías</span>
-        <a href="https://tucartaqr.github.io/maquetas/maquetas.html" target="_blank" class="text-blue-600 hover:underline normal-case tracking-normal font-semibold mt-1">https://tucartaqr.github.io/maquetas/maquetas.html</a>
-    </footer>
+    <!-- Notificación Flotante (Toast) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 flex items-center gap-3 text-sm">
+        <span id="toast-icon">ℹ️</span>
+        <span id="toast-message">Notificación del sistema</span>
+    </div>
 
+    <script>
+        // ESTADO GLOBAL DE LA APLICACIÓN
+        let state = {
+            activeRepoId: 'repo-1',
+            editingRepoId: null,
+            modalRecordId: null,
+            modalMode: 'view', // 'view', 'edit', 'create'
+            searchFilters: {},
+            hiddenColumns: {}, // Registro de columnas ocultas por repo
+            searchOperator: 'AND',
+            repositories: [
+                {
+                    id: 'repo-1',
+                    name: 'Personal',
+                    description: 'Registros históricos de agentes, altas, bajas y condiciones de contratación.',
+                    status: 'activo',
+                    fields: [
+                        { id: 'f1', name: 'Apellido', type: 'text', required: true, searchable: true },
+                        { id: 'f2', name: 'Condición', type: 'select', options: ['Planta Permanente', 'Contratado', 'Gabinete'], required: false, searchable: true },
+                        { id: 'f3', name: 'Nro Legajo', type: 'number', required: true, searchable: true },
+                        { id: 'f4', name: 'Fecha Alta', type: 'date', required: false, searchable: false }
+                    ],
+                    records: [
+                        { id: 'r1', version: 1, active: true, values: { f1: 'Gómez, Carlos Eduardo', f2: 'Planta Permanente', f3: '4021', f4: '2021-03-15' } },
+                        { 
+                            id: 'r2', 
+                            version: 2, 
+                            active: true, 
+                            values: { f1: 'Rodríguez, María Florencia', f2: 'Contratado', f3: '4022', f4: '2022-01-10' },
+                            history: [
+                                {
+                                    version: 1,
+                                    date: '14/11/2023 09:30',
+                                    user: 'mrodriguez_admin',
+                                    values: { f1: 'Rodríguez, María', f2: 'Pasante', f3: '4022', f4: '2021-06-01' }
+                                }
+                            ]
+                        },
+                        { id: 'r3', version: 1, active: false, values: { f1: 'Álvarez, Roberto', f2: 'Gabinete', f3: '3089', f4: '2019-11-20' } }
+                    ]
+                },
+                {
+                    id: 'repo-2',
+                    name: 'Inventario de Equipamiento',
+                    description: 'Bienes tecnológicos y hardware asignado a reparticiones.',
+                    status: 'activo',
+                    fields: [
+                        { id: 'f20', name: 'Código Patrimonio', type: 'text', required: true, searchable: true },
+                        { id: 'f21', name: 'Tipo de Equipo', type: 'select', options: ['Notebook', 'Desktop', 'Servidor', 'Impresora'], required: true, searchable: true },
+                        { id: 'f22', name: 'Serie Hardware', type: 'text', required: false, searchable: true }
+                    ],
+                    records: [
+                        { id: 'r20', version: 1, active: true, values: { f20: 'PAT-9081', f21: 'Notebook', f22: 'SN-908123' } }
+                    ]
+                }
+            ]
+        };
+
+        let confirmCallback = null;
+
+        // INICIALIZACIÓN
+        window.onload = function () {
+            renderDashboardCards();
+            renderListadoView();
+        };
+
+        // NAVEGACIÓN ENTRE PESTAÑAS
+        function switchTab(tabId) {
+            ['dashboard', 'builder', 'listado', 'manual'].forEach(t => {
+                const el = document.getElementById(`view-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    el.classList.remove('hidden');
+                    btn.className = 'px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-slate-900 text-white border-slate-900 shadow-sm flex items-center gap-1.5 whitespace-nowrap';
+                } else {
+                    el.classList.add('hidden');
+                    btn.className = 'px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap';
+                }
+            });
+
+            if (tabId === 'dashboard') renderDashboardCards();
+            if (tabId === 'listado') renderListadoView();
+        }
+
+        // RENDERIZAR TARJETAS EN DASHBOARD
+        function renderDashboardCards() {
+            const grid = document.getElementById('repo-cards-grid');
+            grid.innerHTML = '';
+
+            let totalRecords = 0;
+            let totalFields = 0;
+
+            state.repositories.forEach(repo => {
+                totalRecords += repo.records.length;
+                totalFields += repo.fields.length;
+
+                const isSuspended = repo.status === 'suspendido';
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between overflow-hidden hover:shadow-md transition";
+
+                card.innerHTML = `
+                    <div class="p-5 space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-bold text-slate-900 text-base leading-snug">${repo.name}</h3>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${isSuspended ? 'bg-rose-100 text-rose-800 border border-rose-200' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}">
+                                ${isSuspended ? 'Suspendido' : 'Activo'}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">${repo.description || 'Sin descripción registral.'}</p>
+                        <div class="flex items-center gap-4 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <span>📦 <strong>${repo.records.length}</strong> Registros</span>
+                            <span>⚙️ <strong>${repo.fields.length}</strong> Atributos</span>
+                        </div>
+                    </div>
+
+                    <!-- Botonera al pie de la tarjeta -->
+                    <div class="bg-slate-50 border-t border-slate-200 p-3 flex items-center justify-between gap-2">
+                        <button onclick="selectRepoAndGoToList('${repo.id}')" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                            Ingresar
+                        </button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="prepareEditRepo('${repo.id}')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg text-xs font-medium transition shadow-sm">
+                                Modificar
+                            </button>
+                            <button onclick="confirmToggleRepoStatus('${repo.id}')" class="px-3 py-1.5 bg-white hover:bg-slate-100 ${isSuspended ? 'text-emerald-700' : 'text-rose-700'} border border-slate-300 rounded-lg text-xs font-medium transition shadow-sm">
+                                ${isSuspended ? 'Reactivar' : 'Suspender'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('dash-total-repos').innerText = state.repositories.length;
+            document.getElementById('dash-total-records').innerText = totalRecords.toLocaleString();
+            document.getElementById('dash-total-fields').innerText = totalFields;
+        }
+
+        function selectRepoAndGoToList(repoId) {
+            state.activeRepoId = repoId;
+            switchTab('listado');
+        }
+
+        // CONTROL DE COLUMNAS VISIBLES (+ / -)
+        function toggleColumnPanel() {
+            const panel = document.getElementById('column-panel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                renderColumnCheckboxes();
+            }
+        }
+
+        function renderColumnCheckboxes() {
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+            if (!repo) return;
+
+            const container = document.getElementById('column-checkboxes-container');
+            container.innerHTML = '';
+
+            const hiddenMap = state.hiddenColumns[repo.id] || {};
+
+            repo.fields.forEach((f) => {
+                const isHidden = !!hiddenMap[f.id];
+                const isSearchable = !!f.searchable; // Atributos buscables NO se pueden ocultar
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+
+                if (isSearchable) {
+                    btn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium bg-slate-100 text-slate-800 border-slate-300 shadow-sm opacity-90 cursor-not-allowed";
+                    btn.disabled = true;
+                    btn.title = "Los atributos marcados como Buscables (🔍) son obligatorios en la vista de tabla.";
+                    btn.innerHTML = `
+                        <span>🔍 ${f.name}</span>
+                        <span class="text-[10px] font-bold text-emerald-600">(+)</span>
+                    `;
+                } else {
+                    btn.className = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer transition ${
+                        !isHidden 
+                            ? 'bg-slate-100 text-slate-800 border-slate-300 shadow-sm' 
+                            : 'bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100'
+                    }`;
+                    // Al hacer clic, si estaba oculto (isHidden=true) la pasa a visible (true), y viceversa
+                    btn.onclick = () => toggleSingleColumn(f.id, isHidden);
+                    btn.innerHTML = `
+                        <span>${f.name}</span>
+                        <span class="text-[10px] font-bold ${!isHidden ? 'text-emerald-600' : 'text-slate-400'}">${!isHidden ? '(+)' : '(-)'}</span>
+                    `;
+                }
+
+                container.appendChild(btn);
+            });
+        }
+
+        function toggleSingleColumn(fieldId, shouldShow) {
+            const repoId = state.activeRepoId;
+            if (!state.hiddenColumns[repoId]) state.hiddenColumns[repoId] = {};
+
+            if (shouldShow) {
+                delete state.hiddenColumns[repoId][fieldId]; // ON (+)
+            } else {
+                state.hiddenColumns[repoId][fieldId] = true; // OFF (-)
+            }
+
+            renderColumnCheckboxes();
+            renderRecordsTable(state.repositories.find(r => r.id === repoId));
+        }
+
+        function setAllColumnsVisible(showAll) {
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+            if (!repo) return;
+
+            if (!state.hiddenColumns[repo.id]) state.hiddenColumns[repo.id] = {};
+
+            repo.fields.forEach((f) => {
+                if (f.searchable) return; // Las buscables siempre permanecen activas
+                if (showAll) {
+                    delete state.hiddenColumns[repo.id][f.id]; // ON (+)
+                } else {
+                    state.hiddenColumns[repo.id][f.id] = true; // OFF (-)
+                }
+            });
+
+            renderColumnCheckboxes();
+            renderRecordsTable(repo);
+        }
+
+        // PREPARAR NUEVO REPOSITORIO
+        function prepareNewRepo() {
+            state.editingRepoId = null;
+            document.getElementById('builder-repo-id').value = '';
+            document.getElementById('builder-repo-name').value = '';
+            document.getElementById('builder-repo-desc').value = '';
+            document.getElementById('builder-main-heading').innerText = 'Crear Nuevo Repositorio EAV';
+            document.getElementById('tab-builder-title').innerText = 'Crear Repositorio';
+
+            const container = document.getElementById('builder-fields-container');
+            container.innerHTML = '';
+            addBuilderFieldRow('Apellido', 'text', [], true, true);
+            addBuilderFieldRow('Condición', 'select', ['Planta Permanente', 'Contratado'], false, true);
+
+            switchTab('builder');
+        }
+
+        // PREPARAR EDICIÓN DE REPOSITORIO
+        function prepareEditRepo(repoId) {
+            const repo = state.repositories.find(r => r.id === repoId);
+            if (!repo) return;
+
+            state.editingRepoId = repoId;
+            document.getElementById('builder-repo-id').value = repo.id;
+            document.getElementById('builder-repo-name').value = repo.name;
+            document.getElementById('builder-repo-desc').value = repo.description;
+            document.getElementById('builder-main-heading').innerText = `Modificar Estructura: ${repo.name}`;
+            document.getElementById('tab-builder-title').innerText = 'Modificar Repositorio';
+
+            const container = document.getElementById('builder-fields-container');
+            container.innerHTML = '';
+
+            repo.fields.forEach(f => {
+                addBuilderFieldRow(f.name, f.type, f.options || [], f.required, f.searchable);
+            });
+
+            switchTab('builder');
+        }
+
+        function modifyCurrentRepoFromList() {
+            prepareEditRepo(state.activeRepoId);
+        }
+
+        // AGREGAR FILA AL DISEÑADOR
+        function addBuilderFieldRow(name = '', type = 'text', options = [], required = false, searchable = true) {
+            const container = document.getElementById('builder-fields-container');
+            const rowId = 'builder-row-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+
+            const row = document.createElement('tr');
+            row.id = rowId;
+
+            const optionsStr = Array.isArray(options) ? options.join(', ') : '';
+
+            row.innerHTML = `
+                <td style="text-align: center;">
+                    <div class="flex items-center justify-center gap-1">
+                        <button type="button" class="reorder-btn btn-up" onclick="moveBuilderField('${rowId}', -1)">&uarr;</button>
+                        <button type="button" class="reorder-btn btn-down" onclick="moveBuilderField('${rowId}', 1)">&darr;</button>
+                    </div>
+                </td>
+                <td>
+                    <input type="text" value="${name}" placeholder="Nombre del campo" class="field-name-input w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                </td>
+                <td>
+                    <select onchange="toggleOptionsInput(this)" class="field-type-select w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none bg-white">
+                        <option value="text" ${type === 'text' ? 'selected' : ''}>Texto Corto</option>
+                        <option value="number" ${type === 'number' ? 'selected' : ''}>Número</option>
+                        <option value="date" ${type === 'date' ? 'selected' : ''}>Fecha</option>
+                        <option value="boolean" ${type === 'boolean' ? 'selected' : ''}>Booleano (ON / OFF)</option>
+                        <option value="select" ${type === 'select' ? 'selected' : ''}>Lista (Select)</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" value="${optionsStr}" placeholder="Opción 1, Opción 2" class="field-options-input w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none ${type === 'select' ? '' : 'hidden'}">
+                </td>
+                <td style="text-align: center;">
+                    <input type="checkbox" class="field-req-chk w-4 h-4 text-blue-600 rounded border-slate-300 cursor-pointer" ${required ? 'checked' : ''}>
+                </td>
+                <td style="text-align: center;">
+                    <input type="checkbox" class="field-search-chk w-4 h-4 text-blue-600 rounded border-slate-300 cursor-pointer" ${searchable ? 'checked' : ''}>
+                </td>
+                <td style="text-align: center;">
+                    <button type="button" class="w-7 h-7 bg-red-500 hover:bg-red-600 text-white rounded-md flex items-center justify-center font-bold text-xs transition mx-auto" onclick="confirmRemoveBuilderField('${rowId}', '${name}')">✕</button>
+                </td>
+            `;
+
+            container.appendChild(row);
+            updateReorderButtons();
+        }
+
+        // CONFIRMAR REMOVER CAMPO
+        function confirmRemoveBuilderField(rowId, fieldName) {
+            const displayName = fieldName.trim() || 'este campo';
+            showConfirmModal(
+                'Inactivar / Quitar Campo',
+                `¿Desea quitar el campo "${displayName}" del formulario? Si este campo ya contiene registros guardados, la información histórica NO se borrará de la base de datos; el atributo simplemente dejará de solicitarse en nuevas cargas para resguardar la auditoría legal.`,
+                () => {
+                    const el = document.getElementById(rowId);
+                    if (el) el.remove();
+                    updateReorderButtons();
+                    showToast(`Campo "${displayName}" removido de la estructura.`);
+                },
+                'btn-danger',
+                'Sí, Quitar Campo'
+            );
+        }
+
+        function toggleOptionsInput(selectEl) {
+            const optionsInput = selectEl.closest('tr').querySelector('.field-options-input');
+            if (selectEl.value === 'select') {
+                optionsInput.classList.remove('hidden');
+            } else {
+                optionsInput.classList.add('hidden');
+            }
+        }
+
+        // MOVER Y REORDENAR ATRIBUTOS
+        function moveBuilderField(rowId, direction) {
+            const container = document.getElementById('builder-fields-container');
+            const row = document.getElementById(rowId);
+            if (!row) return;
+
+            if (direction === -1 && row.previousElementSibling) {
+                container.insertBefore(row, row.previousElementSibling);
+            } else if (direction === 1 && row.nextElementSibling) {
+                container.insertBefore(row.nextElementSibling, row);
+            }
+
+            updateReorderButtons();
+        }
+
+        function updateReorderButtons() {
+            const container = document.getElementById('builder-fields-container');
+            const rows = container.querySelectorAll('tr');
+
+            rows.forEach((row, index) => {
+                const btnUp = row.querySelector('.btn-up');
+                const btnDown = row.querySelector('.btn-down');
+
+                if (btnUp) {
+                    if (index === 0) btnUp.classList.add('disabled');
+                    else btnUp.classList.remove('disabled');
+                }
+
+                if (btnDown) {
+                    if (index === rows.length - 1) btnDown.classList.add('disabled');
+                    else btnDown.classList.remove('disabled');
+                }
+            });
+        }
+
+        // GUARDAR REPOSITORIO
+        function saveRepository(e) {
+            e.preventDefault();
+            const repoName = document.getElementById('builder-repo-name').value.trim();
+            const repoDesc = document.getElementById('builder-repo-desc').value.trim();
+            const container = document.getElementById('builder-fields-container');
+            const rows = container.querySelectorAll('tr');
+
+            if (rows.length === 0) {
+                showToast('Debe agregar al menos un atributo al repositorio.', '⚠️');
+                return;
+            }
+
+            const newFields = [];
+            rows.forEach((row, idx) => {
+                const name = row.querySelector('.field-name-input').value.trim() || `Campo ${idx + 1}`;
+                const type = row.querySelector('.field-type-select').value;
+                const optionsRaw = row.querySelector('.field-options-input').value;
+                const required = row.querySelector('.field-req-chk').checked;
+                const searchable = row.querySelector('.field-search-chk').checked;
+
+                const options = type === 'select' ? optionsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+                newFields.push({
+                    id: 'f-' + idx + '-' + Date.now(),
+                    name,
+                    type,
+                    options,
+                    required,
+                    searchable
+                });
+            });
+
+            showConfirmModal(
+                'Guardar Repositorio',
+                `¿Desea publicar los cambios en el repositorio "${repoName}"? El nuevo orden de atributos se aplicará de forma uniforme.`,
+                () => {
+                    if (state.editingRepoId) {
+                        const repo = state.repositories.find(r => r.id === state.editingRepoId);
+                        if (repo) {
+                            repo.name = repoName;
+                            repo.description = repoDesc;
+                            repo.fields = newFields;
+                        }
+                        showToast(`Estructura de "${repoName}" actualizada exitosamente.`);
+                    } else {
+                        const newId = 'repo-' + Date.now();
+                        state.repositories.push({
+                            id: newId,
+                            name: repoName,
+                            description: repoDesc,
+                            status: 'activo',
+                            fields: newFields,
+                            records: []
+                        });
+                        state.activeRepoId = newId;
+                        showToast(`Repositorio "${repoName}" creado y publicado.`);
+                    }
+
+                    switchTab('listado');
+                }
+            );
+        }
+
+        // SUSPENDER / REACTIVAR REPOSITORIO
+        function confirmToggleRepoStatus(repoId) {
+            const repo = state.repositories.find(r => r.id === repoId);
+            if (!repo) return;
+
+            const isSuspended = repo.status === 'suspendido';
+            const actionText = isSuspended ? 'Reactivar' : 'Suspender';
+
+            showConfirmModal(
+                `${actionText} Repositorio`,
+                `¿Desea ${actionText.toLowerCase()} el repositorio "${repo.name}"? ${isSuspended ? 'Se reanudará la carga de datos.' : 'Los usuarios no podrán ingresar nuevos registros mientras esté suspendido.'}`,
+                () => {
+                    repo.status = isSuspended ? 'activo' : 'suspendido';
+                    renderDashboardCards();
+                    if (state.activeRepoId === repoId) renderListadoView();
+                    showToast(`Repositorio "${repo.name}" ${repo.status}.`);
+                }
+            );
+        }
+
+        // VISTA LISTADO DE REGISTROS
+        function renderListadoView() {
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+            if (!repo) return;
+
+            document.getElementById('list-repo-title').innerText = repo.name;
+            document.getElementById('list-repo-desc').innerText = repo.description || 'Sin descripción.';
+
+            const statusBadge = document.getElementById('list-repo-status-badge');
+            const isSuspended = repo.status === 'suspendido';
+            statusBadge.innerText = isSuspended ? 'Suspendido' : 'Activo';
+            statusBadge.className = `px-2.5 py-0.5 rounded-full text-xs font-semibold ${isSuspended ? 'bg-rose-100 text-rose-800 border border-rose-200' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}`;
+
+            const btnNew = document.getElementById('btn-new-record');
+            btnNew.disabled = isSuspended;
+            if (isSuspended) btnNew.classList.add('opacity-50', 'cursor-not-allowed');
+            else btnNew.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            renderSearchFilters(repo);
+            if (!document.getElementById('column-panel').classList.contains('hidden')) {
+                renderColumnCheckboxes();
+            }
+            renderRecordsTable(repo);
+        }
+
+        // BUSCADOR AVANZADO
+        function toggleSearchPanel() {
+            const panel = document.getElementById('search-panel');
+            const btnText = document.getElementById('search-toggle-text');
+            panel.classList.toggle('hidden');
+            btnText.innerText = panel.classList.contains('hidden') ? 'Mostrar Buscador' : 'Ocultar Buscador';
+        }
+
+        function renderSearchFilters(repo) {
+            const container = document.getElementById('search-filters-container');
+            container.innerHTML = '';
+
+            const searchableFields = repo.fields.filter(f => f.searchable);
+
+            if (searchableFields.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-400 col-span-3">No hay atributos marcados como buscables en este repositorio.</p>';
+                return;
+            }
+
+            searchableFields.forEach(f => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label class="block text-xs font-medium text-slate-300 mb-1">🔍 ${f.name}</label>
+                    <input type="text" data-field-id="${f.id}" placeholder="Filtrar..." class="search-field-input w-full px-3 py-1.5 bg-slate-800 border border-slate-700 text-white rounded-lg text-xs focus:ring-1 focus:ring-blue-500">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function resetSearchFilters() {
+            state.searchFilters = {};
+            document.querySelectorAll('.search-field-input').forEach(i => i.value = '');
+            renderListadoView();
+        }
+
+        function applySearchFilters() {
+            state.searchFilters = {};
+            document.querySelectorAll('.search-field-input').forEach(i => {
+                const val = i.value.trim();
+                if (val) state.searchFilters[i.getAttribute('data-field-id')] = val.toLowerCase();
+            });
+
+            const opRadios = document.getElementsByName('search-operator');
+            for (let r of opRadios) {
+                if (r.checked) state.searchOperator = r.value;
+            }
+
+            renderListadoView();
+        }
+
+        // RENDER DE TABLA DE REGISTROS
+        function renderRecordsTable(repo) {
+            const thead = document.getElementById('records-table-head');
+            const tbody = document.getElementById('records-table-body');
+
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            const hiddenMap = state.hiddenColumns[repo.id] || {};
+            // Las columnas visibles son aquellas que son Buscables (🔍) O que no hayan sido ocultadas manualmente
+            const visibleFields = repo.fields.filter(f => f.searchable || !hiddenMap[f.id]);
+
+            // Cabecera basada en los atributos visibles
+            const trHead = document.createElement('tr');
+            trHead.innerHTML = `<th class="px-4 py-3 text-left text-xs font-semibold uppercase text-slate-500">ID</th>`;
+
+            visibleFields.forEach(f => {
+                trHead.innerHTML += `<th class="px-4 py-3 text-left text-xs font-semibold uppercase text-slate-500">${f.name}</th>`;
+            });
+
+            trHead.innerHTML += `
+                <th class="px-4 py-3 text-center text-xs font-semibold uppercase text-slate-500">Estado</th>
+                <th class="px-4 py-3 text-center text-xs font-semibold uppercase text-slate-500">Acción</th>
+            `;
+            thead.appendChild(trHead);
+
+            // Filtrado de registros
+            let filteredRecords = repo.records.filter(rec => {
+                const filterKeys = Object.keys(state.searchFilters);
+                if (filterKeys.length === 0) return true;
+
+                if (state.searchOperator === 'AND') {
+                    return filterKeys.every(fId => {
+                        const val = (rec.values[fId] || '').toString().toLowerCase();
+                        return val.includes(state.searchFilters[fId]);
+                    });
+                } else {
+                    return filterKeys.some(fId => {
+                        const val = (rec.values[fId] || '').toString().toLowerCase();
+                        return val.includes(state.searchFilters[fId]);
+                    });
+                }
+            });
+
+            if (filteredRecords.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="${visibleFields.length + 3}" class="text-center py-8 text-slate-400 text-xs">No se encontraron registros para esta consulta.</td></tr>`;
+                document.getElementById('records-counter-info').innerText = '0 registros encontrados';
+                return;
+            }
+
+            filteredRecords.forEach(rec => {
+                const tr = document.createElement('tr');
+                tr.className = rec.active ? 'hover:bg-slate-50 transition' : 'bg-slate-50 text-slate-400';
+
+                let rowHtml = `<td class="px-4 py-3 font-mono text-xs font-bold text-slate-600">#${rec.id.replace('r', '')}</td>`;
+
+                visibleFields.forEach((f, idx) => {
+                    let rawVal = rec.values[f.id];
+                    let cellVal = rawVal || '-';
+                    
+                    if (f.type === 'boolean') {
+                        const isTrue = rawVal === 'ON' || rawVal === 'Sí' || rawVal === 'true' || rawVal === true;
+                        cellVal = isTrue 
+                            ? '<span class="inline-flex items-center gap-1 font-bold text-emerald-700">☑ ON</span>' 
+                            : '<span class="inline-flex items-center gap-1 text-slate-400">☐ OFF</span>';
+                    }
+
+                    if (idx === 0) {
+                        const versionBadgeHtml = rec.version > 1 ? `<span class="version-badge">v${rec.version}</span>` : '';
+                        rowHtml += `<td class="px-4 py-3 font-medium text-slate-800">${cellVal} ${versionBadgeHtml}</td>`;
+                    } else {
+                        rowHtml += `<td class="px-4 py-3 text-slate-600">${cellVal}</td>`;
+                    }
+                });
+
+                rowHtml += `
+                    <td class="px-4 py-3 text-center">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${rec.active ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-slate-200 text-slate-600'}">
+                            ${rec.active ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="openRecordModalForView('${rec.id}')" class="px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold rounded-lg text-xs transition border border-slate-300 shadow-sm">
+                            Ver
+                        </button>
+                    </td>
+                `;
+
+                tr.innerHTML = rowHtml;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('records-counter-info').innerText = `Mostrando ${filteredRecords.length} de ${repo.records.length} registros`;
+        }
+
+        // MODAL DE REGISTRO
+        function openRecordModalForView(recordId) {
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+            const rec = repo.records.find(r => r.id === recordId);
+            if (!rec) return;
+
+            state.modalRecordId = recordId;
+            state.modalMode = 'view';
+
+            document.getElementById('modal-record-title').innerText = `Ficha Completa del Registro #${rec.id.replace('r', '')}`;
+            document.getElementById('modal-record-version-badge').innerText = `v${rec.version}`;
+
+            renderModalFormFields(repo, rec, true);
+            renderModalFooterActions(rec);
+
+            document.getElementById('modal-record').classList.remove('hidden');
+        }
+
+        function openRecordModalForCreate() {
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+            if (!repo || repo.status === 'suspendido') return;
+
+            state.modalRecordId = null;
+            state.modalMode = 'create';
+
+            document.getElementById('modal-record-title').innerText = `Nuevo Registro en: ${repo.name}`;
+            document.getElementById('modal-record-version-badge').innerText = 'v1';
+
+            renderModalFormFields(repo, null, false);
+            renderModalFooterActions(null);
+
+            document.getElementById('modal-record').classList.remove('hidden');
+        }
+
+        function renderModalFormFields(repo, rec, readOnly) {
+            const form = document.getElementById('form-record-modal');
+            form.innerHTML = '';
+
+            repo.fields.forEach(f => {
+                const div = document.createElement('div');
+                div.className = "space-y-1";
+
+                const val = rec ? (rec.values[f.id] || '') : '';
+
+                let inputHtml = '';
+                if (readOnly) {
+                    let displayVal = val;
+                    if (f.type === 'boolean') {
+                        const isTrue = val === 'ON' || val === 'Sí' || val === 'true' || val === true;
+                        displayVal = isTrue 
+                            ? '<span class="inline-flex items-center gap-1 font-bold text-emerald-700">☑ ON (True)</span>' 
+                            : '<span class="inline-flex items-center gap-1 text-slate-500">☐ OFF (False)</span>';
+                    }
+                    inputHtml = `<div class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-800">${displayVal || '<span class="text-slate-400 italic">Sin datos</span>'}</div>`;
+                } else {
+                    if (f.type === 'select') {
+                        const optionsHtml = f.options.map(o => `<option value="${o}" ${val === o ? 'selected' : ''}>${o}</option>`).join('');
+                        inputHtml = `<select data-field-id="${f.id}" ${f.required ? 'required' : ''} class="rec-input w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-slate-400 focus:outline-none bg-white">
+                            <option value="">Seleccione una opción</option>
+                            ${optionsHtml}
+                        </select>`;
+                    } else if (f.type === 'boolean') {
+                        const isChecked = val === 'ON' || val === 'Sí' || val === 'true' || val === true;
+                        inputHtml = `<label class="inline-flex items-center gap-2.5 pt-1.5 cursor-pointer select-none">
+                            <input type="checkbox" data-field-id="${f.id}" data-type="boolean" ${isChecked ? 'checked' : ''} class="rec-input w-4 h-4 text-slate-900 rounded border-slate-300 focus:ring-slate-400 cursor-pointer">
+                            <span class="text-xs text-slate-700 font-medium">Activar opción (Check = ON / Uncheck = OFF)</span>
+                        </label>`;
+                    } else {
+                        inputHtml = `<input type="${f.type === 'number' ? 'number' : f.type === 'date' ? 'date' : 'text'}" data-field-id="${f.id}" value="${val}" ${f.required ? 'required' : ''} class="rec-input w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-slate-400 focus:outline-none">`;
+                    }
+                }
+
+                div.innerHTML = `
+                    <label class="block text-xs font-semibold text-slate-700">${f.name} ${f.required ? '<span class="text-rose-500">*</span>' : ''}</label>
+                    ${inputHtml}
+                `;
+                form.appendChild(div);
+            });
+
+            // SECCIÓN DE HISTORIAL DE VERSIONES ANTERIORES
+            if (rec && rec.history && rec.history.length > 0) {
+                const historyDiv = document.createElement('div');
+                historyDiv.className = "col-span-1 md:col-span-2 mt-4 pt-4 border-t border-slate-200 space-y-3";
+
+                let historyCardsHtml = '';
+                rec.history.forEach(h => {
+                    let fieldListHtml = repo.fields.map(f => {
+                        const hVal = h.values[f.id] || '-';
+                        return `<span class="inline-block bg-slate-100 px-2 py-1 rounded text-[11px] text-slate-700 mr-2 mb-1"><strong>${f.name}:</strong> ${hVal}</span>`;
+                    }).join('');
+
+                    historyCardsHtml += `
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1.5">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700">
+                                <span class="flex items-center gap-1.5"><span class="version-badge">v${h.version}</span> Snapshot Registral</span>
+                                <span class="text-slate-400 text-[11px]">${h.date} (${h.user || 'Sistema'})</span>
+                            </div>
+                            <div class="pt-1">${fieldListHtml}</div>
+                        </div>
+                    `;
+                });
+
+                historyDiv.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                            📜 Historial de Versiones Anteriores (${rec.history.length})
+                        </h4>
+                    </div>
+                    <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                        ${historyCardsHtml}
+                    </div>
+                `;
+                form.appendChild(historyDiv);
+            }
+        }
+
+        // ACCIONES DEL PIE DEL MODAL DE REGISTRO
+        function renderModalFooterActions(rec) {
+            const footer = document.getElementById('modal-record-footer');
+            footer.innerHTML = '';
+
+            if (state.modalMode === 'view') {
+                if (rec && rec.active) {
+                    footer.innerHTML = `
+                        <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
+                            Cerrar
+                        </button>
+                        <div class="flex items-center gap-2">
+                            <button type="button" onclick="confirmDeactivateRecord('${rec.id}')" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg text-xs font-medium transition">
+                                Bajar
+                            </button>
+                            <button type="button" onclick="switchToEditMode()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                                Editar
+                            </button>
+                        </div>
+                    `;
+                } else if (rec && !rec.active) {
+                    footer.innerHTML = `
+                        <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
+                            Cerrar
+                        </button>
+                        <button type="button" onclick="confirmRestoreRecord('${rec.id}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                            Restaurar / Activar
+                        </button>
+                    `;
+                }
+            } else if (state.modalMode === 'edit') {
+                footer.innerHTML = `
+                    <button type="button" onclick="openRecordModalForView('${rec.id}')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
+                        Cancelar
+                    </button>
+                    <button type="button" onclick="submitRecordForm()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                        Guardar Versión v${rec.version + 1}
+                    </button>
+                `;
+            } else if (state.modalMode === 'create') {
+                footer.innerHTML = `
+                    <button type="button" onclick="closeRecordModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 transition">
+                        Cancelar
+                    </button>
+                    <button type="button" onclick="submitRecordForm()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition shadow-sm">
+                        Guardar Registro
+                    </button>
+                `;
+            }
+        }
+
+        function switchToEditMode() {
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+            const rec = repo.records.find(r => r.id === state.modalRecordId);
+            state.modalMode = 'edit';
+            renderModalFormFields(repo, rec, false);
+            renderModalFooterActions(rec);
+        }
+
+        function closeRecordModal() {
+            document.getElementById('modal-record').classList.add('hidden');
+        }
+
+        // GUARDAR EDICIÓN O CREACIÓN DE REGISTRO
+        function submitRecordForm() {
+            const form = document.getElementById('form-record-modal');
+            const inputs = form.querySelectorAll('.rec-input');
+
+            // Validar requeridos
+            let isValid = true;
+            inputs.forEach(i => {
+                if (i.hasAttribute('required') && i.type !== 'checkbox' && !i.value.trim()) {
+                    isValid = false;
+                    i.classList.add('border-rose-500');
+                } else {
+                    i.classList.remove('border-rose-500');
+                }
+            });
+
+            if (!isValid) {
+                showToast('Por favor, complete todos los campos obligatorios.', '⚠️');
+                return;
+            }
+
+            const newValues = {};
+            inputs.forEach(i => {
+                if (i.type === 'checkbox' || i.getAttribute('data-type') === 'boolean') {
+                    newValues[i.getAttribute('data-field-id')] = i.checked ? 'ON' : 'OFF';
+                } else {
+                    newValues[i.getAttribute('data-field-id')] = i.value.trim();
+                }
+            });
+
+            const repo = state.repositories.find(r => r.id === state.activeRepoId);
+
+            if (state.modalMode === 'edit') {
+                const rec = repo.records.find(r => r.id === state.modalRecordId);
+                showConfirmModal(
+                    'Guardar Nueva Versión',
+                    `¿Desea guardar los cambios en el registro #${rec.id.replace('r', '')}? Se incrementará la versión a v${rec.version + 1} resguardando la auditoría.`,
+                    () => {
+                        if (!rec.history) rec.history = [];
+                        rec.history.unshift({
+                            version: rec.version,
+                            date: new Date().toLocaleString('es-AR', { dateStyle: 'short', timeStyle: 'short' }),
+                            user: 'operador_srf',
+                            values: { ...rec.values }
+                        });
+
+                        rec.values = newValues;
+                        rec.version += 1;
+                        closeRecordModal();
+                        renderListadoView();
+                        showToast(`Registro #${rec.id.replace('r', '')} actualizado a versión v${rec.version}.`);
+                    }
+                );
+            } else if (state.modalMode === 'create') {
+                showConfirmModal(
+                    'Crear Nuevo Registro',
+                    `¿Desea dar de alta este registro en el repositorio "${repo.name}"?`,
+                    () => {
+                        const newId = 'r' + (repo.records.length + 101);
+                        repo.records.push({
+                            id: newId,
+                            version: 1,
+                            active: true,
+                            values: newValues,
+                            history: []
+                        });
+                        closeRecordModal();
+                        renderListadoView();
+                        showToast(`Nuevo registro #${newId.replace('r', '')} creado exitosamente.`);
+                    }
+                );
+            }
+        }
+
+        // CONFIRMAR BAJA Y RESTAURACIÓN DE REGISTROS
+        function confirmDeactivateRecord(recordId) {
+            showConfirmModal(
+                'Bajar Registro (Baja Lógica)',
+                `¿Está seguro de pasar a inactivo el registro #${recordId.replace('r', '')}? La información continuará preservada para auditoría histórica.`,
+                () => {
+                    const repo = state.repositories.find(r => r.id === state.activeRepoId);
+                    const rec = repo.records.find(r => r.id === recordId);
+                    rec.active = false;
+                    closeRecordModal();
+                    renderListadoView();
+                    showToast(`Registro #${recordId.replace('r', '')} dado de baja.`);
+                },
+                'btn-danger',
+                'Sí, Inactivar'
+            );
+        }
+
+        function confirmRestoreRecord(recordId) {
+            showConfirmModal(
+                'Restaurar Registro',
+                `¿Desea reactivar el registro #${recordId.replace('r', '')}?`,
+                () => {
+                    const repo = state.repositories.find(r => r.id === state.activeRepoId);
+                    const rec = repo.records.find(r => r.id === recordId);
+                    rec.active = true;
+                    closeRecordModal();
+                    renderListadoView();
+                    showToast(`Registro #${recordId.replace('r', '')} reactivado.`);
+                }
+            );
+        }
+
+        // MODAL DE CONFIRMACIÓN PERSONALIZADO
+        function showConfirmModal(title, message, onConfirm, actionBtnClass = 'btn-primary', actionBtnText = 'Aceptar') {
+            document.getElementById('confirm-modal-title').innerText = title;
+            document.getElementById('confirm-modal-message').innerText = message;
+
+            const actionBtn = document.getElementById('confirm-modal-action-btn');
+            actionBtn.innerText = actionBtnText;
+
+            if (actionBtnClass === 'btn-danger') {
+                actionBtn.className = "px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition";
+            } else {
+                actionBtn.className = "px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition";
+            }
+
+            confirmCallback = onConfirm;
+            document.getElementById('modal-confirm').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('modal-confirm').classList.add('hidden');
+            confirmCallback = null;
+        }
+
+        document.getElementById('confirm-modal-action-btn').addEventListener('click', function () {
+            if (confirmCallback) confirmCallback();
+            closeConfirmModal();
+        });
+
+        // TOAST NOTIFICATIONS
+        function showToast(message, icon = 'ℹ️') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            document.getElementById('toast-icon').innerText = icon;
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+    </script>
 </body>
 </html>
