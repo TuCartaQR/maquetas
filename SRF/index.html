@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
+<!--COMENTARIO DE PRUEBA  -->
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Registros Flexibles (SRF)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Montserrat (Párrafos) y Lora (Títulos) -->
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
     <style>
-        body, input, select, button, textarea {
+        body,
+        input,
+        select,
+        button,
+        textarea {
             font-family: 'Montserrat', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
         }
 
-        h1, h2, h3, h4, .font-heading {
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
             font-family: 'Lora', serif;
         }
 
@@ -122,13 +136,15 @@
             gap: 0.5rem;
         }
 
-        .manual-card p, .manual-card li {
+        .manual-card p,
+        .manual-card li {
             color: #334155;
             font-size: 0.9rem;
             line-height: 1.6;
         }
 
-        .manual-card ul, .manual-card ol {
+        .manual-card ul,
+        .manual-card ol {
             padding-left: 1.25rem;
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
@@ -158,35 +174,43 @@
             transform: translateY(100%);
             opacity: 0;
         }
+
         #toast.show {
             transform: translateY(0);
             opacity: 1;
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col justify-between p-3 sm:p-6">
 
     <div class="max-w-7xl mx-auto w-full space-y-5">
-        
+
         <!-- ENCABEZADO ESTÉTICA LIMPIA / MIPORTAL -->
         <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-2">
             <div>
-                <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Sistema de Registros Flexibles (SRF)</h1>
-                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Módulo Nativo MiPortal — <span class="text-slate-600 font-medium">srf.miportal.gob.ar</span></p>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Sistema de Registros Flexibles
+                    (SRF)</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Módulo Nativo MiPortal — <span
+                        class="text-slate-600 font-medium">srf.miportal.gob.ar</span></p>
             </div>
 
             <!-- Navegación por Botones Pills -->
             <nav class="flex items-center gap-2 overflow-x-auto pb-1">
-                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-slate-900 text-white border-slate-900 shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard"
+                    class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-slate-900 text-white border-slate-900 shadow-sm flex items-center gap-1.5 whitespace-nowrap">
                     1. Dashboard
                 </button>
-                <button onclick="switchTab('builder')" id="tab-builder" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
+                <button onclick="switchTab('builder')" id="tab-builder"
+                    class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
                     <span id="tab-builder-icon">⚙️</span> <span id="tab-builder-title">Crear Repositorio</span>
                 </button>
-                <button onclick="switchTab('listado')" id="tab-listado" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
+                <button onclick="switchTab('listado')" id="tab-listado"
+                    class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
                     2. Listado y Buscador
                 </button>
-                <button onclick="switchTab('manual')" id="tab-manual" class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
+                <button onclick="switchTab('manual')" id="tab-manual"
+                    class="px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center gap-1.5 whitespace-nowrap">
                     📖 Manual de Usuario
                 </button>
             </nav>
@@ -207,11 +231,13 @@
                         <p class="text-2xl font-bold text-blue-600 mt-1" id="dash-total-records">1,483</p>
                     </div>
                     <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Atributos Configurados</p>
+                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Atributos Configurados
+                        </p>
                         <p class="text-2xl font-bold text-emerald-600 mt-1" id="dash-total-fields">7</p>
                     </div>
                     <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Estado de Base de Datos</p>
+                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Estado de Base de Datos
+                        </p>
                         <p class="text-xs font-semibold text-slate-700 mt-2 flex items-center gap-1.5">
                             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Operativo MariaDB EAV
                         </p>
@@ -222,9 +248,11 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900">Colecciones y Repositorios Activos</h2>
-                        <p class="text-xs text-slate-500">Seleccione un repositorio para ingresar a sus registros o modificar su estructura de atributos.</p>
+                        <p class="text-xs text-slate-500">Seleccione un repositorio para ingresar a sus registros o
+                            modificar su estructura de atributos.</p>
                     </div>
-                    <button onclick="prepareNewRepo()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-1.5">
+                    <button onclick="prepareNewRepo()"
+                        class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-1.5">
                         <span>+</span> Nuevo Repositorio
                     </button>
                 </div>
@@ -239,8 +267,11 @@
             <section id="view-builder" class="hidden space-y-5">
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
                     <div>
-                        <h2 class="text-lg font-bold text-slate-900" id="builder-main-heading">Modificar Estructura: Personal</h2>
-                        <p class="text-xs text-slate-500 mt-0.5">Especifique los datos básicos del repositorio y defina los campos. Use las flechas (&uarr; / &darr;) para fijar el orden de visualización único.</p>
+                        <h2 class="text-lg font-bold text-slate-900" id="builder-main-heading">Modificar Estructura:
+                            Personal</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Especifique los datos básicos del repositorio y defina
+                            los campos. Use las flechas (&uarr; / &darr;) para fijar el orden de visualización único.
+                        </p>
                     </div>
 
                     <form id="form-builder" onsubmit="saveRepository(event)" class="space-y-5">
@@ -249,12 +280,17 @@
                         <!-- Identificación Básica -->
                         <div class="space-y-3">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Repositorio *</label>
-                                <input type="text" id="builder-repo-name" required placeholder="Ej: Personal" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Repositorio
+                                    *</label>
+                                <input type="text" id="builder-repo-name" required placeholder="Ej: Personal"
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Descripción / Objetivo</label>
-                                <input type="text" id="builder-repo-desc" placeholder="Registros históricos de agentes, altas, bajas y condiciones de contratación." class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Descripción /
+                                    Objetivo</label>
+                                <input type="text" id="builder-repo-desc"
+                                    placeholder="Registros históricos de agentes, altas, bajas y condiciones de contratación."
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-slate-400 focus:outline-none">
                             </div>
                         </div>
 
@@ -262,7 +298,8 @@
                         <div class="pt-2">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="text-xs font-bold text-slate-800">Definición de Atributos</h3>
-                                <button type="button" onclick="addBuilderFieldRow()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-xs transition border border-slate-200">
+                                <button type="button" onclick="addBuilderFieldRow()"
+                                    class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-xs transition border border-slate-200">
                                     + Agregar Campo
                                 </button>
                             </div>
@@ -289,10 +326,12 @@
 
                         <!-- Acciones del Diseñador -->
                         <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
-                            <button type="button" onclick="switchTab('dashboard')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition">
+                            <button type="button" onclick="switchTab('dashboard')"
+                                class="px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition">
                                 Cancelar
                             </button>
-                            <button type="submit" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition">
+                            <button type="submit"
+                                class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition">
                                 Guardar Repositorio
                             </button>
                         </div>
@@ -303,41 +342,51 @@
             <!-- VISTA 3: LISTADO Y GESTIÓN DE REGISTROS -->
             <section id="view-listado" class="hidden space-y-5">
                 <!-- Barra Superior de Repositorio Seleccionado -->
-                <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div
+                    class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2">
                             <h2 class="text-lg font-bold text-slate-900" id="list-repo-title">Repositorio</h2>
-                            <span id="list-repo-status-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Activo</span>
+                            <span id="list-repo-status-badge"
+                                class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Activo</span>
                         </div>
                         <p class="text-xs text-slate-500 mt-0.5" id="list-repo-desc">Descripción del repositorio</p>
                     </div>
 
                     <div class="flex items-center gap-2 flex-wrap">
-                        <button onclick="toggleSearchPanel()" class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
+                        <button onclick="toggleSearchPanel()"
+                            class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
                             <span>🔍</span> <span id="search-toggle-text">Mostrar Buscador</span>
                         </button>
-                        <button onclick="toggleColumnPanel()" class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
+                        <button onclick="toggleColumnPanel()"
+                            class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition flex items-center gap-1.5 shadow-sm">
                             <span>👁️</span> <span>Columnas (+ / -)</span>
                         </button>
-                        <button onclick="modifyCurrentRepoFromList()" class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition shadow-sm">
+                        <button onclick="modifyCurrentRepoFromList()"
+                            class="bg-white hover:bg-slate-50 text-slate-700 font-medium px-3.5 py-2 rounded-lg text-xs border border-slate-300 transition shadow-sm">
                             Modificar Estructura
                         </button>
-                        <button id="btn-new-record" onclick="openRecordModalForCreate()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-xs transition shadow-sm">
+                        <button id="btn-new-record" onclick="openRecordModalForCreate()"
+                            class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-xs transition shadow-sm">
                             + Nuevo Registro
                         </button>
                     </div>
                 </div>
 
                 <!-- Panel de Selección de Columnas Visibles (+/-) -->
-                <div id="column-panel" class="hidden bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                <div id="column-panel"
+                    class="hidden bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
                             👁️ Columnas Visibles en Tabla (+ / -)
                         </h3>
                         <div class="flex items-center gap-2">
-                            <button onclick="setAllColumnsVisible(true)" class="text-xs text-blue-600 hover:underline font-semibold">+ Mostrar Todas</button>
+                            <button onclick="setAllColumnsVisible(true)"
+                                class="text-xs text-blue-600 hover:underline font-semibold">+ Mostrar Todas</button>
                             <span class="text-slate-300">|</span>
-                            <button onclick="setAllColumnsVisible(false)" class="text-xs text-slate-500 hover:underline font-semibold">- Ocultar Opcionales</button>
+                            <button onclick="setAllColumnsVisible(false)"
+                                class="text-xs text-slate-500 hover:underline font-semibold">- Ocultar
+                                Opcionales</button>
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-2.5" id="column-checkboxes-container">
@@ -346,30 +395,38 @@
                 </div>
 
                 <!-- Panel del Buscador Avanzado (Colapsable) -->
-                <div id="search-panel" class="hidden bg-slate-900 text-white p-5 rounded-xl border border-slate-800 shadow-md space-y-4">
+                <div id="search-panel"
+                    class="hidden bg-slate-900 text-white p-5 rounded-xl border border-slate-800 shadow-md space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                             <span>🔍</span> Buscador Avanzado por Atributos Indexados
                         </h3>
-                        <span class="text-xs text-slate-400">Filtrado activo únicamente en atributos marcados como "Buscable"</span>
+                        <span class="text-xs text-slate-400">Filtrado activo únicamente en atributos marcados como
+                            "Buscable"</span>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="search-filters-container">
                         <!-- Filtros dinámicos -->
                     </div>
 
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-800">
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-800">
                         <div class="flex items-center gap-4 text-xs text-slate-300">
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="search-operator" value="AND" checked class="text-blue-500"> Coincidir Todos (AND)
+                                <input type="radio" name="search-operator" value="AND" checked class="text-blue-500">
+                                Coincidir Todos (AND)
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="search-operator" value="OR" class="text-blue-500"> Coincidir Cualquier (OR)
+                                <input type="radio" name="search-operator" value="OR" class="text-blue-500"> Coincidir
+                                Cualquier (OR)
                             </label>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button onclick="resetSearchFilters()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition">Limpiar</button>
-                            <button onclick="applySearchFilters()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition shadow-sm">Ejecutar Búsqueda</button>
+                            <button onclick="resetSearchFilters()"
+                                class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition">Limpiar</button>
+                            <button onclick="applySearchFilters()"
+                                class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition shadow-sm">Ejecutar
+                                Búsqueda</button>
                         </div>
                     </div>
                 </div>
@@ -386,7 +443,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                    <div
+                        class="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
                         <span id="records-counter-info">Mostrando 0 registros</span>
                         <span>Doble confirmación requerida en operaciones estructurales.</span>
                     </div>
@@ -397,101 +455,150 @@
             <section id="view-manual" class="hidden space-y-5">
                 <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-1">
                     <h2 class="text-xl font-bold text-slate-900">📖 Manual Operativo y Guía del Usuario</h2>
-                    <p class="text-xs text-slate-500">Documentación integral sobre estructuración EAV, versionado, bajas lógicas y operabilidad de la plataforma SRF.</p>
+                    <p class="text-xs text-slate-500">Documentación integral sobre estructuración EAV, versionado, bajas
+                        lógicas y operabilidad de la plataforma SRF.</p>
                 </div>
 
                 <!-- Índice Rápido Horizontal Flotante Compacto -->
-                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm sticky top-2 z-10 flex flex-wrap items-center gap-2 text-xs">
+                <div
+                    class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm sticky top-2 z-10 flex flex-wrap items-center gap-2 text-xs">
                     <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-1">Índice:</span>
-                    <a href="#m-roles" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">1. Roles</a>
-                    <a href="#m-dash" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">2. Dashboard</a>
-                    <a href="#m-crear" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">3. Diseñador</a>
-                    <a href="#m-eav" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">4. Modelo</a>
-                    <a href="#m-operacion" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">5. Ficha</a>
-                    <a href="#m-faq" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">6. Preguntas</a>
+                    <a href="#m-roles"
+                        class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">1.
+                        Roles</a>
+                    <a href="#m-dash"
+                        class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">2.
+                        Dashboard</a>
+                    <a href="#m-crear"
+                        class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">3.
+                        Diseñador</a>
+                    <a href="#m-eav"
+                        class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">4.
+                        Modelo</a>
+                    <a href="#m-operacion"
+                        class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">5.
+                        Ficha</a>
+                    <a href="#m-faq"
+                        class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">6.
+                        Preguntas</a>
                 </div>
 
                 <!-- Contenido del Manual -->
                 <div class="space-y-4">
                     <div class="manual-card" id="m-roles">
                         <h3>👤 1. Roles y Niveles de Acceso</h3>
-                            <p>El Sistema de Registros Flexibles (SRF) contempla una estructura jerárquica de permisos:</p>
-                            <ul>
-                                <li><strong>Administrador Super:</strong> Acceso total, gestión de usuarios globales y auditoría general.</li>
-                                <li><strong>Administrador Departamental:</strong> Diseña, modifica y suspende repositorios de su área de competencia.</li>
-                                <li><strong>Operador de Carga:</strong> Registra nuevos datos, consulta fichas mediante el botón <code>Ver</code> y aplica modificaciones con registro de versionado.</li>
-                            </ul>
-                        </div>
+                        <p>El Sistema de Registros Flexibles (SRF) contempla una estructura jerárquica de permisos:</p>
+                        <ul>
+                            <li><strong>Administrador Super:</strong> Acceso total, gestión de usuarios globales y
+                                auditoría general.</li>
+                            <li><strong>Administrador Departamental:</strong> Diseña, modifica y suspende repositorios
+                                de su área de competencia.</li>
+                            <li><strong>Operador de Carga:</strong> Registra nuevos datos, consulta fichas mediante el
+                                botón <code>Ver</code> y aplica modificaciones con registro de versionado.</li>
+                        </ul>
+                    </div>
 
-                        <div class="manual-card" id="m-dash">
-                            <h3>📊 2. Dashboard y Control Institucional</h3>
-                            <p>Muestra las tarjetas de repositorios asignados a su departamento. Cada tarjeta ofrece resúmenes de registros y una botonera inferior de control:</p>
-                            <ul>
-                                <li><code>Ingresar</code>: Abre el listado de datos del repositorio.</li>
-                                <li><code>Modificar</code>: Abre el diseñador para reorganizar campos o agregar nuevos atributos.</li>
-                                <li><code>Suspender / Reactivar</code>: Pausa temporalmente la carga de nuevos registros sin afectar las lecturas.</li>
-                            </ul>
-                        </div>
+                    <div class="manual-card" id="m-dash">
+                        <h3>📊 2. Dashboard y Control Institucional</h3>
+                        <p>Muestra las tarjetas de repositorios asignados a su departamento. Cada tarjeta ofrece
+                            resúmenes de registros y una botonera inferior de control:</p>
+                        <ul>
+                            <li><code>Ingresar</code>: Abre el listado de datos del repositorio.</li>
+                            <li><code>Modificar</code>: Abre el diseñador para reorganizar campos o agregar nuevos
+                                atributos.</li>
+                            <li><code>Suspender / Reactivar</code>: Pausa temporalmente la carga de nuevos registros sin
+                                afectar las lecturas.</li>
+                        </ul>
+                    </div>
 
-                        <div class="manual-card" id="m-crear">
-                            <h3>⚙️ 3. Guía Paso a Paso: Crear, Modificar y Suspender Repositorios</h3>
-                            <p>Desde la pestaña <strong>Crear Repositorio</strong> (o desde la opción <code>Modificar</code> en el pie de tarjeta del Dashboard o <code>Modificar Estructura</code> en el listado), el Administrador gestiona la estructura de datos:</p>
-                            <ol>
-                                <li><span class="step-badge">1</span><strong>Identificación:</strong> Ingrese o actualice el Nombre del Repositorio y su descripción u objetivo institucional.</li>
-                                <li><span class="step-badge">2</span><strong>Agregar / Reorganizar Atributos:</strong> Presione el botón <code>+ Agregar Campo</code> para sumar atributos, o reordene los existentes usando las flechas <code>&uarr;</code> (arriba) y <code>&darr;</code> (abajo).</li>
-                                <li><span class="step-badge">3</span><strong>Configuración de Atributos:</strong>
-                                    <ul>
-                                        <li><strong>Nombre del Campo:</strong> Título visible del atributo.</li>
-                                        <li><strong>Tipo de Dato:</strong> Seleccione entre Texto Corto, Número, Fecha o Lista (Select).</li>
-                                        <li><strong>Obligatorio:</strong> Marque la casilla si el dato es requerido para guardar.</li>
-                                        <li><strong>🔍 Buscable:</strong> Habilite esta casilla para incluir el campo en el Buscador Avanzado.</li>
-                                    </ul>
-                                </li>
-                                <li><span class="step-badge">4</span><strong>Fijar Orden Único (&uarr; / &darr;):</strong> Utilice los controles de ordenamiento. El primer campo oculta la flecha hacia arriba (`&uarr;`) y el último oculta la flecha hacia abajo (`&darr;`).</li>
-                                <li><span class="step-badge">5</span><strong>Protección de Datos Históricos (Inactivación de Atributos):</strong> Si remueve un campo mediante el botón <code>✕</code>, el sistema solicitará confirmación. Si el campo posee datos registrados previamente, estos <strong>nunca se borran físicamente de la base de datos</strong>. El atributo pasa a estado inactivo para resguardar la validez y trazabilidad legal.</li>
-                                <li><span class="step-badge">6</span><strong>Guardar Repositorio:</strong> Presione <code>Guardar Repositorio</code> y confirme en la ventana emergente.</li>
-                            </ol>
-                        </div>
+                    <div class="manual-card" id="m-crear">
+                        <h3>⚙️ 3. Guía Paso a Paso: Crear, Modificar y Suspender Repositorios</h3>
+                        <p>Desde la pestaña <strong>Crear Repositorio</strong> (o desde la opción <code>Modificar</code>
+                            en el pie de tarjeta del Dashboard o <code>Modificar Estructura</code> en el listado), el
+                            Administrador gestiona la estructura de datos:</p>
+                        <ol>
+                            <li><span class="step-badge">1</span><strong>Identificación:</strong> Ingrese o actualice el
+                                Nombre del Repositorio y su descripción u objetivo institucional.</li>
+                            <li><span class="step-badge">2</span><strong>Agregar / Reorganizar Atributos:</strong>
+                                Presione el botón <code>+ Agregar Campo</code> para sumar atributos, o reordene los
+                                existentes usando las flechas <code>&uarr;</code> (arriba) y <code>&darr;</code>
+                                (abajo).</li>
+                            <li><span class="step-badge">3</span><strong>Configuración de Atributos:</strong>
+                                <ul>
+                                    <li><strong>Nombre del Campo:</strong> Título visible del atributo.</li>
+                                    <li><strong>Tipo de Dato:</strong> Seleccione entre Texto Corto, Número, Fecha o
+                                        Lista (Select).</li>
+                                    <li><strong>Obligatorio:</strong> Marque la casilla si el dato es requerido para
+                                        guardar.</li>
+                                    <li><strong>🔍 Buscable:</strong> Habilite esta casilla para incluir el campo en el
+                                        Buscador Avanzado.</li>
+                                </ul>
+                            </li>
+                            <li><span class="step-badge">4</span><strong>Fijar Orden Único (&uarr; / &darr;):</strong>
+                                Utilice los controles de ordenamiento. El primer campo oculta la flecha hacia arriba
+                                (`&uarr;`) y el último oculta la flecha hacia abajo (`&darr;`).</li>
+                            <li><span class="step-badge">5</span><strong>Protección de Datos Históricos (Inactivación de
+                                    Atributos):</strong> Si remueve un campo mediante el botón <code>✕</code>, el
+                                sistema solicitará confirmación. Si el campo posee datos registrados previamente, estos
+                                <strong>nunca se borran físicamente de la base de datos</strong>. El atributo pasa a
+                                estado inactivo para resguardar la validez y trazabilidad legal.</li>
+                            <li><span class="step-badge">6</span><strong>Guardar Repositorio:</strong> Presione
+                                <code>Guardar Repositorio</code> y confirme en la ventana emergente.</li>
+                        </ol>
+                    </div>
 
-                        <div class="manual-card" id="m-eav">
-                            <h3>🔍 4. Modelo EAV y Buscador Avanzado</h3>
-                            <p>Gracias al modelo Entidad-Atributo-Valor, la base de datos almacena la información de forma totalmente flexible. Los campos marcados como <code>🔍 Buscable</code> generan índices y columnas virtuales que permiten realizar búsquedas complejas con operadores AND/OR sin penalizar el rendimiento.</p>
-                        </div>
+                    <div class="manual-card" id="m-eav">
+                        <h3>🔍 4. Modelo EAV y Buscador Avanzado</h3>
+                        <p>Gracias al modelo Entidad-Atributo-Valor, la base de datos almacena la información de forma
+                            totalmente flexible. Los campos marcados como <code>🔍 Buscable</code> generan índices y
+                            columnas virtuales que permiten realizar búsquedas complejas con operadores AND/OR sin
+                            penalizar el rendimiento.</p>
+                    </div>
 
-                        <div class="manual-card" id="m-operacion">
-                            <h3>📜 5. Acceso Único mediante 'Ver', Ficha Completa y Versionado</h3>
-                            <p>En las tablas de listado, cada registro muestra únicamente el botón <code>Ver</code>:</p>
-                            <ul>
-                                <li>Al pulsar <code>Ver</code>, se abre la ficha completa en un modal que se amplía en un 50% respecto al tamaño estándar, organizando los atributos consecutivamente en 2 columnas paralelas.</li>
-                                <li>El modal exhibe la insignia de versionado sobria (ejemplo: <code>v2</code>) si el dato sufrió modificaciones pasadas y despliega la trazabilidad histórica completa.</li>
-                                <li>En el pie del modal se encuentran centralizadas las acciones de <code>Cerrar</code>, <code>Bajar</code> (inactivación) y <code>Editar</code>. Toda modificación requiere confirmación previa y genera una nueva versión.</li>
-                            </ul>
-                        </div>
+                    <div class="manual-card" id="m-operacion">
+                        <h3>📜 5. Acceso Único mediante 'Ver', Ficha Completa y Versionado</h3>
+                        <p>En las tablas de listado, cada registro muestra únicamente el botón <code>Ver</code>:</p>
+                        <ul>
+                            <li>Al pulsar <code>Ver</code>, se abre la ficha completa en un modal que se amplía en un
+                                50% respecto al tamaño estándar, organizando los atributos consecutivamente en 2
+                                columnas paralelas.</li>
+                            <li>El modal exhibe la insignia de versionado sobria (ejemplo: <code>v2</code>) si el dato
+                                sufrió modificaciones pasadas y despliega la trazabilidad histórica completa.</li>
+                            <li>En el pie del modal se encuentran centralizadas las acciones de <code>Cerrar</code>,
+                                <code>Bajar</code> (inactivación) y <code>Editar</code>. Toda modificación requiere
+                                confirmación previa y genera una nueva versión.</li>
+                        </ul>
+                    </div>
 
-                        <div class="manual-card" id="m-faq">
-                            <h3>❓ 6. Preguntas Frecuentes</h3>
-                            <p><strong>¿Qué ocurre si suspendo un repositorio?</strong><br>
-                            Los datos existentes siguen estando disponibles para lectura y consulta, pero el botón <code>+ Nuevo Registro</code> queda inhabilitado hasta que presione <code>Reactivar</code>.</p>
-                            <p class="mt-2"><strong>¿Puedo recuperar un registro dado de baja?</strong><br>
-                            Sí, abriendo la ficha del registro inactivo mediante el botón <code>Ver</code> y presionando la opción <code>Restaurar / Activar</code> al pie del modal.</p>
-                        </div>
+                    <div class="manual-card" id="m-faq">
+                        <h3>❓ 6. Preguntas Frecuentes</h3>
+                        <p><strong>¿Qué ocurre si suspendo un repositorio?</strong><br>
+                            Los datos existentes siguen estando disponibles para lectura y consulta, pero el botón
+                            <code>+ Nuevo Registro</code> queda inhabilitado hasta que presione <code>Reactivar</code>.
+                        </p>
+                        <p class="mt-2"><strong>¿Puedo recuperar un registro dado de baja?</strong><br>
+                            Sí, abriendo la ficha del registro inactivo mediante el botón <code>Ver</code> y presionando
+                            la opción <code>Restaurar / Activar</code> al pie del modal.</p>
                     </div>
                 </div>
-            </section>
-        </main>
+    </div>
+    </section>
+    </main>
     </div>
 
     <!-- MODAL 1: VER / EDITAR / CREAR REGISTRO (Ancho al 50% en 2 Columnas) -->
     <div id="modal-record" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="fixed inset-0 modal-backdrop" onclick="closeRecordModal()"></div>
-        <div class="bg-white rounded-xl shadow-2xl z-10 modal-wide flex flex-col overflow-hidden transform transition-all border border-slate-200">
+        <div
+            class="bg-white rounded-xl shadow-2xl z-10 modal-wide flex flex-col overflow-hidden transform transition-all border border-slate-200">
             <!-- Cabecera del Modal -->
             <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <h3 class="text-base font-bold" id="modal-record-title">Ficha Completa del Registro</h3>
                     <span id="modal-record-version-badge" class="version-badge">v1</span>
                 </div>
-                <button onclick="closeRecordModal()" class="text-slate-400 hover:text-white font-bold text-xl leading-none">&times;</button>
+                <button onclick="closeRecordModal()"
+                    class="text-slate-400 hover:text-white font-bold text-xl leading-none">&times;</button>
             </div>
 
             <!-- Cuerpo del Modal (Grilla de 2 Columnas Consecutivas) -->
@@ -502,7 +609,8 @@
             </div>
 
             <!-- Pie del Modal con Acciones Únicas -->
-            <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2" id="modal-record-footer">
+            <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2"
+                id="modal-record-footer">
                 <!-- Dinámico según estado (Ver / Editar / Inactivo) -->
             </div>
         </div>
@@ -516,12 +624,15 @@
                 <span class="text-2xl">⚠️</span>
                 <h3 class="text-base font-bold text-slate-800" id="confirm-modal-title">Confirmar Acción</h3>
             </div>
-            <p class="text-sm text-slate-600 leading-relaxed" id="confirm-modal-message">¿Está seguro de realizar esta operación?</p>
+            <p class="text-sm text-slate-600 leading-relaxed" id="confirm-modal-message">¿Está seguro de realizar esta
+                operación?</p>
             <div class="flex justify-end gap-3 pt-2">
-                <button onclick="closeConfirmModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition">
+                <button onclick="closeConfirmModal()"
+                    class="px-4 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition">
                     Cancelar
                 </button>
-                <button id="confirm-modal-action-btn" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition">
+                <button id="confirm-modal-action-btn"
+                    class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs sm:text-sm font-medium shadow-sm transition">
                     Aceptar
                 </button>
             </div>
@@ -529,7 +640,8 @@
     </div>
 
     <!-- Notificación Flotante (Toast) -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 flex items-center gap-3 text-sm">
+    <div id="toast"
+        class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 flex items-center gap-3 text-sm">
         <span id="toast-icon">ℹ️</span>
         <span id="toast-message">Notificación del sistema</span>
     </div>
@@ -558,10 +670,10 @@
                     ],
                     records: [
                         { id: 'r1', version: 1, active: true, values: { f1: 'Gómez, Carlos Eduardo', f2: 'Planta Permanente', f3: '4021', f4: '2021-03-15' } },
-                        { 
-                            id: 'r2', 
-                            version: 2, 
-                            active: true, 
+                        {
+                            id: 'r2',
+                            version: 2,
+                            active: true,
                             values: { f1: 'Rodríguez, María Florencia', f2: 'Contratado', f3: '4022', f4: '2022-01-10' },
                             history: [
                                 {
@@ -711,11 +823,10 @@
                         <span class="text-[10px] font-bold text-emerald-600">(+)</span>
                     `;
                 } else {
-                    btn.className = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer transition ${
-                        !isHidden 
-                            ? 'bg-slate-100 text-slate-800 border-slate-300 shadow-sm' 
+                    btn.className = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium cursor-pointer transition ${!isHidden
+                            ? 'bg-slate-100 text-slate-800 border-slate-300 shadow-sm'
                             : 'bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100'
-                    }`;
+                        }`;
                     // Al hacer clic, si estaba oculto (isHidden=true) la pasa a visible (true), y viceversa
                     btn.onclick = () => toggleSingleColumn(f.id, isHidden);
                     btn.innerHTML = `
@@ -1466,4 +1577,5 @@
         }
     </script>
 </body>
+
 </html>
