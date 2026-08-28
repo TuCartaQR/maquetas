@@ -414,8 +414,8 @@
 
         <section id="tab-ficha" class="hidden space-y-5">
             
-            <!-- Barra de Selección de Estudiante, Corte Semanal y Botonera de Materias -->
-            <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
+            <!-- Barra de Selección de Estudiante, Corte Semanal y Botonera de Materias (Sticky) -->
+            <div class="bg-white/95 backdrop-blur-xs rounded-xl border border-slate-200 p-4 sm:p-5 shadow-sm space-y-3 sticky top-[62px] sm:top-[65px] z-30 transition-all">
                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
                     <div class="sm:col-span-8 space-y-1">
                         <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Estudiante (Seleccionar por Código / ID Protocolar)</label>
@@ -448,7 +448,7 @@
                 </div>
 
                 <!-- BOTONERA DE MATERIAS CURSADAS POR EL ALUMNO (Debajo del desplegable) -->
-                <div id="contenedor-botonera-materias" class="pt-3 border-t border-slate-100">
+                <div id="contenedor-botonera-materias" class="pt-2 border-t border-slate-100">
                     <p class="text-xs text-slate-400 italic">Seleccione un alumno arriba para desplegar y seleccionar sus materias en curso.</p>
                 </div>
             </div>
@@ -1453,14 +1453,12 @@
             if (!alumnoFichaActual) optVacia.selected = true;
             sel.appendChild(optVacia);
 
-            // Obtener lista de IDs únicos con su comisión (sin mezclar materias)
+            // Obtener lista de IDs únicos limpios (sin comisión)
             const idsUnicos = [...new Set(dataset.map(est => est.id))].sort();
             idsUnicos.forEach(id => {
-                const inscripciones = dataset.filter(x => x.id === id);
-                const comision = inscripciones[0] ? inscripciones[0].comision : '';
                 const opt = document.createElement('option');
                 opt.value = id;
-                opt.innerText = `${id} — Comisión ${comision}`;
+                opt.innerText = `Estudiante: ${id}`;
                 if (id === alumnoFichaActual) opt.selected = true;
                 sel.appendChild(opt);
             });
@@ -1499,6 +1497,7 @@
                             <button type="button" onclick="toggleMateriaFicha('${reg.materia}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition cursor-pointer flex items-center space-x-1.5 ${isActiva ? 'bg-blue-600 border-blue-700 text-white shadow-xs' : 'bg-slate-100 border-slate-300 text-slate-600 hover:bg-slate-200'}">
                                 <span>${isActiva ? '✓' : '+'}</span>
                                 <span>${reg.materia}</span>
+                                <span class="text-[10px] px-1.5 py-0.5 rounded font-mono ${isActiva ? 'bg-blue-700 text-blue-100' : 'bg-slate-200 text-slate-700'}">Com. ${reg.comision}</span>
                             </button>
                         `;
                     }).join('')}
@@ -1692,8 +1691,7 @@
                 <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center space-x-3">
                         <span class="text-xl font-bold font-mono text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">${alumnoId}</span>
-                        <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-300">Comisión ${todasInscripciones[0].comision}</span>
-                        <span class="text-xs text-slate-500 font-semibold">• Analizando ${inscripcionesActivas.length} de ${todasInscripciones.length} materia(s)</span>
+                        <span class="text-xs text-slate-500 font-semibold">• Analizando ${inscripcionesActivas.length} de ${todasInscripciones.length} materia(s) cursada(s)</span>
                     </div>
                     <div class="text-right">
                         <span class="text-[11px] text-slate-400 block uppercase font-semibold">Semáforo Consolidado al Corte</span>
