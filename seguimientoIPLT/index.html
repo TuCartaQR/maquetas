@@ -94,6 +94,19 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+
+        /* Notificaciones flotantes elegantes */
+        .toast-notification {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .toast-notification.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="h-full text-slate-800 flex flex-col bg-slate-50">
@@ -271,11 +284,12 @@
                 <!-- Footer de guardado -->
                 <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
                     <div class="flex items-center space-x-2 text-xs text-slate-600">
-                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-                        <span id="lbl-estado-autoguardado">Cambios reflejados en tiempo real.</span>
+                        <span id="indicador-estado-guardado" class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        <span id="lbl-estado-autoguardado" class="font-medium">Todos los registros están sincronizados.</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button onclick="guardarDocenteSimulado()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-xs transition flex items-center space-x-1.5 cursor-pointer">
+                        <button id="btn-guardar-docente" onclick="guardarDocenteSimulado()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-xs transition flex items-center space-x-1.5 cursor-pointer relative">
+                            <span id="dot-cambios-pendientes" class="hidden w-2 h-2 rounded-full bg-amber-300 animate-ping absolute -top-1 -right-1"></span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             <span>Guardar y Notificar Coordinación</span>
                         </button>
@@ -434,6 +448,35 @@
 
     </main>
 
+    <!-- TOAST NOTIFICACIONES FLOTANTES ELEGANTES -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none max-w-sm w-full px-4 sm:px-0">
+        <!-- Toast de Cambios Pendientes -->
+        <div id="toast-pendientes" class="toast-notification bg-white border border-amber-300 shadow-lg rounded-xl p-3.5 flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background-color: #fffae6; border: 1px solid #FFE680;">
+                <span class="text-sm">⚠️</span>
+            </div>
+            <div class="flex-1">
+                <h4 class="text-xs font-bold text-slate-900">Cambios sin guardar</h4>
+                <p class="text-[11px] text-slate-600 mt-0.5 leading-snug">Tenés modificaciones en la planilla docente pendientes de confirmación.</p>
+            </div>
+            <button onclick="guardarDocenteSimulado()" class="text-[11px] font-semibold text-blue-700 hover:text-blue-900 underline shrink-0 cursor-pointer pt-0.5">
+                Guardar
+            </button>
+        </div>
+
+        <!-- Toast de Guardado Exitoso -->
+        <div id="toast-guardado" class="toast-notification bg-white border border-emerald-300 shadow-lg rounded-xl p-3.5 flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background-color: #f0fff0; border: 1px solid #99FF99;">
+                <span class="text-sm">✅</span>
+            </div>
+            <div class="flex-1">
+                <h4 class="text-xs font-bold text-slate-900">Registros guardados</h4>
+                <p class="text-[11px] text-slate-600 mt-0.5 leading-snug">Los datos se sincronizaron con el Tablero de Coordinación.</p>
+            </div>
+            <button onclick="ocultarToastGuardado()" class="text-slate-400 hover:text-slate-600 text-xs font-bold cursor-pointer">✕</button>
+        </div>
+    </div>
+
     <script>
         // BASE DE DATOS DE EJEMPLO (6 Alumnos en distintas comisiones y materias con formato ABC123)
         const dataset = [
@@ -532,6 +575,34 @@
         let filtroCoordMateria = 'TODAS';
         let filtroCoordComision = 'TODAS';
         let chartEvolucionInstance = null;
+        let tieneCambiosSinGuardar = false;
+        let timerToastGuardado = null;
+
+        // GESTIÓN DE NOTIFICACIONES ELEGANTES
+        function notificarCambioPendiente() {
+            tieneCambiosSinGuardar = true;
+            
+            // Actualizar indicador en footer
+            const ind = document.getElementById('indicador-estado-guardado');
+            const lbl = document.getElementById('lbl-estado-autoguardado');
+            const dot = document.getElementById('dot-cambios-pendientes');
+            if (ind) ind.className = 'inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
+            if (lbl) lbl.innerText = '⚠️ Tenés cambios sin guardar en esta comisión.';
+            if (dot) dot.classList.remove('hidden');
+
+            // Mostrar toast de cambios pendientes
+            const toastPendiente = document.getElementById('toast-pendientes');
+            if (toastPendiente) toastPendiente.classList.add('active');
+
+            // Ocultar toast de guardado si estaba visible
+            const toastGuardado = document.getElementById('toast-guardado');
+            if (toastGuardado) toastGuardado.classList.remove('active');
+        }
+
+        function ocultarToastGuardado() {
+            const toastGuardado = document.getElementById('toast-guardado');
+            if (toastGuardado) toastGuardado.classList.remove('active');
+        }
 
         // FUNCIÓN PURA: CÁLCULO DE REGLA CUANTITATIVA
         function calcularSemaforo(asist, teo, prac) {
@@ -705,6 +776,7 @@
             if (dataset[alumnoIndex].id === alumnoFichaActual) {
                 cargarFichaAlumno(alumnoFichaActual);
             }
+            notificarCambioPendiente();
         }
 
         function actualizarObsDocente(alumnoIndex, valor) {
@@ -712,6 +784,7 @@
                 dataset[alumnoIndex].semanas[semanaSeleccionada] = { asist: 0, teo: 0, prac: 0, obs: "" };
             }
             dataset[alumnoIndex].semanas[semanaSeleccionada].obs = valor;
+            notificarCambioPendiente();
         }
 
         function cambiarSemanaCarga(sem) {
@@ -720,12 +793,28 @@
         }
 
         function guardarDocenteSimulado() {
+            tieneCambiosSinGuardar = false;
+
+            // Actualizar footer de la tabla
+            const ind = document.getElementById('indicador-estado-guardado');
             const lbl = document.getElementById('lbl-estado-autoguardado');
-            if (lbl) {
-                lbl.innerText = '✅ Registros guardados y consolidados en el Tablero de Coordinación.';
-                setTimeout(() => {
-                    lbl.innerText = 'Cambios reflejados en tiempo real.';
-                }, 3500);
+            const dot = document.getElementById('dot-cambios-pendientes');
+            if (ind) ind.className = 'inline-block w-2.5 h-2.5 rounded-full bg-emerald-500';
+            if (lbl) lbl.innerText = '✅ Registros guardados y notificados a Coordinación correctamente.';
+            if (dot) dot.classList.add('hidden');
+
+            // Ocultar toast de pendientes
+            const toastPendiente = document.getElementById('toast-pendientes');
+            if (toastPendiente) toastPendiente.classList.remove('active');
+
+            // Mostrar toast elegante de éxito
+            const toastGuardado = document.getElementById('toast-guardado');
+            if (toastGuardado) {
+                toastGuardado.classList.add('active');
+                if (timerToastGuardado) clearTimeout(timerToastGuardado);
+                timerToastGuardado = setTimeout(() => {
+                    toastGuardado.classList.remove('active');
+                }, 4000);
             }
         }
 
