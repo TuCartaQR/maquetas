@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full">
+<html lang="es" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Chart.js para gráficos evolutivos -->
+    <!-- Chart.js para gráficos apilados y evolutivos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
@@ -18,112 +18,86 @@
                 extend: {
                     fontFamily: {
                         sans: ['"Titillium Web"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            500: '#0066FF',
-                            600: '#0052cc',
-                            700: '#003d99',
-                        }
+                        mono: ['monospace']
                     }
                 }
             }
-        }
+        };
     </script>
     <style>
         body {
             font-family: 'Titillium Web', sans-serif;
-        }
-        
-        /* Contenedores con scroll optimizado y anclaje para mobile */
-        .table-scroll-container {
-            max-height: 68vh;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
+            color: #0f172a;
         }
         .sticky-left-shadow {
-            box-shadow: 2px 0 6px -1px rgba(0, 0, 0, 0.08);
+            box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.08);
         }
-
-        /* Estilos base de radio buttons outline */
         .matrix-radio-btn {
-            border: 1px solid #cbd5e1;
             background-color: #ffffff;
-            color: #000000;
-            transition: all 0.15s ease;
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            font-weight: 600;
+            transition: all 0.15s ease-in-out;
         }
         .matrix-radio-btn:hover {
             border-color: #94a3b8;
             background-color: #f8fafc;
         }
-        
-        /* Estados activos de selección (outline pastel con borde de 1px) */
         .matrix-radio-btn.selected-verde {
-            border: 1px solid #99FF99 !important;
             background-color: #f0fff0 !important;
-            color: #000000 !important;
-            font-weight: 600;
+            border-color: #66cc66 !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 0 1px #66cc66;
         }
         .matrix-radio-btn.selected-amarillo {
-            border: 1px solid #FFE680 !important;
             background-color: #fffae6 !important;
-            color: #000000 !important;
-            font-weight: 600;
+            border-color: #e6b800 !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 0 1px #e6b800;
         }
         .matrix-radio-btn.selected-rojo {
-            border: 1px solid #FF9999 !important;
             background-color: #fff0f0 !important;
-            color: #000000 !important;
-            font-weight: 600;
-        }
-
-        /* Scrollbar suave */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            border-color: #e65c5c !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 0 1px #e65c5c;
         }
     </style>
 </head>
-<body class="h-full text-slate-800 flex flex-col bg-slate-50">
+<body class="h-full flex flex-col bg-slate-50 text-slate-900">
 
-    <!-- HEADER PRINCIPAL -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3 gap-3">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white shadow-xs" style="background-color: #0066FF;">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs">
+                        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <path d="M12 11h4"></path>
+                            <path d="M12 16h4"></path>
+                            <path d="M8 11h.01"></path>
+                            <path d="M8 16h.01"></path>
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Seguimiento Pedagógico de Alumnos</h1>
-                        <p class="text-xs text-slate-500">Tecnicatura en Enfermería • Plataforma de Trayectorias y Articulación</p>
+                        <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Sistema de Seguimiento Pedagógico</h1>
+                        <p class="text-xs text-slate-500">Tecnicatura Superior en Enfermería • Monitoreo Temprano</p>
                     </div>
                 </div>
 
-                <!-- Pestañas de Navegación -->
-                <nav class="flex space-x-1 sm:space-x-2">
-                    <button onclick="switchTab('docente')" id="tab-btn-docente" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer bg-blue-50 border-blue-400 text-blue-900 shadow-xs">
+                <!-- Botones de Navegación de Pestañas -->
+                <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold">
+                    <button id="tab-btn-docente" onclick="switchTab('docente')" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer bg-blue-50 border-blue-400 text-blue-900 shadow-xs">
+                        <span>📝</span>
                         <span>1. Carga Rápida Docente</span>
                     </button>
-                    <button onclick="switchTab('coordinacion')" id="tab-btn-coordinacion" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer bg-white border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-                        <span>2. Tablero de Coordinación</span>
+                    <button id="tab-btn-coordinacion" onclick="switchTab('coordinacion')" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer bg-white border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        <span>📊</span>
+                        <span>2. Tablero Coordinación</span>
                     </button>
-                    <button onclick="switchTab('ficha')" id="tab-btn-ficha" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer bg-white border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-                        <span>3. Ficha Individual & Diagnóstico</span>
+                    <button id="tab-btn-ficha" onclick="switchTab('ficha')" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer bg-white border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        <span>📋</span>
+                        <span>3. Ficha Individual</span>
                     </button>
                 </nav>
             </div>
@@ -133,302 +107,214 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
 
-        <!-- TAB 1: CARGA RÁPIDA DOCENTE -->
         <section id="tab-docente" class="space-y-4">
             
-            <!-- Barra superior: Selector de Comisión/Semana y Regla de Cálculo -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs">
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                    <div class="flex flex-wrap items-center gap-3">
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Materia & Comisión</label>
-                            <select id="sel-comision-docente" class="mt-1 block w-auto pl-3 pr-8 py-1.5 text-xs sm:text-sm font-semibold border border-slate-300 bg-white rounded-lg shadow-2xs focus:ring-1 focus:ring-blue-500">
-                                <option value="ENF-101-1A">ENF-101: Prácticas Profesionalizantes I (Com. 1A)</option>
-                                <option value="ENF-102-2B">ENF-102: Fundamentos de Enfermería (Com. 2B)</option>
-                                <option value="ENF-201-3A">ENF-201: Farmacología Clínica (Com. 3A)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Semana a Registrar</label>
-                            <select id="sel-semana-docente" onchange="cambiarSemanaCarga(this.value)" class="mt-1 block w-auto pl-3 pr-8 py-1.5 text-xs sm:text-sm font-semibold border border-slate-300 bg-white rounded-lg shadow-2xs focus:ring-1 focus:ring-blue-500">
-                                <option value="1">Semana 1</option>
-                                <option value="2">Semana 2</option>
-                                <option value="3" selected>Semana 3 (En Curso)</option>
-                                <option value="4">Semana 4</option>
-                                <option value="5">Semana 5</option>
-                            </select>
-                        </div>
+            <!-- Banner Informativo: Regla de Cálculo Descartable a Ancho Completo -->
+            <div id="banner-regla-calculo" class="bg-white rounded-xl border border-slate-200 p-3 shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <span class="font-bold text-slate-700 flex items-center gap-1.5">
+                        <span class="text-blue-600 text-sm">ℹ️</span> Regla de Calificación Semanal:
+                    </span>
+                    <span class="font-mono bg-slate-100 px-2 py-0.5 rounded border border-slate-300 font-semibold whitespace-nowrap text-slate-800">
+                        Score = A + B + C
+                    </span>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="px-2 py-0.5 rounded-md font-semibold border text-black text-[11px]" style="background-color: #f0fff0; border-color: #99FF99;">🟢 0-1 pt: Óptimo</span>
+                        <span class="px-2 py-0.5 rounded-md font-semibold border text-black text-[11px]" style="background-color: #fffae6; border-color: #FFE680;">🟡 2-4 pts: Atención</span>
+                        <span class="px-2 py-0.5 rounded-md font-semibold border text-black text-[11px]" style="background-color: #fff0f0; border-color: #FF9999;">🔴 5+ pts: Crítico</span>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('banner-regla-calculo').classList.add('hidden')" title="Cerrar regla informativa" class="text-slate-400 hover:text-slate-700 font-bold p-1 rounded-md hover:bg-slate-100 transition cursor-pointer text-sm">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Selectores Activos del Docente en una sola línea -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+                    <div class="sm:col-span-5 space-y-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Materia / Asignatura</label>
+                        <select id="sel-materia-docente" onchange="cambiarFiltroDocente()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-lg p-2 font-semibold focus:ring-1 focus:ring-blue-500 focus:bg-white transition cursor-pointer">
+                            <option value="ENF-101: Prácticas I">ENF-101: Prácticas Profesionalizantes I</option>
+                            <option value="ENF-102: Fundamentos">ENF-102: Fundamentos de Enfermería</option>
+                            <option value="ENF-201: Farmacología">ENF-201: Farmacología Clínica</option>
+                        </select>
                     </div>
 
-                    <!-- REGLA CUANTITATIVA DE CÁLCULO VISIBLE -->
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-3 text-xs">
-                        <div class="font-semibold text-slate-700">
-                            <span>Regla de Cálculo:</span>
-                            <span class="font-mono bg-white px-2 py-0.5 rounded border border-slate-300 text-slate-900 ml-1">Score = A + B + C</span>
-                        </div>
-                        <div class="flex items-center gap-1.5 flex-wrap">
-                            <span class="px-2 py-0.5 rounded-md border text-black font-semibold text-[11px]" style="background-color: #f0fff0; border-color: #99FF99;">🟢 0-1 pt: Óptimo</span>
-                            <span class="px-2 py-0.5 rounded-md border text-black font-semibold text-[11px]" style="background-color: #fffae6; border-color: #FFE680;">🟡 2-4 pts: Atención</span>
-                            <span class="px-2 py-0.5 rounded-md border text-black font-semibold text-[11px]" style="background-color: #fff0f0; border-color: #FF9999;">🔴 5+ pts: Crítico</span>
-                        </div>
+                    <div class="sm:col-span-3 space-y-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Comisión / Curso</label>
+                        <select id="sel-comision-docente" onchange="cambiarFiltroDocente()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-lg p-2 font-semibold focus:ring-1 focus:ring-blue-500 focus:bg-white transition cursor-pointer">
+                            <option value="1A">Comisión 1A (1er Año)</option>
+                            <option value="2B">Comisión 2B (2do Año)</option>
+                            <option value="3A">Comisión 3A (3er Año)</option>
+                        </select>
+                    </div>
+
+                    <div class="sm:col-span-4 space-y-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Semana a Registrar</label>
+                        <select id="sel-semana-docente" onchange="cambiarSemanaCarga(this.value)" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-lg p-2 font-semibold focus:ring-1 focus:ring-blue-500 focus:bg-white transition cursor-pointer">
+                            <option value="1">Semana 1 (Diagnóstico inicial)</option>
+                            <option value="2">Semana 2 (Primera evaluación práctica)</option>
+                            <option value="3" selected>Semana 3 (Semana en curso)</option>
+                            <option value="4">Semana 4 (Consolidación de destrezas)</option>
+                            <option value="5">Semana 5 (Cierre de módulo 1)</option>
+                            <option value="6">Semana 6</option>
+                            <option value="7">Semana 7</option>
+                            <option value="8">Semana 8 (Mitad de cuatrimestre)</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
-            <!-- BANNER SUPERIOR DE AVISO DE CAMBIOS / GUARDADO -->
-            <div id="banner-estado-docente" class="hidden rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs">
-                <div class="flex items-center space-x-3">
-                    <div id="banner-estado-icono-box" class="w-8 h-8 rounded-lg border flex items-center justify-center shrink-0">
-                        <span id="banner-estado-icono" class="text-sm">⚠️</span>
+            <!-- Banner Superior de Notificación de Cambios (Pendientes / Guardado) -->
+            <div id="banner-estado-docente" class="hidden rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs bg-white">
+                <div class="flex items-center gap-3">
+                    <div id="banner-estado-icono-box" class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold border">
+                        <span id="banner-estado-icono">⚠️</span>
                     </div>
                     <div>
-                        <span id="banner-estado-titulo" class="font-bold text-slate-900 block">Cambios pendientes</span>
-                        <span id="banner-estado-subtitulo" class="text-slate-600 text-[11px]">Tenés modificaciones sin guardar en la planilla docente.</span>
+                        <p id="banner-estado-titulo" class="font-bold text-slate-900 text-xs sm:text-sm">Cambios sin guardar</p>
+                        <p id="banner-estado-subtitulo" class="text-slate-600 text-[11px]">Tenés modificaciones en la planilla pendientes de confirmación.</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 shrink-0">
+                <div class="flex items-center gap-2">
                     <button id="btn-banner-guardar" onclick="guardarDocenteSimulado()" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-xs transition cursor-pointer text-xs">
-                        Guardar Cambios
+                        💾 Guardar Cambios
                     </button>
-                    <button id="btn-banner-cerrar" onclick="cerrarBannerEstado()" class="hidden text-slate-400 hover:text-slate-600 font-bold px-2 py-1 cursor-pointer text-sm">✕</button>
+                    <button id="btn-banner-cerrar" onclick="cerrarBannerEstado()" class="hidden text-slate-400 hover:text-slate-700 p-1.5 rounded-md hover:bg-slate-100 transition cursor-pointer">
+                        ✕
+                    </button>
                 </div>
             </div>
 
-            <!-- Tabla de Carga Matricial con Radio Buttons -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="table-scroll-container">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-100 text-slate-700 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
-                                <th class="p-3 pl-4 sm:pl-6 sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-300 sticky-left-shadow w-44">
-                                    <div class="font-bold text-slate-900">ID Protocolar</div>
-                                    <div class="text-[10px] text-slate-500 font-normal mt-0.5 font-mono">ABC123</div>
-                                </th>
+            <!-- Tabla de Carga Docente Matricial con Columnas Ancladas -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+                <div class="p-3.5 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                        <span id="lbl-alumnos-docente-count" class="font-bold text-slate-800 text-xs uppercase tracking-wider">Alumnos en Lista: 0</span>
+                    </div>
+                    <span class="text-xs text-slate-500 italic">Clic en cada opción para asignar puntos de advertencia (0p es óptimo)</span>
+                </div>
 
-                                <!-- Dimensión A Cyan -->
-                                <th class="p-2.5 border-l border-slate-200 text-center min-w-[270px] sticky top-0 z-20" style="background-color: #e6faff;">
-                                    <div class="flex items-center justify-center space-x-1.5 pb-2 mb-1.5 border-b border-cyan-200/80">
-                                        <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #00D4FF;"></span>
-                                        <span class="font-bold text-xs text-black">A. Asistencia y Compromiso</span>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-1.5 text-[10px] text-black">
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-cyan-200/60 leading-tight">
-                                            <div class="font-semibold">Regular</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">0 pts</div>
-                                        </div>
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-cyan-200/60 leading-tight">
-                                            <div class="font-semibold">Aislada</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">1 pt</div>
-                                        </div>
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-cyan-200/60 leading-tight">
-                                            <div class="font-semibold">Reiterada</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">3 pts</div>
-                                        </div>
-                                    </div>
+                <div class="overflow-x-auto max-h-[520px]">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-100 text-slate-700 font-bold sticky top-0 z-20 border-b border-slate-200">
+                            <tr>
+                                <th class="p-3 pl-4 sm:pl-6 text-black sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-200 sticky-left-shadow min-w-[120px]">
+                                    ID Alumno
                                 </th>
-
-                                <!-- Dimensión B Violeta/Púrpura -->
-                                <th class="p-2.5 border-l border-slate-200 text-center min-w-[270px] sticky top-0 z-20" style="background-color: #f4edfe;">
-                                    <div class="flex items-center justify-center space-x-1.5 pb-2 mb-1.5 border-b border-purple-200/80">
-                                        <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #7B2FF7;"></span>
-                                        <span class="font-bold text-xs text-black">B. Teoría y Asimilación</span>
+                                <th class="p-3 text-center text-black min-w-[160px]" style="background-color: #e6faff; border-right: 1px solid #d1edf2;">
+                                    <div class="flex items-center justify-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-sm" style="background-color: #00D4FF;"></span>
+                                        <span>A. Asistencia</span>
                                     </div>
-                                    <div class="grid grid-cols-3 gap-1.5 text-[10px] text-black">
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-purple-200/60 leading-tight">
-                                            <div class="font-semibold">Óptima</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">0 pts</div>
-                                        </div>
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-purple-200/60 leading-tight">
-                                            <div class="font-semibold">Dificultad</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">1 pt</div>
-                                        </div>
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-purple-200/60 leading-tight">
-                                            <div class="font-semibold">Brecha</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">3 pts</div>
-                                        </div>
-                                    </div>
+                                    <span class="block text-[10px] font-normal text-slate-600 mt-0.5">0p=Presente | 1p=Tarde | 3p=Falta</span>
                                 </th>
-
-                                <!-- Dimensión C Azul Eléctrico -->
-                                <th class="p-2.5 border-l border-slate-200 text-center min-w-[270px] sticky top-0 z-20" style="background-color: #edf4ff;">
-                                    <div class="flex items-center justify-center space-x-1.5 pb-2 mb-1.5 border-b border-blue-200/80">
-                                        <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #0066FF;"></span>
-                                        <span class="font-bold text-xs text-black">C. Práctica / Bioseguridad</span>
+                                <th class="p-3 text-center text-black min-w-[160px]" style="background-color: #f4edfe; border-right: 1px solid #e2d2f9;">
+                                    <div class="flex items-center justify-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-sm" style="background-color: #7B2FF7;"></span>
+                                        <span>B. Teoría</span>
                                     </div>
-                                    <div class="grid grid-cols-3 gap-1.5 text-[10px] text-black">
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-blue-200/60 leading-tight">
-                                            <div class="font-semibold">Adecuada</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">0 pts</div>
-                                        </div>
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-blue-200/60 leading-tight">
-                                            <div class="font-semibold">Supervisión</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">2 pts</div>
-                                        </div>
-                                        <div class="bg-white/80 py-1 px-0.5 rounded border border-blue-200/60 leading-tight">
-                                            <div class="font-semibold">Riesgo/Falla</div>
-                                            <div class="text-[9px] text-slate-600 font-mono">5 pts</div>
-                                        </div>
+                                    <span class="block text-[10px] font-normal text-slate-600 mt-0.5">0p=Bien | 1p=Dudas | 3p=Brecha</span>
+                                </th>
+                                <th class="p-3 text-center text-black min-w-[160px]" style="background-color: #edf4ff; border-right: 1px solid #d0e0fc;">
+                                    <div class="flex items-center justify-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-sm" style="background-color: #0066FF;"></span>
+                                        <span>C. Práctica / Bioseg.</span>
                                     </div>
+                                    <span class="block text-[10px] font-normal text-slate-600 mt-0.5">0p=Seguro | 2p=Supervisión | 5p=Falla Crítica</span>
                                 </th>
-
-                                <th class="p-3 border-l border-slate-200 min-w-[170px] align-bottom sticky top-0 z-20 bg-slate-100">
-                                    <div class="font-bold text-slate-900">Observación Breve</div>
-                                    <div class="text-[10px] text-slate-500 font-normal mt-0.5">Nota cualitativa opcional</div>
+                                <th class="p-3 min-w-[200px] text-black">
+                                    Nota / Observación Pedagógica
                                 </th>
-                                <th class="p-3 border-l border-slate-200 text-center w-36 align-bottom sticky top-0 z-20 bg-slate-100">
-                                    <div class="font-bold text-slate-900">Semáforo</div>
-                                    <div class="text-[10px] font-mono text-slate-500 font-normal mt-0.5">0-1 | 2-4 | 5+</div>
+                                <th class="p-3 text-center text-black min-w-[130px]">
+                                    Semáforo Semanal
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="tbody-carga-docente" class="divide-y divide-slate-200 text-xs">
-                            <!-- Inyectado dinámicamente con JS -->
+                        <tbody id="tbody-carga-docente" class="divide-y divide-slate-100 bg-white">
+                            <!-- Inyectado dinámicamente por JS -->
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Footer de guardado -->
-                <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                <!-- Footer de Guardado -->
+                <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center space-x-2 text-xs text-slate-600">
                         <span id="indicador-estado-guardado" class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                        <span id="lbl-estado-autoguardado" class="font-medium">Todos los registros están sincronizados.</span>
+                        <span id="lbl-estado-autoguardado">✅ Todos los cambios sincronizados con la cátedra.</span>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <button id="btn-guardar-docente" onclick="guardarDocenteSimulado()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-xs transition flex items-center space-x-1.5 cursor-pointer relative">
-                            <span id="dot-cambios-pendientes" class="hidden w-2 h-2 rounded-full bg-amber-300 animate-ping absolute -top-1 -right-1"></span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Guardar y Notificar Coordinación</span>
-                        </button>
-                    </div>
+                    <button onclick="guardarDocenteSimulado()" class="w-full sm:w-auto px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-xs transition cursor-pointer flex items-center justify-center space-x-2 text-xs sm:text-sm">
+                        <span>💾</span>
+                        <span>Guardar y Notificar Coordinación</span>
+                        <span id="dot-cambios-pendientes" class="hidden w-2 h-2 rounded-full bg-amber-300"></span>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 2: TABLERO GENERAL DE COORDINACIÓN -->
-        <section id="tab-coordinacion" class="space-y-6 hidden">
+        <section id="tab-coordinacion" class="hidden space-y-5">
             
-            <!-- TARJETAS MÉTRICAS DE IMPACTO -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Tarjetas de Métricas KPI -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-                    <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Total Alumnos Filtrados</span>
-                    <div class="text-2xl font-bold text-slate-800 mt-1" id="kpi-total">6</div>
-                    <span class="text-[11px] text-slate-400">En el período seleccionado</span>
+                    <span class="text-slate-500 text-xs uppercase font-bold block">Alumnos Evaluados</span>
+                    <span id="kpi-total" class="text-2xl font-bold text-slate-900 mt-1 block">0</span>
+                    <span class="text-[11px] text-slate-400">Total en vista activa</span>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs" style="border-left: 4px solid #FF9999;">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-black uppercase tracking-wider font-semibold">🔴 Estado Crítico (5+ pts)</span>
-                        <span class="px-2 py-0.5 text-xs rounded-md border text-black font-semibold" style="background-color: #fff0f0; border-color: #FF9999;" id="kpi-rojo">2</span>
-                    </div>
-                    <span class="text-[11px] text-slate-500 block mt-2">Requieren intervención urgente</span>
+                <div class="bg-white p-4 rounded-xl border border-red-200 shadow-xs" style="background-color: #fffbfb;">
+                    <span class="text-red-700 text-xs uppercase font-bold block">🔴 En Estado Crítico</span>
+                    <span id="kpi-rojo" class="text-2xl font-bold text-red-600 mt-1 block">0</span>
+                    <span class="text-[11px] text-red-500">Score semanal ≥ 5 pts</span>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs" style="border-left: 4px solid #FFE680;">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-black uppercase tracking-wider font-semibold">🟡 En Atención (2-4 pts)</span>
-                        <span class="px-2 py-0.5 text-xs rounded-md border text-black font-semibold" style="background-color: #fffae6; border-color: #FFE680;" id="kpi-amarillo">2</span>
-                    </div>
-                    <span class="text-[11px] text-slate-500 block mt-2">Seguimiento preventivo</span>
+                <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-xs" style="background-color: #fffdf5;">
+                    <span class="text-amber-700 text-xs uppercase font-bold block">🟡 En Atención</span>
+                    <span id="kpi-amarillo" class="text-2xl font-bold text-amber-600 mt-1 block">0</span>
+                    <span class="text-[11px] text-amber-600">Score semanal 2 a 4 pts</span>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs" style="border-left: 4px solid #99FF99;">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-black uppercase tracking-wider font-semibold">🟢 Estado Óptimo (0-1 pt)</span>
-                        <span class="px-2 py-0.5 text-xs rounded-md border text-black font-semibold" style="background-color: #f0fff0; border-color: #99FF99;" id="kpi-verde">2</span>
-                    </div>
-                    <span class="text-[11px] text-slate-500 block mt-2">Trayectoria regular</span>
+                <div class="bg-white p-4 rounded-xl border border-emerald-200 shadow-xs" style="background-color: #f7fdf7;">
+                    <span class="text-emerald-700 text-xs uppercase font-bold block">🟢 Desempeño Óptimo</span>
+                    <span id="kpi-verde" class="text-2xl font-bold text-emerald-600 mt-1 block">0</span>
+                    <span class="text-[11px] text-emerald-600">Score semanal 0 a 1 pt</span>
                 </div>
             </div>
 
-            <!-- BARRA DE SELECTORES Y FILTROS -->
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-3">
-                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                    <div class="flex flex-wrap items-center gap-3">
-                        <!-- Filtro Materia -->
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-500">Materia / Módulo:</label>
-                            <select id="sel-filtro-materia" onchange="actualizarFiltrosCoordinacion()" class="mt-1 block text-xs font-semibold border border-slate-300 bg-white rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-blue-500">
-                                <option value="TODAS">Todas las Materias</option>
-                                <option value="ENF-101: Prácticas I">ENF-101: Prácticas I</option>
-                                <option value="ENF-102: Fundamentos">ENF-102: Fundamentos</option>
-                                <option value="ENF-201: Farmacología">ENF-201: Farmacología</option>
-                            </select>
-                        </div>
-                        <!-- Filtro Comisión -->
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-500">Comisión / Año:</label>
-                            <select id="sel-filtro-comision" onchange="actualizarFiltrosCoordinacion()" class="mt-1 block text-xs font-semibold border border-slate-300 bg-white rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-blue-500">
-                                <option value="TODAS">Todas las Comisiones</option>
-                                <option value="1A">Comisión 1A (1er Año)</option>
-                                <option value="2B">Comisión 2B (2do Año)</option>
-                                <option value="3A">Comisión 3A (3er Año)</option>
-                            </select>
-                        </div>
-                        <!-- Filtro Semana -->
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-500">Semana de Análisis:</label>
-                            <select id="sel-filtro-semana" onchange="actualizarFiltrosCoordinacion()" class="mt-1 block text-xs font-semibold border border-slate-300 bg-white rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-blue-500">
-                                <option value="1">Semana 1</option>
-                                <option value="2">Semana 2</option>
-                                <option value="3" selected>Semana 3</option>
-                                <option value="4">Semana 4</option>
-                                <option value="5">Semana 5</option>
-                            </select>
-                        </div>
+            <!-- Filtros de Coordinación Multicomisión -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-xs space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-800">Filtros de Análisis Institucional</h3>
+                        <p id="lbl-filtro-coord-resumen" class="text-xs text-slate-500">Mostrando: Todas las materias • Todas las comisiones • Semana 3</p>
                     </div>
-
-                    <button onclick="resetearFiltrosCoordinacion()" class="text-xs text-blue-600 hover:text-blue-800 font-semibold underline cursor-pointer">
-                        Restablecer Filtros
+                    <button onclick="resetearFiltrosCoordinacion()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition cursor-pointer">
+                        🔄 Restablecer Filtros
                     </button>
                 </div>
 
-                <!-- Filtros Rápidos por Semáforo -->
-                <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
-                    <span class="text-xs text-slate-600 font-semibold" id="lbl-filtro-coord-resumen">Mostrando: Todas las materias • Todas las comisiones • Semana 3</span>
-                    <div class="flex items-center space-x-1.5">
-                        <button onclick="filtrarTablero('TODOS')" id="btn-filtro-todos" class="px-2.5 py-1 text-xs rounded-lg border font-semibold bg-white text-black border-slate-400 hover:bg-slate-100 cursor-pointer shadow-xs ring-2 ring-slate-900 ring-offset-1">Todos</button>
-                        <button onclick="filtrarTablero('ROJO')" id="btn-filtro-rojo" class="px-2.5 py-1 text-xs rounded-lg border font-semibold text-black cursor-pointer" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Críticos (5+)</button>
-                        <button onclick="filtrarTablero('AMARILLO')" id="btn-filtro-amarillo" class="px-2.5 py-1 text-xs rounded-lg border font-semibold text-black cursor-pointer" style="background-color: #fffae6; border-color: #FFE680;">🟡 Atención (2-4)</button>
-                        <button onclick="filtrarTablero('VERDE')" id="btn-filtro-verde" class="px-2.5 py-1 text-xs rounded-lg border font-semibold text-black cursor-pointer" style="background-color: #f0fff0; border-color: #99FF99;">🟢 Óptimos (0-1)</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TABLA GENERAL DE ALUMNOS -->
-            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="table-scroll-container">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-100 text-slate-700 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
-                                <th class="p-3 pl-4 sm:pl-6 sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-300 sticky-left-shadow">ID Protocolar</th>
-                                <th class="p-3 sticky top-0 z-20 bg-slate-100">Materia / Comisión</th>
-                                <th class="p-3 sticky top-0 z-20 bg-slate-100">Semana Actual</th>
-                                <th class="p-3 sticky top-0 z-20 bg-slate-100">Tendencia Acumulada</th>
-                                <th class="p-3 sticky top-0 z-20 bg-slate-100">Desglose de Desempeño</th>
-                                <th class="p-3 sticky top-0 z-20 bg-slate-100">Intervenciones Registradas</th>
-                                <th class="p-3 text-right pr-6 sticky top-0 z-20 bg-slate-100">Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-tablero-coordinacion" class="divide-y divide-slate-200 text-xs sm:text-sm">
-                            <!-- Inyectado con JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 3: FICHA INDIVIDUAL & DIAGNÓSTICO LONGITUDINAL -->
-        <section id="tab-ficha" class="space-y-6 hidden">
-            
-            <!-- Barra de Selección y Búsqueda -->
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-4">
-                <div class="flex flex-wrap items-center gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-500">Seleccionar Estudiante:</label>
-                        <select id="sel-alumno-ficha" onchange="cargarFichaAlumno(this.value)" class="mt-1 block text-xs sm:text-sm font-semibold border border-slate-300 bg-white rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-blue-500">
-                            <!-- Inyectado con JS -->
+                        <label class="text-[11px] font-bold text-slate-500 uppercase block mb-1">Materia</label>
+                        <select id="sel-filtro-materia" onchange="actualizarFiltrosCoordinacion()" class="w-full bg-slate-50 border border-slate-300 text-xs rounded-lg p-2 font-semibold text-slate-800">
+                            <option value="TODAS">Todas las Materias</option>
+                            <option value="ENF-101: Prácticas I">ENF-101: Prácticas I</option>
+                            <option value="ENF-102: Fundamentos">ENF-102: Fundamentos</option>
+                            <option value="ENF-201: Farmacología">ENF-201: Farmacología</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-500">Semana de Corte Situacional:</label>
-                        <select id="sel-semana-corte-ficha" onchange="cambiarSemanaCorteFicha(this.value)" class="mt-1 block text-xs sm:text-sm font-semibold border border-slate-300 bg-white rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-blue-500">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase block mb-1">Comisión / Año</label>
+                        <select id="sel-filtro-comision" onchange="actualizarFiltrosCoordinacion()" class="w-full bg-slate-50 border border-slate-300 text-xs rounded-lg p-2 font-semibold text-slate-800">
+                            <option value="TODAS">Todas las Comisiones</option>
+                            <option value="1A">Comisión 1A (1er Año)</option>
+                            <option value="2B">Comisión 2B (2do Año)</option>
+                            <option value="3A">Comisión 3A (3er Año)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-slate-500 uppercase block mb-1">Semana de Observación</label>
+                        <select id="sel-filtro-semana" onchange="actualizarFiltrosCoordinacion()" class="w-full bg-slate-50 border border-slate-300 text-xs rounded-lg p-2 font-semibold text-slate-800">
+                            <option value="TODAS">Todas las Semanas (Acumulado Cuatrimestral)</option>
                             <option value="1">Semana 1</option>
                             <option value="2">Semana 2</option>
                             <option value="3" selected>Semana 3</option>
@@ -437,26 +323,148 @@
                             <option value="6">Semana 6</option>
                             <option value="7">Semana 7</option>
                             <option value="8">Semana 8</option>
+                            <option value="9">Semana 9</option>
+                            <option value="10">Semana 10</option>
+                            <option value="11">Semana 11</option>
+                            <option value="12">Semana 12</option>
+                            <option value="13">Semana 13</option>
+                            <option value="14">Semana 14</option>
+                            <option value="15">Semana 15</option>
+                            <option value="16">Semana 16</option>
                         </select>
                     </div>
                 </div>
-                <div class="text-xs text-slate-500 flex items-center space-x-2">
-                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span>Trazabilidad de 16 semanas activa</span>
+
+                <!-- Botones de Filtrado Rápido por Estado -->
+                <div class="flex items-center gap-2 pt-1 flex-wrap text-xs">
+                    <span class="font-bold text-slate-600 text-[11px] uppercase">Filtrar Estado:</span>
+                    <button id="btn-filtro-todos" onclick="filtrarTablero('TODOS')" class="px-3 py-1 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 hover:bg-slate-50 ring-2 ring-slate-900 ring-offset-1">Todos</button>
+                    <button id="btn-filtro-rojo" onclick="filtrarTablero('ROJO')" class="px-3 py-1 rounded-lg border font-semibold text-black" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Críticos</button>
+                    <button id="btn-filtro-amarillo" onclick="filtrarTablero('AMARILLO')" class="px-3 py-1 rounded-lg border font-semibold text-black" style="background-color: #fffae6; border-color: #FFE680;">🟡 En Atención</button>
+                    <button id="btn-filtro-verde" onclick="filtrarTablero('VERDE')" class="px-3 py-1 rounded-lg border font-semibold text-black" style="background-color: #f0fff0; border-color: #99FF99;">🟢 Óptimos</button>
                 </div>
             </div>
 
-            <!-- CONTENEDOR DE DETALLE DEL ESTUDIANTE -->
-            <div id="contenedor-detalle-alumno" class="space-y-6">
-                <!-- Inyectado con JS -->
+            <!-- Gráficos de Análisis de la Cohorte / Grupo Seleccionado -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 id="lbl-grafico-coord-titulo" class="font-bold text-sm text-slate-800">Comportamiento Pedagógico del Grupo Seleccionado</h3>
+                        <p id="lbl-grafico-coord-subtitulo" class="text-xs text-slate-500">Materia: Todas • Comisión: Todas</p>
+                    </div>
+                    <div class="flex items-center space-x-3 text-xs flex-wrap gap-y-1">
+                        <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm" style="background-color: #00D4FF;"></span><span class="text-black font-semibold">A. Asistencia</span></span>
+                        <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm" style="background-color: #7B2FF7;"></span><span class="text-black font-semibold">B. Teoría</span></span>
+                        <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm" style="background-color: #0066FF;"></span><span class="text-black font-semibold">C. Práctica</span></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                    <!-- Gráfico 1: Evolución Semanal por Dimensiones (Barras Apiladas) -->
+                    <div class="lg:col-span-8 bg-slate-50/50 p-3 rounded-xl border border-slate-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Carga de Alertas Semanal de la Cohorte (16 Semanas)</span>
+                            <span class="text-[10px] text-slate-400 font-mono">Volumen Acumulado por Dimensión</span>
+                        </div>
+                        <div class="h-[220px] w-full relative">
+                            <canvas id="chartCoordEvolucion"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico 2: Distribución de Semáforo en la Semana Activa (Dona) -->
+                    <div class="lg:col-span-4 bg-slate-50/50 p-3 rounded-xl border border-slate-200 flex flex-col items-center justify-center">
+                        <div class="w-full flex items-center justify-between mb-1">
+                            <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Distribución <span id="lbl-grafico-coord-semana">Semana 3</span></span>
+                            <span class="text-[10px] text-slate-400 font-mono">% de Riesgo</span>
+                        </div>
+                        <div class="h-[180px] w-full relative flex items-center justify-center">
+                            <canvas id="chartCoordDistribucion"></canvas>
+                        </div>
+                        <div class="w-full grid grid-cols-3 gap-1 mt-2 text-center text-[10px]">
+                            <div class="p-1 rounded bg-red-50 border border-red-200 text-red-700 font-semibold" id="lbl-stat-coord-rojo">Críticos: 0</div>
+                            <div class="p-1 rounded bg-amber-50 border border-amber-200 text-amber-700 font-semibold" id="lbl-stat-coord-amarillo">Atención: 0</div>
+                            <div class="p-1 rounded bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold" id="lbl-stat-coord-verde">Óptimos: 0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla Consolidada de Coordinación -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+                <div class="overflow-x-auto max-h-[520px]">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-100 text-slate-700 font-bold sticky top-0 z-20 border-b border-slate-200">
+                            <tr>
+                                <th class="p-3 pl-4 sm:pl-6 text-black sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-200 sticky-left-shadow min-w-[120px]">ID Alumno</th>
+                                <th class="p-3 text-black min-w-[160px]">Materia / Comisión</th>
+                                <th class="p-3 text-black min-w-[130px]">Estado Semanal</th>
+                                <th class="p-3 text-black min-w-[150px]">Tendencia Acumulada</th>
+                                <th class="p-3 text-black min-w-[200px]">Desglose Dimensiones & Observación</th>
+                                <th class="p-3 text-black min-w-[130px]">Intervenciones</th>
+                                <th class="p-3 text-right pr-6 text-black min-w-[110px]">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-tablero-coordinacion" class="divide-y divide-slate-100 bg-white">
+                            <!-- Inyectado dinámicamente por JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-ficha" class="hidden space-y-5">
+            
+            <!-- Barra de Selección de Estudiante, Corte Semanal y Botonera de Materias -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+                    <div class="sm:col-span-8 space-y-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Estudiante (Seleccionar por Código / ID Protocolar)</label>
+                        <select id="sel-alumno-ficha" onchange="seleccionarAlumnoFicha(this.value)" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-lg p-2 font-semibold focus:ring-1 focus:ring-blue-500 focus:bg-white transition cursor-pointer">
+                            <!-- Opciones limpias cargadas dinámicamente: solo Alumno y Comisión -->
+                        </select>
+                    </div>
+
+                    <div class="sm:col-span-4 space-y-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Semana de Corte Situacional</label>
+                        <select id="sel-semana-corte-ficha" onchange="cambiarSemanaCorteFicha(this.value)" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-lg p-2 font-semibold focus:ring-1 focus:ring-blue-500 focus:bg-white transition cursor-pointer">
+                            <option value="1">Semana 1</option>
+                            <option value="2">Semana 2</option>
+                            <option value="3" selected>Semana 3</option>
+                            <option value="4">Semana 4</option>
+                            <option value="5">Semana 5</option>
+                            <option value="6">Semana 6</option>
+                            <option value="7">Semana 7</option>
+                            <option value="8">Semana 8</option>
+                            <option value="9">Semana 9</option>
+                            <option value="10">Semana 10</option>
+                            <option value="11">Semana 11</option>
+                            <option value="12">Semana 12</option>
+                            <option value="13">Semana 13</option>
+                            <option value="14">Semana 14</option>
+                            <option value="15">Semana 15</option>
+                            <option value="16">Semana 16</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- BOTONERA DE MATERIAS CURSADAS POR EL ALUMNO (Debajo del desplegable) -->
+                <div id="contenedor-botonera-materias" class="pt-3 border-t border-slate-100">
+                    <p class="text-xs text-slate-400 italic">Seleccione un alumno arriba para desplegar y seleccionar sus materias en curso.</p>
+                </div>
+            </div>
+
+            <!-- Contenedor Dinámico de la Ficha del Estudiante -->
+            <div id="contenedor-detalle-alumno" class="space-y-5">
+                <!-- Se inyecta dinámicamente desde JavaScript -->
             </div>
         </section>
 
     </main>
 
     <script>
-        // BASE DE DATOS DE EJEMPLO (6 Alumnos en distintas comisiones y materias con formato ABC123)
+        // BASE DE DATOS DE EJEMPLO (Estudiantes con múltiples materias cursadas simultáneas/recursantes)
         const dataset = [
+            // --- MGA920 (Cursando Prácticas I y Fundamentos) ---
             {
                 id: "MGA920",
                 materia: "ENF-101: Prácticas I",
@@ -464,27 +472,151 @@
                 semanas: {
                     1: { asist: 0, teo: 0, prac: 0, obs: "Inicio correcto y puntual" },
                     2: { asist: 0, teo: 1, prac: 0, obs: "Dificultades menores en farmacocinética" },
-                    3: { asist: 1, teo: 0, prac: 5, obs: "Falla técnica bioseguridad" },
+                    3: { asist: 1, teo: 0, prac: 5, obs: "Falla técnica bioseguridad en punción" },
                     4: { asist: 0, teo: 0, prac: 2, obs: "Supervisión cercana en colocación de vías" },
-                    5: { asist: 0, teo: 0, prac: 0, obs: "Buen desempeño general" }
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Buen desempeño general recuperado" }
                 },
                 intervenciones: [
-                    { fecha: "2026-03-20", tipo: "Entrevista Pedagógica", obs: "Se acordó refuerzo en simulación de bioseguridad." }
+                    { fecha: "2026-03-20", tipo: "Entrevista Pedagógica", obs: "Se acordó refuerzo en simulación de bioseguridad y punción." }
                 ]
             },
+            {
+                id: "MGA920",
+                materia: "ENF-102: Fundamentos",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Asistencia y participación normal" },
+                    2: { asist: 0, teo: 1, prac: 0, obs: "Dudas en terminología anatómica" },
+                    3: { asist: 1, teo: 1, prac: 0, obs: "Llegada demorada y dudas en PAE" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Entrega completa de trabajos prácticos" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Buen rendimiento teórico" }
+                },
+                intervenciones: []
+            },
+
+            // --- JPR833 ---
             {
                 id: "JPR833",
                 materia: "ENF-101: Prácticas I",
                 comision: "1A",
                 semanas: {
                     1: { asist: 0, teo: 0, prac: 0, obs: "Presente y participativo" },
-                    2: { asist: 0, teo: 0, prac: 0, obs: "Excelente desempeño en taller" },
-                    3: { asist: 1, teo: 0, prac: 0, obs: "Llegada tarde justificada" },
-                    4: { asist: 0, teo: 0, prac: 0, obs: "Al día con lecturas" },
-                    5: { asist: 0, teo: 0, prac: 0, obs: "Desempeño sobresaliente" }
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Excelente desempeño en taller de destrezas" },
+                    3: { asist: 1, teo: 0, prac: 0, obs: "Llegada tarde justificada con aviso" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Al día con lecturas y guías" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Desempeño sobresaliente en campo" }
                 },
                 intervenciones: []
             },
+            {
+                id: "JPR833",
+                materia: "ENF-102: Fundamentos",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Muy buen nivel de lectura" },
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Participación destacada en clase" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Excelente asimilación conceptual" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Exposición impecable" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Promovido con honores" }
+                },
+                intervenciones: []
+            },
+
+            // --- BNV318 ---
+            {
+                id: "BNV318",
+                materia: "ENF-101: Prácticas I",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Excelente predisposición" },
+                    2: { asist: 0, teo: 0, prac: 2, obs: "Dudas en asepsia de campo estéril" },
+                    3: { asist: 0, teo: 1, prac: 2, obs: "Requiere apoyo en maniobras invasivas" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Consolidó técnica en simulación" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Muy buen desempeño" }
+                },
+                intervenciones: []
+            },
+
+            // --- DPZ504 ---
+            {
+                id: "DPZ504",
+                materia: "ENF-101: Prácticas I",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 1, teo: 1, prac: 0, obs: "Demora en entrega de fichas" },
+                    2: { asist: 1, teo: 1, prac: 2, obs: "Inseguridad en signos vitales pediátricos" },
+                    3: { asist: 3, teo: 1, prac: 2, obs: "Inasistencias reiteradas y dudas clínicas" },
+                    4: { asist: 1, teo: 0, prac: 0, obs: "Retomó asistencia regular" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Estabilizado" }
+                },
+                intervenciones: [
+                    { fecha: "2026-03-24", tipo: "Tutoría de Apoyo", obs: "Citación para regularizar asistencia y afianzar toma de signos vitales." }
+                ]
+            },
+            {
+                id: "DPZ504",
+                materia: "ENF-201: Farmacología",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 1, teo: 1, prac: 0, obs: "Dificultad inicial en conversiones de unidades" },
+                    2: { asist: 1, teo: 3, prac: 0, obs: "Faltas reiteradas a prácticos de cálculo de dosis" },
+                    3: { asist: 3, teo: 3, prac: 2, obs: "Alerta severa de regularidad en teoría y práctica" },
+                    4: { asist: 1, teo: 1, prac: 0, obs: "Asistió a tutoría obligatoria" },
+                    5: { asist: 0, teo: 1, prac: 0, obs: "Recuperando contenidos" }
+                },
+                intervenciones: [
+                    { fecha: "2026-03-26", tipo: "Acuerdo de Cátedra", obs: "Plan conjunto con docente de Farmacología para entrega semanal de ejercicios." }
+                ]
+            },
+
+            // --- EMR712 ---
+            {
+                id: "EMR712",
+                materia: "ENF-102: Fundamentos",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Participación muy activa" },
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Lecturas completas al día" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Excelente fundamentación teórica" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Destacado en resolución de casos" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Rendimiento óptimo continuo" }
+                },
+                intervenciones: []
+            },
+
+            // --- GLS281 ---
+            {
+                id: "GLS281",
+                materia: "ENF-102: Fundamentos",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 0, teo: 1, prac: 0, obs: "Dificultades de comprensión en anatomofisiología" },
+                    2: { asist: 0, teo: 3, prac: 0, obs: "Brecha marcada en marco ético-legal" },
+                    3: { asist: 1, teo: 3, prac: 2, obs: "Falta de estudio y dudas conceptuales básicas" },
+                    4: { asist: 0, teo: 1, prac: 0, obs: "Asistió a clase de consulta; mejoró" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Aprobó recuperatorio parcial" }
+                },
+                intervenciones: [
+                    { fecha: "2026-03-22", tipo: "Entrevista Pedagógica", obs: "Se acordó plan de lectura guiada con bibliografía complementaria." }
+                ]
+            },
+
+            // --- HCK630 ---
+            {
+                id: "HCK630",
+                materia: "ENF-201: Farmacología",
+                comision: "1A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Buen inicio" },
+                    2: { asist: 0, teo: 1, prac: 0, obs: "Repaso necesario de farmacocinética" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Correcto en cálculo de dosis" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Buen manejo de vademécum" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Sin observaciones" }
+                },
+                intervenciones: []
+            },
+
+            // --- COMISIÓN 2B ---
             {
                 id: "CRO449",
                 materia: "ENF-102: Fundamentos",
@@ -494,11 +626,24 @@
                     2: { asist: 0, teo: 1, prac: 2, obs: "Necesita afianzar lavado de manos quirúrgico" },
                     3: { asist: 0, teo: 1, prac: 2, obs: "Requiere supervisión continua en gabinete" },
                     4: { asist: 0, teo: 0, prac: 2, obs: "Mejora en teoría; sostiene supervisión" },
-                    5: { asist: 0, teo: 0, prac: 0, obs: "Objetivos alcanzados" }
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Objetivos alcanzados con solidez" }
                 },
                 intervenciones: [
-                    { fecha: "2026-03-18", tipo: "Acompañamiento en Gabinete", obs: "Práctica extra de destrezas clínicas." }
+                    { fecha: "2026-03-18", tipo: "Acompañamiento en Gabinete", obs: "Práctica extra de destrezas clínicas y técnica aséptica." }
                 ]
+            },
+            {
+                id: "CRO449",
+                materia: "ENF-101: Prácticas I",
+                comision: "2B",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Puntualidad en campo hospitalario" },
+                    2: { asist: 0, teo: 1, prac: 2, obs: "Supervisión en preparación de mesa de curación" },
+                    3: { asist: 0, teo: 1, prac: 2, obs: "Avanza con acompañamiento docente" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Destrezas logradas" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Buen desempeño" }
+                },
+                intervenciones: []
             },
             {
                 id: "FTE109",
@@ -507,14 +652,83 @@
                 semanas: {
                     1: { asist: 0, teo: 0, prac: 0, obs: "Sin observaciones" },
                     2: { asist: 1, teo: 3, prac: 2, obs: "Brecha en fisiología y supervisión en práctica" },
-                    3: { asist: 3, teo: 3, prac: 5, obs: "Ausencias reiteradas y riesgo en campo" },
+                    3: { asist: 3, teo: 3, prac: 5, obs: "Ausencias reiteradas y riesgo en campo clínico" },
                     4: { asist: 1, teo: 1, prac: 2, obs: "Retomó asistencia; acordó tutoría" },
                     5: { asist: 0, teo: 1, prac: 0, obs: "Progresando favorablemente" }
                 },
                 intervenciones: [
-                    { fecha: "2026-03-22", tipo: "Acta de Compromiso", obs: "Citación formal por inasistencias y práctica." }
+                    { fecha: "2026-03-22", tipo: "Acta de Compromiso", obs: "Citación formal por inasistencias y práctica de riesgo en servicio." }
                 ]
             },
+            {
+                id: "IKL849",
+                materia: "ENF-101: Prácticas I",
+                comision: "2B",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Excelente presentación e instrumental completo" },
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Muy buen desempeño en control de drenajes" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Resolución rápida y segura de procedimientos" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Colabora activamente con compañeros" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Desempeño de excelencia" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "JPX193",
+                materia: "ENF-101: Prácticas I",
+                comision: "2B",
+                semanas: {
+                    1: { asist: 0, teo: 1, prac: 0, obs: "Dudas en fundamentación del PAE" },
+                    2: { asist: 1, teo: 1, prac: 2, obs: "Lentitud en administración de medicación" },
+                    3: { asist: 0, teo: 0, prac: 5, obs: "Error en rotulado de jeringa sin control cruzado" },
+                    4: { asist: 0, teo: 0, prac: 2, obs: "Supervisión 1 a 1 en preparación farmacológica" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Técnica corregida y afianzada" }
+                },
+                intervenciones: [
+                    { fecha: "2026-03-25", tipo: "Incidente en Simulación", obs: "Refuerzo estricto de los 5 correctos en administración de fármacos." }
+                ]
+            },
+            {
+                id: "KNB452",
+                materia: "ENF-201: Farmacología",
+                comision: "2B",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Asistencia perfecta" },
+                    2: { asist: 0, teo: 1, prac: 0, obs: "Dificultad en cálculo de goteo macro/micro" },
+                    3: { asist: 0, teo: 1, prac: 2, obs: "Supervisión en bomba de infusión" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Cálculos matemáticos afianzados" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Progreso consolidado" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "LRT706",
+                materia: "ENF-201: Farmacología",
+                comision: "2B",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Excelente nivel previo" },
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Participación sobresaliente" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Dominio de interacciones medicamentosas" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Evaluación parcial perfecta" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Rendimiento óptimo" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "MRV538",
+                materia: "ENF-102: Fundamentos",
+                comision: "2B",
+                semanas: {
+                    1: { asist: 1, teo: 0, prac: 0, obs: "Llegada demorada" },
+                    2: { asist: 1, teo: 1, prac: 0, obs: "Dudas en registros de enfermería" },
+                    3: { asist: 1, teo: 1, prac: 2, obs: "Supervisión en confección de report diario" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Mejora notable en redacción clínica" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Sin observaciones" }
+                },
+                intervenciones: []
+            },
+
+            // --- COMISIÓN 3A ---
             {
                 id: "LMA091",
                 materia: "ENF-201: Farmacología",
@@ -533,10 +747,90 @@
                 materia: "ENF-201: Farmacología",
                 comision: "3A",
                 semanas: {
-                    1: { asist: 0, teo: 1, prac: 0, obs: "Dificultad en diluciones" },
+                    1: { asist: 0, teo: 1, prac: 0, obs: "Dificultad en diluciones de antibióticos" },
                     2: { asist: 1, teo: 1, prac: 2, obs: "Supervisión en administración parenteral" },
                     3: { asist: 1, teo: 1, prac: 2, obs: "Atención sostenida en cálculo y técnica" },
                     4: { asist: 0, teo: 1, prac: 0, obs: "Mejora notable en práctica" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Desempeño normalizado" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "NTQ215",
+                materia: "ENF-201: Farmacología",
+                comision: "3A",
+                semanas: {
+                    1: { asist: 3, teo: 1, prac: 0, obs: "Ausencias al inicio de cursada" },
+                    2: { asist: 3, teo: 3, prac: 2, obs: "Faltas sucesivas y brecha conceptual" },
+                    3: { asist: 3, teo: 3, prac: 5, obs: "Sin contacto con la cátedra; riesgo de libre" },
+                    4: { asist: 1, teo: 1, prac: 2, obs: "Acudió a entrevista; solicitó plan de recuperación" },
+                    5: { asist: 0, teo: 1, prac: 0, obs: "En seguimiento" }
+                },
+                intervenciones: [
+                    { fecha: "2026-03-21", tipo: "Citación de Coordinación", obs: "Alerta de inasistencias críticas y riesgo de pérdida de regularidad." }
+                ]
+            },
+            {
+                id: "OBL941",
+                materia: "ENF-101: Prácticas I",
+                comision: "3A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Puntual y responsable" },
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Excelente técnica en curación plana" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Buen trato con el sujeto de atención" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Seguridad procedimental destacada" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Óptimo" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "PZS382",
+                materia: "ENF-101: Prácticas I",
+                comision: "3A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 2, obs: "Supervisión en armado de mesa de curaciones" },
+                    2: { asist: 0, teo: 1, prac: 2, obs: "Dudas en clasificación de apósitos" },
+                    3: { asist: 0, teo: 0, prac: 2, obs: "Requiere apoyo en curaciones complejas" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Procedimiento dominado con soltura" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Desempeño satisfactorio" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "QTV617",
+                materia: "ENF-102: Fundamentos",
+                comision: "3A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Excelente base de enfermería comunitaria" },
+                    2: { asist: 0, teo: 0, prac: 0, obs: "Muy buenos aportes en clase" },
+                    3: { asist: 0, teo: 0, prac: 0, obs: "Al día con las guías de estudio" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Rendimiento óptimo" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Sin observaciones" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "RME824",
+                materia: "ENF-102: Fundamentos",
+                comision: "3A",
+                semanas: {
+                    1: { asist: 1, teo: 0, prac: 0, obs: "Llegada tarde" },
+                    2: { asist: 0, teo: 1, prac: 0, obs: "Dificultades menores en modelos de enfermería" },
+                    3: { asist: 1, teo: 1, prac: 2, obs: "Supervisión en aplicación del modelo de Virginia Henderson" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Conceptos afianzados" },
+                    5: { asist: 0, teo: 0, prac: 0, obs: "Evolución favorable" }
+                },
+                intervenciones: []
+            },
+            {
+                id: "SNF139",
+                materia: "ENF-101: Prácticas I",
+                comision: "3A",
+                semanas: {
+                    1: { asist: 0, teo: 0, prac: 0, obs: "Buen comienzo" },
+                    2: { asist: 1, teo: 0, prac: 2, obs: "Supervisión en control de balance hidroelectrolítico" },
+                    3: { asist: 0, teo: 1, prac: 2, obs: "Dudas en registro de ingresos y egresos" },
+                    4: { asist: 0, teo: 0, prac: 0, obs: "Destreza lograda correctamente" },
                     5: { asist: 0, teo: 0, prac: 0, obs: "Desempeño normalizado" }
                 },
                 intervenciones: []
@@ -545,62 +839,20 @@
 
         // ESTADO GLOBAL DE LA APLICACIÓN
         let semanaSeleccionada = 3;
-        let semanaCoordSeleccionada = 3;
+        let semanaCoordSeleccionada = "3";
         let semanaFichaSeleccionada = 3;
-        let alumnoFichaActual = dataset[0].id;
+        let alumnoFichaActual = ""; // Sin alumno seleccionado por defecto
+        let materiasActivasFicha = []; // Materias seleccionadas activamente para análisis
         let filtroTableroActual = 'TODOS';
         let filtroCoordMateria = 'TODAS';
         let filtroCoordComision = 'TODAS';
+        let docenteFiltroMateria = 'ENF-101: Prácticas I';
+        let docenteFiltroComision = '1A';
         let chartEvolucionInstance = null;
-        let tieneCambiosSinGuardar = false;
+        let chartCoordEvolucionInstance = null;
+        let chartCoordDistribucionInstance = null;
         let timerBannerGuardado = null;
 
-        // GESTIÓN DE NOTIFICACIÓN SUPERIOR INTEGRADA
-        function notificarCambioPendiente() {
-            tieneCambiosSinGuardar = true;
-            
-            // Actualizar pie de tabla
-            const ind = document.getElementById('indicador-estado-guardado');
-            const lbl = document.getElementById('lbl-estado-autoguardado');
-            const dot = document.getElementById('dot-cambios-pendientes');
-            if (ind) ind.className = 'inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
-            if (lbl) lbl.innerText = '⚠️ Tenés cambios sin guardar en esta comisión.';
-            if (dot) dot.classList.remove('hidden');
-
-            // Configurar y desplegar Banner Superior en estado de alerta pendiente
-            const banner = document.getElementById('banner-estado-docente');
-            const iconoBox = document.getElementById('banner-estado-icono-box');
-            const icono = document.getElementById('banner-estado-icono');
-            const titulo = document.getElementById('banner-estado-titulo');
-            const subtitulo = document.getElementById('banner-estado-subtitulo');
-            const btnGuardar = document.getElementById('btn-banner-guardar');
-            const btnCerrar = document.getElementById('btn-banner-cerrar');
-
-            if (banner) {
-                if (timerBannerGuardado) clearTimeout(timerBannerGuardado);
-                banner.className = 'rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs bg-white';
-                banner.style.borderColor = '#FFE680';
-                
-                if (iconoBox) {
-                    iconoBox.style.backgroundColor = '#fffae6';
-                    iconoBox.style.borderColor = '#FFE680';
-                }
-                if (icono) icono.innerText = '⚠️';
-                if (titulo) titulo.innerText = 'Cambios sin guardar';
-                if (subtitulo) subtitulo.innerText = 'Tenés modificaciones en la planilla docente pendientes de confirmación.';
-                if (btnGuardar) btnGuardar.classList.remove('hidden');
-                if (btnCerrar) btnCerrar.classList.add('hidden');
-                
-                banner.classList.remove('hidden');
-            }
-        }
-
-        function cerrarBannerEstado() {
-            const banner = document.getElementById('banner-estado-docente');
-            if (banner) banner.classList.add('hidden');
-        }
-
-        // FUNCIÓN PURA: CÁLCULO DE REGLA CUANTITATIVA
         function calcularSemaforo(asist, teo, prac) {
             const suma = parseInt(asist || 0) + parseInt(teo || 0) + parseInt(prac || 0);
             if (suma >= 5) {
@@ -609,7 +861,7 @@
                     suma: suma,
                     label: '🔴 Crítico',
                     badgeHtml: `<span class="px-2.5 py-1 rounded-md text-xs font-semibold border text-black inline-flex items-center" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Crítico (${suma} pts)</span>`,
-                    diagnostico: 'Alerta crítica activa. Compromete la continuidad pedagógica o la bioseguridad.'
+                    diagnostico: 'Alerta crítica activa. Compromete la continuidad pedagógica o la bioseguridad en campo.'
                 };
             } else if (suma >= 2) {
                 return {
@@ -630,7 +882,6 @@
             }
         }
 
-        // FUNCIÓN: ANÁLISIS LONGITUDINAL Y TENDENCIA ACUMULADA
         function calcularAnalisisLongitudinal(est, hastaSemana) {
             const semHasta = parseInt(hastaSemana);
             let sumaTotal = 0;
@@ -687,7 +938,6 @@
             };
         }
 
-        // FUNCIÓN: BADGE DE DIMENSIÓN SEGÚN PUNTAJE
         function renderPuntajeBadge(dim, valor) {
             const v = parseInt(valor || 0);
             let bg = '#f0fff0';
@@ -702,96 +952,47 @@
             return `<span class="px-1.5 py-0.5 rounded-md text-[10px] font-semibold border text-black inline-block font-mono" style="background-color: ${bg}; border-color: ${bdr};">${dim}: ${v}p</span>`;
         }
 
-        // RENDER: PESTAÑA 1 - CARGA DOCENTE
-        function renderCargaDocente() {
-            const tbody = document.getElementById('tbody-carga-docente');
-            if (!tbody) return;
-            tbody.innerHTML = '';
+        function notificarCambioPendiente() {
+            const ind = document.getElementById('indicador-estado-guardado');
+            const lbl = document.getElementById('lbl-estado-autoguardado');
+            const dot = document.getElementById('dot-cambios-pendientes');
+            if (ind) ind.className = 'inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
+            if (lbl) lbl.innerText = '⚠️ Tenés cambios sin guardar en esta comisión.';
+            if (dot) dot.classList.remove('hidden');
 
-            dataset.forEach((est, index) => {
-                const datosSemana = est.semanas[semanaSeleccionada] || { asist: 0, teo: 0, prac: 0, obs: "" };
-                const res = calcularSemaforo(datosSemana.asist, datosSemana.teo, datosSemana.prac);
+            const banner = document.getElementById('banner-estado-docente');
+            const iconoBox = document.getElementById('banner-estado-icono-box');
+            const icono = document.getElementById('banner-estado-icono');
+            const titulo = document.getElementById('banner-estado-titulo');
+            const subtitulo = document.getElementById('banner-estado-subtitulo');
+            const btnGuardar = document.getElementById('btn-banner-guardar');
+            const btnCerrar = document.getElementById('btn-banner-cerrar');
+
+            if (banner) {
+                if (timerBannerGuardado) clearTimeout(timerBannerGuardado);
+                banner.className = 'rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs bg-white';
+                banner.style.borderColor = '#FFE680';
                 
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/80 transition border-b border-slate-100 group';
-                tr.innerHTML = `
-                    <td class="p-3 pl-4 sm:pl-6 font-mono font-semibold text-blue-700 sticky left-0 bg-white group-hover:bg-slate-50 z-10 border-r border-slate-200 sticky-left-shadow">
-                        <span class="bg-blue-50 px-2 py-1 rounded-md border border-blue-200 whitespace-nowrap">${est.id}</span>
-                    </td>
-                    
-                    <!-- Radio Buttons: Dimensión A Cyan -->
-                    <td class="p-2 border-l border-slate-100" style="background-color: #f2ffff;">
-                        <div class="grid grid-cols-3 gap-1">
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'asist', 0)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.asist === 0 ? 'selected-verde' : ''}">0p</button>
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'asist', 1)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.asist === 1 ? 'selected-amarillo' : ''}">1p</button>
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'asist', 3)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.asist === 3 ? 'selected-rojo' : ''}">3p</button>
-                        </div>
-                    </td>
-
-                    <!-- Radio Buttons: Dimensión B Violeta/Púrpura -->
-                    <td class="p-2 border-l border-slate-100" style="background-color: #fff2ff;">
-                        <div class="grid grid-cols-3 gap-1">
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'teo', 0)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.teo === 0 ? 'selected-verde' : ''}">0p</button>
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'teo', 1)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.teo === 1 ? 'selected-amarillo' : ''}">1p</button>
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'teo', 3)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.teo === 3 ? 'selected-rojo' : ''}">3p</button>
-                        </div>
-                    </td>
-
-                    <!-- Radio Buttons: Dimensión C Azul Eléctrico -->
-                    <td class="p-2 border-l border-slate-100" style="background-color: #f2f2ff;">
-                        <div class="grid grid-cols-3 gap-1">
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'prac', 0)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.prac === 0 ? 'selected-verde' : ''}">0p</button>
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'prac', 2)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.prac === 2 ? 'selected-amarillo' : ''}">2p</button>
-                            <button type="button" onclick="actualizarValorDocente(${index}, 'prac', 5)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.prac === 5 ? 'selected-rojo' : ''}">5p</button>
-                        </div>
-                    </td>
-
-                    <!-- Observación Breve -->
-                    <td class="p-2 border-l border-slate-100">
-                        <input type="text" value="${datosSemana.obs || ''}" onchange="actualizarObsDocente(${index}, this.value)" placeholder="Nota pedagógica..." class="w-full text-xs px-2.5 py-1.5 rounded-md border border-slate-200 focus:ring-1 focus:ring-blue-500 focus:bg-white bg-slate-50/50">
-                    </td>
-
-                    <!-- Semáforo Dinámico -->
-                    <td class="p-2 border-l border-slate-100 text-center">
-                        ${res.badgeHtml}
-                    </td>
-                </tr>
-            `;
-            tbody.appendChild(tr);
-            });
+                if (iconoBox) {
+                    iconoBox.style.backgroundColor = '#fffae6';
+                    iconoBox.style.borderColor = '#FFE680';
+                }
+                if (icono) icono.innerText = '⚠️';
+                if (titulo) titulo.innerText = 'Cambios sin guardar';
+                if (subtitulo) subtitulo.innerText = 'Tenés modificaciones en la planilla docente pendientes de confirmación.';
+                if (btnGuardar) btnGuardar.classList.remove('hidden');
+                if (btnCerrar) btnCerrar.classList.add('hidden');
+                
+                banner.classList.remove('hidden');
+            }
         }
 
-        // ACTUALIZACIÓN DE VALORES EN TIEMPO REAL
-        function actualizarValorDocente(alumnoIndex, dimension, valor) {
-            if (!dataset[alumnoIndex].semanas[semanaSeleccionada]) {
-                dataset[alumnoIndex].semanas[semanaSeleccionada] = { asist: 0, teo: 0, prac: 0, obs: "" };
-            }
-            dataset[alumnoIndex].semanas[semanaSeleccionada][dimension] = valor;
-            renderCargaDocente();
-            renderTableroCoordinacion();
-            if (dataset[alumnoIndex].id === alumnoFichaActual) {
-                cargarFichaAlumno(alumnoFichaActual);
-            }
-            notificarCambioPendiente();
-        }
-
-        function actualizarObsDocente(alumnoIndex, valor) {
-            if (!dataset[alumnoIndex].semanas[semanaSeleccionada]) {
-                dataset[alumnoIndex].semanas[semanaSeleccionada] = { asist: 0, teo: 0, prac: 0, obs: "" };
-            }
-            dataset[alumnoIndex].semanas[semanaSeleccionada].obs = valor;
-            notificarCambioPendiente();
-        }
-
-        function cambiarSemanaCarga(sem) {
-            semanaSeleccionada = parseInt(sem);
-            renderCargaDocente();
+        function cerrarBannerEstado() {
+            const banner = document.getElementById('banner-estado-docente');
+            if (banner) banner.classList.add('hidden');
         }
 
         function guardarDocenteSimulado() {
-            tieneCambiosSinGuardar = false;
-
-            // Actualizar footer de la tabla
             const ind = document.getElementById('indicador-estado-guardado');
             const lbl = document.getElementById('lbl-estado-autoguardado');
             const dot = document.getElementById('dot-cambios-pendientes');
@@ -799,7 +1000,6 @@
             if (lbl) lbl.innerText = '✅ Registros guardados y notificados a Coordinación correctamente.';
             if (dot) dot.classList.add('hidden');
 
-            // Actualizar Banner Superior a estado de guardado exitoso
             const banner = document.getElementById('banner-estado-docente');
             const iconoBox = document.getElementById('banner-estado-icono-box');
             const icono = document.getElementById('banner-estado-icono');
@@ -830,7 +1030,123 @@
             }
         }
 
-        // RENDER: PESTAÑA 2 - TABLERO DE COORDINACIÓN
+        function renderCargaDocente() {
+            const tbody = document.getElementById('tbody-carga-docente');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            let alumnosFiltrados = dataset.filter(est => {
+                if (docenteFiltroMateria !== 'TODAS' && est.materia !== docenteFiltroMateria) return false;
+                if (docenteFiltroComision !== 'TODAS' && est.comision !== docenteFiltroComision) return false;
+                return true;
+            });
+
+            const countBadge = document.getElementById('lbl-alumnos-docente-count');
+            if (countBadge) {
+                countBadge.innerText = `Alumnos en Lista: ${alumnosFiltrados.length}`;
+            }
+
+            if (alumnosFiltrados.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="p-8 text-center text-slate-400 italic">
+                            No hay estudiantes registrados para la materia y comisión seleccionadas.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            alumnosFiltrados.forEach(est => {
+                const datosSemana = est.semanas[semanaSeleccionada] || { asist: 0, teo: 0, prac: 0, obs: "" };
+                const res = calcularSemaforo(datosSemana.asist, datosSemana.teo, datosSemana.prac);
+                
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100 group';
+                tr.innerHTML = `
+                    <td class="p-3 pl-4 sm:pl-6 font-mono font-semibold text-blue-700 sticky left-0 bg-white group-hover:bg-slate-50 z-10 border-r border-slate-200 sticky-left-shadow">
+                        <span class="bg-blue-50 px-2 py-1 rounded-md border border-blue-200 whitespace-nowrap">${est.id}</span>
+                        <span class="block text-[10px] text-slate-400 font-sans font-normal mt-0.5">Com. ${est.comision}</span>
+                    </td>
+                    
+                    <!-- Dimensión A: Asistencia (#00D4FF) -->
+                    <td class="p-2 border-l border-slate-100" style="background-color: #f2ffff;">
+                        <div class="grid grid-cols-3 gap-1">
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'asist', 0)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.asist === 0 ? 'selected-verde' : ''}">0p</button>
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'asist', 1)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.asist === 1 ? 'selected-amarillo' : ''}">1p</button>
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'asist', 3)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.asist === 3 ? 'selected-rojo' : ''}">3p</button>
+                        </div>
+                    </td>
+
+                    <!-- Dimensión B: Teoría (#7B2FF7) -->
+                    <td class="p-2 border-l border-slate-100" style="background-color: #fff2ff;">
+                        <div class="grid grid-cols-3 gap-1">
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'teo', 0)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.teo === 0 ? 'selected-verde' : ''}">0p</button>
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'teo', 1)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.teo === 1 ? 'selected-amarillo' : ''}">1p</button>
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'teo', 3)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.teo === 3 ? 'selected-rojo' : ''}">3p</button>
+                        </div>
+                    </td>
+
+                    <!-- Dimensión C: Práctica (#0066FF) -->
+                    <td class="p-2 border-l border-slate-100" style="background-color: #f2f2ff;">
+                        <div class="grid grid-cols-3 gap-1">
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'prac', 0)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.prac === 0 ? 'selected-verde' : ''}">0p</button>
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'prac', 2)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.prac === 2 ? 'selected-amarillo' : ''}">2p</button>
+                            <button type="button" onclick="actualizarValorDocente('${est.id}', 'prac', 5)" class="matrix-radio-btn py-1.5 px-1 rounded-md text-[11px] text-center cursor-pointer ${datosSemana.prac === 5 ? 'selected-rojo' : ''}">5p</button>
+                        </div>
+                    </td>
+
+                    <!-- Observación Breve -->
+                    <td class="p-2 border-l border-slate-100">
+                        <input type="text" value="${datosSemana.obs || ''}" onchange="actualizarObsDocente('${est.id}', this.value)" placeholder="Nota pedagógica..." class="w-full text-xs px-2.5 py-1.5 rounded-md border border-slate-200 focus:ring-1 focus:ring-blue-500 focus:bg-white bg-slate-50">
+                    </td>
+
+                    <!-- Semáforo Dinámico -->
+                    <td class="p-2 border-l border-slate-100 text-center">
+                        ${res.badgeHtml}
+                    </td>
+                </tr>
+            `;
+            tbody.appendChild(tr);
+            });
+        }
+
+        function cambiarFiltroDocente() {
+            docenteFiltroMateria = document.getElementById('sel-materia-docente').value;
+            docenteFiltroComision = document.getElementById('sel-comision-docente').value;
+            renderCargaDocente();
+        }
+
+        function actualizarValorDocente(alumnoId, dimension, valor) {
+            const est = dataset.find(x => x.id === alumnoId);
+            if (!est) return;
+            if (!est.semanas[semanaSeleccionada]) {
+                est.semanas[semanaSeleccionada] = { asist: 0, teo: 0, prac: 0, obs: "" };
+            }
+            est.semanas[semanaSeleccionada][dimension] = valor;
+            renderCargaDocente();
+            renderTableroCoordinacion();
+            if (est.id === alumnoFichaActual) {
+                cargarFichaAlumno(alumnoFichaActual);
+            }
+            notificarCambioPendiente();
+        }
+
+        function actualizarObsDocente(alumnoId, valor) {
+            const est = dataset.find(x => x.id === alumnoId);
+            if (!est) return;
+            if (!est.semanas[semanaSeleccionada]) {
+                est.semanas[semanaSeleccionada] = { asist: 0, teo: 0, prac: 0, obs: "" };
+            }
+            est.semanas[semanaSeleccionada].obs = valor;
+            notificarCambioPendiente();
+        }
+
+        function cambiarSemanaCarga(sem) {
+            semanaSeleccionada = parseInt(sem);
+            renderCargaDocente();
+        }
+
         function renderTableroCoordinacion() {
             const tbody = document.getElementById('tbody-tablero-coordinacion');
             if (!tbody) return;
@@ -838,31 +1154,67 @@
 
             let cVerde = 0, cAmarillo = 0, cRojo = 0;
             let totalFiltrados = 0;
+            let alumnosGrupo = [];
+            const esTodasSemanas = semanaCoordSeleccionada === 'TODAS';
+            const semNum = esTodasSemanas ? 16 : parseInt(semanaCoordSeleccionada);
 
             dataset.forEach(est => {
-                if (filtroCoordMateria !== 'TODAS' && est.materia !== filtroCoordMateria) {
-                    return;
-                }
-                if (filtroCoordComision !== 'TODAS' && est.comision !== filtroCoordComision) {
-                    return;
-                }
+                if (filtroCoordMateria !== 'TODAS' && est.materia !== filtroCoordMateria) return;
+                if (filtroCoordComision !== 'TODAS' && est.comision !== filtroCoordComision) return;
 
+                alumnosGrupo.push(est);
                 totalFiltrados++;
-                const datosActuales = est.semanas[semanaCoordSeleccionada] || { asist: 0, teo: 0, prac: 0, obs: "" };
-                const res = calcularSemaforo(datosActuales.asist, datosActuales.teo, datosActuales.prac);
-                const long = calcularAnalisisLongitudinal(est, semanaCoordSeleccionada);
+                
+                let res, badgeAsist, badgeTeo, badgePrac, obsTexto, subTextoEstado;
+                const long = calcularAnalisisLongitudinal(est, semNum);
+
+                if (esTodasSemanas) {
+                    // Evaluación acumulada cuatrimestral
+                    let totalAsist = 0, totalTeo = 0, totalPrac = 0;
+                    for (let s = 1; s <= 16; s++) {
+                        if (est.semanas[s]) {
+                            totalAsist += (est.semanas[s].asist || 0);
+                            totalTeo += (est.semanas[s].teo || 0);
+                            totalPrac += (est.semanas[s].prac || 0);
+                        }
+                    }
+                    const promVal = parseFloat(long.promedio);
+                    if (promVal >= 4 || (totalAsist + totalTeo + totalPrac >= 10)) {
+                        res = {
+                            estado: 'ROJO',
+                            badgeHtml: `<span class="px-2.5 py-1 rounded-md text-xs font-semibold border text-black inline-flex items-center" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Crítico Acumulado</span>`
+                        };
+                    } else if (promVal >= 1.5 || (totalAsist + totalTeo + totalPrac >= 4)) {
+                        res = {
+                            estado: 'AMARILLO',
+                            badgeHtml: `<span class="px-2.5 py-1 rounded-md text-xs font-semibold border text-black inline-flex items-center" style="background-color: #fffae6; border-color: #FFE680;">🟡 Atención Acumulada</span>`
+                        };
+                    } else {
+                        res = {
+                            estado: 'VERDE',
+                            badgeHtml: `<span class="px-2.5 py-1 rounded-md text-xs font-semibold border text-black inline-flex items-center" style="background-color: #f0fff0; border-color: #99FF99;">🟢 Óptimo General</span>`
+                        };
+                    }
+                    badgeAsist = renderPuntajeBadge('Asist Tot', totalAsist);
+                    badgeTeo = renderPuntajeBadge('Teo Tot', totalTeo);
+                    badgePrac = renderPuntajeBadge('Prac Tot', totalPrac);
+                    obsTexto = `Totales acumulados en ${long.semanasContadas} semanas registradas`;
+                    subTextoEstado = `Acumulado S1-S16`;
+                } else {
+                    const datosActuales = est.semanas[semNum] || { asist: 0, teo: 0, prac: 0, obs: "" };
+                    res = calcularSemaforo(datosActuales.asist, datosActuales.teo, datosActuales.prac);
+                    badgeAsist = renderPuntajeBadge('Asist', datosActuales.asist);
+                    badgeTeo = renderPuntajeBadge('Teo', datosActuales.teo);
+                    badgePrac = renderPuntajeBadge('Prac', datosActuales.prac);
+                    obsTexto = datosActuales.obs || 'Sin observaciones';
+                    subTextoEstado = `Semana ${semNum}`;
+                }
 
                 if (res.estado === 'VERDE') cVerde++;
                 else if (res.estado === 'AMARILLO') cAmarillo++;
                 else if (res.estado === 'ROJO') cRojo++;
 
-                if (filtroTableroActual !== 'TODOS' && res.estado !== filtroTableroActual) {
-                    return;
-                }
-
-                const badgeAsist = renderPuntajeBadge('Asist', datosActuales.asist);
-                const badgeTeo = renderPuntajeBadge('Teo', datosActuales.teo);
-                const badgePrac = renderPuntajeBadge('Prac', datosActuales.prac);
+                if (filtroTableroActual !== 'TODOS' && res.estado !== filtroTableroActual) return;
 
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50 transition border-b border-slate-100 group';
@@ -874,7 +1226,7 @@
                     </td>
                     <td class="p-3 text-xs">
                         ${res.badgeHtml}
-                        <span class="block text-[11px] text-slate-500 mt-1">Semana ${semanaCoordSeleccionada}</span>
+                        <span class="block text-[11px] text-slate-500 mt-1">${subTextoEstado}</span>
                     </td>
                     <td class="p-3 text-xs">
                         ${long.tendenciaBadge}
@@ -886,14 +1238,14 @@
                             ${badgeTeo}
                             ${badgePrac}
                         </div>
-                        <p class="text-[11px] text-slate-500 italic mt-1">${datosActuales.obs || 'Sin observaciones'}</p>
+                        <p class="text-[11px] text-slate-500 italic mt-1">${obsTexto}</p>
                     </td>
                     <td class="p-3 text-xs">
                         <span class="font-semibold text-slate-700">${est.intervenciones.length} registrada(s)</span>
                         ${est.intervenciones.length > 0 ? `<span class="block text-[10px] text-slate-400">Última: ${est.intervenciones[est.intervenciones.length - 1].tipo}</span>` : ''}
                     </td>
                     <td class="p-3 text-right pr-6">
-                        <button onclick="verFichaDirecta('${est.id}', ${semanaCoordSeleccionada})" class="px-3 py-1.5 bg-white border border-blue-400 text-blue-800 hover:bg-blue-50 text-xs font-semibold rounded-lg shadow-2xs transition cursor-pointer">
+                        <button onclick="verFichaDirecta('${est.id}', ${esTodasSemanas ? 3 : semNum})" class="px-3 py-1.5 bg-white border border-blue-400 text-blue-800 hover:bg-blue-50 text-xs font-semibold rounded-lg shadow-2xs transition cursor-pointer">
                             Ver Ficha →
                         </button>
                     </td>
@@ -901,21 +1253,165 @@
                 tbody.appendChild(tr);
             });
 
-            // Actualizar KPIs
             document.getElementById('kpi-total').innerText = totalFiltrados;
             document.getElementById('kpi-rojo').innerText = cRojo;
             document.getElementById('kpi-amarillo').innerText = cAmarillo;
             document.getElementById('kpi-verde').innerText = cVerde;
+
+            const lblSem = document.getElementById('lbl-grafico-coord-semana');
+            if (lblSem) {
+                lblSem.innerText = esTodasSemanas ? 'Acumulada (S1-S16)' : `Semana ${semanaCoordSeleccionada}`;
+            }
+
+            const matTxt = filtroCoordMateria === 'TODAS' ? 'Todas las Materias' : filtroCoordMateria;
+            const comTxt = filtroCoordComision === 'TODAS' ? 'Todas las Comisiones' : `Comisión ${filtroCoordComision}`;
+            const lblSub = document.getElementById('lbl-grafico-coord-subtitulo');
+            if (lblSub) lblSub.innerText = `${matTxt} • ${comTxt} (${alumnosGrupo.length} alumnos)`;
+
+            const stRojo = document.getElementById('lbl-stat-coord-rojo');
+            const stAmarillo = document.getElementById('lbl-stat-coord-amarillo');
+            const stVerde = document.getElementById('lbl-stat-coord-verde');
+            if (stRojo) stRojo.innerText = `🔴 Críticos: ${cRojo}`;
+            if (stAmarillo) stAmarillo.innerText = `🟡 Atención: ${cAmarillo}`;
+            if (stVerde) stVerde.innerText = `🟢 Óptimos: ${cVerde}`;
+
+            renderGraficosCoordinacion(alumnosGrupo, semanaCoordSeleccionada, cRojo, cAmarillo, cVerde);
+        }
+
+        function renderGraficosCoordinacion(alumnos, semActiva, cRojo, cAmarillo, cVerde) {
+            const ctxEvol = document.getElementById('chartCoordEvolucion');
+            const ctxDist = document.getElementById('chartCoordDistribucion');
+            if (!ctxEvol || !ctxDist) return;
+
+            if (chartCoordEvolucionInstance) chartCoordEvolucionInstance.destroy();
+            if (chartCoordDistribucionInstance) chartCoordDistribucionInstance.destroy();
+
+            // Datos acumulados por dimensión para las 16 semanas en la cohorte filtrada
+            const labels = [];
+            const dataAsist = [];
+            const dataTeo = [];
+            const dataPrac = [];
+
+            for (let s = 1; s <= 16; s++) {
+                labels.push(`S${s}`);
+                let sumAsist = 0, sumTeo = 0, sumPrac = 0;
+                alumnos.forEach(a => {
+                    if (a.semanas[s]) {
+                        sumAsist += parseInt(a.semanas[s].asist || 0);
+                        sumTeo += parseInt(a.semanas[s].teo || 0);
+                        sumPrac += parseInt(a.semanas[s].prac || 0);
+                    }
+                });
+                dataAsist.push(sumAsist);
+                dataTeo.push(sumTeo);
+                dataPrac.push(sumPrac);
+            }
+
+            // Gráfico 1: Barras Apiladas del Grupo
+            chartCoordEvolucionInstance = new Chart(ctxEvol, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'A. Asistencia',
+                            data: dataAsist,
+                            backgroundColor: '#00D4FF',
+                            borderRadius: 2
+                        },
+                        {
+                            label: 'B. Teoría',
+                            data: dataTeo,
+                            backgroundColor: '#7B2FF7',
+                            borderRadius: 2
+                        },
+                        {
+                            label: 'C. Práctica',
+                            data: dataPrac,
+                            backgroundColor: '#0066FF',
+                            borderRadius: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            ticks: { font: { family: '"Titillium Web"' } },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 2,
+                                font: { family: '"Titillium Web"' }
+                            },
+                            grid: { color: '#f1f5f9' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y} pts totales`,
+                                footer: (items) => {
+                                    let sum = 0;
+                                    items.forEach(i => { sum += i.parsed.y; });
+                                    return `Total Grupo en la semana: ${sum} pts`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico 2: Dona de Distribución Semanal
+            const total = cRojo + cAmarillo + cVerde;
+            const distData = total === 0 ? [0, 0, 1] : [cRojo, cAmarillo, cVerde];
+
+            chartCoordDistribucionInstance = new Chart(ctxDist, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Críticos', 'Atención', 'Óptimos'],
+                    datasets: [{
+                        data: distData,
+                        backgroundColor: ['#ef4444', '#f59e0b', '#10b981'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '68%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const val = ctx.parsed;
+                                    const pct = total > 0 ? ((val / total) * 100).toFixed(0) : 0;
+                                    return ` ${ctx.label}: ${val} alumno(s) (${pct}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         function actualizarFiltrosCoordinacion() {
             filtroCoordMateria = document.getElementById('sel-filtro-materia').value;
             filtroCoordComision = document.getElementById('sel-filtro-comision').value;
-            semanaCoordSeleccionada = parseInt(document.getElementById('sel-filtro-semana').value);
+            semanaCoordSeleccionada = document.getElementById('sel-filtro-semana').value;
 
             const matTxt = filtroCoordMateria === 'TODAS' ? 'Todas las materias' : filtroCoordMateria;
             const comTxt = filtroCoordComision === 'TODAS' ? 'Todas las comisiones' : `Comisión ${filtroCoordComision}`;
-            document.getElementById('lbl-filtro-coord-resumen').innerText = `Mostrando: ${matTxt} • ${comTxt} • Semana ${semanaCoordSeleccionada}`;
+            const semTxt = semanaCoordSeleccionada === 'TODAS' ? 'Todas las semanas (Acumulado)' : `Semana ${semanaCoordSeleccionada}`;
+            document.getElementById('lbl-filtro-coord-resumen').innerText = `Mostrando: ${matTxt} • ${comTxt} • ${semTxt}`;
 
             renderTableroCoordinacion();
         }
@@ -945,24 +1441,115 @@
             if (activo) activo.classList.add('ring-2', 'ring-slate-900', 'ring-offset-1');
         }
 
-        // RENDER: PESTAÑA 3 - FICHA INDIVIDUAL & DIAGNÓSTICO
         function poblarSelectAlumnosFicha() {
             const sel = document.getElementById('sel-alumno-ficha');
             if (!sel) return;
             sel.innerHTML = '';
-            dataset.forEach(est => {
+            
+            // Opción inicial vacía por defecto
+            const optVacia = document.createElement('option');
+            optVacia.value = "";
+            optVacia.innerText = "-- Seleccione un Estudiante por ID Protocolar --";
+            if (!alumnoFichaActual) optVacia.selected = true;
+            sel.appendChild(optVacia);
+
+            // Obtener lista de IDs únicos con su comisión (sin mezclar materias)
+            const idsUnicos = [...new Set(dataset.map(est => est.id))].sort();
+            idsUnicos.forEach(id => {
+                const inscripciones = dataset.filter(x => x.id === id);
+                const comision = inscripciones[0] ? inscripciones[0].comision : '';
                 const opt = document.createElement('option');
-                opt.value = est.id;
-                opt.innerText = `${est.id} — ${est.materia} (Com. ${est.comision})`;
-                if (est.id === alumnoFichaActual) opt.selected = true;
+                opt.value = id;
+                opt.innerText = `${id} — Comisión ${comision}`;
+                if (id === alumnoFichaActual) opt.selected = true;
                 sel.appendChild(opt);
             });
+        }
+
+        function renderBotoneraMaterias(alumnoId) {
+            const contenedor = document.getElementById('contenedor-botonera-materias');
+            if (!contenedor) return;
+
+            if (!alumnoId) {
+                contenedor.innerHTML = `<p class="text-xs text-slate-400 italic">Seleccione un alumno arriba para desplegar y seleccionar sus materias en curso.</p>`;
+                return;
+            }
+
+            const todasInscripciones = dataset.filter(x => x.id === alumnoId);
+            if (todasInscripciones.length === 0) {
+                contenedor.innerHTML = `<p class="text-xs text-slate-400 italic">No se encontraron materias asignadas para este alumno.</p>`;
+                return;
+            }
+
+            contenedor.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <span class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="text-blue-600">📚</span> Materias cursadas (clic para sumar o restar del análisis):
+                    </span>
+                    ${todasInscripciones.length > 1 ? `
+                        <button type="button" onclick="seleccionarTodasMateriasFicha()" class="text-[11px] text-blue-700 hover:text-blue-900 font-semibold hover:underline cursor-pointer">
+                            ✓ Seleccionar todas (${todasInscripciones.length})
+                        </button>
+                    ` : ''}
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    ${todasInscripciones.map(reg => {
+                        const isActiva = materiasActivasFicha.includes(reg.materia);
+                        return `
+                            <button type="button" onclick="toggleMateriaFicha('${reg.materia}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition cursor-pointer flex items-center space-x-1.5 ${isActiva ? 'bg-blue-600 border-blue-700 text-white shadow-xs' : 'bg-slate-100 border-slate-300 text-slate-600 hover:bg-slate-200'}">
+                                <span>${isActiva ? '✓' : '+'}</span>
+                                <span>${reg.materia}</span>
+                            </button>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function seleccionarAlumnoFicha(alumnoId) {
+            alumnoFichaActual = alumnoId;
+            if (!alumnoId) {
+                materiasActivasFicha = [];
+                renderBotoneraMaterias("");
+                cargarFichaAlumno("");
+                return;
+            }
+            // Al elegir un alumno, activar todas sus materias por defecto
+            const inscripciones = dataset.filter(x => x.id === alumnoId);
+            materiasActivasFicha = inscripciones.map(i => i.materia);
+            renderBotoneraMaterias(alumnoId);
+            cargarFichaAlumno(alumnoId);
+        }
+
+        function toggleMateriaFicha(materiaNombre) {
+            if (materiasActivasFicha.includes(materiaNombre)) {
+                // No permitir deseleccionar todas si es la única
+                if (materiasActivasFicha.length > 1) {
+                    materiasActivasFicha = materiasActivasFicha.filter(m => m !== materiaNombre);
+                }
+            } else {
+                materiasActivasFicha.push(materiaNombre);
+            }
+            renderBotoneraMaterias(alumnoFichaActual);
+            cargarFichaAlumno(alumnoFichaActual);
+        }
+
+        function seleccionarTodasMateriasFicha() {
+            if (!alumnoFichaActual) return;
+            const inscripciones = dataset.filter(x => x.id === alumnoFichaActual);
+            materiasActivasFicha = inscripciones.map(i => i.materia);
+            renderBotoneraMaterias(alumnoFichaActual);
+            cargarFichaAlumno(alumnoFichaActual);
         }
 
         function verFichaDirecta(alumnoId, semana) {
             alumnoFichaActual = alumnoId;
             semanaFichaSeleccionada = parseInt(semana || 3);
+            const inscripciones = dataset.filter(x => x.id === alumnoId);
+            materiasActivasFicha = inscripciones.map(i => i.materia);
+            
             poblarSelectAlumnosFicha();
+            renderBotoneraMaterias(alumnoId);
             const selCorte = document.getElementById('sel-semana-corte-ficha');
             if (selCorte) selCorte.value = semanaFichaSeleccionada;
             switchTab('ficha');
@@ -975,53 +1562,148 @@
         }
 
         function cargarFichaAlumno(alumnoId) {
-            alumnoFichaActual = alumnoId;
-            const est = dataset.find(x => x.id === alumnoId) || dataset[0];
             const cont = document.getElementById('contenedor-detalle-alumno');
             if (!cont) return;
 
-            const datosCorte = est.semanas[semanaFichaSeleccionada] || { asist: 0, teo: 0, prac: 0, obs: "" };
-            const resCorte = calcularSemaforo(datosCorte.asist, datosCorte.teo, datosCorte.prac);
-            const long = calcularAnalisisLongitudinal(est, semanaFichaSeleccionada);
+            // ESTADO VACÍO: Si no hay alumno seleccionado
+            if (!alumnoId) {
+                cont.innerHTML = `
+                    <div class="bg-white rounded-xl border border-dashed border-slate-300 p-12 text-center shadow-xs flex flex-col items-center justify-center space-y-3">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center text-2xl font-bold">
+                            📋
+                        </div>
+                        <div class="max-w-md">
+                            <h3 class="text-base font-bold text-slate-800">Ningún estudiante seleccionado</h3>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Seleccione un estudiante en el menú desplegable superior para cargar su ficha situacional, materias cursadas y análisis de trayectoria.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
 
-            // Generar 16 semanas para la tabla y gráfico
+            // Filtrar todos los registros del estudiante seleccionado
+            const todasInscripciones = dataset.filter(x => x.id === alumnoId);
+            if (todasInscripciones.length === 0) return;
+
+            // Si no hay materias seleccionadas, activar la primera
+            if (materiasActivasFicha.length === 0) {
+                materiasActivasFicha = [todasInscripciones[0].materia];
+            }
+
+            // Registros activos correspondientes a los botones encendidos
+            const inscripcionesActivas = todasInscripciones.filter(i => materiasActivasFicha.includes(i.materia));
+
+            // Consolidar datos de la semana de corte para las materias activas
+            let sumAsistCorte = 0, sumTeoCorte = 0, sumPracCorte = 0;
+            let obsArrayCorte = [];
+
+            inscripcionesActivas.forEach(reg => {
+                if (reg.semanas[semanaFichaSeleccionada]) {
+                    sumAsistCorte += (reg.semanas[semanaFichaSeleccionada].asist || 0);
+                    sumTeoCorte += (reg.semanas[semanaFichaSeleccionada].teo || 0);
+                    sumPracCorte += (reg.semanas[semanaFichaSeleccionada].prac || 0);
+                    if (reg.semanas[semanaFichaSeleccionada].obs) {
+                        obsArrayCorte.push(`<strong>${reg.materia.split(':')[0]}:</strong> ${reg.semanas[semanaFichaSeleccionada].obs}`);
+                    }
+                }
+            });
+
+            const resCorte = calcularSemaforo(sumAsistCorte, sumTeoCorte, sumPracCorte);
+
+            // Consolidar historial de 16 semanas sumando las materias activas
             const historial16 = [];
+            let totalPuntosLongitudinal = 0;
+            let semanasConDatos = 0;
+            let scoresSemanalLong = [];
+
             for (let s = 1; s <= 16; s++) {
-                if (est.semanas[s]) {
-                    historial16.push({
-                        sem: s,
-                        asist: est.semanas[s].asist,
-                        teo: est.semanas[s].teo,
-                        prac: est.semanas[s].prac,
-                        obs: est.semanas[s].obs
-                    });
-                } else {
-                    historial16.push({ sem: s, asist: 0, teo: 0, prac: 0, obs: "-" });
+                let asistS = 0, teoS = 0, pracS = 0;
+                let tieneDato = false;
+
+                inscripcionesActivas.forEach(reg => {
+                    if (reg.semanas[s]) {
+                        asistS += (reg.semanas[s].asist || 0);
+                        teoS += (reg.semanas[s].teo || 0);
+                        pracS += (reg.semanas[s].prac || 0);
+                        tieneDato = true;
+                    }
+                });
+
+                const totalS = asistS + teoS + pracS;
+                historial16.push({
+                    sem: s,
+                    asist: asistS,
+                    teo: teoS,
+                    prac: pracS,
+                    total: totalS
+                });
+
+                if (tieneDato && s <= semanaFichaSeleccionada) {
+                    totalPuntosLongitudinal += totalS;
+                    semanasConDatos++;
+                    scoresSemanalLong.push(totalS);
                 }
             }
 
+            const promLong = semanasConDatos > 0 ? (totalPuntosLongitudinal / semanasConDatos).toFixed(1) : 0;
+            const actualLong = scoresSemanalLong[scoresSemanalLong.length - 1] || 0;
+            const previoLong = scoresSemanalLong.length > 1 ? scoresSemanalLong[scoresSemanalLong.length - 2] : actualLong;
+
+            let tendenciaTexto = '➡️ Trayectoria Estable';
+            if (actualLong > previoLong) {
+                tendenciaTexto = '📉 En Deterioro (Alerta creciente)';
+            } else if (actualLong < previoLong) {
+                tendenciaTexto = '📈 En Recuperación (Alza pedagógica)';
+            }
+
+            let diagTrayectoria = '';
+            if (actualLong >= 5 && promLong < 3) {
+                diagTrayectoria = '⚠️ Incidente Crítico Aislado: El estudiante mantiene una trayectoria previa regular; la alerta responde a un suceso específico en la semana.';
+            } else if (actualLong >= 5 && promLong >= 3) {
+                diagTrayectoria = '🚨 Dificultad Crónica Acumulada: Se observa persistencia de fallas en múltiples semanas en las materias seleccionadas.';
+            } else if (actualLong < previoLong) {
+                diagTrayectoria = '✨ Evolución Positiva: El alumno redujo penalizaciones respecto a semanas anteriores en las asignaturas analizadas.';
+            } else if (actualLong <= 1) {
+                diagTrayectoria = '✅ Trayectoria Consolidada: Desempeño constante y seguro sin alertas pedagógicas activas.';
+            } else {
+                diagTrayectoria = '🔍 Monitoreo Continuo: Desempeño oscilante en zona de atención.';
+            }
+
+            // Recopilar todas las intervenciones de las materias activas
+            let todasIntervenciones = [];
+            inscripcionesActivas.forEach(reg => {
+                if (reg.intervenciones) {
+                    reg.intervenciones.forEach(it => {
+                        todasIntervenciones.push({
+                            materia: reg.materia.split(':')[0],
+                            fecha: it.fecha,
+                            tipo: it.tipo,
+                            obs: it.obs
+                        });
+                    });
+                }
+            });
+
+            // Renderizar la Ficha consolidando las materias activadas en la botonera superior
             cont.innerHTML = `
-                <!-- TARJETA CABECERA DE PERFIL -->
-                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-wrap items-center justify-between gap-4">
-                    <div>
-                        <div class="flex items-center space-x-3">
-                            <span class="text-xl font-bold font-mono text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">${est.id}</span>
-                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-300">Comisión ${est.comision}</span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-1 font-semibold">${est.materia} • Trayectoria Cuatrimestral Regular</p>
-                    </div>
+                <!-- Cabecera Perfil Consolidado al Corte -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center space-x-3">
-                        <div class="text-right">
-                            <span class="text-[11px] text-slate-400 block uppercase font-semibold">Estado al Corte</span>
-                            <div class="mt-0.5">${resCorte.badgeHtml}</div>
-                        </div>
+                        <span class="text-xl font-bold font-mono text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">${alumnoId}</span>
+                        <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-300">Comisión ${todasInscripciones[0].comision}</span>
+                        <span class="text-xs text-slate-500 font-semibold">• Analizando ${inscripcionesActivas.length} de ${todasInscripciones.length} materia(s)</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[11px] text-slate-400 block uppercase font-semibold">Semáforo Consolidado al Corte</span>
+                        <div class="mt-0.5">${resCorte.badgeHtml}</div>
                     </div>
                 </div>
 
-                <!-- DIAGNÓSTICO DUAL: SITUACIONAL vs LONGITUDINAL -->
+                <!-- Diagnóstico Dual: Situacional vs Longitudinal -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Foto Situacional -->
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-2">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                             <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Diagnóstico Situacional (Semana ${semanaFichaSeleccionada})</h3>
                             <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Corte Sincrónico</span>
@@ -1031,37 +1713,39 @@
                                 <span class="text-lg font-bold text-slate-900">${resCorte.label} (${resCorte.suma} pts)</span>
                             </div>
                             <p class="text-xs text-slate-600 mt-1 leading-relaxed">${resCorte.diagnostico}</p>
-                            <div class="mt-3 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                                <span class="font-semibold text-slate-700">Observación Docente:</span>
-                                <span class="italic text-slate-600 ml-1">"${datosCorte.obs || 'Sin comentarios registrados esta semana.'}"</span>
+                            <div class="mt-3 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs space-y-1">
+                                <span class="font-semibold text-slate-700 block">Observaciones Docentes en la Semana:</span>
+                                ${obsArrayCorte.length > 0 ? obsArrayCorte.map(o => `<p class="text-slate-600 text-[11px]">${o}</p>`).join('') : '<p class="text-slate-400 italic text-[11px]">Sin observaciones registradas esta semana en las materias seleccionadas.</p>'}
                             </div>
                         </div>
                     </div>
 
-                    <!-- Trayectoria Longitudinal -->
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-2">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Diagnóstico Longitudinal (Trayectoria)</h3>
+                            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Diagnóstico Longitudinal (Trayectoria Acumulada)</h3>
                             <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Semanas 1 a ${semanaFichaSeleccionada}</span>
                         </div>
                         <div class="pt-1">
                             <div class="flex items-center space-x-2">
-                                <span class="text-base font-bold text-slate-900">${long.tendenciaTexto}</span>
-                                <span class="text-xs text-slate-500 font-mono font-semibold">• Prom: ${long.promedio} pts/sem</span>
+                                <span class="text-base font-bold text-slate-900">${tendenciaTexto}</span>
+                                <span class="text-xs text-slate-500 font-mono font-semibold">• Prom: ${promLong} pts/sem</span>
                             </div>
-                            <p class="text-xs text-slate-600 mt-1 leading-relaxed">${long.diagnosticoTrayectoria}</p>
+                            <p class="text-xs text-slate-600 mt-1 leading-relaxed">${diagTrayectoria}</p>
                             <div class="mt-3 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs flex items-center justify-between">
-                                <span class="text-slate-600 font-semibold">Trazabilidad Registrada:</span>
-                                <span class="font-bold text-slate-900">${long.semanasContadas} semanas evaluadas</span>
+                                <span class="text-slate-600 font-semibold">Materias Integradas al Cálculo:</span>
+                                <span class="font-bold text-slate-900">${inscripcionesActivas.length} de ${todasInscripciones.length}</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- TABLA HISTÓRICA DE 16 SEMANAS Y GRÁFICO EVOLUTIVO -->
-                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+                <!-- Tabla 16 Semanas y Gráfico de Barras Apiladas -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                        <h3 class="text-sm font-bold text-slate-800">Evolución de Trayectoria (16 Semanas)</h3>
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-800">Evolución y Desglose Semanal (16 Semanas)</h3>
+                            <p class="text-xs text-slate-500">Puntaje semanal consolidado de las materias activas marcadas arriba</p>
+                        </div>
                         <div class="flex items-center space-x-3 text-xs">
                             <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm" style="background-color: #00D4FF;"></span><span class="text-black font-semibold">A. Asistencia</span></span>
                             <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm" style="background-color: #7B2FF7;"></span><span class="text-black font-semibold">B. Teoría</span></span>
@@ -1070,25 +1754,24 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                        <!-- Tabla 16 Semanas con anclaje -->
+                        <!-- Tabla 16 Semanas -->
                         <div class="lg:col-span-6 overflow-x-auto max-h-[380px] border border-slate-200 rounded-xl">
                             <table class="w-full text-left text-xs border-collapse">
                                 <thead class="bg-slate-100 text-slate-600 font-bold sticky top-0 z-20 border-b border-slate-200">
                                     <tr>
                                         <th class="p-2 text-center text-black sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-200 sticky-left-shadow">Sem</th>
-                                        <th class="p-2 text-center text-black sticky top-0 z-20" style="background-color: #e6faff;">A. Asistencia</th>
-                                        <th class="p-2 text-center text-black sticky top-0 z-20" style="background-color: #f4edfe;">B. Teoría</th>
-                                        <th class="p-2 text-center text-black sticky top-0 z-20" style="background-color: #edf4ff;">C. Práctica</th>
-                                        <th class="p-2 text-center text-black sticky top-0 z-20 bg-slate-100">Suma</th>
+                                        <th class="p-2 text-center text-black sticky top-0 z-20" style="background-color: #e6faff;">A. Asist</th>
+                                        <th class="p-2 text-center text-black sticky top-0 z-20" style="background-color: #f4edfe;">B. Teo</th>
+                                        <th class="p-2 text-center text-black sticky top-0 z-20" style="background-color: #edf4ff;">C. Prac</th>
+                                        <th class="p-2 text-center text-black sticky top-0 z-20 bg-slate-100">Total</th>
                                         <th class="p-2 text-black sticky top-0 z-20 bg-slate-100">Semáforo</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 font-mono text-[11px]">
                                     ${historial16.map(h => {
-                                        const sum = h.asist + h.teo + h.prac;
                                         let badgeSem = '<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border text-black" style="background-color: #f0fff0; border-color: #99FF99;">🟢 Óptimo</span>';
-                                        if (sum >= 5) badgeSem = '<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border text-black" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Crítico</span>';
-                                        else if (sum >= 2) badgeSem = '<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border text-black" style="background-color: #fffae6; border-color: #FFE680;">🟡 Atención</span>';
+                                        if (h.total >= 5) badgeSem = '<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border text-black" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Crítico</span>';
+                                        else if (h.total >= 2) badgeSem = '<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border text-black" style="background-color: #fffae6; border-color: #FFE680;">🟡 Atención</span>';
 
                                         const isAct = h.sem === semanaFichaSeleccionada;
                                         const bgRow = isAct ? 'bg-blue-50' : 'bg-white';
@@ -1099,7 +1782,7 @@
                                                 <td class="p-2 text-center text-black" style="background-color: #f2ffff;">${h.asist}</td>
                                                 <td class="p-2 text-center text-black" style="background-color: #fff2ff;">${h.teo}</td>
                                                 <td class="p-2 text-center text-black" style="background-color: #f2f2ff;">${h.prac}</td>
-                                                <td class="p-2 text-center font-semibold text-black">${sum}</td>
+                                                <td class="p-2 text-center font-semibold text-black">${h.total}</td>
                                                 <td class="p-2">${badgeSem}</td>
                                             </tr>
                                         `;
@@ -1108,7 +1791,7 @@
                             </table>
                         </div>
 
-                        <!-- Gráfico Chart.js -->
+                        <!-- Gráfico Chart.js Stacked Bar -->
                         <div class="lg:col-span-6 bg-slate-50/50 p-3 rounded-xl border border-slate-200">
                             <div class="h-[340px] w-full relative">
                                 <canvas id="chartEvolucionAlumno"></canvas>
@@ -1117,37 +1800,34 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN DE INTERVENCIONES Y ACUERDOS PEDAGÓGICOS -->
-                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-800">Bitácora de Intervenciones & Articulación</h3>
-                            <p class="text-xs text-slate-500">Historial acumulado de acuerdos entre docentes y coordinación</p>
-                        </div>
+                <!-- Bitácora de Intervenciones -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="text-sm font-bold text-slate-800">Bitácora de Intervenciones & Acuerdos Pedagógicos</h3>
+                        <p class="text-xs text-slate-500">Historial de articulación entre docentes y coordinación</p>
                     </div>
 
-                    <!-- Listado de intervenciones -->
                     <div class="space-y-2.5">
-                        ${est.intervenciones.length === 0 ? `
+                        ${todasIntervenciones.length === 0 ? `
                             <p class="text-xs text-slate-400 italic py-2">No se han registrado acuerdos o intervenciones para este estudiante aún.</p>
-                        ` : est.intervenciones.map(it => `
+                        ` : todasIntervenciones.map(it => `
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                                 <div>
                                     <div class="flex items-center space-x-2">
+                                        <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold text-[10px]">${it.materia}</span>
                                         <span class="font-bold text-slate-900">${it.tipo}</span>
                                         <span class="text-slate-400 font-mono text-[11px]">• ${it.fecha}</span>
                                     </div>
-                                    <p class="text-slate-600 mt-0.5">${it.obs}</p>
+                                    <p class="text-slate-600 mt-1">${it.obs}</p>
                                 </div>
                                 <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border text-black bg-white border-slate-300 self-start sm:self-auto">Registrado</span>
                             </div>
                         `).join('')}
                     </div>
 
-                    <!-- Formulario para nueva intervención -->
                     <div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row gap-2">
                         <input type="text" id="input-nueva-intervencion" placeholder="Describir nuevo acuerdo o intervención pedagógica..." class="flex-1 text-xs px-3 py-2 rounded-lg border border-slate-300 focus:ring-1 focus:ring-blue-500">
-                        <button onclick="guardarIntervencion('${est.id}')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-xs transition cursor-pointer">
+                        <button onclick="guardarIntervencion('${alumnoId}')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-xs transition cursor-pointer">
                             + Registrar Acuerdo
                         </button>
                     </div>
@@ -1157,7 +1837,6 @@
             renderGraficoEvolucion(historial16);
         }
 
-        // RENDER DE CHART.JS CON COLORES DEFINIDOS (#00D4FF, #7B2FF7, #0066FF)
         function renderGraficoEvolucion(historial) {
             const ctx = document.getElementById('chartEvolucionAlumno');
             if (!ctx) return;
@@ -1166,45 +1845,39 @@
                 chartEvolucionInstance.destroy();
             }
 
-            const labels = historial.map(h => `Sem ${h.sem}`);
-            const dataAsist = historial.map(h => h.asist);
-            const dataTeo = historial.map(h => h.teo);
-            const dataPrac = historial.map(h => h.prac);
+            const labels = historial.map(h => `S${h.sem}`);
+            const dataAsist = historial.map(h => parseInt(h.asist || 0));
+            const dataTeo = historial.map(h => parseInt(h.teo || 0));
+            const dataPrac = historial.map(h => parseInt(h.prac || 0));
 
             chartEvolucionInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [
                         {
                             label: 'A. Asistencia',
                             data: dataAsist,
+                            backgroundColor: '#00D4FF',
                             borderColor: '#00D4FF',
-                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.3,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#00D4FF'
+                            borderWidth: 1,
+                            borderRadius: 2
                         },
                         {
                             label: 'B. Teoría',
                             data: dataTeo,
+                            backgroundColor: '#7B2FF7',
                             borderColor: '#7B2FF7',
-                            backgroundColor: 'rgba(123, 47, 247, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.3,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#7B2FF7'
+                            borderWidth: 1,
+                            borderRadius: 2
                         },
                         {
                             label: 'C. Práctica',
                             data: dataPrac,
+                            backgroundColor: '#0066FF',
                             borderColor: '#0066FF',
-                            backgroundColor: 'rgba(0, 102, 255, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.3,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#0066FF'
+                            borderWidth: 1,
+                            borderRadius: 2
                         }
                     ]
                 },
@@ -1212,17 +1885,19 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
+                        x: {
+                            stacked: true,
+                            ticks: { font: { family: '"Titillium Web"' } },
+                            grid: { color: '#f1f5f9' }
+                        },
                         y: {
+                            stacked: true,
                             beginAtZero: true,
-                            max: 6,
+                            suggestedMax: 6,
                             ticks: {
                                 stepSize: 1,
                                 font: { family: '"Titillium Web"' }
                             },
-                            grid: { color: '#f1f5f9' }
-                        },
-                        x: {
-                            ticks: { font: { family: '"Titillium Web"' } },
                             grid: { color: '#f1f5f9' }
                         }
                     },
@@ -1233,13 +1908,29 @@
                                 boxWidth: 12,
                                 font: { family: '"Titillium Web"', size: 11 }
                             }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.parsed.y} pts`;
+                                },
+                                footer: function(tooltipItems) {
+                                    let sum = 0;
+                                    tooltipItems.forEach(function(tooltipItem) {
+                                        sum += tooltipItem.parsed.y;
+                                    });
+                                    let estado = '🟢 Óptimo';
+                                    if (sum >= 5) estado = '🔴 Crítico';
+                                    else if (sum >= 2) estado = '🟡 Atención';
+                                    return `Total Semana: ${sum} pts (${estado})`;
+                                }
+                            }
                         }
                     }
                 }
             });
         }
 
-        // REGISTRAR NUEVA INTERVENCIÓN
         function guardarIntervencion(alumnoId) {
             const input = document.getElementById('input-nueva-intervencion');
             if (!input || !input.value.trim()) return;
@@ -1257,7 +1948,6 @@
             }
         }
 
-        // NAVEGACIÓN ENTRE PESTAÑAS
         function switchTab(tabId) {
             const tabs = ['docente', 'coordinacion', 'ficha'];
             tabs.forEach(t => {
@@ -1284,11 +1974,11 @@
             }
         }
 
-        // INICIALIZACIÓN COMPLETA AL CARGAR LA PÁGINA
         window.onload = function() {
             renderCargaDocente();
             renderTableroCoordinacion();
             poblarSelectAlumnosFicha();
+            renderBotoneraMaterias(alumnoFichaActual);
             cargarFichaAlumno(alumnoFichaActual);
         };
     </script>
