@@ -94,19 +94,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-
-        /* Notificaciones flotantes elegantes */
-        .toast-notification {
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-        }
-        .toast-notification.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
     </style>
 </head>
 <body class="h-full text-slate-800 flex flex-col bg-slate-50">
@@ -150,7 +137,7 @@
         <section id="tab-docente" class="space-y-4">
             
             <!-- Barra superior: Selector de Comisión/Semana y Regla de Cálculo -->
-            <div class="bg-white rounded-t-2xl border border-slate-200 border-b-0 p-4 sm:p-5 shadow-xs">
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <div class="flex flex-wrap items-center gap-3">
                         <div>
@@ -188,17 +175,36 @@
                 </div>
             </div>
 
+            <!-- BANNER SUPERIOR DE AVISO DE CAMBIOS / GUARDADO -->
+            <div id="banner-estado-docente" class="hidden rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs">
+                <div class="flex items-center space-x-3">
+                    <div id="banner-estado-icono-box" class="w-8 h-8 rounded-lg border flex items-center justify-center shrink-0">
+                        <span id="banner-estado-icono" class="text-sm">⚠️</span>
+                    </div>
+                    <div>
+                        <span id="banner-estado-titulo" class="font-bold text-slate-900 block">Cambios pendientes</span>
+                        <span id="banner-estado-subtitulo" class="text-slate-600 text-[11px]">Tenés modificaciones sin guardar en la planilla docente.</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 shrink-0">
+                    <button id="btn-banner-guardar" onclick="guardarDocenteSimulado()" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-xs transition cursor-pointer text-xs">
+                        Guardar Cambios
+                    </button>
+                    <button id="btn-banner-cerrar" onclick="cerrarBannerEstado()" class="hidden text-slate-400 hover:text-slate-600 font-bold px-2 py-1 cursor-pointer text-sm">✕</button>
+                </div>
+            </div>
+
             <!-- Tabla de Carga Matricial con Radio Buttons -->
-            <div class="bg-white rounded-b-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="table-scroll-container">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-100 text-slate-700 text-xs font-semibold border-b border-slate-300">
-                                <th class="p-3 pl-4 sm:pl-6 w-36 align-bottom sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-300 sticky-left-shadow">
+                            <tr class="bg-slate-100 text-slate-700 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
+                                <th class="p-3 pl-4 sm:pl-6 sticky top-0 left-0 z-30 bg-slate-100 border-r border-slate-300 sticky-left-shadow w-44">
                                     <div class="font-bold text-slate-900">ID Protocolar</div>
-                                    <div class="text-[10px] text-slate-500 font-normal mt-0.5">Iniciales + 3 Dígitos</div>
+                                    <div class="text-[10px] text-slate-500 font-normal mt-0.5 font-mono">ABC123</div>
                                 </th>
-                                
+
                                 <!-- Dimensión A Cyan -->
                                 <th class="p-2.5 border-l border-slate-200 text-center min-w-[270px] sticky top-0 z-20" style="background-color: #e6faff;">
                                     <div class="flex items-center justify-center space-x-1.5 pb-2 mb-1.5 border-b border-cyan-200/80">
@@ -377,7 +383,7 @@
                 <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
                     <span class="text-xs text-slate-600 font-semibold" id="lbl-filtro-coord-resumen">Mostrando: Todas las materias • Todas las comisiones • Semana 3</span>
                     <div class="flex items-center space-x-1.5">
-                        <button onclick="filtrarTablero('TODOS')" id="btn-filtro-todos" class="px-2.5 py-1 text-xs rounded-lg border font-semibold bg-white text-black border-slate-400 hover:bg-slate-100 cursor-pointer shadow-xs">Todos</button>
+                        <button onclick="filtrarTablero('TODOS')" id="btn-filtro-todos" class="px-2.5 py-1 text-xs rounded-lg border font-semibold bg-white text-black border-slate-400 hover:bg-slate-100 cursor-pointer shadow-xs ring-2 ring-slate-900 ring-offset-1">Todos</button>
                         <button onclick="filtrarTablero('ROJO')" id="btn-filtro-rojo" class="px-2.5 py-1 text-xs rounded-lg border font-semibold text-black cursor-pointer" style="background-color: #fff0f0; border-color: #FF9999;">🔴 Críticos (5+)</button>
                         <button onclick="filtrarTablero('AMARILLO')" id="btn-filtro-amarillo" class="px-2.5 py-1 text-xs rounded-lg border font-semibold text-black cursor-pointer" style="background-color: #fffae6; border-color: #FFE680;">🟡 Atención (2-4)</button>
                         <button onclick="filtrarTablero('VERDE')" id="btn-filtro-verde" class="px-2.5 py-1 text-xs rounded-lg border font-semibold text-black cursor-pointer" style="background-color: #f0fff0; border-color: #99FF99;">🟢 Óptimos (0-1)</button>
@@ -447,35 +453,6 @@
         </section>
 
     </main>
-
-    <!-- TOAST NOTIFICACIONES FLOTANTES ELEGANTES -->
-    <div class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none max-w-sm w-full px-4 sm:px-0">
-        <!-- Toast de Cambios Pendientes -->
-        <div id="toast-pendientes" class="toast-notification bg-white border border-amber-300 shadow-lg rounded-xl p-3.5 flex items-start space-x-3">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background-color: #fffae6; border: 1px solid #FFE680;">
-                <span class="text-sm">⚠️</span>
-            </div>
-            <div class="flex-1">
-                <h4 class="text-xs font-bold text-slate-900">Cambios sin guardar</h4>
-                <p class="text-[11px] text-slate-600 mt-0.5 leading-snug">Tenés modificaciones en la planilla docente pendientes de confirmación.</p>
-            </div>
-            <button onclick="guardarDocenteSimulado()" class="text-[11px] font-semibold text-blue-700 hover:text-blue-900 underline shrink-0 cursor-pointer pt-0.5">
-                Guardar
-            </button>
-        </div>
-
-        <!-- Toast de Guardado Exitoso -->
-        <div id="toast-guardado" class="toast-notification bg-white border border-emerald-300 shadow-lg rounded-xl p-3.5 flex items-start space-x-3">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background-color: #f0fff0; border: 1px solid #99FF99;">
-                <span class="text-sm">✅</span>
-            </div>
-            <div class="flex-1">
-                <h4 class="text-xs font-bold text-slate-900">Registros guardados</h4>
-                <p class="text-[11px] text-slate-600 mt-0.5 leading-snug">Los datos se sincronizaron con el Tablero de Coordinación.</p>
-            </div>
-            <button onclick="ocultarToastGuardado()" class="text-slate-400 hover:text-slate-600 text-xs font-bold cursor-pointer">✕</button>
-        </div>
-    </div>
 
     <script>
         // BASE DE DATOS DE EJEMPLO (6 Alumnos en distintas comisiones y materias con formato ABC123)
@@ -576,13 +553,13 @@
         let filtroCoordComision = 'TODAS';
         let chartEvolucionInstance = null;
         let tieneCambiosSinGuardar = false;
-        let timerToastGuardado = null;
+        let timerBannerGuardado = null;
 
-        // GESTIÓN DE NOTIFICACIONES ELEGANTES
+        // GESTIÓN DE NOTIFICACIÓN SUPERIOR INTEGRADA
         function notificarCambioPendiente() {
             tieneCambiosSinGuardar = true;
             
-            // Actualizar indicador en footer
+            // Actualizar pie de tabla
             const ind = document.getElementById('indicador-estado-guardado');
             const lbl = document.getElementById('lbl-estado-autoguardado');
             const dot = document.getElementById('dot-cambios-pendientes');
@@ -590,18 +567,37 @@
             if (lbl) lbl.innerText = '⚠️ Tenés cambios sin guardar en esta comisión.';
             if (dot) dot.classList.remove('hidden');
 
-            // Mostrar toast de cambios pendientes
-            const toastPendiente = document.getElementById('toast-pendientes');
-            if (toastPendiente) toastPendiente.classList.add('active');
+            // Configurar y desplegar Banner Superior en estado de alerta pendiente
+            const banner = document.getElementById('banner-estado-docente');
+            const iconoBox = document.getElementById('banner-estado-icono-box');
+            const icono = document.getElementById('banner-estado-icono');
+            const titulo = document.getElementById('banner-estado-titulo');
+            const subtitulo = document.getElementById('banner-estado-subtitulo');
+            const btnGuardar = document.getElementById('btn-banner-guardar');
+            const btnCerrar = document.getElementById('btn-banner-cerrar');
 
-            // Ocultar toast de guardado si estaba visible
-            const toastGuardado = document.getElementById('toast-guardado');
-            if (toastGuardado) toastGuardado.classList.remove('active');
+            if (banner) {
+                if (timerBannerGuardado) clearTimeout(timerBannerGuardado);
+                banner.className = 'rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs bg-white';
+                banner.style.borderColor = '#FFE680';
+                
+                if (iconoBox) {
+                    iconoBox.style.backgroundColor = '#fffae6';
+                    iconoBox.style.borderColor = '#FFE680';
+                }
+                if (icono) icono.innerText = '⚠️';
+                if (titulo) titulo.innerText = 'Cambios sin guardar';
+                if (subtitulo) subtitulo.innerText = 'Tenés modificaciones en la planilla docente pendientes de confirmación.';
+                if (btnGuardar) btnGuardar.classList.remove('hidden');
+                if (btnCerrar) btnCerrar.classList.add('hidden');
+                
+                banner.classList.remove('hidden');
+            }
         }
 
-        function ocultarToastGuardado() {
-            const toastGuardado = document.getElementById('toast-guardado');
-            if (toastGuardado) toastGuardado.classList.remove('active');
+        function cerrarBannerEstado() {
+            const banner = document.getElementById('banner-estado-docente');
+            if (banner) banner.classList.add('hidden');
         }
 
         // FUNCIÓN PURA: CÁLCULO DE REGLA CUANTITATIVA
@@ -803,18 +799,34 @@
             if (lbl) lbl.innerText = '✅ Registros guardados y notificados a Coordinación correctamente.';
             if (dot) dot.classList.add('hidden');
 
-            // Ocultar toast de pendientes
-            const toastPendiente = document.getElementById('toast-pendientes');
-            if (toastPendiente) toastPendiente.classList.remove('active');
+            // Actualizar Banner Superior a estado de guardado exitoso
+            const banner = document.getElementById('banner-estado-docente');
+            const iconoBox = document.getElementById('banner-estado-icono-box');
+            const icono = document.getElementById('banner-estado-icono');
+            const titulo = document.getElementById('banner-estado-titulo');
+            const subtitulo = document.getElementById('banner-estado-subtitulo');
+            const btnGuardar = document.getElementById('btn-banner-guardar');
+            const btnCerrar = document.getElementById('btn-banner-cerrar');
 
-            // Mostrar toast elegante de éxito
-            const toastGuardado = document.getElementById('toast-guardado');
-            if (toastGuardado) {
-                toastGuardado.classList.add('active');
-                if (timerToastGuardado) clearTimeout(timerToastGuardado);
-                timerToastGuardado = setTimeout(() => {
-                    toastGuardado.classList.remove('active');
-                }, 4000);
+            if (banner) {
+                banner.className = 'rounded-xl border p-3.5 transition-all duration-200 flex items-center justify-between gap-3 text-xs shadow-xs bg-white';
+                banner.style.borderColor = '#99FF99';
+
+                if (iconoBox) {
+                    iconoBox.style.backgroundColor = '#f0fff0';
+                    iconoBox.style.borderColor = '#99FF99';
+                }
+                if (icono) icono.innerText = '✅';
+                if (titulo) titulo.innerText = 'Registros guardados con éxito';
+                if (subtitulo) subtitulo.innerText = 'Los datos fueron sincronizados con el Tablero de Coordinación.';
+                if (btnGuardar) btnGuardar.classList.add('hidden');
+                if (btnCerrar) btnCerrar.classList.remove('hidden');
+                banner.classList.remove('hidden');
+
+                if (timerBannerGuardado) clearTimeout(timerBannerGuardado);
+                timerBannerGuardado = setTimeout(() => {
+                    banner.classList.add('hidden');
+                }, 4500);
             }
         }
 
