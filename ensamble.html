@@ -1,0 +1,2900 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Ensamblada — Gestor de Formas (1 Corte de Cada Tipo)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;0,6..96,700;1,6..96,600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,600;0,6..72,700;1,6..72,600&family=Nunito+Sans:wght@400;600;700&family=Oswald:wght@500;600;700&family=Outfit:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Anonymous+Pro:wght@400;700&family=Anton&family=Archivo:wght@600;700;800&family=Azeret+Mono:wght@500;600&family=Cabin:wght@400;500;600;700&family=Chakra+Petch:wght@600;700&family=Courier+Prime:wght@400;700&family=DM+Mono:wght@400;500&family=EB+Garamond:ital,wght@0,600;0,700;1,600&family=Exo+2:wght@400;500;600;700&family=Figtree:wght@400;500;600;700&family=Fira+Code:wght@500;600&family=Fira+Mono:wght@500;700&family=Inconsolata:wght@500;600&family=Instrument+Serif:ital@0;1&family=Josefin+Sans:wght@600;700&family=Karla:wght@400;500;600;700&family=Lato:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,600;0,700;1,600&family=Mulish:wght@400;600;700&family=Overpass+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Roboto+Mono:wght@500;600&family=Share+Tech+Mono&family=Sora:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&family=Zilla+Slab:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bebas+Neue&family=Bitter:wght@600;700&family=Bricolage+Grotesque:wght@500;700&family=Cinzel:wght@500;700&family=Crimson+Pro:wght@500;700&family=DM+Serif+Display&family=Epilogue:wght@500;700;800&family=Geist+Mono:wght@500;600&family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&family=Lexend:wght@500;600;700&family=Marcellus&family=Martian+Mono:wght@500;600&family=Merriweather+Sans:wght@400;600;700&family=Montserrat:wght@400;500;600;700&family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Mono:wght@500;600&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&family=Raleway:wght@500;700&family=Red+Hat+Display:wght@500;700;800&family=Red+Hat+Mono:wght@500;600&family=Red+Hat+Text:wght@400;500;700&family=Rubik:wght@400;500;600&family=Sometype+Mono:wght@500;600&family=Source+Code+Pro:wght@500;600&family=Source+Serif+4:wght@500;700&family=Spectral:wght@500;700&family=Spline+Sans+Mono:wght@500;600&family=Urbanist:wght@500;700;800&family=Young+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@500;700&family=Arvo:wght@400;700&family=Rokkitt:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Acme&family=Amatic+SC:wght@400;700&family=Cabin+Condensed:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&family=Caveat:wght@400;600;700&family=Changa:wght@400;600;700;800&family=Changa+One&family=Comfortaa:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cuprum:ital,wght@0,400;0,600;0,700;1,400&family=Doppio+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700;800&family=Electrolize&family=Encode+Sans:wght@400;600;700;800&family=Encode+Sans+Condensed:wght@400;600;700;800&family=Exo:ital,wght@0,400;0,600;0,700;1,400&family=Fjalla+One&family=Gugi&family=Host+Grotesk:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Indie+Flower&family=Kodchasan:wght@400;600;700&family=Lobster&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mina:wght@400;700&family=Monda:wght@400;700&family=Pacifico&family=Pontano+Sans&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Quantico:ital,wght@0,400;0,700;1,400&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Condensed:wght@400;600;700;800&family=Roboto+Serif:ital,opsz,wght@0,8..144,400;0,8..144,600;0,8..144,700;1,8..144,400&family=Ropa+Sans:ital@0;1&family=Rosario:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;600;700;800&family=Syncopate:wght@400;700&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&family=Ubuntu+Condensed&family=Caacupe+One&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&family=Cutive+Mono&family=Fragment+Mono:ital@0;1&family=B612+Mono:ital,wght@0,400;0,700;1,400&family=Oxygen+Mono&family=Cousine:ital,wght@0,400;0,700;1,400&family=Major+Mono+Display&display=swap" rel="stylesheet">
+  
+  <!-- Estilos base del sistema y UI de catálogo (Topbar y Modales) -->
+  <link rel="stylesheet" href="./catalogos/css/00-tokens-y-base.css">
+  <link rel="stylesheet" href="./catalogos/css/ui-catalogo.css">
+
+  <!-- Estilos atómicos de los 6 cortes ensamblados -->
+  <link rel="stylesheet" href="./cortes/01-headers/header-doble-piso.css">
+  <link rel="stylesheet" href="./cortes/02-heros/hero-estandar.css">
+  <link rel="stylesheet" href="./cortes/03-cintas/cinta-logos-marcas.css">
+  <link rel="stylesheet" href="./cortes/04-aperturas/heading-split.css">
+  <link rel="stylesheet" href="./cortes/05-features/features-grilla-quinteto.css">
+  <link rel="stylesheet" href="./cortes/06-servicios-procesos/services-matriz-comparativa.css">
+
+  <style>
+    /* Estilos de la barra de control de cada corte ensamblado */
+    .assembled-cut-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    .cut-model-picker {
+      background: #1f2328;
+      border: 1px solid #3d444d;
+      color: #e6edf3;
+      font-family: var(--font-mono, monospace);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .cut-model-picker:hover, .cut-model-picker:focus {
+      border-color: #58a6ff;
+      background: #2b313a;
+    }
+    .cut-tag__controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cut-tag__model-label {
+      font-size: 11px;
+      color: #8b949e;
+      font-family: var(--font-mono, monospace);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Footer complementario para cierre completo de página */
+    .assembled-footer {
+      background: var(--forest);
+      color: var(--forest-ink);
+      padding: 64px 24px 32px;
+      border-top: 1px solid var(--line-dark);
+      font-family: var(--font-body);
+      position: relative;
+      z-index: 10;
+    }
+    .assembled-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 860px) {
+      .assembled-footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 540px) {
+      .assembled-footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+    .assembled-footer-brand h4 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.01em;
+      color: var(--forest-ink);
+    }
+    .assembled-footer-brand p {
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.8;
+      margin: 0;
+    }
+    .assembled-footer-col h5 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 16px 0;
+    }
+    .assembled-footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .assembled-footer-col a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .assembled-footer-col a:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+    .assembled-footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--line-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      opacity: 0.65;
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BOTÓN FLOTANTE PARA OCULTAR/MOSTRAR EL MENÚ (TECLA M) -->
+  <button type="button" id="topbar-toggle-fab" class="topbar-toggle-fab" aria-controls="catalog-topbar" aria-expanded="true" title="Ocultar / mostrar el menú superior (tecla M)">
+    <span id="topbar-toggle-icon">▲</span> <span id="topbar-toggle-label">Ocultar menú</span>
+  </button>
+
+  <!-- BARRA SUPERIOR DE CONTROL MAESTRO (HEREDADA DEL CATÁLOGO 08) -->
+  <nav class="catalog-topbar" id="catalog-topbar" aria-label="Control maestro de la página ensamblada">
+    <div class="catalog-topbar__brand">
+      
+      <!-- ESTADO Y MODO LIMPIO -->
+      <div class="topbar-cluster topbar-cluster--status">
+        <span class="catalog-topbar__badge" id="topbar-count-badge">6 CORTES · 6 FAMILIAS ENSAMBLADAS</span>
+        <button type="button" id="toggle-markers" class="catalog-topbar__toggle" aria-pressed="false" onclick="toggleCleanMode()" title="Ocultar todas las etiquetas técnicas para ver la landing 100% limpia">
+          <span id="toggle-markers-label">👁️ Ocultar marcas de sección</span>
+        </button>
+      </div>
+
+      <!-- SELECTORES MAESTROS DE PALETA Y TIPOGRAFÍA -->
+      <div class="topbar-cluster topbar-cluster--theme">
+        <button type="button" id="open-palette-modal-btn" class="topbar-modal-trigger" onclick="openPaletteModal()" title="Abrir catálogo visual de 92 paletas de colores y 14 slots">
+          <span class="palette-swatches-mini" id="topbar-swatches">
+            <span style="background:#f6f2ea;"></span>
+            <span style="background:#162620;"></span>
+            <span style="background:#c84b28;"></span>
+            <span style="background:#d8a962;"></span>
+          </span>
+          <span id="topbar-palette-label">🎨 Paleta: Base 1. Tierra &amp; Bosque</span>
+          <span class="topbar-modal-trigger__caret">▾</span>
+        </button>
+        <button type="button" id="open-font-modal-btn" class="topbar-modal-trigger" onclick="openFontModal()" title="Abrir catálogo visual de 49 conjuntos tipográficos Google Fonts">
+          <span id="topbar-font-label">🔤 Tipografía: Set 01 · Editorial Cálido (Fraunces + DM Sans)</span>
+          <span class="topbar-modal-trigger__caret">▾</span>
+        </button>
+      </div>
+
+      <!-- ACCIONES Y ACCESO A CATÁLOGOS -->
+      <div class="topbar-cluster topbar-cluster--actions">
+        <div class="topbar-btn-pair" title="Navegar a otros catálogos del sistema">
+          <a href="./catalogos/08-catalogo-arquetipos-parametricos.html" class="catalog-topbar__btn" style="text-decoration:none;">
+            📚 Catálogo 08 (91 Cortes)
+          </a>
+        </div>
+      </div>
+
+      <!-- COLAPSO DEL MENÚ -->
+      <div class="topbar-cluster topbar-cluster--meta">
+        <button type="button" id="topbar-collapse-btn" class="catalog-topbar__btn catalog-topbar__btn--collapse" onclick="document.getElementById('topbar-toggle-fab').click()" title="Ocultar el menú superior para ver la página completa (tecla M)">
+          ▲ Ocultar menú <kbd style="font-size:9.5px;opacity:0.75;margin-left:4px;background:#35312d;padding:1px 5px;border-radius:3px;">M</kbd>
+        </button>
+      </div>
+    </div>
+
+    <!-- NAVEGACIÓN RÁPIDA POR LOS 6 CORTES ENSAMBLADOS -->
+    <div class="catalog-topbar__nav">
+      <div class="catalog-topbar__nav-families">
+        <a href="#sec-corte-1" style="font-weight:700;">1. Header (Doble Piso)</a>
+        <a href="#sec-corte-2" style="font-weight:700;">2. Hero (Estándar Editorial)</a>
+        <a href="#sec-corte-3" style="font-weight:700;">3. Cinta (Logos &amp; Prensa)</a>
+        <a href="#sec-corte-4" style="font-weight:700;">4. Apertura (Heading Split)</a>
+        <a href="#sec-corte-5" style="font-weight:700;">5. Features (Grilla Quinteto)</a>
+        <a href="#sec-corte-6" style="font-weight:700;color:var(--gold);">6. Servicios (Matriz Comparativa)</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MODAL VISUAL 1: CATÁLOGO DE 92 PALETAS DE COLOR (DIRECTO DE 08) -->
+  <div id="modal-palettes" class="visual-modal-backdrop" hidden role="dialog" aria-modal="true" aria-label="Catálogo visual de paletas de color" onclick="if(event.target===this)closePaletteModal()">
+    <div class="visual-modal">
+      <div class="visual-modal__head">
+        <div>
+          <strong style="font-size:15px;display:block;" id="palette-lab-title">🎨 Paleta Activa: Base 1. Tierra &amp; Bosque (#C84B28)</strong>
+          <span style="font-size:11px;color:#a8a299;">Hacé clic en cualquier tarjeta o círculo para aplicar el esquema en vivo a los 91 cortes. Cada tarjeta muestra: <strong>1° Papel</strong> · <strong>2° Oscuro</strong> · <strong>3° Acento Brillante</strong> · <strong>4° Detalle</strong>.</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button type="button" class="cut-ctrl-btn" onclick="copyCurrentPaletteCss()">📋 Copiar :root CSS</button>
+          <button type="button" class="cut-ctrl-btn" onclick="closePaletteModal()" style="background:#b91c1c;border-color:#ef4444;color:#fff;">✕ Cerrar</button>
+        </div>
+      </div>
+
+      <div class="visual-modal__body visual-modal__body--split">
+        <div class="visual-modal__main">
+        <!-- PALETAS AGRUPADAS POR FAMILIA TONAL (claras + inversas oscuras) -->
+        <section style="display:grid;gap:10px;">
+          <div class="modal-section-title">
+            <span><strong>Paletas por familia tonal</strong> · <span id="pal-count">0</span> combinaciones · clic = aplicar y ver detalle</span>
+            <span class="pal-toolbar">
+              <button type="button" class="pal-mode-btn" aria-pressed="true" onclick="setPaletteModeFilter('all', this)">Todas</button>
+              <button type="button" class="pal-mode-btn" aria-pressed="false" onclick="setPaletteModeFilter('light', this)">☀ Fondo claro</button>
+              <button type="button" class="pal-mode-btn" aria-pressed="false" onclick="setPaletteModeFilter('dark', this)">☾ Fondo oscuro (inversas)</button>
+              <button type="button" class="pal-mode-btn" aria-pressed="false" onclick="setPaletteModeFilter('web216', this)">🌐 Web 216 (24)</button>
+              <button type="button" class="pal-mode-btn" aria-pressed="false" onclick="setPaletteModeFilter('nuevas', this)" style="border-color:#f59e0b;color:#f59e0b;font-weight:700;">✨ Nuevas Propuestas (10)</button>
+              <label style="display:inline-flex;align-items:center;gap:6px;color:#e5dec9;cursor:pointer;font-size:11px;">
+                <input type="checkbox" id="harmonize-all-toggle" checked onchange="if(activeSwatchKey)applyPalettePreset(activeSwatchKey)">
+                Armonizar fondos al elegir
+              </label>
+            </span>
+          </div>
+          <div id="palette-families" class="pal-families"></div>
+        </section>
+
+        </div>
+
+        <!-- SECCIÓN 4: INSPECTOR FINO DE LOS 8 SLOTS (PANEL FIJO A LA DERECHA) -->
+        <aside class="visual-modal__aside" aria-label="Ajuste fino de la paleta activa">
+          <div class="modal-section-title">
+            <span><strong>4. Ajuste Fino Completo (14 Slots)</strong> (Personalizá cualquier color puntualmente)</span>
+            <span style="color:#9e9689;text-transform:none;">Tocá el selector de color de cada slot para afinar la paleta activa</span>
+          </div>
+          <div id="palette-slots-grid" class="palette-slots-grid"></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL VISUAL 2: CATÁLOGO DE 49 CONJUNTOS TIPOGRÁFICOS (DIRECTO DE 08) -->
+  <div id="modal-fonts" class="visual-modal-backdrop" hidden role="dialog" aria-modal="true" aria-label="Catálogo visual de conjuntos tipográficos" onclick="if(event.target===this)closeFontModal()">
+    <div class="visual-modal">
+      <div class="visual-modal__head">
+        <div>
+          <strong style="font-size:15px;display:block;" id="font-modal-active-title">🔤 Tipografía Activa: Set 01 · Editorial Cálido &amp; Artesanal</strong>
+          <span style="font-size:11px;color:#a8a299;">Cada tarjeta previsualiza en vivo las 3 fuentes reales del conjunto (<strong>Titular Display</strong> + <strong>Cuerpo Body</strong> + <strong>Técnica Mono</strong>). Todas son 100% Google Fonts libres (SIL OFL 1.1).</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button type="button" class="cut-ctrl-btn" onclick="closeFontModal()" style="background:#b91c1c;border-color:#ef4444;color:#fff;">✕ Cerrar</button>
+        </div>
+      </div>
+
+      <div class="visual-modal__body visual-modal__body--split">
+        <div class="visual-modal__main">
+          <!-- TIPOGRAFÍAS AGRUPADAS POR ESTILO -->
+          <section style="display:grid;gap:10px;">
+            <div class="modal-section-title">
+              <span><strong>Conjuntos tipográficos por estilo</strong> · <span id="font-count">0</span> combinaciones · clic = aplicar y ampliar</span>
+              <span style="color:#9e9689;text-transform:none;">Google Fonts &amp; Fuentes del Sistema · 100% compatibles con caracteres en español</span>
+            </div>
+            <div id="font-families" class="pal-families"></div>
+          </section>
+        </div>
+
+        <aside class="visual-modal__aside" aria-label="Ajuste fino de las 3 fuentes tipográficas">
+          <div class="modal-section-title">
+            <span><strong>Ajuste Fino de Tipografía (3 Slots)</strong></span>
+            <span style="color:#9e9689;text-transform:none;">Elegí puntualmente la fuente para Títulos, Textos y Monospace</span>
+          </div>
+          <div id="font-slots-grid" class="palette-slots-grid"></div>
+
+          <!-- TIP EXPLICATIVO KERNING POR NIVEL -->
+          <div style="margin-top:14px;padding:10px 12px;background:#161412;border:1px dashed #3a3227;border-radius:6px;font-size:11px;color:#9e9689;line-height:1.4;">
+            💡 <strong>Kerning Individual:</strong> Cada uno de los 3 niveles superiores (Títulos, Cuerpo y Monospace) posee su propio deslizador de espaciado independiente y botones de preset óptico en su tarjeta.
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CONTENIDO DE LA PÁGINA ENSAMBLADA (1 CORTE DE CADA FAMILIA)
+       ======================================================================== -->
+  <main id="assembledPage">
+
+    <!-- ----------------------------------------------------------------------
+         1. FAMILIA 01: HEADER DOBLE PISO (CORTE 1.2)
+         ---------------------------------------------------------------------- -->
+    <div class="assembled-cut-wrapper" id="sec-corte-1">
+      <div class="cut-tag">
+        <span class="cut-tag__name"><span class="cut-tag__id">CORTE 1.2</span> Header Doble Piso con Contacto y Utilidad</span>
+        <div class="cut-tag__controls">
+          <span class="cut-tag__model-label">Modelo:</span>
+          <select class="cut-model-picker" onchange="setCutModel('cutHeader', 'data-model', this.value)">
+            <option value="contrast-topbar">1. Piso Superior Contratono Oscuro</option>
+            <option value="monochrome-divided">2. Superficie Dividida por Línea Fina</option>
+            <option value="compact-ticker">3. Piso Superior Ticker Técnico</option>
+            <option value="stacked-brand">4. Marca &amp; Datos Arriba + Menú Abajo</option>
+          </select>
+        </div>
+      </div>
+
+      <header class="cut-header-2floor" id="cutHeader" data-model="contrast-topbar">
+        <!-- Piso 1: Barra de Utilidad y Contacto -->
+        <div class="cut-h2f__top">
+          <div class="cut-h2f__top-items">
+            <span class="cut-h2f__top-item">📍 Humboldt 1420, Palermo Soho, CABA</span>
+            <span class="cut-h2f__top-item">📞 +54 11 4890-2300</span>
+            <span class="cut-h2f__top-item">⏱ Lun a Vie 9 a 18 hs · Sáb 10 a 14 hs</span>
+          </div>
+          <div class="cut-h2f__top-actions">
+            <span class="cut-h2f__top-item" style="color:var(--gold);font-weight:700;">★ Taller de Ebanistería Certificada</span>
+          </div>
+        </div>
+
+        <!-- Piso 2: Barra Principal de Marca y Navegación -->
+        <div class="cut-h2f__main">
+          <div class="cut-h2f__brand">
+            <a href="#sec-corte-1" class="cut-h2f__logo">Atelier Monte</a>
+            <span class="cut-h2f__tagline">Muebles de Autor &amp; Ebanistería</span>
+          </div>
+          <nav class="cut-h2f__nav">
+            <a href="#sec-corte-2" class="cut-h2f__nav-link is-active">Inicio</a>
+            <a href="#sec-corte-4" class="cut-h2f__nav-link">Filosofía</a>
+            <a href="#sec-corte-5" class="cut-h2f__nav-link">Calidad</a>
+            <a href="#sec-corte-6" class="cut-h2f__nav-link">Método</a>
+            <a href="#sec-footer" class="cut-h2f__nav-link">Contacto</a>
+          </nav>
+          <div class="cut-h2f__actions">
+            <a href="#sec-corte-6" class="cut-h2f__btn cut-h2f__btn--cta">Cotizar Proyecto</a>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         2. FAMILIA 02: HERO ESTÁNDAR (CORTE 2.1)
+         ---------------------------------------------------------------------- -->
+    <div class="assembled-cut-wrapper" id="sec-corte-2">
+      <div class="cut-tag">
+        <span class="cut-tag__name"><span class="cut-tag__id">CORTE 2.1</span> Hero Estándar Editorial con Doble CTA y Sellos</span>
+        <div class="cut-tag__controls">
+          <span class="cut-tag__model-label">Modelo:</span>
+          <select class="cut-model-picker" onchange="setCutModel('cutHero', 'data-model', this.value)">
+            <option value="split-media">1. Split 2 Columnas con Foto Enmarcada</option>
+            <option value="fullbleed-veil">2. Telón Fotográfico Fullbleed con Velo</option>
+            <option value="bottom-rail">3. Telón Completo con Riel Inferior</option>
+            <option value="editorial-centered">4. Minimalista Centrado a Gran Escala</option>
+            <option value="split-collage">5. Split con Mosaico de 3 Fotos</option>
+            <option value="card-over-media">6. Tarjeta Sólida Suspendida</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="cut-hero-std" id="cutHero" data-model="split-media">
+        <div class="cut-hero-std__veil"></div>
+
+        <div class="cut-hero-std__inner">
+          <div class="cut-hero-std__copy">
+            <span class="cut-hero-std__kicker">TALLER DE EBANISTERÍA CONTEMPORÁNEA</span>
+            <h1 class="cut-hero-std__title">Muebles a medida pensados para habitar una vida entera.</h1>
+            <p class="cut-hero-std__lead">Diseñamos y fabricamos piezas en maderas macizas nobles y herrería técnica. Cada proyecto nace de un plano riguroso y se construye a mano en Buenos Aires.</p>
+            
+            <div class="cut-hero-std__ctas">
+              <a href="#sec-corte-6" class="cut-hero-std__btn cut-hero-std__btn--primary">Solicitar cotización técnica</a>
+              <a href="#sec-corte-5" class="cut-hero-std__btn cut-hero-std__btn--secondary">Ver proceso artesanal</a>
+            </div>
+
+            <div class="cut-hero-std__trust-row">
+              <div class="cut-hero-std__trust-item">
+                <span class="cut-hero-std__trust-icon">🪵</span>
+                <span class="cut-hero-std__trust-text">Madera maciza estacionada</span>
+              </div>
+              <div class="cut-hero-std__trust-item">
+                <span class="cut-hero-std__trust-icon">📐</span>
+                <span class="cut-hero-std__trust-text">Planos técnicos 3D antes de señar</span>
+              </div>
+              <div class="cut-hero-std__trust-item">
+                <span class="cut-hero-std__trust-icon">🛡️</span>
+                <span class="cut-hero-std__trust-text">Garantía estructural de 10 años</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cut-hero-std__media">
+            <img class="cut-hero-std__photo cut-hero-std__photo--main" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80" alt="Ebanista trabajando madera en banco de taller">
+            <img class="cut-hero-std__photo cut-hero-std__photo--sub1" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="Detalle de ensamble de madera maciza">
+            <img class="cut-hero-std__photo cut-hero-std__photo--sub2" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Mueble colocado en ambiente contemporáneo">
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         3. FAMILIA 03: CINTA DE CONFIANZA (CORTE 3.1)
+         ---------------------------------------------------------------------- -->
+    <div class="assembled-cut-wrapper" id="sec-corte-3">
+      <div class="cut-tag">
+        <span class="cut-tag__name"><span class="cut-tag__id">CORTE 3.1</span> Cinta de Confianza y Respaldo de Marcas / Medios</span>
+        <div class="cut-tag__controls">
+          <span class="cut-tag__model-label">Modelo:</span>
+          <select class="cut-model-picker" onchange="setCutModel('cutCinta', 'data-logos-model', this.value)">
+            <option value="split-sidebar-grid">1. Sidebar Lateral + Grilla Derecha</option>
+            <option value="centered-continuous-ribbon">2. Cinta Centrada Continua de Autoridad</option>
+            <option value="swiss-technical-ledger">3. Ficha Técnica Suiza de Celdas</option>
+            <option value="modern-bento-cards">4. Tarjetas Bento Elevadas Modernas</option>
+            <option value="infinite-ticker-marquee">5. Marquee Deslizable Infinito</option>
+          </select>
+        </div>
+      </div>
+
+      <section id="cutCinta" class="trust-logos-unit" data-logos-model="split-sidebar-grid">
+        <div class="trust-logos-container">
+          <div class="trust-logos-header">
+            <span class="trust-logos-kicker">RESPALDO EDITORIAL</span>
+            <p class="trust-logos-title">Mobiliario distinguido y reseñado en las principales publicaciones de diseño.</p>
+          </div>
+          <div class="trust-logos-grid">
+            <div class="trust-logo-card">
+              <span class="trust-logo-name">AD Architectural Digest</span>
+              <span class="trust-logo-desc">Selección Diseño Latinoamericano 2024</span>
+            </div>
+            <div class="trust-logo-card">
+              <span class="trust-logo-name">Casa FOA</span>
+              <span class="trust-logo-desc">Premio a la Mejor Aplicación de Madera</span>
+            </div>
+            <div class="trust-logo-card">
+              <span class="trust-logo-name">Dwell Magazine</span>
+              <span class="trust-logo-desc">Mención Especial Innovación Sustentable</span>
+            </div>
+            <div class="trust-logo-card">
+              <span class="trust-logo-name">Summa+ Arquitectura</span>
+              <span class="trust-logo-desc">Nota Central Espacios &amp; Texturas</span>
+            </div>
+            <div class="trust-logo-card">
+              <span class="trust-logo-name">Revista Living</span>
+              <span class="trust-logo-desc">Tapa Edición Especial Artesanos del Año</span>
+            </div>
+            <div class="trust-logo-card">
+              <span class="trust-logo-name">DArA Diseñadores</span>
+              <span class="trust-logo-desc">Miembro Honorario Asociación Decoradores</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         4. FAMILIA 04: APERTURA DIVIDIDA (CORTE 4.1)
+         ---------------------------------------------------------------------- -->
+    <div class="assembled-cut-wrapper" id="sec-corte-4">
+      <div class="cut-tag">
+        <span class="cut-tag__name"><span class="cut-tag__id">CORTE 4.1</span> Apertura Dividida con Epígrafe y Bajada Amplia</span>
+        <div class="cut-tag__controls">
+          <span class="cut-tag__model-label">Modelo:</span>
+          <select class="cut-model-picker" onchange="setCutModel('cutHeading', 'data-heading-model', this.value)">
+            <option value="split-asymmetric-bottom">1. Split Asimétrico con Bajada Amplia</option>
+            <option value="split-balanced-50-50">2. Dos Columnas Simétricas 50/50 con Divisor</option>
+            <option value="split-topline-metadata">3. Barra Superior de Metadatos + Split 60/40</option>
+            <option value="split-swiss-ledger">4. Estilo Suizo con Regla Fina y Enlace</option>
+          </select>
+        </div>
+      </div>
+
+      <header id="cutHeading" class="heading-split-unit" data-heading-model="split-asymmetric-bottom">
+        <div class="heading-split-container">
+          <div class="heading-split-meta-row">
+            <span class="heading-split-kicker">FILOSOFÍA DE TALLER</span>
+            <span class="heading-split-badge">MANIFIESTO ATELIER</span>
+          </div>
+          <div class="heading-split-main-grid">
+            <div class="heading-split-title-col">
+              <h2 class="heading-split-title">El valor de lo bien hecho, sin atajos ni materiales descartables.</h2>
+            </div>
+            <div class="heading-split-desc-col">
+              <p class="heading-split-lead">No creemos en la producción seriada ni en los aglomerados enchapados con fecha de vencimiento. Cada mueble se proyecta desde la madera bruta hasta la colocación final con trazabilidad absoluta y precisión milimétrica.</p>
+              <div class="heading-split-cta-wrapper">
+                <a href="#sec-corte-5" class="heading-split-link">Conocer los 5 pilares de construcción artesanal →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         5. FAMILIA 05: CARACTERÍSTICAS · GRILLA QUINTETO (CORTE 5.4)
+         ---------------------------------------------------------------------- -->
+    <div class="assembled-cut-wrapper" id="sec-corte-5">
+      <div class="cut-tag">
+        <span class="cut-tag__name"><span class="cut-tag__id">CORTE 5.4</span> Grilla de Quinteto: 1 Tarjeta Destacada + 4 Complementarias</span>
+        <div class="cut-tag__controls">
+          <span class="cut-tag__model-label">Modelo:</span>
+          <select class="cut-model-picker" onchange="setCutModel('cutFeatures', 'data-quintet-model', this.value)">
+            <option value="quintet-parallel-columns">1. 1 Hero + 4 Columnas Paralelas</option>
+            <option value="quintet-bento-hero">2. Bento Asimétrico Destacado</option>
+            <option value="quintet-horizontal-strips">3. Tira de Fichas Horizontales</option>
+            <option value="quintet-technical-ledger">4. Catálogo Técnico Ledger Suizo</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="features-quintet-unit" id="cutFeatures" data-quintet-model="quintet-parallel-columns">
+        <div class="features-quintet-container">
+          <div class="features-quintet-head">
+            <div class="features-quintet-head-main">
+              <span class="features-quintet-kicker">COMPROMISOS DE CALIDAD</span>
+              <h2 class="features-quintet-title">Cinco reglas innegociables en cada pieza que sale de nuestro banco.</h2>
+            </div>
+            <div class="features-quintet-head-desc">
+              <p class="features-quintet-lead">Desde la selección de tablones secados a horno hasta las uniones encoladas a mano con espiga pasante y ceras ecológicas al tacto.</p>
+            </div>
+          </div>
+
+          <div class="features-quintet-grid">
+            <!-- Tarjeta 1 (Hero) -->
+            <article class="features-quintet-card features-quintet-card--hero" data-card-index="0">
+              <div class="features-quintet-badge">PILAR PRINCIPAL 01</div>
+              <h3 class="features-quintet-card-title">Madera maciza de origen responsable</h3>
+              <p class="features-quintet-card-desc">Trabajamos exclusivamente con maderas nobles estacionadas con trazabilidad forestal verificada: Petiribí misionero, Guayubira, Paraíso y Roble Americano, respetando su veta continua.</p>
+              <div class="features-quintet-card-meta">
+                <span class="features-quintet-tag">PETIRIBÍ &amp; GUAYUBIRA</span>
+                <span class="features-quintet-status">TRAZABILIDAD 100%</span>
+              </div>
+            </article>
+
+            <!-- Tarjeta 2 -->
+            <article class="features-quintet-card" data-card-index="1">
+              <div class="features-quintet-badge">02 · ESTABILIDAD</div>
+              <h3 class="features-quintet-card-title">Secado a horno 10%–12%</h3>
+              <p class="features-quintet-card-desc">Humedad controlada rigurosamente para evitar deformaciones, grietas o revirados con los cambios de estación y humedad ambiente.</p>
+              <div class="features-quintet-card-meta">
+                <span class="features-quintet-tag">CONTROL LÁSER</span>
+              </div>
+            </article>
+
+            <!-- Tarjeta 3 -->
+            <article class="features-quintet-card" data-card-index="2">
+              <div class="features-quintet-badge">03 · EBANISTERÍA</div>
+              <h3 class="features-quintet-card-title">Uniones tradicionales</h3>
+              <p class="features-quintet-card-desc">Encastres de caja y espiga, cola de milano y tarugos de madera dura. Sin tornillos a la vista ni ensambles plásticos frágiles.</p>
+              <div class="features-quintet-card-meta">
+                <span class="features-quintet-tag">CAJA &amp; ESPIGA</span>
+              </div>
+            </article>
+
+            <!-- Tarjeta 4 -->
+            <article class="features-quintet-card" data-card-index="3">
+              <div class="features-quintet-badge">04 · SUSTENTABILIDAD</div>
+              <h3 class="features-quintet-card-title">Acabado ecológico al tacto</h3>
+              <p class="features-quintet-card-desc">Protegemos cada superficie con ceras naturales de abeja y aceites de linaza hidrófugos sin solventes tóxicos que resaltan la textura viva.</p>
+              <div class="features-quintet-card-meta">
+                <span class="features-quintet-tag">CERA DE ABEJAS</span>
+              </div>
+            </article>
+
+            <!-- Tarjeta 5 -->
+            <article class="features-quintet-card" data-card-index="4">
+              <div class="features-quintet-badge">05 · RESPALDO</div>
+              <h3 class="features-quintet-card-title">Garantía estructural de 10 años</h3>
+              <p class="features-quintet-card-desc">Nuestros muebles están concebidos para soportar el uso diario de generaciones enteras con servicio técnico propio de por vida.</p>
+              <div class="features-quintet-card-meta">
+                <span class="features-quintet-tag">10 AÑOS ESCRITO</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         6. FAMILIA 06: SERVICIOS Y MATRIZ COMPARATIVA (CORTE 6.9)
+         ---------------------------------------------------------------------- -->
+    <div class="assembled-cut-wrapper" id="sec-corte-6">
+      <div class="cut-tag">
+        <span class="cut-tag__name"><span class="cut-tag__id">CORTE 6.9</span> Matriz Comparativa de Contraste: Lo Habitual vs. Nuestro Método</span>
+        <div class="cut-tag__controls">
+          <span class="cut-tag__model-label">Modelo:</span>
+          <select class="cut-model-picker" onchange="setComparisonModel(this.value)">
+            <option value="comparison-split-contrast">1. Tableros Contrastantes Lado a Lado (Split Contrast)</option>
+            <option value="comparison-stacked-rows">2. Filas Comparativas Horizontales (Stacked Rows)</option>
+            <option value="comparison-table-ledger">3. Tabla Técnica Suiza (Table Ledger)</option>
+            <option value="comparison-cards-duo">4. Tarjetas Modulares Bento (Cards Duo)</option>
+          </select>
+        </div>
+      </div>
+
+      <section id="cutServices" class="services-comparison-section" data-comparison-model="comparison-split-contrast">
+        <div class="services-comparison-container">
+          <div class="services-comparison-header">
+            <div class="services-comparison-header-split">
+              <div>
+                <span class="services-comparison-kicker">DIFERENCIAL DE MÉTODO</span>
+                <h2 class="services-comparison-title">Lo habitual en el rubro vs. Nuestro compromiso garantizado.</h2>
+              </div>
+              <p class="services-comparison-lead">Dos formas opuestas de trabajar. Compará punto por punto por qué nuestros clientes nos recomiendan y vuelven a elegirnos en cada nueva reforma.</p>
+            </div>
+          </div>
+
+          <div class="services-comparison-board" id="servicesComparisonBoard">
+            <!-- Columna Tradicional -->
+            <div class="comparison-col comparison-col--traditional">
+              <div class="comparison-col-header">
+                <span class="services-comparison-tag services-comparison-tag--traditional">MÉTODO HABITUAL</span>
+                <span class="services-comparison-kicker-sub">LO QUE SUELE PASAR EN EL RUBRO</span>
+                <h3 class="services-comparison-board-title">El encargo tradicional</h3>
+              </div>
+              <ul class="comparison-col-list">
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--cross">✕</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">PRESUPUESTO</span>
+                    <span>Presupuestos abiertos que aumentan un 35% a mitad del trabajo con imprevistos.</span>
+                  </div>
+                </li>
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--cross">✕</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">MADERAS</span>
+                    <span>Maderas verdes sin estacionar que se doblan o agrietan a los pocos meses.</span>
+                  </div>
+                </li>
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--cross">✕</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">PLAZOS</span>
+                    <span>Plazos de entrega que se postergan semana tras semana sin aviso previo ni certezas.</span>
+                  </div>
+                </li>
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--cross">✕</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">TERMINACIONES</span>
+                    <span>Terminaciones con lacas plásticas brillantes que ocultan y ahogan la veta real.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Columna Propia Atelier Monte -->
+            <div class="comparison-col comparison-col--ours">
+              <div class="comparison-col-header">
+                <span class="services-comparison-tag services-comparison-tag--ours">EXPERIENCIA GARANTIZADA</span>
+                <span class="services-comparison-kicker-sub">NUESTRO COMPROMISO</span>
+                <h3 class="services-comparison-board-title">El método Atelier Monte</h3>
+              </div>
+              <ul class="comparison-col-list">
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--check">✓</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">PRESUPUESTO</span>
+                    <span>Cotización cerrada por escrito con plano técnico 3D antes de señar. Precio congelado.</span>
+                  </div>
+                </li>
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--check">✓</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">MADERAS</span>
+                    <span>Madera maciza secada a horno con humedad controlada estrictamente (10%–12%).</span>
+                  </div>
+                </li>
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--check">✓</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">PLAZOS</span>
+                    <span>Fecha de entrega pactada por contrato y reporte semanal con fotos por WhatsApp.</span>
+                  </div>
+                </li>
+                <li class="comparison-item-row">
+                  <span class="services-comparison-icon services-comparison-icon--check">✓</span>
+                  <div class="comparison-item-text">
+                    <span class="services-comparison-criterion-pill">TERMINACIONES</span>
+                    <span>Protección con aceites y ceras naturales que resaltan la textura viva al tacto.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- ------------------------------------------------------------------------
+       FOOTER ARMONIOSO DE CIERRE DE PÁGINA
+       ------------------------------------------------------------------------ -->
+  <footer class="assembled-footer" id="sec-footer">
+    <div class="assembled-footer-inner">
+      <div class="assembled-footer-brand">
+        <h4>Atelier Monte</h4>
+        <p>Ebanistería contemporánea y mobiliario a medida de alta gama. Diseño riguroso, maderas nobles macizas y construcción artesanal en Buenos Aires.</p>
+      </div>
+      <div class="assembled-footer-col">
+        <h5>Navegación</h5>
+        <ul>
+          <li><a href="#sec-corte-2">Inicio</a></li>
+          <li><a href="#sec-corte-4">Filosofía</a></li>
+          <li><a href="#sec-corte-5">Compromisos de Calidad</a></li>
+          <li><a href="#sec-corte-6">Método de Trabajo</a></li>
+        </ul>
+      </div>
+      <div class="assembled-footer-col">
+        <h5>Taller &amp; Showroom</h5>
+        <ul>
+          <li>Humboldt 1420, Palermo Soho</li>
+          <li>Buenos Aires, Argentina</li>
+          <li>+54 11 4890-2300</li>
+          <li>info@ateliermonte.com.ar</li>
+        </ul>
+      </div>
+      <div class="assembled-footer-col">
+        <h5>Horarios</h5>
+        <ul>
+          <li>Lunes a Viernes: 9 a 18 hs</li>
+          <li>Sábados: 10 a 14 hs (con cita previa)</li>
+          <li>Domingos y feriados: Cerrado</li>
+        </ul>
+      </div>
+    </div>
+    <div class="assembled-footer-bottom">
+      <span>© 2026 Atelier Monte Ebanistería. Todos los derechos reservados.</span>
+      <span>Página construida con la Arquitectura Paramétrica de GestorFormas.</span>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       SCRIPTS: MOTOR COMPLETO DE PALETAS (92), FUENTES (49) Y MODELOS DE CORTE
+       ======================================================================== -->
+  <script>
+    // 1. Selector dinámico de modelo de layout por corte
+    function setCutModel(elementId, attributeName, modelValue) {
+      var el = document.getElementById(elementId);
+      if (el) {
+        el.setAttribute(attributeName, modelValue);
+      }
+    }
+
+    // 2. Renderizado dinámico de la matriz comparativa de corte 6.9
+    function setComparisonModel(model) {
+      var comp = document.getElementById('cutServices');
+      if (comp) comp.setAttribute('data-comparison-model', model);
+      var board = document.getElementById('servicesComparisonBoard');
+      if (!board) return;
+
+      var data = {
+        traditional_tag: "MÉTODO HABITUAL",
+        traditional_label: "LO QUE SUELE PASAR EN EL RUBRO",
+        traditional_title: "El encargo tradicional",
+        ours_tag: "EXPERIENCIA GARANTIZADA",
+        ours_label: "NUESTRO COMPROMISO",
+        ours_title: "El método Atelier Monte",
+        items: [
+          {
+            criterion: "PRESUPUESTO",
+            traditional: "Presupuestos abiertos que aumentan un 35% a mitad del trabajo con imprevistos.",
+            ours: "Cotización cerrada por escrito con plano técnico 3D antes de señar. Precio congelado."
+          },
+          {
+            criterion: "MADERAS",
+            traditional: "Maderas verdes sin estacionar que se doblan o agrietan a los pocos meses.",
+            ours: "Madera maciza secada a horno con humedad controlada estrictamente (10%–12%)."
+          },
+          {
+            criterion: "PLAZOS",
+            traditional: "Plazos de entrega que se postergan semana tras semana sin dar explicaciones claras.",
+            ours: "Fecha de entrega pactada por contrato y reporte semanal con fotos por WhatsApp."
+          },
+          {
+            criterion: "TERMINACIONES",
+            traditional: "Terminaciones con lacas plásticas brillantes que ocultan y ahogan la veta real.",
+            ours: "Protección con aceites y ceras naturales que resaltan la textura viva al tacto."
+          }
+        ]
+      };
+
+      if (model === "comparison-split-contrast") {
+        board.innerHTML = '<div class="comparison-col comparison-col--traditional">' +
+          '<div class="comparison-col-header">' +
+            '<span class="services-comparison-tag services-comparison-tag--traditional">' + data.traditional_tag + '</span>' +
+            '<span class="services-comparison-kicker-sub">' + data.traditional_label + '</span>' +
+            '<h3 class="services-comparison-board-title">' + data.traditional_title + '</h3>' +
+          '</div>' +
+          '<ul class="comparison-col-list">' +
+            data.items.map(function(item) {
+              return '<li class="comparison-item-row">' +
+                '<span class="services-comparison-icon services-comparison-icon--cross">✕</span>' +
+                '<div class="comparison-item-text">' +
+                  '<span class="services-comparison-criterion-pill">' + item.criterion + '</span>' +
+                  '<span>' + item.traditional + '</span>' +
+                '</div>' +
+              '</li>';
+            }).join('') +
+          '</ul>' +
+        '</div>' +
+        '<div class="comparison-col comparison-col--ours">' +
+          '<div class="comparison-col-header">' +
+            '<span class="services-comparison-tag services-comparison-tag--ours">' + data.ours_tag + '</span>' +
+            '<span class="services-comparison-kicker-sub">' + data.ours_label + '</span>' +
+            '<h3 class="services-comparison-board-title">' + data.ours_title + '</h3>' +
+          '</div>' +
+          '<ul class="comparison-col-list">' +
+            data.items.map(function(item) {
+              return '<li class="comparison-item-row">' +
+                '<span class="services-comparison-icon services-comparison-icon--check">✓</span>' +
+                '<div class="comparison-item-text">' +
+                  '<span class="services-comparison-criterion-pill">' + item.criterion + '</span>' +
+                  '<span>' + item.ours + '</span>' +
+                '</div>' +
+              '</li>';
+            }).join('') +
+          '</ul>' +
+        '</div>';
+      } else if (model === "comparison-stacked-rows") {
+        board.innerHTML = '<div class="comparison-board-meta-bar">' +
+          '<div class="comparison-meta-cell">' +
+            '<div>' +
+              '<span class="services-comparison-tag services-comparison-tag--traditional">' + data.traditional_tag + '</span>' +
+              '<h3 class="comparison-meta-cell-title">' + data.traditional_title + '</h3>' +
+            '</div>' +
+            '<span class="services-comparison-criterion-pill">' + data.traditional_label + '</span>' +
+          '</div>' +
+          '<div class="comparison-meta-cell">' +
+            '<div>' +
+              '<span class="services-comparison-tag services-comparison-tag--ours">' + data.ours_tag + '</span>' +
+              '<h3 class="comparison-meta-cell-title">' + data.ours_title + '</h3>' +
+            '</div>' +
+            '<span class="services-comparison-criterion-pill">' + data.ours_label + '</span>' +
+          '</div>' +
+        '</div>' +
+        data.items.map(function(item) {
+          return '<div class="comparison-row-card">' +
+            '<div class="comparison-row-criterion">' +
+              '<span class="services-comparison-criterion-pill">CRITERIO</span>' +
+              '<h4 class="comparison-row-criterion-title">' + item.criterion + '</h4>' +
+            '</div>' +
+            '<div class="comparison-row-side comparison-row-side--traditional">' +
+              '<span class="services-comparison-icon services-comparison-icon--cross">✕</span>' +
+              '<span>' + item.traditional + '</span>' +
+            '</div>' +
+            '<div class="comparison-row-side comparison-row-side--ours">' +
+              '<span class="services-comparison-icon services-comparison-icon--check">✓</span>' +
+              '<span>' + item.ours + '</span>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      } else if (model === "comparison-table-ledger") {
+        board.innerHTML = '<table class="comparison-ledger-table">' +
+          '<thead>' +
+            '<tr>' +
+              '<th class="comparison-ledger-th">' +
+                '<span class="services-comparison-criterion-pill">ASPECTO CLAVE</span>' +
+                '<h3 class="comparison-ledger-th-title">Criterio Evaluado</h3>' +
+              '</th>' +
+              '<th class="comparison-ledger-th">' +
+                '<span class="services-comparison-tag services-comparison-tag--traditional">' + data.traditional_tag + '</span>' +
+                '<span class="services-comparison-criterion-pill" style="display:block;margin-top:6px;">' + data.traditional_label + '</span>' +
+                '<h3 class="comparison-ledger-th-title">' + data.traditional_title + '</h3>' +
+              '</th>' +
+              '<th class="comparison-ledger-th comparison-ledger-th--ours">' +
+                '<span class="services-comparison-tag services-comparison-tag--ours">' + data.ours_tag + '</span>' +
+                '<span class="services-comparison-criterion-pill" style="display:block;margin-top:6px;color:rgba(255,255,255,0.7);">' + data.ours_label + '</span>' +
+                '<h3 class="comparison-ledger-th-title" style="color:var(--forest-ink);">' + data.ours_title + '</h3>' +
+              '</th>' +
+            '</tr>' +
+          '</thead>' +
+          '<tbody>' +
+            data.items.map(function(item) {
+              return '<tr class="comparison-ledger-tr">' +
+                '<td class="comparison-ledger-td comparison-ledger-td--criterion">' + item.criterion + '</td>' +
+                '<td class="comparison-ledger-td comparison-ledger-td--traditional">' +
+                  '<div class="comparison-cell-flex">' +
+                    '<span class="services-comparison-icon services-comparison-icon--cross">✕</span>' +
+                    '<span>' + item.traditional + '</span>' +
+                  '</div>' +
+                '</td>' +
+                '<td class="comparison-ledger-td comparison-ledger-td--ours">' +
+                  '<div class="comparison-cell-flex">' +
+                    '<span class="services-comparison-icon services-comparison-icon--check">✓</span>' +
+                    '<span>' + item.ours + '</span>' +
+                  '</div>' +
+                '</td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody>' +
+        '</table>';
+      } else if (model === "comparison-cards-duo") {
+        board.innerHTML = data.items.map(function(item, idx) {
+          return '<div class="comparison-bento-card">' +
+            '<div class="comparison-bento-header">' +
+              '<span class="services-comparison-criterion-pill">EVALUACIÓN #' + (idx + 1) + '</span>' +
+              '<h3 class="comparison-bento-title">' + item.criterion + '</h3>' +
+            '</div>' +
+            '<div class="comparison-bento-split">' +
+              '<div class="comparison-bento-item comparison-bento-item--traditional">' +
+                '<span class="services-comparison-icon services-comparison-icon--cross">✕</span>' +
+                '<div>' +
+                  '<div class="comparison-bento-col-label">' + data.traditional_tag + ' · ' + data.traditional_title + '</div>' +
+                  '<span>' + item.traditional + '</span>' +
+                '</div>' +
+              '</div>' +
+              '<div class="comparison-bento-item comparison-bento-item--ours">' +
+                '<span class="services-comparison-icon services-comparison-icon--check">✓</span>' +
+                '<div>' +
+                  '<div class="comparison-bento-col-label" style="color:var(--gold);">' + data.ours_tag + ' · ' + data.ours_title + '</div>' +
+                  '<span>' + item.ours + '</span>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+    }
+
+    // 3. Control de modo limpio (Ocultar/mostrar marcas y etiquetas técnicas)
+    function toggleCleanMode() {
+      var isClean = document.body.classList.toggle('is-clean-mode');
+      var btn = document.getElementById('toggle-markers');
+      var label = document.getElementById('toggle-markers-label');
+      if (btn) btn.setAttribute('aria-pressed', String(isClean));
+      if (label) {
+        label.textContent = isClean
+          ? '🏷️ Mostrar marcas de sección'
+          : '👁️ Ocultar marcas de sección';
+      }
+    }
+
+    // 4. Motor maestro de Paletas y Fuentes heredado de Catálogo 08
+    // 7. MOTOR DE PALETAS EN VIVO (8 SLOTS SEMÁNTICOS PARA EL CONSTRUCTOR)
+    // =========================================================================
+        var PALETTE_SLOTS_META = [
+      { key: '--paper',           label: '1. bg-base (--paper)',            desc: 'Fondo claro general',        fallback: '#F6F2EA' },
+      { key: '--paper-warm',      label: '2. bg-alt (--paper-warm)',        desc: 'Fondo claro alterno',        fallback: '#EDE6D8' },
+      { key: '--surface',         label: '3. bg-card (--surface)',          desc: 'Superficie de tarjetas',     fallback: '#FFFFFF' },
+      { key: '--sand',            label: '4. bg-warm (--sand)',             desc: 'Degradados y superficies',   fallback: '#E4DAC9' },
+      { key: '--forest',          label: '5. bg-deep (--forest)',           desc: 'Secciones oscuras',          fallback: '#162620' },
+      { key: '--forest-soft',     label: '6. bg-deep-card (--forest-soft)', desc: 'Tarjetas sobre oscuro',      fallback: '#233830' },
+      { key: '--ink',             label: '7. ink-main (--ink)',             desc: 'Texto y títulos',            fallback: '#181614' },
+      { key: '--ink-muted',       label: '8. ink-muted (--ink-muted)',      desc: 'Texto secundario y logos',   fallback: '#5C5750' },
+      { key: '--forest-ink',      label: '9. ink-on-deep (--forest-ink)',   desc: 'Texto sobre oscuro',         fallback: '#F6F2EA' },
+      { key: '--terracotta',      label: '10. accent-primary',              desc: 'Botones y labels',           fallback: '#C84B28' },
+      { key: '--terracotta-ink',  label: '11. accent-ink',                  desc: 'Texto sobre botones',        fallback: '#FFFFFF' },
+      { key: '--terracotta-soft', label: '12. badge-bg (--terracotta-soft)',desc: 'Fondo de etiquetas',        fallback: '#F5D8CE' },
+      { key: '--gold',            label: '13. accent-on-dark (--gold)',     desc: 'Acento sobre oscuro',        fallback: '#D8A962' },
+      { key: '--line',            label: '14. border-line (--line)',        desc: 'Bordes y líneas',            fallback: '#DCD5C8' }
+    ];
+
+    var PALETTE_PRESETS = {
+      test_mono: {
+        name: '0. Test Monocromo Total (#E6464C)',
+        vars: {
+          '--paper': '#E6464C',
+          '--paper-warm': '#E6464C',
+          '--surface': '#E6464C',
+          '--sand': '#E6464C',
+          '--forest': '#E6464C',
+          '--forest-soft': '#E6464C',
+          '--forest-ink': '#E6464C',
+          '--ink': '#E6464C',
+          '--ink-muted': '#E6464C',
+          '--terracotta': '#E6464C',
+          '--terracotta-ink': '#E6464C',
+          '--terracotta-soft': '#E6464C',
+          '--gold': '#E6464C',
+          '--line': '#E6464C',
+          '--line-dark': '#E6464C',
+          '--radius': '6px'
+        }
+      },
+      tierra: {
+        name: '1. Tierra & Bosque (Actual)',
+        vars: {
+          '--paper': '#F6F2EA',
+          '--paper-warm': '#EDE6D8',
+          '--surface': '#FFFFFF',
+          '--forest': '#162620',
+          '--forest-soft': '#233830',
+          '--ink': '#181614',
+          '--ink-muted': '#5C5750',
+          '--terracotta': '#C84B28',
+          '--terracotta-soft': '#F5D8CE',
+          '--sand': '#E4DAC9',
+          '--gold': '#D8A962'
+        }
+      },
+      clinico: {
+        name: '2. Azul Clínico & Cielo (Salud / Estética)',
+        vars: {
+          '--paper': '#F7FAFC',
+          '--paper-warm': '#EBF3F9',
+          '--surface': '#FFFFFF',
+          '--forest': '#0B3B60',
+          '--forest-soft': '#134E7A',
+          '--ink': '#0F2537',
+          '--ink-muted': '#4E677B',
+          '--terracotta': '#0A79B5',
+          '--terracotta-soft': '#DCF0FA',
+          '--sand': '#DCE8F2',
+          '--gold': '#6EE7C8'
+        }
+      },
+      industrial: {
+        name: '3. Taller Industrial & Acero (Oficios / Construcción)',
+        vars: {
+          '--paper': '#F2F0EA',
+          '--paper-warm': '#E4E0D6',
+          '--surface': '#FFFFFF',
+          '--forest': '#182125',
+          '--forest-soft': '#243137',
+          '--ink': '#14191C',
+          '--ink-muted': '#566066',
+          '--terracotta': '#C93B22',
+          '--terracotta-soft': '#FADBD4',
+          '--sand': '#D9D4C7',
+          '--gold': '#F4B63F'
+        }
+      },
+      ejecutivo: {
+        name: '4. Ejecutivo & Jurídico (Consultoras / Estudios)',
+        vars: {
+          '--paper': '#F5F7FA',
+          '--paper-warm': '#E8ECF2',
+          '--surface': '#FFFFFF',
+          '--forest': '#0F172A',
+          '--forest-soft': '#1E293B',
+          '--ink': '#111827',
+          '--ink-muted': '#4B5563',
+          '--terracotta': '#1D4ED8',
+          '--terracotta-soft': '#DBEAFE',
+          '--sand': '#DDE3ED',
+          '--gold': '#93C5FD'
+        }
+      },
+      cafe: {
+        name: '5. Café Tostado & Gastronomía (Restó / Café / Vinos)',
+        vars: {
+          '--paper': '#FAF5EE',
+          '--paper-warm': '#EFE5D6',
+          '--surface': '#FFFDF9',
+          '--forest': '#241712',
+          '--forest-soft': '#36231C',
+          '--ink': '#1F1410',
+          '--ink-muted': '#695850',
+          '--terracotta': '#B84A24',
+          '--terracotta-soft': '#F6DFD5',
+          '--sand': '#E5D7C3',
+          '--gold': '#E8B86D'
+        }
+      },
+      botanico: {
+        name: '6. Botánico & Bienestar (Paisajismo / Spa / Natural)',
+        vars: {
+          '--paper': '#F4F6F0',
+          '--paper-warm': '#E6EBE0',
+          '--surface': '#FFFFFF',
+          '--forest': '#1B2A1E',
+          '--forest-soft': '#283D2C',
+          '--ink': '#162018',
+          '--ink-muted': '#556357',
+          '--terracotta': '#3F7A4D',
+          '--terracotta-soft': '#DCF0E0',
+          '--sand': '#D8E0D0',
+          '--gold': '#C5E080'
+        }
+      },
+      minimal: {
+        name: '7. Editorial Minimal / Moda (Diseño / Joyería)',
+        vars: {
+          '--paper': '#F7F6F4',
+          '--paper-warm': '#EAE8E3',
+          '--surface': '#FFFFFF',
+          '--forest': '#141413',
+          '--forest-soft': '#242422',
+          '--ink': '#141413',
+          '--ink-muted': '#66645E',
+          '--terracotta': '#8C5A3C',
+          '--terracotta-soft': '#EFE3DB',
+          '--sand': '#DFDDD6',
+          '--gold': '#E2C799'
+        }
+      },
+      energia: {
+        name: '8. Energía & Alto Impacto (Academias / Eventos / Gym)',
+        vars: {
+          '--paper': '#F4F1E8',
+          '--paper-warm': '#E7E2D4',
+          '--surface': '#FFFFFF',
+          '--forest': '#0B1020',
+          '--forest-soft': '#17203A',
+          '--ink': '#0F1424',
+          '--ink-muted': '#52586B',
+          '--terracotta': '#FF5A1F',
+          '--terracotta-soft': '#FFE0D4',
+          '--sand': '#DDD6C5',
+          '--gold': '#FFD166'
+        }
+      },
+      n01: {
+        name: 'Nueva 01 · Petróleo & Cobre Oxidado',
+        vars: {
+          '--paper': '#F4F6F6',
+          '--paper-warm': '#E5ECEC',
+          '--surface': '#FFFFFF',
+          '--forest': '#0D2C36',
+          '--forest-soft': '#164250',
+          '--ink': '#102026',
+          '--ink-muted': '#4F646B',
+          '--terracotta': '#C95B32',
+          '--terracotta-soft': '#F8E1D7',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#D7E2E2',
+          '--gold': '#F0B27A'
+        }
+      },
+      n02: {
+        name: 'Nueva 02 · Borgoña Reserva & Champagne',
+        vars: {
+          '--paper': '#FAF6F4',
+          '--paper-warm': '#EFE6E2',
+          '--surface': '#FFFFFF',
+          '--forest': '#231016',
+          '--forest-soft': '#361A22',
+          '--ink': '#1E1115',
+          '--ink-muted': '#665258',
+          '--terracotta': '#9E1F37',
+          '--terracotta-soft': '#F5D8DE',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#E3D6D1',
+          '--gold': '#E2C98A'
+        }
+      },
+      n03: {
+        name: 'Nueva 03 · Oliva Militar & Ocre Mostaza',
+        vars: {
+          '--paper': '#F5F4EE',
+          '--paper-warm': '#E8E6DA',
+          '--surface': '#FFFFFF',
+          '--forest': '#1E2418',
+          '--forest-soft': '#2D3624',
+          '--ink': '#191C15',
+          '--ink-muted': '#5A5E52',
+          '--terracotta': '#C68B12',
+          '--terracotta-soft': '#F7EBD0',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#DCD9C8',
+          '--gold': '#F5CE5B'
+        }
+      },
+      n04: {
+        name: 'Nueva 04 · Índigo Noche & Coral Eléctrico',
+        vars: {
+          '--paper': '#F5F6FB',
+          '--paper-warm': '#E7EAF4',
+          '--surface': '#FFFFFF',
+          '--forest': '#111633',
+          '--forest-soft': '#1B234D',
+          '--ink': '#101426',
+          '--ink-muted': '#505670',
+          '--terracotta': '#FF4D3D',
+          '--terracotta-soft': '#FFE0DC',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#D8DDEC',
+          '--gold': '#7CE8FF'
+        }
+      },
+      n05: {
+        name: 'Nueva 05 · Ciruela Nocturno & Bronce Rosado',
+        vars: {
+          '--paper': '#F9F5F7',
+          '--paper-warm': '#EFE7EC',
+          '--surface': '#FFFFFF',
+          '--forest': '#221526',
+          '--forest-soft': '#34203A',
+          '--ink': '#1D1420',
+          '--ink-muted': '#645469',
+          '--terracotta': '#C46D5E',
+          '--terracotta-soft': '#F7E3DF',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#E3D7DE',
+          '--gold': '#F2C5A7'
+        }
+      },
+      n06: {
+        name: 'Nueva 06 · Carbón Pizarra & Esmeralda Fintech',
+        vars: {
+          '--paper': '#F3F6F5',
+          '--paper-warm': '#E3ECE9',
+          '--surface': '#FFFFFF',
+          '--forest': '#131A17',
+          '--forest-soft': '#1F2B26',
+          '--ink': '#111715',
+          '--ink-muted': '#4E5C56',
+          '--terracotta': '#00A86B',
+          '--terracotta-soft': '#D4F5E8',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#D4E0DC',
+          '--gold': '#68F5B6'
+        }
+      },
+      n07: {
+        name: 'Nueva 07 · Arena Mediterránea & Azul Cobalto',
+        vars: {
+          '--paper': '#F7F3EB',
+          '--paper-warm': '#EBE3D3',
+          '--surface': '#FFFFFF',
+          '--forest': '#152036',
+          '--forest-soft': '#213252',
+          '--ink': '#141B29',
+          '--ink-muted': '#545C6E',
+          '--terracotta': '#1B56D0',
+          '--terracotta-soft': '#DAE5FA',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#DFD5C1',
+          '--gold': '#F2B84B'
+        }
+      },
+      n08: {
+        name: 'Nueva 08 · Cacao Amargo & Turquesa Andino',
+        vars: {
+          '--paper': '#F7F4F0',
+          '--paper-warm': '#EAE3DA',
+          '--surface': '#FFFFFF',
+          '--forest': '#241A16',
+          '--forest-soft': '#362721',
+          '--ink': '#1E1613',
+          '--ink-muted': '#635650',
+          '--terracotta': '#0E8A83',
+          '--terracotta-soft': '#D5F0EE',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#DED5C9',
+          '--gold': '#7DE2DB'
+        }
+      },
+      n09: {
+        name: 'Nueva 09 · Titanio Técnico & Carmesí Suizo',
+        vars: {
+          '--paper': '#F4F5F6',
+          '--paper-warm': '#E6E8EA',
+          '--surface': '#FFFFFF',
+          '--forest': '#16181A',
+          '--forest-soft': '#24282C',
+          '--ink': '#121416',
+          '--ink-muted': '#54595E',
+          '--terracotta': '#E01E26',
+          '--terracotta-soft': '#FADADB',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#D8DBDE',
+          '--gold': '#FFB84D'
+        }
+      },
+      n10: {
+        name: 'Nueva 10 · Pino Ártico & Violeta Boreal',
+        vars: {
+          '--paper': '#F4F5F8',
+          '--paper-warm': '#E6E8F0',
+          '--surface': '#FFFFFF',
+          '--forest': '#121C1D',
+          '--forest-soft': '#1D2D2F',
+          '--ink': '#12171A',
+          '--ink-muted': '#525A61',
+          '--terracotta': '#6D4AFF',
+          '--terracotta-soft': '#E5DEFF',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#D7DAE6',
+          '--gold': '#9BF5B9'
+        }
+      },
+      wf01: {
+        name: '📐 Wireframe Arquitectónico · Azul Blueprint (#0055FF)',
+        vars: {
+          '--paper': '#F4F3EF',
+          '--paper-warm': '#E9E7E0',
+          '--surface': '#FFFFFF',
+          '--forest': '#16181D',
+          '--forest-soft': '#22262E',
+          '--ink': '#16181D',
+          '--ink-muted': '#5A5F6A',
+          '--terracotta': '#0055FF',
+          '--terracotta-soft': '#DCE8FF',
+          '--terracotta-ink': '#FFFFFF',
+          '--sand': '#DFDDD4',
+          '--gold': '#7AB0FF',
+          '--line': '#CBC8BE',
+          '--radius': '4px'
+        }
+      }      ,
+      ws_carmesi_claro: {
+        name: 'Web 216 · Carmesí & Marfil',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFCC', '--paper-warm': '#FFCCCC', '--surface': '#FFFFFF',
+          '--forest': '#660000', '--forest-soft': '#990000', '--ink': '#330000', '--ink-muted': '#663333',
+          '--terracotta': '#CC0000', '--terracotta-soft': '#FFCCCC', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#FFCCCC', '--gold': '#FF9900', '--line': '#CC9999', '--radius': '4px'
+        }
+      },
+      ws_coral_fucsia: {
+        name: 'Web 216 · Fucsia & Blanco Puro',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#FFCCFF', '--surface': '#FFFFFF',
+          '--forest': '#330033', '--forest-soft': '#660066', '--ink': '#000000', '--ink-muted': '#663366',
+          '--terracotta': '#FF0066', '--terracotta-soft': '#FFCCFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#FFCCFF', '--gold': '#FF66CC', '--line': '#CC99CC', '--radius': '6px'
+        }
+      },
+      ws_rubi_oscuro: {
+        name: 'Web 216 · Rubí Nocturno',
+        web216: true,
+        vars: {
+          '--paper': '#330000', '--paper-warm': '#660000', '--surface': '#330033',
+          '--forest': '#000000', '--forest-soft': '#330000', '--ink': '#FFFFFF', '--ink-muted': '#FFCCCC',
+          '--terracotta': '#FF3366', '--terracotta-soft': '#660033', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#660000', '--gold': '#FFCC00', '--line': '#993333', '--radius': '6px'
+        }
+      },
+      ws_mandarina_claro: {
+        name: 'Web 216 · Mandarina & Crema',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFCC', '--paper-warm': '#FFCC99', '--surface': '#FFFFFF',
+          '--forest': '#333300', '--forest-soft': '#663300', '--ink': '#330000', '--ink-muted': '#663300',
+          '--terracotta': '#FF6600', '--terracotta-soft': '#FFCC99', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#FFCC99', '--gold': '#FFCC00', '--line': '#CC9966', '--radius': '6px'
+        }
+      },
+      ws_ambar_tostado: {
+        name: 'Web 216 · Ámbar & Chocolate',
+        web216: true,
+        vars: {
+          '--paper': '#FFCC99', '--paper-warm': '#FF9966', '--surface': '#FFFFCC',
+          '--forest': '#330000', '--forest-soft': '#663300', '--ink': '#330000', '--ink-muted': '#663300',
+          '--terracotta': '#CC3300', '--terracotta-soft': '#FF9966', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#FFCC66', '--gold': '#FFFF00', '--line': '#996633', '--radius': '4px'
+        }
+      },
+      ws_brasa_oscura: {
+        name: 'Web 216 · Brasa & Carbón',
+        web216: true,
+        vars: {
+          '--paper': '#000000', '--paper-warm': '#333333', '--surface': '#330000',
+          '--forest': '#330000', '--forest-soft': '#663300', '--ink': '#FFFFFF', '--ink-muted': '#FFCC99',
+          '--terracotta': '#FF6600', '--terracotta-soft': '#663300', '--terracotta-ink': '#000000',
+          '--sand': '#333333', '--gold': '#FFCC00', '--line': '#663300', '--radius': '4px'
+        }
+      },
+      ws_lima_fresca: {
+        name: 'Web 216 · Lima Eléctrica & Pizarra',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFCC', '--paper-warm': '#CCFF99', '--surface': '#FFFFFF',
+          '--forest': '#003300', '--forest-soft': '#336600', '--ink': '#003300', '--ink-muted': '#336633',
+          '--terracotta': '#99CC00', '--terracotta-soft': '#CCFF99', '--terracotta-ink': '#003300',
+          '--sand': '#CCFF99', '--gold': '#FFCC00', '--line': '#99CC66', '--radius': '6px'
+        }
+      },
+      ws_oliva_solar: {
+        name: 'Web 216 · Sol & Oliva Clásico',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#FFFF99', '--surface': '#FFFFCC',
+          '--forest': '#333300', '--forest-soft': '#666600', '--ink': '#333300', '--ink-muted': '#666633',
+          '--terracotta': '#CCCC00', '--terracotta-soft': '#FFFF99', '--terracotta-ink': '#000000',
+          '--sand': '#FFFF99', '--gold': '#FF9900', '--line': '#CCCC66', '--radius': '4px'
+        }
+      },
+      ws_neon_lima_oscuro: {
+        name: 'Web 216 · Neón Lima Terminal',
+        web216: true,
+        vars: {
+          '--paper': '#000000', '--paper-warm': '#003300', '--surface': '#333300',
+          '--forest': '#003300', '--forest-soft': '#336600', '--ink': '#FFFFCC', '--ink-muted': '#CCFF99',
+          '--terracotta': '#CCFF00', '--terracotta-soft': '#336600', '--terracotta-ink': '#000000',
+          '--sand': '#333300', '--gold': '#FFFF00', '--line': '#669900', '--radius': '2px'
+        }
+      },
+      ws_bosque_web: {
+        name: 'Web 216 · Bosque & Menta',
+        web216: true,
+        vars: {
+          '--paper': '#CCFFCC', '--paper-warm': '#99FF99', '--surface': '#FFFFFF',
+          '--forest': '#003300', '--forest-soft': '#006600', '--ink': '#003300', '--ink-muted': '#336633',
+          '--terracotta': '#009900', '--terracotta-soft': '#99FF99', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#99FFCC', '--gold': '#66CC00', '--line': '#66CC66', '--radius': '6px'
+        }
+      },
+      ws_esmeralda_limpio: {
+        name: 'Web 216 · Esmeralda & Blanco',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#CCFFCC', '--surface': '#FFFFFF',
+          '--forest': '#003333', '--forest-soft': '#006633', '--ink': '#003300', '--ink-muted': '#336666',
+          '--terracotta': '#00CC66', '--terracotta-soft': '#CCFFCC', '--terracotta-ink': '#003300',
+          '--sand': '#CCFFCC', '--gold': '#009933', '--line': '#99CC99', '--radius': '6px'
+        }
+      },
+      ws_matrix_oscuro: {
+        name: 'Web 216 · Fósforo Verde 1999',
+        web216: true,
+        vars: {
+          '--paper': '#000000', '--paper-warm': '#003300', '--surface': '#003300',
+          '--forest': '#003300', '--forest-soft': '#006600', '--ink': '#CCFFCC', '--ink-muted': '#66CC66',
+          '--terracotta': '#00FF66', '--terracotta-soft': '#006600', '--terracotta-ink': '#000000',
+          '--sand': '#003300', '--gold': '#99FF00', '--line': '#006600', '--radius': '2px'
+        }
+      },
+      ws_aguamarina_claro: {
+        name: 'Web 216 · Aguamarina & Hielo',
+        web216: true,
+        vars: {
+          '--paper': '#CCFFFF', '--paper-warm': '#99FFFF', '--surface': '#FFFFFF',
+          '--forest': '#003333', '--forest-soft': '#006666', '--ink': '#003333', '--ink-muted': '#336666',
+          '--terracotta': '#009999', '--terracotta-soft': '#99FFFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#99CCCC', '--gold': '#00CCCC', '--line': '#66CCCC', '--radius': '6px'
+        }
+      },
+      ws_turquesa_estudio: {
+        name: 'Web 216 · Turquesa & Pizarra',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#CCFFFF', '--surface': '#FFFFFF',
+          '--forest': '#003366', '--forest-soft': '#006666', '--ink': '#003333', '--ink-muted': '#336666',
+          '--terracotta': '#00CCCC', '--terracotta-soft': '#CCFFFF', '--terracotta-ink': '#003333',
+          '--sand': '#CCFFFF', '--gold': '#3399CC', '--line': '#99CCCC', '--radius': '6px'
+        }
+      },
+      ws_abismo_cian: {
+        name: 'Web 216 · Abismo Cian',
+        web216: true,
+        vars: {
+          '--paper': '#003333', '--paper-warm': '#006666', '--surface': '#000000',
+          '--forest': '#000000', '--forest-soft': '#003333', '--ink': '#FFFFFF', '--ink-muted': '#99FFFF',
+          '--terracotta': '#00FFFF', '--terracotta-soft': '#006666', '--terracotta-ink': '#000000',
+          '--sand': '#006666', '--gold': '#66FFCC', '--line': '#009999', '--radius': '6px'
+        }
+      },
+      ws_cobalto_web: {
+        name: 'Web 216 · Azul Cobalto Clásico',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#CCCCFF', '--surface': '#FFFFFF',
+          '--forest': '#000066', '--forest-soft': '#003399', '--ink': '#000033', '--ink-muted': '#333366',
+          '--terracotta': '#0033FF', '--terracotta-soft': '#CCCCFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#99CCFF', '--gold': '#3399FF', '--line': '#9999CC', '--radius': '4px'
+        }
+      },
+      ws_cielo_marino: {
+        name: 'Web 216 · Cielo & Azul Marino',
+        web216: true,
+        vars: {
+          '--paper': '#CCFFFF', '--paper-warm': '#99CCFF', '--surface': '#FFFFFF',
+          '--forest': '#000033', '--forest-soft': '#003366', '--ink': '#000033', '--ink-muted': '#336699',
+          '--terracotta': '#0066CC', '--terracotta-soft': '#99CCFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#99CCFF', '--gold': '#33CCFF', '--line': '#6699CC', '--radius': '6px'
+        }
+      },
+      ws_medianoche_216: {
+        name: 'Web 216 · Medianoche Eléctrica',
+        web216: true,
+        vars: {
+          '--paper': '#000033', '--paper-warm': '#000066', '--surface': '#003366',
+          '--forest': '#000000', '--forest-soft': '#000066', '--ink': '#FFFFFF', '--ink-muted': '#99CCFF',
+          '--terracotta': '#3399FF', '--terracotta-soft': '#003366', '--terracotta-ink': '#000000',
+          '--sand': '#000066', '--gold': '#00FFFF', '--line': '#336699', '--radius': '6px'
+        }
+      },
+      ws_lavanda_indigo: {
+        name: 'Web 216 · Lavanda & Índigo',
+        web216: true,
+        vars: {
+          '--paper': '#FFCCFF', '--paper-warm': '#CCCCFF', '--surface': '#FFFFFF',
+          '--forest': '#330066', '--forest-soft': '#660099', '--ink': '#330033', '--ink-muted': '#663399',
+          '--terracotta': '#6600FF', '--terracotta-soft': '#CCCCFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#CC99FF', '--gold': '#CC66FF', '--line': '#9966CC', '--radius': '6px'
+        }
+      },
+      ws_purpura_real: {
+        name: 'Web 216 · Púrpura Real & Blanco',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#FFCCFF', '--surface': '#FFFFFF',
+          '--forest': '#330033', '--forest-soft': '#660066', '--ink': '#330033', '--ink-muted': '#663366',
+          '--terracotta': '#9900CC', '--terracotta-soft': '#FFCCFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#CC99FF', '--gold': '#FF00FF', '--line': '#CC99CC', '--radius': '6px'
+        }
+      },
+      ws_cyber_violeta: {
+        name: 'Web 216 · Cyber Violeta',
+        web216: true,
+        vars: {
+          '--paper': '#330066', '--paper-warm': '#660099', '--surface': '#330033',
+          '--forest': '#000000', '--forest-soft': '#330066', '--ink': '#FFFFFF', '--ink-muted': '#CC99FF',
+          '--terracotta': '#FF00FF', '--terracotta-soft': '#660066', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#660099', '--gold': '#00FFFF', '--line': '#9933CC', '--radius': '6px'
+        }
+      },
+      ws_monocromo_puro: {
+        name: 'Web 216 · Monocromo 100% Puro',
+        web216: true,
+        vars: {
+          '--paper': '#FFFFFF', '--paper-warm': '#CCCCCC', '--surface': '#FFFFFF',
+          '--forest': '#000000', '--forest-soft': '#333333', '--ink': '#000000', '--ink-muted': '#666666',
+          '--terracotta': '#333333', '--terracotta-soft': '#CCCCCC', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#CCCCCC', '--gold': '#999999', '--line': '#999999', '--radius': '2px'
+        }
+      },
+      ws_gris_suizo: {
+        name: 'Web 216 · Gris Suizo & Grafito',
+        web216: true,
+        vars: {
+          '--paper': '#CCCCCC', '--paper-warm': '#999999', '--surface': '#FFFFFF',
+          '--forest': '#000000', '--forest-soft': '#333333', '--ink': '#000000', '--ink-muted': '#333333',
+          '--terracotta': '#666666', '--terracotta-soft': '#FFFFFF', '--terracotta-ink': '#FFFFFF',
+          '--sand': '#999999', '--gold': '#333333', '--line': '#666666', '--radius': '4px'
+        }
+      },
+      ws_negro_absoluto: {
+        name: 'Web 216 · Negro Absoluto & Plata',
+        web216: true,
+        vars: {
+          '--paper': '#000000', '--paper-warm': '#333333', '--surface': '#333333',
+          '--forest': '#333333', '--forest-soft': '#666666', '--ink': '#FFFFFF', '--ink-muted': '#CCCCCC',
+          '--terracotta': '#CCCCCC', '--terracotta-soft': '#333333', '--terracotta-ink': '#000000',
+          '--sand': '#333333', '--gold': '#FFFFFF', '--line': '#666666', '--radius': '4px'
+        }
+      }
+    };
+
+    var activePaletteVars = Object.assign({}, PALETTE_PRESETS.tierra.vars);
+    var activeSwatchKey = 'tierra';
+
+    // Las 24 variantes exactas extraídas píxel por píxel de la imagen subida (13 en fila 1 + 11 en fila 2)
+    var SWATCH_24_LIST = [
+      // Fila 1 (13 colores)
+      { key: 'c01', row: 1, name: '01. Borgoña Intenso',      accent: '#B20F57', paper: '#F8F2F4', warm: '#EFE4E8', forest: '#30121F', forestSoft: '#42192B', ink: '#1F1418', muted: '#614F56', soft: '#F9D6E5', sand: '#E6D5DC', gold: '#E58A92', btnInk: '#FFFFFF' },
+      { key: 'c02', row: 1, name: '02. Frambuesa Viva',       accent: '#DE1661', paper: '#F8F2F4', warm: '#EFE4E8', forest: '#30121D', forestSoft: '#441A29', ink: '#1F1418', muted: '#614F55', soft: '#FAD8E5', sand: '#E6D5DB', gold: '#E38C8D', btnInk: '#FFFFFF' },
+      { key: 'c03', row: 1, name: '03. Coral Salmón',         accent: '#EA7C76', paper: '#F7F2F2', warm: '#EFE6E5', forest: '#301412', forestSoft: '#451E1B', ink: '#1F1514', muted: '#61504F', soft: '#FBE3E1', sand: '#E6D8D7', gold: '#DFB190', btnInk: '#FFFFFF' },
+      { key: 'c04', row: 1, name: '04. Rojo Carmesí',         accent: '#DB0016', paper: '#F8F2F3', warm: '#EFE4E5', forest: '#301215', forestSoft: '#451A1E', ink: '#1F1415', muted: '#614F50', soft: '#FAD6DA', sand: '#E6D5D7', gold: '#ED9E82', btnInk: '#FFFFFF' },
+      { key: 'c05', row: 1, name: '05. Bermellón',            accent: '#FA502D', paper: '#F8F3F2', warm: '#EFE6E4', forest: '#301712', forestSoft: '#45221B', ink: '#1F1614', muted: '#61524F', soft: '#FCDCD6', sand: '#E6D8D5', gold: '#EBBB85', btnInk: '#FFFFFF' },
+      { key: 'c06', row: 1, name: '06. Naranja Mandarina',    accent: '#F46C22', paper: '#F8F4F2', warm: '#EFE7E4', forest: '#301D12', forestSoft: '#452A1B', ink: '#1F1814', muted: '#61554F', soft: '#FCE2D4', sand: '#E6DBD5', gold: '#E8CC87', btnInk: '#FFFFFF' },
+      { key: 'c07', row: 1, name: '07. Ámbar Dorado',         accent: '#F49328', paper: '#F8F5F2', warm: '#EFEAE4', forest: '#302212', forestSoft: '#45311B', ink: '#1F1A14', muted: '#61584F', soft: '#FCE9D4', sand: '#E6DFD5', gold: '#E8DD87', btnInk: '#181614' },
+      { key: 'c08', row: 1, name: '08. Amarillo Sol',         accent: '#F9C03E', paper: '#F8F6F2', warm: '#EFECE4', forest: '#302712', forestSoft: '#45381B', ink: '#1F1C14', muted: '#615B4F', soft: '#FDF2D7', sand: '#E6E2D5', gold: '#FFE07D', btnInk: '#181614' },
+      { key: 'c09', row: 1, name: '09. Oro Mostaza',          accent: '#E5C550', paper: '#F7F6F2', warm: '#EEECE4', forest: '#302A12', forestSoft: '#453D1B', ink: '#1F1D14', muted: '#615D4F', soft: '#F9F3DC', sand: '#E5E2D5', gold: '#F0DC86', btnInk: '#181614' },
+      { key: 'c10', row: 1, name: '10. Verde Lima',           accent: '#BFCB45', paper: '#F6F7F3', warm: '#ECEEE5', forest: '#262914', forestSoft: '#373B1D', ink: '#1C1D15', muted: '#5B5E50', soft: '#F1F4D8', sand: '#E1E4D6', gold: '#D8E376', btnInk: '#181614' },
+      { key: 'c11', row: 1, name: '11. Verde Manzana',        accent: '#77B44B', paper: '#F4F6F3', warm: '#E8EDE5', forest: '#1E2916', forestSoft: '#2B3B20', ink: '#181D15', muted: '#545E50', soft: '#E3F0DA', sand: '#DBE3D6', gold: '#AEDB8C', btnInk: '#FFFFFF' },
+      { key: 'c12', row: 1, name: '12. Verde Esmeralda',      accent: '#008146', paper: '#F2F7F4', warm: '#E4EFE9', forest: '#122E21', forestSoft: '#1B4230', ink: '#141F1A', muted: '#4F6158', soft: '#D4EFE2', sand: '#D5E6DD', gold: '#7CE0B3', btnInk: '#FFFFFF' },
+      { key: 'c13', row: 1, name: '13. Verde Jade',           accent: '#12B77B', paper: '#F2F7F5', warm: '#E4EFEA', forest: '#122E24', forestSoft: '#1B4234', ink: '#141F1B', muted: '#4F615A', soft: '#D5F4E8', sand: '#D5E6DF', gold: '#82E8C2', btnInk: '#FFFFFF' },
+      // Fila 2 (11 colores)
+      { key: 'c14', row: 2, name: '14. Verde Azulado (Teal)', accent: '#009688', paper: '#F2F7F7', warm: '#E4EFEF', forest: '#122D2B', forestSoft: '#1A423F', ink: '#141F1E', muted: '#4F615F', soft: '#D4F0ED', sand: '#D5E5E4', gold: '#7CE0D6', btnInk: '#FFFFFF' },
+      { key: 'c15', row: 2, name: '15. Cian Cerúleo',         accent: '#009AE2', paper: '#F2F6F8', warm: '#E4ECF0', forest: '#122630', forestSoft: '#1A3745', ink: '#141C1F', muted: '#4F5B61', soft: '#D4EEF9', sand: '#D5E1E6', gold: '#7CD1F5', btnInk: '#FFFFFF' },
+      { key: 'c16', row: 2, name: '16. Azul Real',            accent: '#3D83F0', paper: '#F2F5F8', warm: '#E4E9F0', forest: '#121E30', forestSoft: '#1B2C45', ink: '#14181F', muted: '#4F5661', soft: '#D8E6FC', sand: '#D5DCE6', gold: '#8EB8FA', btnInk: '#FFFFFF' },
+      { key: 'c17', row: 2, name: '17. Azul Lavanda',         accent: '#7985C8', paper: '#F3F4F7', warm: '#E6E8EF', forest: '#181B2B', forestSoft: '#24283F', ink: '#16171E', muted: '#525460', soft: '#E2E5F4', sand: '#D8DBE5', gold: '#ABB3E6', btnInk: '#FFFFFF' },
+      { key: 'c18', row: 2, name: '18. Azul Índigo',          accent: '#3F4FB2', paper: '#F3F4F8', warm: '#E5E7F0', forest: '#16192E', forestSoft: '#212542', ink: '#15171F', muted: '#515361', soft: '#DCE0F5', sand: '#D7DAE6', gold: '#9AA5EB', btnInk: '#FFFFFF' },
+      { key: 'c19', row: 2, name: '19. Lila Glicina',         accent: '#B59CD9', paper: '#F5F3F7', warm: '#EAE6F0', forest: '#211A2C', forestSoft: '#302640', ink: '#19161E', muted: '#585260', soft: '#EFEAF7', sand: '#DFD9E6', gold: '#D5C2F0', btnInk: '#181614' },
+      { key: 'c20', row: 2, name: '20. Amatista Malva',       accent: '#A168AD', paper: '#F6F3F7', warm: '#ECE6EE', forest: '#261A29', forestSoft: '#37263B', ink: '#1C161D', muted: '#5B525D', soft: '#EFE2F2', sand: '#E1D8E3', gold: '#DBA8E6', btnInk: '#FFFFFF' },
+      { key: 'c21', row: 2, name: '21. Púrpura Imperial',     accent: '#921EA7', paper: '#F7F2F8', warm: '#EEE4F0', forest: '#2B1230', forestSoft: '#3E1A45', ink: '#1D141F', muted: '#5E4F61', soft: '#F1D6F5', sand: '#E4D5E6', gold: '#E096ED', btnInk: '#FFFFFF' },
+      { key: 'c22', row: 2, name: '22. Cacao Tostado',        accent: '#7B5549', paper: '#F6F4F3', warm: '#EDE8E6', forest: '#261D1A', forestSoft: '#382B26', ink: '#1C1817', muted: '#5C5452', soft: '#ECE1DE', sand: '#E2DAD7', gold: '#DEB9A8', btnInk: '#FFFFFF' },
+      { key: 'c23', row: 2, name: '23. Grafito Pizarra',      accent: '#616161', paper: '#F5F5F5', warm: '#EAEAEA', forest: '#1F1F1F', forestSoft: '#2E2E2E', ink: '#171717', muted: '#575757', soft: '#E5E5E5', sand: '#DCDCDC', gold: '#D8C39E', btnInk: '#FFFFFF' },
+      { key: 'c24', row: 2, name: '24. Piedra Greige',        accent: '#A89B8F', paper: '#F6F5F4', warm: '#ECEAE7', forest: '#24211E', forestSoft: '#36312D', ink: '#1B1918', muted: '#5B5754', soft: '#EFECE9', sand: '#E1DDD8', gold: '#E3CFB8', btnInk: '#181614' }
+    ];
+
+    // Registrar las 24 variantes en PALETTE_PRESETS para que funcionen desde el <select> y desde los círculos
+    SWATCH_24_LIST.forEach(function(item) {
+      PALETTE_PRESETS[item.key] = {
+        name: item.name + ' (' + item.accent + ')',
+        vars: {
+          '--paper': item.paper,
+          '--paper-warm': item.warm,
+          '--surface': '#FFFFFF',
+          '--forest': item.forest,
+          '--forest-soft': item.forestSoft,
+          '--ink': item.ink,
+          '--ink-muted': item.muted,
+          '--terracotta': item.accent,
+          '--terracotta-soft': item.soft,
+          '--terracotta-ink': item.btnInk,
+          '--sand': item.sand,
+          '--gold': item.gold
+        }
+      };
+    });
+
+    // =========================================================================
+    // PALETAS INVERSAS: fondos oscuros con textos y acentos vivos claros (24 combinaciones)
+    // =========================================================================
+    function hslHex(h, s, l) {
+      h = ((h % 360) + 360) % 360; s = Math.max(0, Math.min(100, s)) / 100; l = l / 100;
+      var a = s * Math.min(l, 1 - l);
+      function f(n) {
+        var k = (n + h / 30) % 12;
+        var c = l - a * Math.max(-1, Math.min(k - 3, Math.min(9 - k, 1)));
+        return Math.round(255 * c).toString(16).padStart(2, '0');
+      }
+      return ('#' + f(0) + f(8) + f(4)).toUpperCase();
+    }
+
+    // h = tono del fondo · ah = tono del acento vivo · gh = tono del detalle · s = escala de saturación del fondo
+    var INVERSE_LIST = [
+      { key: 'i01', name: 'Inv 01 · Vino Noche & Rosa Neón',        h: 340, ah: 345, gh: 20 },
+      { key: 'i02', name: 'Inv 02 · Granate Humo & Coral Vivo',     h: 355, ah: 6,   gh: 40 },
+      { key: 'i03', name: 'Inv 03 · Carmín Nocturno & Rosa Luz',    h: 350, ah: 350, gh: 30, al: 72 },
+      { key: 'i04', name: 'Inv 04 · Espresso & Naranja Brasa',      h: 22,  ah: 24,  gh: 45 },
+      { key: 'i05', name: 'Inv 05 · Cobre Oscuro & Ámbar Luminoso', h: 30,  ah: 38,  gh: 50 },
+      { key: 'i06', name: 'Inv 06 · Chocolate & Mandarina Eléctrica', h: 18, ah: 28, gh: 55 },
+      { key: 'i07', name: 'Inv 07 · Oliva Profundo & Amarillo Limón', h: 70, ah: 54, gh: 62, al: 64 },
+      { key: 'i08', name: 'Inv 08 · Musgo Negro & Lima Ácida',      h: 85,  ah: 78,  gh: 95, al: 62 },
+      { key: 'i09', name: 'Inv 09 · Bronce Noche & Oro Pálido',     h: 45,  ah: 50,  gh: 48, al: 70 },
+      { key: 'i10', name: 'Inv 10 · Bosque Negro & Verde Menta',    h: 150, ah: 145, gh: 165 },
+      { key: 'i11', name: 'Inv 11 · Abeto Nocturno & Verde Manzana', h: 135, ah: 100, gh: 130, al: 62 },
+      { key: 'i12', name: 'Inv 12 · Pino Profundo & Esmeralda Neón', h: 160, ah: 155, gh: 85 },
+      { key: 'i13', name: 'Inv 13 · Petróleo Oscuro & Turquesa Hielo', h: 185, ah: 175, gh: 160 },
+      { key: 'i14', name: 'Inv 14 · Marino Verdoso & Cian Eléctrico', h: 195, ah: 190, gh: 45 },
+      { key: 'i15', name: 'Inv 15 · Medianoche & Azul Cielo',       h: 220, ah: 205, gh: 170 },
+      { key: 'i16', name: 'Inv 16 · Azul Tinta & Celeste Pastel',   h: 225, ah: 212, gh: 45, al: 74 },
+      { key: 'i17', name: 'Inv 17 · Cobalto Noche & Azul Eléctrico', h: 230, ah: 225, gh: 190, al: 70 },
+      { key: 'i18', name: 'Inv 18 · Índigo Humo & Lavanda Luz',     h: 250, ah: 258, gh: 320, al: 74 },
+      { key: 'i19', name: 'Inv 19 · Ciruela Negra & Lila Brillante', h: 280, ah: 282, gh: 330, al: 72 },
+      { key: 'i20', name: 'Inv 20 · Berenjena & Orquídea Neón',     h: 300, ah: 305, gh: 180 },
+      { key: 'i21', name: 'Inv 21 · Uva Noche & Magenta Claro',     h: 310, ah: 320, gh: 45, al: 70 },
+      { key: 'i22', name: 'Inv 22 · Grafito Puro & Marfil Cálido',  h: 30,  ah: 40,  gh: 38, s: 0.25, as: 20, al: 86 },
+      { key: 'i23', name: 'Inv 23 · Carbón Azulado & Plata Hielo',  h: 215, ah: 210, gh: 190, s: 0.3,  as: 18, al: 84 },
+      { key: 'i24', name: 'Inv 24 · Tierra Oscura & Arena Luminosa', h: 25, ah: 34,  gh: 42, s: 0.45, as: 25, al: 76 }
+    ];
+
+    INVERSE_LIST.forEach(function(it) {
+      var s = it.s || 1, h = it.h;
+      var accent = hslHex(it.ah, it.as != null ? it.as : 92, it.al || 67);
+      PALETTE_PRESETS[it.key] = {
+        name: it.name + ' (' + accent + ')',
+        vars: {
+          '--paper': hslHex(h, 28 * s, 9),
+          '--paper-warm': hslHex(h, 26 * s, 13),
+          '--surface': hslHex(h, 24 * s, 16),
+          '--forest': hslHex(h, 32 * s, 6),
+          '--forest-soft': hslHex(h, 28 * s, 11),
+          '--ink': hslHex(h, 18 * s, 93),
+          '--ink-muted': hslHex(h, 12 * s, 70),
+          '--terracotta': accent,
+          '--terracotta-soft': hslHex(it.ah, 40 * s, 20),
+          '--terracotta-ink': hslHex(h, 40 * s, 7),
+          '--sand': hslHex(h, 18 * s, 24),
+          '--gold': hslHex(it.gh, 88, 76),
+          '--line': 'rgba(255, 255, 255, 0.16)'
+        }
+      };
+    });
+
+    function getContrastInkForHex(hex) {
+      var clean = hex.replace('#', '');
+      if (clean.length !== 6) return '#FFFFFF';
+      var r = parseInt(clean.substring(0, 2), 16);
+      var g = parseInt(clean.substring(2, 4), 16);
+      var b = parseInt(clean.substring(4, 6), 16);
+      var lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      return lum > 0.62 ? '#181614' : '#FFFFFF';
+    }
+
+    function applyPalettePreset(presetKey) {
+      var preset = PALETTE_PRESETS[presetKey];
+      if (!preset) return;
+      activeSwatchKey = presetKey;
+
+      var harmonizeToggle = document.getElementById('harmonize-all-toggle');
+      var harmonizeAll = !harmonizeToggle || harmonizeToggle.checked || !/^c\d\d$/.test(presetKey);
+
+      if (harmonizeAll) {
+        activePaletteVars = Object.assign({}, preset.vars);
+      } else {
+        // Cambiar SOLO el 3er color brillante y su tinte suave, manteniendo fondos actuales
+        activePaletteVars['--terracotta'] = preset.vars['--terracotta'];
+        activePaletteVars['--terracotta-soft'] = preset.vars['--terracotta-soft'];
+        activePaletteVars['--terracotta-ink'] = preset.vars['--terracotta-ink'] || getContrastInkForHex(preset.vars['--terracotta']);
+      }
+
+      if (!activePaletteVars['--terracotta-ink']) {
+        activePaletteVars['--terracotta-ink'] = getContrastInkForHex(activePaletteVars['--terracotta'] || '#C84B28');
+      }
+      if (!activePaletteVars['--forest-ink']) {
+        activePaletteVars['--forest-ink'] = getContrastInkForHex(activePaletteVars['--forest'] || '#162620');
+      }
+      if (!activePaletteVars['--line']) {
+        activePaletteVars['--line'] = '#DCD5C7';
+      }
+      if (!activePaletteVars['--line-dark']) {
+        activePaletteVars['--line-dark'] = activePaletteVars['--line'];
+      }
+      if (!activePaletteVars['--radius']) {
+        activePaletteVars['--radius'] = '6px';
+      }
+
+      var root = document.documentElement;
+      PALETTE_SLOTS_META.forEach(function(slot) {
+        var val = activePaletteVars[slot.key] || slot.fallback;
+        activePaletteVars[slot.key] = val;
+        root.style.setProperty(slot.key, val);
+      });
+      Object.keys(activePaletteVars).forEach(function(k) {
+        root.style.setProperty(k, activePaletteVars[k]);
+      });
+
+      var topbarLabel = document.getElementById('topbar-palette-label');
+      if (topbarLabel) {
+        topbarLabel.textContent = '🎨 Paleta: ' + preset.name;
+      }
+
+      var titleEl = document.getElementById('palette-lab-title');
+      if (titleEl) titleEl.textContent = '🎨 Paleta Activa: ' + preset.name;
+
+      updateTopbarSwatches();
+      render24SwatchCircles();
+      renderVisualPaletteCards();
+      renderPaletteLabSlots();
+    }
+
+    function openPaletteModal() {
+      var modal = document.getElementById('modal-palettes');
+      if (!modal) return;
+      render24SwatchCircles();
+      renderVisualPaletteCards();
+      renderPaletteLabSlots();
+      modal.removeAttribute('hidden');
+    }
+
+    function closePaletteModal() {
+      var modal = document.getElementById('modal-palettes');
+      if (modal) modal.setAttribute('hidden', '');
+    }
+
+    function openFontModal() {
+      var modal = document.getElementById('modal-fonts');
+      if (!modal) return;
+      renderVisualFontCards();
+      renderFontSlotsGrid();
+      initFontTrackingControls();
+      modal.removeAttribute('hidden');
+    }
+
+    function closeFontModal() {
+      var modal = document.getElementById('modal-fonts');
+      if (modal) modal.setAttribute('hidden', '');
+    }
+
+    // =========================================================================
+    // TARJETAS MÍNIMAS EXPANDIBLES, AGRUPADAS POR FAMILIA TONAL
+    // =========================================================================
+    var PALETTE_FAMILIES = [
+      { id: 'rojos',    name: 'Rojos y Rosas',       color: '#E0245E' },
+      { id: 'naranjas', name: 'Naranjas y Ámbar',    color: '#F28C28' },
+      { id: 'amarillos',name: 'Amarillos y Limas',   color: '#C9D43A' },
+      { id: 'verdes',   name: 'Verdes',              color: '#2FB872' },
+      { id: 'cianes',   name: 'Turquesas y Cianes',  color: '#14B8C4' },
+      { id: 'azules',   name: 'Azules',              color: '#3D7BF0' },
+      { id: 'violetas', name: 'Violetas y Magentas', color: '#9B59D0' },
+      { id: 'neutros',  name: 'Neutros y Tierras',   color: '#A89B8F' }
+    ];
+    var paletteModeFilter = 'all';
+    var expandedPaletteKeys = {};
+    var collapsedPaletteFamilies = {};
+
+    function hexToHsl(hex) {
+      var c = hex.replace('#', '');
+      var r = parseInt(c.substr(0, 2), 16) / 255, g = parseInt(c.substr(2, 2), 16) / 255, b = parseInt(c.substr(4, 2), 16) / 255;
+      var mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, h = 0, s = 0, d = mx - mn;
+      if (d) {
+        s = d / (1 - Math.abs(2 * l - 1));
+        if (mx === r) h = ((g - b) / d) % 6; else if (mx === g) h = (b - r) / d + 2; else h = (r - g) / d + 4;
+        h = (h * 60 + 360) % 360;
+      }
+      return { h: h, s: s, l: l };
+    }
+
+    function paletteFamilyOf(accentHex) {
+      var c = hexToHsl(accentHex);
+      if (c.s < 0.28) return 'neutros';
+      var h = c.h;
+      if (h < 15 || h >= 335) return 'rojos';
+      if (h < 47) return 'naranjas';
+      if (h < 95) return 'amarillos';
+      if (h < 165) return 'verdes';
+      if (h < 200) return 'cianes';
+      if (h < 255) return 'azules';
+      return 'violetas';
+    }
+
+    function isDarkPalette(vars) {
+      return hexToHsl(vars['--paper']).l < 0.4;
+    }
+
+    function setPaletteModeFilter(mode, btn) {
+      paletteModeFilter = mode;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.pal-mode-btn').forEach(function(b) { b.setAttribute('aria-pressed', 'false'); });
+        btn.setAttribute('aria-pressed', 'true');
+      }
+      renderVisualPaletteCards();
+    }
+
+    function createPaletteCardElement(key) {
+      var preset = PALETTE_PRESETS[key];
+      if (!preset) return null;
+      var v = preset.vars;
+      var isActive = activeSwatchKey === key;
+      var isOpen = !!expandedPaletteKeys[key];
+      var dark = isDarkPalette(v);
+      var fam = PALETTE_FAMILIES.filter(function(f) { return f.id === paletteFamilyOf(v['--terracotta']); })[0];
+
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'palette-chip';
+      card.setAttribute('aria-pressed', String(isActive));
+      card.setAttribute('aria-expanded', String(isOpen));
+      card.title = preset.name + (dark ? ' · fondo oscuro' : ' · fondo claro');
+
+      var accentInk = v['--terracotta-ink'] || getContrastInkForHex(v['--terracotta']);
+      var slots = [
+        ['Papel', '--paper'], ['Papel alt.', '--paper-warm'], ['Tarjeta', '--surface'], ['Oscuro', '--forest'],
+        ['Texto', '--ink'], ['Texto sec.', '--ink-muted'], ['Acento', '--terracotta'], ['Detalle', '--gold']
+      ].map(function(sl) {
+        var hex = v[sl[1]];
+        return '<span class="palette-chip__slot" style="background:' + hex + ';color:' + getContrastInkForHex(hex) + ';"><b>' + sl[0] + '</b>' + hex.toUpperCase() + '</span>';
+      }).join('');
+
+      card.innerHTML =
+        '<span class="palette-chip__bar">' +
+          '<span style="background:' + v['--paper'] + ';"></span>' +
+          '<span style="background:' + v['--forest'] + ';"></span>' +
+          '<span style="background:' + v['--terracotta'] + ';"></span>' +
+          '<span style="background:' + v['--gold'] + ';"></span>' +
+        '</span>' +
+        '<span class="palette-chip__detail">' +
+          '<span class="palette-chip__title"><strong>' + preset.name + '</strong>' +
+            '<span class="palette-chip__badge">' + (dark ? '☾ OSCURA' : '☀ CLARA') + '</span>' +
+            '<span class="palette-chip__badge">' + (fam ? fam.name : '') + '</span>' +
+            (isActive ? '<span class="palette-chip__badge palette-chip__badge--on">ACTIVA</span>' : '') +
+            '<span class="palette-chip__close" role="button" tabindex="0" aria-label="Cerrar detalle" title="Cerrar detalle">✕ Cerrar</span>' +
+          '</span>' +
+          '<span class="palette-chip__slots">' + slots + '</span>' +
+        '</span>';
+
+      var closeEl = card.querySelector('.palette-chip__close');
+      function closeDetail(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        expandedPaletteKeys = {};
+        renderVisualPaletteCards();
+      }
+      closeEl.addEventListener('click', closeDetail);
+      closeEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') closeDetail(e);
+      });
+
+      card.onclick = function() {
+        if (activeSwatchKey === key) {
+          var willOpen = !expandedPaletteKeys[key];
+          expandedPaletteKeys = {};
+          if (willOpen) expandedPaletteKeys[key] = true;
+          renderVisualPaletteCards();
+        } else {
+          expandedPaletteKeys = {};
+          expandedPaletteKeys[key] = true;
+          applyPalettePreset(key);
+        }
+      };
+      return card;
+    }
+
+    function renderVisualPaletteCards() {
+      var host = document.getElementById('palette-families');
+      if (!host) return;
+      host.innerHTML = '';
+
+      var entries = Object.keys(PALETTE_PRESETS).map(function(key) {
+        var v = PALETTE_PRESETS[key].vars;
+        var hsl = hexToHsl(v['--terracotta']);
+        return { key: key, fam: paletteFamilyOf(v['--terracotta']), dark: isDarkPalette(v), hsl: hsl };
+      }).filter(function(e) {
+        if (paletteModeFilter === 'nuevas') return /^n\d\d$/.test(e.key);
+        if (paletteModeFilter === 'web216') return !!PALETTE_PRESETS[e.key].web216;
+        return paletteModeFilter === 'all' || (paletteModeFilter === 'dark') === e.dark;
+      });
+
+      var countEl = document.getElementById('pal-count');
+      if (countEl) countEl.textContent = String(entries.length);
+
+      PALETTE_FAMILIES.forEach(function(fam) {
+        var list = entries.filter(function(e) { return e.fam === fam.id; });
+        if (!list.length) return;
+        list.sort(function(a, b) {
+          if (a.dark !== b.dark) return a.dark ? 1 : -1;
+          return fam.id === 'neutros' ? a.hsl.l - b.hsl.l : a.hsl.h - b.hsl.h;
+        });
+
+        var det = document.createElement('details');
+        det.className = 'pal-family';
+        if (!collapsedPaletteFamilies[fam.id]) det.setAttribute('open', '');
+        det.addEventListener('toggle', function() { collapsedPaletteFamilies[fam.id] = !det.open; });
+
+        var sum = document.createElement('summary');
+        sum.innerHTML = '<span class="pal-family__dot" style="background:' + fam.color + ';"></span>' +
+          '<span>' + fam.name + '</span><span class="pal-family__count">' + list.length + '</span>';
+        det.appendChild(sum);
+
+        var grid = document.createElement('div');
+        grid.className = 'pal-family__grid';
+        list.forEach(function(e) {
+          var el = createPaletteCardElement(e.key);
+          if (el) grid.appendChild(el);
+        });
+        det.appendChild(grid);
+        host.appendChild(det);
+      });
+    }
+
+    function render24SwatchCircles() {
+      var row1 = document.getElementById('swatch-row-1');
+      var row2 = document.getElementById('swatch-row-2');
+      if (!row1 || !row2) return;
+      row1.innerHTML = '';
+      row2.innerHTML = '';
+
+      SWATCH_24_LIST.forEach(function(item) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'swatch-24-dot';
+        btn.style.background = item.accent;
+        btn.title = item.name + ' · ' + item.accent;
+        btn.setAttribute('aria-label', item.name);
+        btn.setAttribute('aria-pressed', String(activeSwatchKey === item.key));
+        btn.onclick = function() {
+          applyPalettePreset(item.key);
+        };
+        if (item.row === 1) {
+          row1.appendChild(btn);
+        } else {
+          row2.appendChild(btn);
+        }
+      });
+    }
+
+    function updateTopbarSwatches() {
+      var sw = document.getElementById('topbar-swatches');
+      if (!sw) return;
+      sw.innerHTML =
+        '<span style="background:' + activePaletteVars['--paper'] + ';"></span>' +
+        '<span style="background:' + activePaletteVars['--forest'] + ';"></span>' +
+        '<span style="background:' + activePaletteVars['--terracotta'] + ';"></span>' +
+        '<span style="background:' + activePaletteVars['--gold'] + ';"></span>';
+    }
+
+    function renderPaletteLabSlots() {
+      var grid = document.getElementById('palette-slots-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      PALETTE_SLOTS_META.forEach(function(slot) {
+        var rawHex = activePaletteVars[slot.key] || slot.fallback || '#000000';
+        var hex = /^#[0-9A-Fa-f]{6}$/.test(rawHex) ? rawHex : (slot.fallback || '#000000');
+        var card = document.createElement('div');
+        card.className = 'palette-slot-card';
+        card.innerHTML =
+          '<div class="palette-slot-card__top">' +
+            '<strong style="color:#fff;">' + slot.label + '</strong>' +
+            '<input type="color" value="' + hex + '" aria-label="' + slot.label + '">' +
+          '</div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;color:#b5afa6;">' +
+            '<span>' + slot.desc + '</span>' +
+            '<code class="slot-hex-code" style="color:var(--gold);font-weight:700;">' + hex.toUpperCase() + '</code>' +
+          '</div>';
+
+        var input = card.querySelector('input[type="color"]');
+        var codeEl = card.querySelector('.slot-hex-code');
+        input.addEventListener('input', function(e) {
+          var newHex = e.target.value.toUpperCase();
+          activePaletteVars[slot.key] = newHex;
+          document.documentElement.style.setProperty(slot.key, newHex);
+          if (slot.key === '--line') { document.documentElement.style.setProperty('--line-dark', newHex); }
+          codeEl.textContent = newHex;
+          updateTopbarSwatches();
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function copyCurrentPaletteCss() {
+      var lines = [':root {'];
+      Object.keys(activePaletteVars).forEach(function(k) {
+        lines.push('  ' + k + ': ' + activePaletteVars[k] + ';');
+      });
+      lines.push('}');
+      navigator.clipboard.writeText(lines.join('\n')).then(function() {
+        alert('Variables :root de la paleta actual copiadas al portapapeles.');
+      });
+    }
+
+    // =========================================================================
+        // =========================================================================
+        // =========================================================================
+    // 8. MOTOR DE SETS TIPOGRÁFICOS Y SELECTOR DE FUENTES (GOOGLE FONTS + SISTEMA)
+    // 100% COMPATIBLES CON CARACTERES EN ESPAÑOL (Á, É, Í, Ó, Ú, Ü, Ñ, ¿, ¡)
+    // =========================================================================
+    var FONT_SETS = {
+      // SETS CLÁSICOS EXISTENTES
+      f01: { name: 'Set 01 · Editorial Cálido & Artesanal', display: '"Fraunces", Georgia, serif', body: '"DM Sans", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f02: { name: 'Set 02 · Alta Costura & Lujo Clásico', display: '"Cormorant Garamond", Georgia, serif', body: '"Manrope", system-ui, sans-serif', mono: '"Space Mono", monospace' },
+      f03: { name: 'Set 03 · Revista Moderna & Diseño', display: '"Bodoni Moda", Georgia, serif', body: '"DM Sans", system-ui, sans-serif', mono: '"JetBrains Mono", monospace' },
+      f04: { name: 'Set 04 · Prensa & Confianza Institucional', display: '"Newsreader", Georgia, serif', body: '"Inter", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f05: { name: 'Set 05 · Arquitectura & Precisión Técnica', display: '"Space Grotesk", system-ui, sans-serif', body: '"IBM Plex Sans", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f06: { name: 'Set 06 · Corporativo Contemporáneo Limpio', display: '"Manrope", system-ui, sans-serif', body: '"Plus Jakarta Sans", system-ui, sans-serif', mono: '"JetBrains Mono", monospace' },
+      f07: { name: 'Set 07 · Agencia Creativa & Vanguardia', display: '"Syne", system-ui, sans-serif', body: '"Plus Jakarta Sans", system-ui, sans-serif', mono: '"Space Mono", monospace' },
+      f08: { name: 'Set 08 · Cartel Industrial & Alto Impacto', display: '"Oswald", system-ui, sans-serif', body: '"Inter", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f09: { name: 'Set 09 · Clásico Académico & Tradición', display: '"Playfair Display", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f10: { name: 'Set 10 · Cercanía & Comercio Amigable', display: '"Outfit", system-ui, sans-serif', body: '"Nunito Sans", system-ui, sans-serif', mono: '"JetBrains Mono", monospace' },
+      f11: { name: 'Set 11 · Póster de Impacto & Gimnasio', display: '"Anton", system-ui, sans-serif', body: '"Work Sans", system-ui, sans-serif', mono: '"Fira Mono", monospace' },
+      f12: { name: 'Set 12 · Slab Industrial & Oficio', display: '"Zilla Slab", Georgia, serif', body: '"Karla", system-ui, sans-serif', mono: '"Fira Code", monospace' },
+      f13: { name: 'Set 13 · Editorial Literario & Renacentista', display: '"EB Garamond", Georgia, serif', body: '"Lato", system-ui, sans-serif', mono: '"Inconsolata", monospace' },
+      f14: { name: 'Set 14 · Bauhaus & Diseño Nórdico', display: '"Josefin Sans", system-ui, sans-serif', body: '"Mulish", system-ui, sans-serif', mono: '"DM Mono", monospace' },
+      f15: { name: 'Set 15 · Startup & Producto Digital', display: '"Sora", system-ui, sans-serif', body: '"Figtree", system-ui, sans-serif', mono: '"Roboto Mono", monospace' },
+      f16: { name: 'Set 16 · Botánica & Cosmética de Autor', display: '"Instrument Serif", Georgia, serif', body: '"Albert Sans", system-ui, sans-serif', mono: '"Courier Prime", monospace' },
+      f17: { name: 'Set 17 · Escuela Suiza & Grilla Internacional', display: '"Archivo", system-ui, sans-serif', body: '"Public Sans", system-ui, sans-serif', mono: '"Azeret Mono", monospace' },
+      f18: { name: 'Set 18 · Gastronomía & Bistró Clásico', display: '"Libre Baskerville", Georgia, serif', body: '"Cabin", system-ui, sans-serif', mono: '"Anonymous Pro", monospace' },
+      f19: { name: 'Set 19 · Deporte, Motor & Velocidad', display: '"Chakra Petch", system-ui, sans-serif', body: '"Exo 2", system-ui, sans-serif', mono: '"Share Tech Mono", monospace' },
+      f20: { name: 'Set 20 · Bienestar, Salud & Maternidad', display: '"Lora", Georgia, serif', body: '"Quicksand", system-ui, sans-serif', mono: '"Overpass Mono", monospace' },
+      f21: { name: 'Set 21 · Estilo Wireframe Arquitectónico', display: '"Inter", system-ui, -apple-system, sans-serif', body: '"Inter", system-ui, -apple-system, sans-serif', mono: '"IBM Plex Mono", ui-monospace, monospace' },
+      f22: { name: 'Set 22 · Editorial Contemporáneo con Aire', display: '"DM Serif Display", Georgia, serif', body: '"Hanken Grotesk", system-ui, sans-serif', mono: '"Source Code Pro", monospace' },
+      f23: { name: 'Set 23 · Lujo Clásico Romano', display: '"Cinzel", Georgia, serif', body: '"Montserrat", system-ui, sans-serif', mono: '"Noto Sans Mono", monospace' },
+      f24: { name: 'Set 24 · Literario Cálido & Librería', display: '"Young Serif", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif', mono: '"Spline Sans Mono", monospace' },
+      f25: { name: 'Set 25 · Periodismo Digital Legible', display: '"Source Serif 4", Georgia, serif', body: '"Noto Sans", system-ui, sans-serif', mono: '"Noto Sans Mono", monospace' },
+      f26: { name: 'Set 26 · Galería de Arte Minimalista', display: '"Gloock", Georgia, serif', body: '"Urbanist", system-ui, sans-serif', mono: '"Martian Mono", monospace' },
+      f27: { name: 'Set 27 · Boutique Humanista Delicada', display: '"Marcellus", Georgia, serif', body: '"Alegreya Sans", system-ui, sans-serif', mono: '"Sometype Mono", monospace' },
+      f28: { name: 'Set 28 · Neogrotesca Moderna Expresiva', display: '"Bricolage Grotesque", system-ui, sans-serif', body: '"Be Vietnam Pro", system-ui, sans-serif', mono: '"Red Hat Mono", monospace' },
+      f29: { name: 'Set 29 · Producto SaaS Claro & Amable', display: '"Lexend", system-ui, sans-serif', body: '"Open Sans", system-ui, sans-serif', mono: '"Geist Mono", monospace' },
+      f30: { name: 'Set 30 · Estudio Geométrico Redondeado', display: '"Poppins", system-ui, sans-serif', body: '"Nunito", system-ui, sans-serif', mono: '"Source Code Pro", monospace' },
+      f31: { name: 'Set 31 · Cartel Condensado de Impacto', display: '"Bebas Neue", system-ui, sans-serif', body: '"Barlow", system-ui, sans-serif', mono: '"Spline Sans Mono", monospace' },
+      f32: { name: 'Set 32 · Deportivo Condensado & Energía', display: '"Barlow Condensed", system-ui, sans-serif', body: '"Barlow", system-ui, sans-serif', mono: '"Martian Mono", monospace' },
+      f33: { name: 'Set 33 · Slab Robusta de Oficio', display: '"Bitter", Georgia, serif', body: '"Rubik", system-ui, sans-serif', mono: '"Red Hat Mono", monospace' },
+      f34: { name: 'Set 34 · Titular Monumental Contemporáneo', display: '"Epilogue", system-ui, sans-serif', body: '"Red Hat Text", system-ui, sans-serif', mono: '"Geist Mono", monospace' },
+      f35: { name: 'Set 35 · Verde Orgánico & Cercanía', display: '"Crimson Pro", Georgia, serif', body: '"Raleway", system-ui, sans-serif', mono: '"Sometype Mono", monospace' },
+      f36: { name: 'Set 36 · Café Literario & Tradición', display: '"Alegreya", Georgia, serif', body: '"Merriweather Sans", system-ui, sans-serif', mono: '"Courier Prime", monospace' },
+      f37: { name: 'Set 37 · Familia Única Tech Redondeada', display: '"Red Hat Display", system-ui, sans-serif', body: '"Red Hat Text", system-ui, sans-serif', mono: '"Red Hat Mono", monospace' },
+      f38: { name: 'Set 38 · Fintech Sobrio & Confianza', display: '"Spectral", Georgia, serif', body: '"Inter", system-ui, sans-serif', mono: '"Geist Mono", monospace' },
+      f39: { name: 'Set 39 · Wireframe Técnico Mono', display: '"Space Grotesk", system-ui, sans-serif', body: '"Space Grotesk", system-ui, sans-serif', mono: '"Space Mono", monospace' },
+      f40: { name: 'Set 40 · Wireframe Plano Industrial', display: '"Archivo", system-ui, sans-serif', body: '"Archivo", system-ui, sans-serif', mono: '"Roboto Mono", monospace' },
+      f41: { name: 'Set 41 · Wireframe Blueprint Compacto', display: '"IBM Plex Sans", system-ui, sans-serif', body: '"IBM Plex Sans", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f42: { name: 'Set 42 · Slab Geométrica Contemporánea', display: '"Aleo", Georgia, serif', body: '"Work Sans", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f43: { name: 'Set 43 · Slab Clásica de Imprenta', display: '"Arvo", Georgia, serif', body: '"Open Sans", system-ui, sans-serif', mono: '"Source Code Pro", monospace' },
+      f44: { name: 'Set 44 · Slab Compacta Mecánica', display: '"Rokkitt", Georgia, serif', body: '"Lato", system-ui, sans-serif', mono: '"Fira Code", monospace' },
+      f45: { name: 'Set 45 · Ingeniería & Telemetría', display: '"Titillium Web", system-ui, sans-serif', body: '"Source Sans 3", system-ui, sans-serif', mono: '"JetBrains Mono", monospace' },
+      f46: { name: 'Set 46 · Industrial Moderno', display: '"Titillium Web", system-ui, sans-serif', body: '"Barlow", system-ui, sans-serif', mono: '"Roboto Mono", monospace' },
+      f47: { name: 'Set 47 · Técnico con Contraste Serif', display: '"Titillium Web", system-ui, sans-serif', body: '"Source Serif 4", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f48: { name: 'Set 48 · Titular Clásico + Cuerpo Titillium', display: '"Playfair Display", Georgia, serif', body: '"Titillium Web", system-ui, sans-serif', mono: '"Space Mono", monospace' },
+      f49: { name: 'Set 49 · Deportivo, Gaming & Energía', display: '"Titillium Web", system-ui, sans-serif', body: '"Exo 2", system-ui, sans-serif', mono: '"Share Tech Mono", monospace' },
+
+      // NUEVOS SETS CON LAS FUENTES SOLICITADAS POR EL USUARIO (IMÁGENES 1, 2, 3 + CAACUPÉ ONE + MONOSPACE)
+      f50: { name: 'Set 50 · Caacupé One & Rótulo Popular', display: '"Caacupe One", sans-serif', body: '"DM Sans", system-ui, sans-serif', mono: '"Fragment Mono", monospace' },
+      f51: { name: 'Set 51 · Abel & Modernismo Esbelto', display: '"Abel", sans-serif', body: '"Open Sans", system-ui, sans-serif', mono: '"Ubuntu Mono", monospace' },
+      f52: { name: 'Set 52 · Acme & Carácter Amigable', display: '"Acme", sans-serif', body: '"Nunito", system-ui, sans-serif', mono: '"Cutive Mono", monospace' },
+      f53: { name: 'Set 53 · Amatic SC & Taller Artesanal', display: '"Amatic SC", cursive', body: '"Lato", system-ui, sans-serif', mono: '"Cousine", monospace' },
+      f54: { name: 'Set 54 · Cabin Condensed & Compacto', display: '"Cabin Condensed", sans-serif', body: '"Cabin", system-ui, sans-serif', mono: '"B612 Mono", monospace' },
+      f55: { name: 'Set 55 · Cairo & Precisión Geométrica', display: '"Cairo", sans-serif', body: '"Inter", system-ui, sans-serif', mono: '"Oxygen Mono", monospace' },
+      f56: { name: 'Set 56 · Caveat & Caligrafía Viva', display: '"Caveat", cursive', body: '"Plus Jakarta Sans", system-ui, sans-serif', mono: '"Fragment Mono", monospace' },
+      f57: { name: 'Set 57 · Changa & Cartel Monumental', display: '"Changa", sans-serif', body: '"Work Sans", system-ui, sans-serif', mono: '"JetBrains Mono", monospace' },
+      f58: { name: 'Set 58 · Changa One & Titular Grueso', display: '"Changa One", cursive, sans-serif', body: '"Public Sans", system-ui, sans-serif', mono: '"Roboto Mono", monospace' },
+      f59: { name: 'Set 59 · Comfortaa & Curvas Amables', display: '"Comfortaa", cursive, sans-serif', body: '"Nunito Sans", system-ui, sans-serif', mono: '"Sometype Mono", monospace' },
+      f60: { name: 'Set 60 · Crimson Text & Humanismo', display: '"Crimson Text", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif', mono: '"Courier Prime", monospace' },
+      f61: { name: 'Set 61 · Cuprum & Arquitectura Esbelta', display: '"Cuprum", sans-serif', body: '"Figtree", system-ui, sans-serif', mono: '"Space Mono", monospace' },
+      f62: { name: 'Set 62 · Doppio One & Sólido Vanguardista', display: '"Doppio One", sans-serif', body: '"Manrope", system-ui, sans-serif', mono: '"IBM Plex Mono", monospace' },
+      f63: { name: 'Set 63 · Dosis & Minimalismo Suave', display: '"Dosis", sans-serif', body: '"DM Sans", system-ui, sans-serif', mono: '"Fira Code", monospace' },
+      f64: { name: 'Set 64 · Electrolize & Ingeniería Digital', display: '"Electrolize", sans-serif', body: '"Albert Sans", system-ui, sans-serif', mono: '"Share Tech Mono", monospace' },
+      f65: { name: 'Set 65 · Encode Sans & Agilidad Técnica', display: '"Encode Sans", sans-serif', body: '"Inter", system-ui, sans-serif', mono: '"Red Hat Mono", monospace' },
+      f66: { name: 'Set 66 · Encode Sans Condensed & Póster', display: '"Encode Sans Condensed", sans-serif', body: '"Roboto", system-ui, sans-serif', mono: '"Martian Mono", monospace' },
+      f67: { name: 'Set 67 · Exo & Cyber Dinámico', display: '"Exo", sans-serif', body: '"Exo 2", system-ui, sans-serif', mono: '"B612 Mono", monospace' },
+      f68: { name: 'Set 68 · Fjalla One & Prensa Nórdica', display: '"Fjalla One", sans-serif', body: '"Source Sans 3", system-ui, sans-serif', mono: '"Ubuntu Mono", monospace' },
+      f69: { name: 'Set 69 · Gugi & Futurismo Expresivo', display: '"Gugi", cursive, sans-serif', body: '"Lexend", system-ui, sans-serif', mono: '"Major Mono Display", monospace' },
+      f70: { name: 'Set 70 · Host Grotesk & Vanguardia Neo', display: '"Host Grotesk", sans-serif', body: '"Plus Jakarta Sans", system-ui, sans-serif', mono: '"Fragment Mono", monospace' },
+      f71: { name: 'Set 71 · Indie Flower & Espontaneidad', display: '"Indie Flower", cursive', body: '"Quicksand", system-ui, sans-serif', mono: '"Cutive Mono", monospace' },
+      f72: { name: 'Set 72 · Kodchasan & Expresión Casual', display: '"Kodchasan", sans-serif', body: '"Mulish", system-ui, sans-serif', mono: '"Oxygen Mono", monospace' },
+      f73: { name: 'Set 73 · Lobster & Rótulo Tradición', display: '"Lobster", cursive', body: '"Montserrat", system-ui, sans-serif', mono: '"Cousine", monospace' },
+      f74: { name: 'Set 74 · Merriweather & Lectura Profunda', display: '"Merriweather", Georgia, serif', body: '"Open Sans", system-ui, sans-serif', mono: '"Source Code Pro", monospace' },
+      f75: { name: 'Set 75 · Mina & Pureza Funcional', display: '"Mina", sans-serif', body: '"Work Sans", system-ui, sans-serif', mono: '"Inconsolata", monospace' },
+      f76: { name: 'Set 76 · Monda & Estructura Equilibrada', display: '"Monda", sans-serif', body: '"Lato", system-ui, sans-serif', mono: '"DM Mono", monospace' },
+      f77: { name: 'Set 77 · Pacifico & Pincel Libre', display: '"Pacifico", cursive', body: '"Nunito", system-ui, sans-serif', mono: '"Fragment Mono", monospace' },
+      f78: { name: 'Set 78 · Pontano Sans & Luminosidad', display: '"Pontano Sans", sans-serif', body: '"Inter", system-ui, sans-serif', mono: '"JetBrains Mono", monospace' },
+      f79: { name: 'Set 79 · PT Sans & Estándar Universal', display: '"PT Sans", sans-serif', body: '"PT Sans", system-ui, sans-serif', mono: '"Roboto Mono", monospace' },
+      f80: { name: 'Set 80 · Quantico & Telemetría Táctica', display: '"Quantico", sans-serif', body: '"Roboto", system-ui, sans-serif', mono: '"B612 Mono", monospace' },
+      f81: { name: 'Set 81 · Quattrocento Sans & Elegancia', display: '"Quattrocento Sans", sans-serif', body: '"Cormorant Garamond", Georgia, serif', mono: '"Space Mono", monospace' },
+      f82: { name: 'Set 82 · Roboto & Ecosistema Neutral', display: '"Roboto", sans-serif', body: '"Roboto", system-ui, sans-serif', mono: '"Roboto Mono", monospace' },
+      f83: { name: 'Set 83 · Roboto Condensed & Prensa', display: '"Roboto Condensed", sans-serif', body: '"Roboto", system-ui, sans-serif', mono: '"Ubuntu Mono", monospace' },
+      f84: { name: 'Set 84 · Roboto Serif & Edición Moderna', display: '"Roboto Serif", Georgia, serif', body: '"Inter", system-ui, sans-serif', mono: '"Cousine", monospace' },
+      f85: { name: 'Set 85 · Ropa Sans & Racionalismo DIN', display: '"Ropa Sans", sans-serif', body: '"IBM Plex Sans", system-ui, sans-serif', mono: '"Oxygen Mono", monospace' },
+      f86: { name: 'Set 86 · Rosario & Grotesca Rioplatense', display: '"Rosario", sans-serif', body: '"DM Sans", system-ui, sans-serif', mono: '"Fragment Mono", monospace' },
+      f87: { name: 'Set 87 · Saira Condensed & Cartel Gráfico', display: '"Saira Condensed", sans-serif', body: '"Plus Jakarta Sans", system-ui, sans-serif', mono: '"Martian Mono", monospace' },
+      f88: { name: 'Set 88 · Syncopate & Expansión Ultra-Wide', display: '"Syncopate", sans-serif', body: '"Manrope", system-ui, sans-serif', mono: '"Major Mono Display", monospace' },
+      f89: { name: 'Set 89 · Ubuntu & Open Source Cálido', display: '"Ubuntu", sans-serif', body: '"Ubuntu", system-ui, sans-serif', mono: '"Ubuntu Mono", monospace' },
+      f90: { name: 'Set 90 · Ubuntu Condensed & Eficiencia', display: '"Ubuntu Condensed", sans-serif', body: '"Ubuntu", system-ui, sans-serif', mono: '"Ubuntu Mono", monospace' },
+      f91: { name: 'Set 91 · Sistema Arial Universal', display: 'Arial, Helvetica, sans-serif', body: 'Arial, Helvetica, sans-serif', mono: 'Consolas, monospace' },
+      f92: { name: 'Set 92 · Sistema Calibri Corporativo', display: 'Calibri, "Segoe UI", sans-serif', body: 'Calibri, "Segoe UI", sans-serif', mono: 'Consolas, monospace' },
+      f93: { name: 'Set 93 · Sistema Cambria Editorial', display: 'Cambria, Georgia, serif', body: 'Calibri, "Segoe UI", sans-serif', mono: 'Consolas, monospace' },
+      f94: { name: 'Set 94 · Sistema Georgia Clásico', display: 'Georgia, serif', body: 'Arial, Helvetica, sans-serif', mono: '"Courier New", Courier, monospace' },
+      f95: { name: 'Set 95 · Sistema Impact Cartelera', display: 'Impact, Haettenschweiler, sans-serif', body: 'Arial, Helvetica, sans-serif', mono: 'Consolas, monospace' },
+      f96: { name: 'Set 96 · Sistema Tahoma Corporativo', display: 'Tahoma, Verdana, sans-serif', body: 'Tahoma, Verdana, sans-serif', mono: 'Consolas, monospace' },
+      f97: { name: 'Set 97 · Sistema Times New Roman', display: '"Times New Roman", Times, serif', body: 'Georgia, serif', mono: '"Courier New", Courier, monospace' },
+      f98: { name: 'Set 98 · Sistema Trebuchet Dinámico', display: '"Trebuchet MS", sans-serif', body: 'Arial, Helvetica, sans-serif', mono: 'Consolas, monospace' },
+      f99: { name: 'Set 99 · Sistema Verdana Alta Legibilidad', display: 'Verdana, Geneva, sans-serif', body: 'Verdana, Geneva, sans-serif', mono: 'Consolas, monospace' },
+      f100: { name: 'Set 100 · Sistema Corsiva Tradición', display: '"Monotype Corsiva", "Apple Chancery", cursive', body: 'Georgia, serif', mono: '"Courier New", Courier, monospace' },
+      f101: { name: 'Set 101 · Sistema Comic Sans Lúdico', display: '"Comic Sans MS", cursive, sans-serif', body: '"Comic Sans MS", cursive, sans-serif', mono: '"Courier New", Courier, monospace' },
+      f102: { name: 'Set 102 · Monospace Cutive & Imprenta', display: '"Cutive Mono", monospace', body: '"Source Sans 3", system-ui, sans-serif', mono: '"Cutive Mono", monospace' },
+      f103: { name: 'Set 103 · Monospace Fragment & Vanguardia', display: '"Fragment Mono", monospace', body: '"Inter", system-ui, sans-serif', mono: '"Fragment Mono", monospace' },
+      f104: { name: 'Set 104 · Monospace B612 & Aeronáutica', display: '"B612 Mono", monospace', body: '"Public Sans", system-ui, sans-serif', mono: '"B612 Mono", monospace' },
+      f105: { name: 'Set 105 · Monospace Oxygen & Escritorio', display: '"Oxygen Mono", monospace', body: '"Work Sans", system-ui, sans-serif', mono: '"Oxygen Mono", monospace' },
+      f106: { name: 'Set 106 · Monospace Cousine & Formato Legal', display: '"Cousine", monospace', body: '"Lato", system-ui, sans-serif', mono: '"Cousine", monospace' },
+      f107: { name: 'Set 107 · Monospace Major & Arte Conceptual', display: '"Major Mono Display", monospace', body: '"Syne", system-ui, sans-serif', mono: '"Major Mono Display", monospace' }
+    };
+
+    var activeFontSetKey = 'f01';
+
+    function extractPrimaryFontName(stack) {
+      if (!stack) return 'Fraunces';
+      return stack.split(',')[0].replace(/"/g, '').trim();
+    }
+
+    // =========================================================================
+    // AGRUPAMIENTO TEMÁTICO DE LOS 107 CONJUNTOS TIPOGRÁFICOS
+    // =========================================================================
+    var FONT_GROUPS = [
+      { id: 'local',     name: '⭐ Caacupé One & Identidad Rioplatense', color: '#10B981', sets: ['f50', 'f86'] },
+      { id: 'display',   name: 'Impacto, Cartel y Condensadas',         color: '#FF7A59', sets: ['f50','f57','f58','f66','f68','f83','f87','f90','f07','f08','f11','f31','f32','f34','f49','f95'] },
+      { id: 'serif',     name: 'Serif Editoriales, Literarias y Prensa', color: '#D8A962', sets: ['f60','f74','f84','f93','f97','f01','f02','f03','f04','f09','f13','f16','f18','f22','f23','f24','f25','f26','f27','f36','f48'] },
+      { id: 'sans',      name: 'Sans Modernas, Grotescas y Universales', color: '#7AB0FF', sets: ['f51','f55','f62','f65','f70','f75','f76','f78','f79','f81','f82','f89','f06','f14','f17','f28','f38','f47'] },
+      { id: 'playful',   name: 'Amigables, Redondeadas y Cercanas',     color: '#6EE7B7', sets: ['f52','f59','f63','f69','f72','f10','f20','f30','f35','f101'] },
+      { id: 'script',    name: 'Caligráficas, Pincel y Rótulo',         color: '#EC4899', sets: ['f53','f56','f71','f73','f77','f100'] },
+      { id: 'tech',      name: 'Técnicas, Futuristas y Telemetría',     color: '#9B8CFF', sets: ['f54','f61','f64','f67','f80','f85','f88','f05','f15','f19','f29','f37','f45','f46'] },
+      { id: 'slab',      name: 'Slab y Oficio',                         color: '#E5C550', sets: ['f12','f33','f42','f43','f44'] },
+      { id: 'mono',      name: 'Monospace Puras & Laboratorio Técnico', color: '#A3E635', sets: ['f102','f103','f104','f105','f106','f107'] },
+      { id: 'sistema',   name: 'Fuentes del Sistema (Web Safe Clásicas)', color: '#CBD5E1', sets: ['f91','f92','f93','f94','f95','f96','f97','f98','f99','f100','f101'] },
+      { id: 'wireframe', name: 'Wireframe Arquitectónico',              color: '#A8A299', sets: ['f21','f39','f40','f41'] }
+    ];
+    var WIREFRAME_SETS = ['f21', 'f39', 'f40', 'f41'];
+    var expandedFontKeys = {};
+    var collapsedFontGroups = {};
+
+        // CATÁLOGO COMPLETO PARA EL SELECTOR INDIVIDUAL DE 3 SLOTS (SEGMENTADO: RECOMENDADAS PRIMERO)
+    var ALL_DISPLAY_FONTS = [
+      // ⭐ Fuentes Recomendadas para Títulos y Cabeceras
+      { name: 'Caacupé One (Cartelería Popular)', stack: '"Caacupe One", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Bebas Neue (Titular Clásico / All-Caps)', stack: '"Bebas Neue", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Playfair Display (Alta Gama / Editorial)', stack: '"Playfair Display", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Montserrat (Geométrica / Arquitectura)', stack: '"Montserrat", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Fraunces (Editorial Orgánica / Calidez)', stack: '"Fraunces", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Anton (Cartel Brutalista / Impacto)', stack: '"Anton", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Syne (Agencia / Vanguardia)', stack: '"Syne", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Oswald (Condensada Fuerte / Prensa)', stack: '"Oswald", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Bodoni Moda (Alta Costura / Lujo)', stack: '"Bodoni Moda", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Cormorant Garamond (Lujo Clásico)', stack: '"Cormorant Garamond", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Cinzel (Romana Imperial / Solemne)', stack: '"Cinzel", serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Inter (UI Moderna / Minimalista)', stack: '"Inter", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'DM Sans (Fluida / Contemporánea)', stack: '"DM Sans", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Plus Jakarta Sans (Moderna Tech)', stack: '"Plus Jakarta Sans", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Titillium Web (Ingeniería / Estructura)', stack: '"Titillium Web", sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Lora (Editorial Líquida)', stack: '"Lora", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'EB Garamond (Renacentista)', stack: '"EB Garamond", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Manrope (Geométrica Equilibrada)', stack: '"Manrope", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Changa One (Pesada & Expresiva)', stack: '"Changa One", cursive, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Fjalla One (Titular Nórdico)', stack: '"Fjalla One", sans-serif', group: '⭐ Fuentes Recomendadas' },
+
+      // Resto de Fuentes Disponibles
+      { name: 'Abel (Sans Esbelta)', stack: '"Abel", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Acme (Display Amigable)', stack: '"Acme", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Amatic SC (Rótulo Condensado)', stack: '"Amatic SC", cursive', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Cabin Condensed (Sans Compacta)', stack: '"Cabin Condensed", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Cairo (Geométrica Moderna)', stack: '"Cairo", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Caveat (Manuscrita Viva)', stack: '"Caveat", cursive', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Changa (Póster Contundente)', stack: '"Changa", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Comfortaa (Redondeada Suave)', stack: '"Comfortaa", cursive, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Crimson Text (Editorial Académica)', stack: '"Crimson Text", Georgia, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Cuprum (Condensada Fina)', stack: '"Cuprum", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Doppio One (Sólida & Moderna)', stack: '"Doppio One", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Dosis (Redondeada Ligera)', stack: '"Dosis", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Electrolize (Tech / Mecánica)', stack: '"Electrolize", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Encode Sans (Sans Dinámica)', stack: '"Encode Sans", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Encode Sans Condensed (Compacta)', stack: '"Encode Sans Condensed", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Exo (Tecnológica / Gaming)', stack: '"Exo", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Gugi (Futurista Orgánica)', stack: '"Gugi", cursive, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Host Grotesk (Neo-Grotesca)', stack: '"Host Grotesk", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Indie Flower (Espontánea)', stack: '"Indie Flower", cursive', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Kodchasan (Caligráfica Casual)', stack: '"Kodchasan", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Lobster (Rótulo Retro)', stack: '"Lobster", cursive', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Merriweather (Lectura Prensa)', stack: '"Merriweather", Georgia, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Mina (Limpia & Minimalista)', stack: '"Mina", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Monda (Sans Equilibrada)', stack: '"Monda", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Pacifico (Pincel Californiano)', stack: '"Pacifico", cursive', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Pontano Sans (Luminosa)', stack: '"Pontano Sans", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'PT Sans (Universal)', stack: '"PT Sans", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Quantico (Militar / Telemetría)', stack: '"Quantico", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Quattrocento Sans (Elegante)', stack: '"Quattrocento Sans", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Roboto (Universal Android)', stack: '"Roboto", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Roboto Condensed (Prensa Ágil)', stack: '"Roboto Condensed", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Roboto Serif (Editorial Multifacética)', stack: '"Roboto Serif", Georgia, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Ropa Sans (Industrial DIN)', stack: '"Ropa Sans", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Rosario (Grotesca Argentina)', stack: '"Rosario", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Saira Condensed (Póster Gráfico)', stack: '"Saira Condensed", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Syncopate (Expandida Ultra-Wide)', stack: '"Syncopate", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Ubuntu (Humanista Linux)', stack: '"Ubuntu", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Ubuntu Condensed (Linux Compacta)', stack: '"Ubuntu Condensed", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Arial (Sistema)', stack: 'Arial, Helvetica, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Calibri (Sistema)', stack: 'Calibri, "Segoe UI", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Cambria (Sistema Serif)', stack: 'Cambria, Georgia, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Comic Sans MS (Sistema Cursiva)', stack: '"Comic Sans MS", cursive, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Consolas (Sistema Mono)', stack: 'Consolas, "Courier New", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Corsiva (Sistema Caligráfica)', stack: '"Monotype Corsiva", "Apple Chancery", cursive', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Courier New (Sistema Mecanográfica)', stack: '"Courier New", Courier, monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Georgia (Sistema Clásico)', stack: 'Georgia, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Impact (Sistema Cartel)', stack: 'Impact, Haettenschweiler, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Tahoma (Sistema)', stack: 'Tahoma, Verdana, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Times New Roman (Sistema)', stack: '"Times New Roman", Times, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Trebuchet MS (Sistema)', stack: '"Trebuchet MS", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Verdana (Sistema)', stack: 'Verdana, Geneva, sans-serif', group: 'Resto de Fuentes Disponibles' }
+    ];
+
+    var ALL_BODY_FONTS = [
+      // ⭐ Fuentes Recomendadas para Lectura y Contenido
+      { name: 'DM Sans (Recomendada / Lectura Fluida)', stack: '"DM Sans", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Inter (Alta Legibilidad UI)', stack: '"Inter", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Plus Jakarta Sans (Contemporánea)', stack: '"Plus Jakarta Sans", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Manrope (Grotesca Equilibrada)', stack: '"Manrope", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Open Sans (Corporativa Clásica)', stack: '"Open Sans", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Source Sans 3 (Lectura Continua)', stack: '"Source Sans 3", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Roboto (Google Universal)', stack: '"Roboto", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Lato (Humanista Cálida)', stack: '"Lato", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Source Serif 4 (Lectura Editorial Serif)', stack: '"Source Serif 4", Georgia, serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Work Sans (Editorial Moderna)', stack: '"Work Sans", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Nunito (Redondeada Amigable)', stack: '"Nunito", system-ui, sans-serif', group: '⭐ Fuentes Recomendadas' },
+
+      // Resto de Fuentes Disponibles
+      { name: 'Albert Sans (Moderna Geométrica)', stack: '"Albert Sans", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Figtree (Producto Digital)', stack: '"Figtree", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Mulish (Minimalista Nórdica)', stack: '"Mulish", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Lexend (Optimización Lectora)', stack: '"Lexend", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Public Sans (Grilla Limpia)', stack: '"Public Sans", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Rosario (Grotesca Argentina)', stack: '"Rosario", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Ubuntu (Cálida Open Source)', stack: '"Ubuntu", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'PT Sans (Universal)', stack: '"PT Sans", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Quicksand (Redondeada Ligera)', stack: '"Quicksand", system-ui, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Georgia (Sistema Serif)', stack: 'Georgia, serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Arial (Sistema Sans)', stack: 'Arial, Helvetica, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Calibri (Sistema Sans)', stack: 'Calibri, "Segoe UI", sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Verdana (Sistema Sans)', stack: 'Verdana, Geneva, sans-serif', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Tahoma (Sistema Sans)', stack: 'Tahoma, Verdana, sans-serif', group: 'Resto de Fuentes Disponibles' }
+    ];
+
+    var ALL_MONO_FONTS = [
+      // ⭐ Fuentes Recomendadas para Técnica / Código / Tags
+      { name: 'IBM Plex Mono (Estándar Editorial / IBM)', stack: '"IBM Plex Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'JetBrains Mono (Developer / Código Legible)', stack: '"JetBrains Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Space Mono (Vanguardia / Editorial)', stack: '"Space Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Fira Code (Ligaduras & Precisión)', stack: '"Fira Code", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Roboto Mono (Google Técnica)', stack: '"Roboto Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Source Code Pro (Adobe Clásica)', stack: '"Source Code Pro", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Geist Mono (Vercel Minimalista)', stack: '"Geist Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Ubuntu Mono (Linux Terminal)', stack: '"Ubuntu Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Fragment Mono (Editorial Contemporánea)', stack: '"Fragment Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'Inconsolata (Clásica Proporcional)', stack: '"Inconsolata", monospace', group: '⭐ Fuentes Recomendadas' },
+      { name: 'DM Mono (Geométrica Limpia)', stack: '"DM Mono", monospace', group: '⭐ Fuentes Recomendadas' },
+
+      // Resto de Fuentes Disponibles
+      { name: 'Cutive Mono (Mecanográfica Clásica)', stack: '"Cutive Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'B612 Mono (Aeronáutica / Cabina)', stack: '"B612 Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Oxygen Mono (KDE / Escritorio)', stack: '"Oxygen Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Cousine (Courier de Alta Precisión)', stack: '"Cousine", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Major Mono Display (Experimental)', stack: '"Major Mono Display", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Fira Mono (Mozilla)', stack: '"Fira Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Martian Mono (Brutalista)', stack: '"Martian Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Sometype Mono (Humanista)', stack: '"Sometype Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Red Hat Mono (Red Hat)', stack: '"Red Hat Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Courier Prime (Guion de Cine)', stack: '"Courier Prime", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Azeret Mono (Brutal)', stack: '"Azeret Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Anonymous Pro (Terminal)', stack: '"Anonymous Pro", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Share Tech Mono (Telemetría)', stack: '"Share Tech Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Overpass Mono (Red Hat)', stack: '"Overpass Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Spline Sans Mono (Híbrida)', stack: '"Spline Sans Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Noto Sans Mono (Universal)', stack: '"Noto Sans Mono", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Consolas (Sistema Windows)', stack: 'Consolas, "Courier New", monospace', group: 'Resto de Fuentes Disponibles' },
+      { name: 'Courier New (Sistema Clásico)', stack: '"Courier New", Courier, monospace', group: 'Resto de Fuentes Disponibles' }
+    ];
+
+    function createFontCardElement(setKey) {
+      var fs = FONT_SETS[setKey];
+      if (!fs) return null;
+      var isActive = activeFontSetKey === setKey;
+      var isOpen = !!expandedFontKeys[setKey];
+      var dispName = extractPrimaryFontName(fs.display);
+      var bodyName = extractPrimaryFontName(fs.body);
+      var monoName = extractPrimaryFontName(fs.mono);
+      var q = function(s) { return s.replace(/"/g, "'"); };
+      var wf = (WIREFRAME_SETS.indexOf(setKey) > -1) ? 'font-weight:800;letter-spacing:-0.03em;' : '';
+
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'font-chip';
+      card.setAttribute('aria-pressed', String(isActive));
+      card.setAttribute('aria-expanded', String(isOpen));
+      card.title = fs.name + ' · ' + dispName + ' + ' + bodyName + ' + ' + monoName;
+
+      card.innerHTML =
+        '<span class="font-chip__mini">' +
+          '<span class="d" style="font-family:' + q(fs.display) + ';' + wf + '">Ag</span>' +
+          '<span class="b" style="font-family:' + q(fs.body) + ';">Ag</span>' +
+          '<span class="m" style="font-family:' + q(fs.mono) + ';">01</span>' +
+        '</span>' +
+        '<span class="font-chip__num">' + fs.name.split('·')[0].trim().toUpperCase() + '</span>' +
+        '<span class="font-chip__detail">' +
+          '<span class="font-chip__head"><strong>' + fs.name + '</strong>' +
+            (isActive ? '<span class="palette-chip__badge palette-chip__badge--on">ACTIVO</span>' : '') +
+            '<span class="font-chip__close" role="button" tabindex="0" aria-label="Cerrar detalle" title="Cerrar detalle">✕ Cerrar</span>' +
+          '</span>' +
+          '<span class="font-card__pills">' +
+            '<span class="font-card__pill"><strong>Títulos:</strong> ' + dispName + '</span>' +
+            '<span class="font-card__pill"><strong>Cuerpo:</strong> ' + bodyName + '</span>' +
+            '<span class="font-card__pill"><strong>Técnica:</strong> ' + monoName + '</span>' +
+          '</span>' +
+          '<span class="font-card__sample-display" style="display:block;font-family:' + q(fs.display) + ';' + wf + '">Aa · Pingüino, caña &amp; éxito ¿¡100%!?</span>' +
+          '<span class="font-card__sample-body" style="display:block;font-family:' + q(fs.body) + ';">Párrafos fluidos, botones claros y lectura cómoda en cualquier pantalla (' + bodyName + ').</span>' +
+          '<span class="font-card__sample-mono" style="display:block;font-family:' + q(fs.mono) + ';">01 / CATEGORÍA · $ 145.000 · ' + monoName + '</span>' +
+        '</span>';
+
+      var closeEl = card.querySelector('.font-chip__close');
+      function closeDetail(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        expandedFontKeys = {};
+        renderVisualFontCards();
+      }
+      closeEl.addEventListener('click', closeDetail);
+      closeEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') closeDetail(e);
+      });
+
+      card.onclick = function() {
+        if (activeFontSetKey === setKey) {
+          var willOpen = !expandedFontKeys[setKey];
+          expandedFontKeys = {};
+          if (willOpen) expandedFontKeys[setKey] = true;
+          renderVisualFontCards();
+        } else {
+          expandedFontKeys = {};
+          expandedFontKeys[setKey] = true;
+          applyFontSet(setKey);
+        }
+      };
+      return card;
+    }
+
+    function renderVisualFontCards() {
+      var host = document.getElementById('font-families');
+      if (!host) return;
+      host.innerHTML = '';
+      var total = 0;
+
+      FONT_GROUPS.forEach(function(group) {
+        var keys = group.sets.filter(function(k) { return FONT_SETS[k]; });
+        if (!keys.length) return;
+        total += keys.length;
+
+        var det = document.createElement('details');
+        det.className = 'pal-family';
+        if (!collapsedFontGroups[group.id]) det.setAttribute('open', '');
+        det.addEventListener('toggle', function() { collapsedFontGroups[group.id] = !det.open; });
+
+        var sum = document.createElement('summary');
+        sum.innerHTML = '<span class="pal-family__dot" style="background:' + group.color + ';"></span>' +
+          '<span>' + group.name + '</span><span class="pal-family__count">' + keys.length + '</span>';
+        det.appendChild(sum);
+
+        var grid = document.createElement('div');
+        grid.className = 'pal-family__grid';
+        keys.forEach(function(k) {
+          var el = createFontCardElement(k);
+          if (el) grid.appendChild(el);
+        });
+        det.appendChild(grid);
+        host.appendChild(det);
+      });
+
+      var countEl = document.getElementById('font-count');
+      if (countEl) countEl.textContent = String(total);
+    }
+
+    // AJUSTE FINO DE 3 SLOTS TIPOGRÁFICOS INDEPENDIENTES CON KERNING INDIVIDUAL POR NIVEL
+    function renderFontSlotsGrid() {
+      var grid = document.getElementById('font-slots-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      var root = document.documentElement;
+      var curDisplay = root.style.getPropertyValue('--font-display') || activePaletteVars['--font-display'] || '"Fraunces", Georgia, serif';
+      var curBody = root.style.getPropertyValue('--font-body') || activePaletteVars['--font-body'] || '"DM Sans", system-ui, sans-serif';
+      var curMono = root.style.getPropertyValue('--font-mono') || activePaletteVars['--font-mono'] || '"IBM Plex Mono", monospace';
+
+      var curDisplaySpacing = root.style.getPropertyValue('--font-display-spacing') || activePaletteVars['--font-display-spacing'] || '0';
+      var curBodySpacing = root.style.getPropertyValue('--font-body-spacing') || activePaletteVars['--font-body-spacing'] || '0';
+      var curMonoSpacing = root.style.getPropertyValue('--font-mono-spacing') || activePaletteVars['--font-mono-spacing'] || '0';
+
+      var slots = [
+        {
+          key: '--font-display',
+          spacingKey: '--font-display-spacing',
+          label: '1. Títulos (--font-display)',
+          desc: 'Titular principal, hero y cabeceras',
+          current: curDisplay,
+          currentSpacing: curDisplaySpacing,
+          min: -0.05,
+          max: 0.10,
+          presets: ['-0.03em', '-0.015em', '0', '+0.02em', '+0.05em', '+0.08em'],
+          options: ALL_DISPLAY_FONTS,
+          sample: 'Aa · Pingüino, caña &amp; éxito ¿¡100%!?',
+          getOptimal: function(stack) { return getOptimalTrackingForFont(stack); }
+        },
+        {
+          key: '--font-body',
+          spacingKey: '--font-body-spacing',
+          label: '2. Cuerpo (--font-body)',
+          desc: 'Párrafos, descripciones y botones',
+          current: curBody,
+          currentSpacing: curBodySpacing,
+          min: -0.03,
+          max: 0.08,
+          presets: ['-0.02em', '-0.01em', '0', '+0.01em', '+0.02em', '+0.04em'],
+          options: ALL_BODY_FONTS,
+          sample: 'Lectura fluida y cómoda en cualquier pantalla.',
+          getOptimal: function(stack) { return '0'; }
+        },
+        {
+          key: '--font-mono',
+          spacingKey: '--font-mono-spacing',
+          label: '3. Técnica / Código (--font-mono)',
+          desc: 'Precios, tags, metadatos y código',
+          current: curMono,
+          currentSpacing: curMonoSpacing,
+          min: -0.03,
+          max: 0.15,
+          presets: ['-0.02em', '0', '+0.03em', '+0.06em', '+0.09em', '+0.12em'],
+          options: ALL_MONO_FONTS,
+          sample: '01 / PRECIO · $145.000 · REF-2026',
+          getOptimal: function(stack) { return '0'; }
+        }
+      ];
+
+      slots.forEach(function(slot) {
+        var card = document.createElement('div');
+        card.className = 'font-slot-card';
+
+        var top = document.createElement('div');
+        top.className = 'font-slot-card__top';
+        top.innerHTML = '<strong style="color:#fff;font-size:12px;">' + slot.label + '</strong>' +
+          '<span class="font-slot-badge" style="font-family:var(--font-mono);font-size:10px;color:var(--gold);">' + extractPrimaryFontName(slot.current) + '</span>';
+
+        var desc = document.createElement('div');
+        desc.style.cssText = 'color:#a8a299;font-size:10.5px;';
+        desc.textContent = slot.desc;
+
+        // --- CUSTOM FONT PICKER DROPDOWN ---
+        var pickerWrap = document.createElement('div');
+        pickerWrap.className = 'font-picker-dropdown';
+        pickerWrap.setAttribute('data-slot', slot.key);
+
+        var curFontName = extractPrimaryFontName(slot.current);
+
+        var triggerBtn = document.createElement('button');
+        triggerBtn.type = 'button';
+        triggerBtn.className = 'font-picker-trigger';
+        triggerBtn.setAttribute('aria-haspopup', 'listbox');
+        triggerBtn.setAttribute('aria-expanded', 'false');
+        triggerBtn.innerHTML = '<span class="font-picker-trigger__name" style="font-family:' + slot.current + ';">' + curFontName + '</span>' +
+          '<span class="font-picker-trigger__arrow">▾</span>';
+
+        var menu = document.createElement('div');
+        menu.className = 'font-picker-menu';
+        menu.setAttribute('hidden', '');
+
+        var searchWrap = document.createElement('div');
+        searchWrap.className = 'font-picker-search-wrap';
+        var searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.className = 'font-picker-search';
+        searchInput.placeholder = '🔍 Buscar fuente (' + slot.options.length + ' disponibles)...';
+        searchWrap.appendChild(searchInput);
+        menu.appendChild(searchWrap);
+
+        var listWrap = document.createElement('div');
+        listWrap.className = 'font-picker-list';
+        listWrap.setAttribute('role', 'listbox');
+
+        var currentGroup = '';
+        var optionElements = [];
+        var groupHeaders = [];
+
+        slot.options.forEach(function(opt) {
+          var itemGroup = opt.group || 'Resto de Fuentes Disponibles';
+          if (itemGroup !== currentGroup) {
+            currentGroup = itemGroup;
+            var groupHeader = document.createElement('div');
+            groupHeader.className = 'font-picker-group-title';
+            groupHeader.textContent = currentGroup;
+            groupHeader.setAttribute('data-group-for', currentGroup);
+            listWrap.appendChild(groupHeader);
+            groupHeaders.push({ el: groupHeader, groupName: currentGroup.toLowerCase() });
+          }
+
+          var isSelected = extractPrimaryFontName(opt.stack) === curFontName;
+          var cleanName = opt.name.split('(')[0].trim();
+          var roleMatch = opt.name.match(/\(([^)]+)\)/);
+          var roleHtml = roleMatch ? ('<span class="font-picker-item__role">' + roleMatch[1] + '</span>') : '';
+
+          var itemBtn = document.createElement('button');
+          itemBtn.type = 'button';
+          itemBtn.className = 'font-picker-item' + (isSelected ? ' is-selected' : '');
+          itemBtn.setAttribute('data-stack', opt.stack);
+          itemBtn.setAttribute('data-name', opt.name.toLowerCase());
+          itemBtn.setAttribute('data-group', currentGroup.toLowerCase());
+          itemBtn.style.fontFamily = opt.stack;
+          itemBtn.innerHTML = '<span class="font-picker-item__label" style="font-family:' + opt.stack + ';">' + cleanName + '</span>' + roleHtml;
+
+          itemBtn.onclick = function(e) {
+            e.stopPropagation();
+            slot.current = opt.stack;
+            updateIndividualFont(slot.key, opt.stack);
+            prev.style.fontFamily = opt.stack;
+            top.querySelector('.font-slot-badge').textContent = cleanName;
+            triggerBtn.querySelector('.font-picker-trigger__name').textContent = cleanName;
+            triggerBtn.querySelector('.font-picker-trigger__name').style.fontFamily = opt.stack;
+            
+            // Si es Display, recalcular kerning óptico automáticamente
+            if (slot.key === '--font-display') {
+              var optVal = slot.getOptimal(opt.stack);
+              updateSlotKerning(optVal, false);
+            }
+
+            // Mark selected
+            listWrap.querySelectorAll('.font-picker-item').forEach(function(it) {
+              it.classList.remove('is-selected');
+            });
+            itemBtn.classList.add('is-selected');
+
+            // Close menu
+            pickerWrap.classList.remove('is-open');
+            menu.setAttribute('hidden', '');
+            triggerBtn.setAttribute('aria-expanded', 'false');
+          };
+
+          optionElements.push(itemBtn);
+          listWrap.appendChild(itemBtn);
+        });
+
+        menu.appendChild(listWrap);
+        pickerWrap.appendChild(triggerBtn);
+        pickerWrap.appendChild(menu);
+
+        // Search filtering con visibilidad dinámica de encabezados de grupo
+        searchInput.oninput = function() {
+          var query = this.value.trim().toLowerCase();
+          var visibleGroups = {};
+          optionElements.forEach(function(el) {
+            var name = el.getAttribute('data-name');
+            var group = el.getAttribute('data-group');
+            var match = !query || name.indexOf(query) > -1 || group.indexOf(query) > -1;
+            el.style.display = match ? 'flex' : 'none';
+            if (match) {
+              visibleGroups[group] = true;
+            }
+          });
+          groupHeaders.forEach(function(gh) {
+            gh.el.style.display = (!query || visibleGroups[gh.groupName]) ? 'block' : 'none';
+          });
+        };
+
+        // Toggle open / close
+        triggerBtn.onclick = function(e) {
+          e.stopPropagation();
+          var isOpen = pickerWrap.classList.contains('is-open');
+          document.querySelectorAll('.font-picker-dropdown.is-open').forEach(function(dp) {
+            dp.classList.remove('is-open');
+            var m = dp.querySelector('.font-picker-menu');
+            if (m) m.setAttribute('hidden', '');
+            var tb = dp.querySelector('.font-picker-trigger');
+            if (tb) tb.setAttribute('aria-expanded', 'false');
+          });
+
+          if (!isOpen) {
+            pickerWrap.classList.add('is-open');
+            menu.removeAttribute('hidden');
+            triggerBtn.setAttribute('aria-expanded', 'true');
+            var selItem = listWrap.querySelector('.font-picker-item.is-selected');
+            if (selItem) {
+              setTimeout(function() {
+                selItem.scrollIntoView({ block: 'nearest' });
+              }, 10);
+            }
+            setTimeout(function() { searchInput.focus(); }, 50);
+          }
+        };
+
+        // Preview box
+        var prev = document.createElement('div');
+        prev.className = 'font-slot-preview';
+        prev.style.fontFamily = slot.current;
+        prev.style.letterSpacing = slot.currentSpacing;
+        prev.innerHTML = slot.sample;
+
+        // --- CONTROL INDIVIDUAL DE KERNING / TRACKING PARA ESTE SLOT ---
+        var kerningBox = document.createElement('div');
+        kerningBox.className = 'font-slot-kerning';
+
+        var kerningHead = document.createElement('div');
+        kerningHead.className = 'font-slot-kerning__head';
+
+        var kerningTitle = document.createElement('span');
+        kerningTitle.className = 'font-slot-kerning__title';
+        kerningTitle.innerHTML = '↔ Kerning / Espaciado';
+
+        var kerningMeta = document.createElement('div');
+        kerningMeta.className = 'font-slot-kerning__meta';
+
+        var kerningBadge = document.createElement('span');
+        kerningBadge.className = 'font-slot-kerning__badge';
+
+        var resetBtn = document.createElement('button');
+        resetBtn.type = 'button';
+        resetBtn.className = 'font-slot-kerning__reset';
+        resetBtn.textContent = 'Auto';
+        resetBtn.title = 'Restablecer espaciado óptico recomendado';
+
+        kerningMeta.appendChild(kerningBadge);
+        kerningMeta.appendChild(resetBtn);
+        kerningHead.appendChild(kerningTitle);
+        kerningHead.appendChild(kerningMeta);
+
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'font-slot-kerning__slider-row';
+
+        var sliderInput = document.createElement('input');
+        sliderInput.type = 'range';
+        sliderInput.className = 'font-slot-kerning__slider';
+        sliderInput.min = String(slot.min);
+        sliderInput.max = String(slot.max);
+        sliderInput.step = '0.005';
+        sliderRow.appendChild(sliderInput);
+
+        var presetsRow = document.createElement('div');
+        presetsRow.className = 'font-slot-kerning__presets';
+
+        var presetChips = [];
+        slot.presets.forEach(function(pVal) {
+          var chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'font-track-chip';
+          chip.setAttribute('data-track', pVal);
+          chip.textContent = (pVal === '0') ? '0 (Normal)' : pVal;
+          presetsRow.appendChild(chip);
+          presetChips.push(chip);
+        });
+
+        function updateSlotKerning(trackVal, isManual) {
+          var trackStr = (typeof trackVal === 'number') ? (trackVal + 'em') : String(trackVal);
+          if (trackStr === '0em') trackStr = '0';
+          root.style.setProperty(slot.spacingKey, trackStr);
+          activePaletteVars[slot.spacingKey] = trackStr;
+          prev.style.letterSpacing = trackStr;
+
+          var numVal = parseFloat(trackStr);
+          if (isNaN(numVal)) numVal = 0;
+
+          kerningBadge.textContent = (numVal === 0 ? '0.00em' : (numVal > 0 ? '+' : '') + numVal.toFixed(3) + 'em') + (isManual ? ' (Manual)' : ' (Auto)');
+          sliderInput.value = numVal;
+
+          presetChips.forEach(function(cp) {
+            var cTrack = cp.getAttribute('data-track');
+            var cNum = parseFloat(cTrack);
+            cp.classList.toggle('is-active', Math.abs(cNum - numVal) < 0.004);
+          });
+        }
+
+        sliderInput.oninput = function() {
+          var val = parseFloat(this.value);
+          var str = (val === 0) ? '0' : (val.toFixed(3) + 'em');
+          updateSlotKerning(str, true);
+        };
+
+        resetBtn.onclick = function() {
+          var opt = slot.getOptimal(slot.current);
+          updateSlotKerning(opt, false);
+        };
+
+        presetChips.forEach(function(cp) {
+          cp.onclick = function() {
+            var t = this.getAttribute('data-track');
+            updateSlotKerning(t, true);
+          };
+        });
+
+        // Inicializar estado del kerning para este slot
+        updateSlotKerning(slot.currentSpacing, false);
+
+        kerningBox.appendChild(kerningHead);
+        kerningBox.appendChild(sliderRow);
+        kerningBox.appendChild(presetsRow);
+
+        card.appendChild(top);
+        card.appendChild(desc);
+        card.appendChild(pickerWrap);
+        card.appendChild(prev);
+        card.appendChild(kerningBox);
+        grid.appendChild(card);
+      });
+    }
+
+    // Global listener to close font picker dropdown on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.font-picker-dropdown')) {
+        document.querySelectorAll('.font-picker-dropdown.is-open').forEach(function(dp) {
+          dp.classList.remove('is-open');
+          var m = dp.querySelector('.font-picker-menu');
+          if (m) m.setAttribute('hidden', '');
+          var tb = dp.querySelector('.font-picker-trigger');
+          if (tb) tb.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    function getOptimalTrackingForFont(fontStack) {
+      if (!fontStack) return '0';
+      var name = fontStack.toLowerCase();
+      // Fuentes caligráficas, manuscritas o de trazo continuo
+      if (name.indexOf('amatic') > -1 || name.indexOf('caveat') > -1 || name.indexOf('indie') > -1 ||
+          name.indexOf('lobster') > -1 || name.indexOf('pacifico') > -1 || name.indexOf('comic') > -1 ||
+          name.indexOf('corsiva') > -1 || name.indexOf('comfortaa') > -1 || name.indexOf('gugi') > -1 ||
+          name.indexOf('doppio') > -1 || name.indexOf('major mono') > -1) {
+        return '0';
+      }
+      // Fuentes condensadas
+      if (name.indexOf('condensed') > -1 || name.indexOf('fjalla') > -1 || name.indexOf('impact') > -1 ||
+          name.indexOf('bebas') > -1 || name.indexOf('oswald') > -1 || name.indexOf('saira') > -1) {
+        return '0';
+      }
+      // Monospace
+      if (name.indexOf('mono') > -1 || name.indexOf('code') > -1 || name.indexOf('cousine') > -1) {
+        return '0';
+      }
+      // Serifs clásicas con alto contraste óptico
+      if (name.indexOf('fraunces') > -1 || name.indexOf('garamond') > -1 || name.indexOf('bodoni') > -1 ||
+          name.indexOf('playfair') > -1 || name.indexOf('newsreader') > -1 || name.indexOf('spectral') > -1 ||
+          name.indexOf('marcellus') > -1 || name.indexOf('merriweather') > -1 || name.indexOf('crimson') > -1 ||
+          name.indexOf('lora') > -1 || name.indexOf('baskerville') > -1 || name.indexOf('young') > -1 ||
+          name.indexOf('gloock') > -1 || name.indexOf('cinzel') > -1 || name.indexOf('georgia') > -1 ||
+          name.indexOf('times') > -1 || name.indexOf('cambria') > -1 || name.indexOf('aleo') > -1 ||
+          name.indexOf('arvo') > -1 || name.indexOf('bitter') > -1 || name.indexOf('rokkitt') > -1 ||
+          name.indexOf('zilla') > -1) {
+        return '-0.01em';
+      }
+      // Sans-serif grotesks modernas
+      return '-0.015em';
+    }
+
+    function initFontTrackingControls() {
+      // Los controles de kerning ahora residen individualmente en cada slot dentro de renderFontSlotsGrid()
+    }
+
+    function updateIndividualFont(slotKey, stackValue) {
+      var root = document.documentElement;
+      root.style.setProperty(slotKey, stackValue);
+      activePaletteVars[slotKey] = stackValue;
+
+      var dispName = extractPrimaryFontName(root.style.getPropertyValue('--font-display') || activePaletteVars['--font-display']);
+      var bodyName = extractPrimaryFontName(root.style.getPropertyValue('--font-body') || activePaletteVars['--font-body']);
+
+      var topbarFontLabel = document.getElementById('topbar-font-label');
+      if (topbarFontLabel) {
+        topbarFontLabel.textContent = '🔤 Tipografía: Personalizada (' + dispName + ' + ' + bodyName + ')';
+      }
+      var modalTitle = document.getElementById('font-modal-active-title');
+      if (modalTitle) {
+        modalTitle.textContent = '🔤 Tipografía Activa: ' + dispName + ' + ' + bodyName;
+      }
+      // Re-evaluate wireframe mode
+      var isWf = stackValue.indexOf('Inter') > -1 && slotKey === '--font-display';
+      document.body.classList.toggle('is-wireframe-style', isWf);
+    }
+
+    function applyFontSet(setKey) {
+      var fs = FONT_SETS[setKey];
+      if (!fs) return;
+      activeFontSetKey = setKey;
+
+      var root = document.documentElement;
+      root.style.setProperty('--font-display', fs.display);
+      root.style.setProperty('--font-body', fs.body);
+      root.style.setProperty('--font-mono', fs.mono);
+
+      var optTrack = getOptimalTrackingForFont(fs.display);
+      root.style.setProperty('--font-display-spacing', optTrack);
+      root.style.setProperty('--font-body-spacing', '0');
+      root.style.setProperty('--font-mono-spacing', '0');
+
+      activePaletteVars['--font-display'] = fs.display;
+      activePaletteVars['--font-body'] = fs.body;
+      activePaletteVars['--font-mono'] = fs.mono;
+      activePaletteVars['--font-display-spacing'] = optTrack;
+      activePaletteVars['--font-body-spacing'] = '0';
+      activePaletteVars['--font-mono-spacing'] = '0';
+
+      var dispName = extractPrimaryFontName(fs.display);
+      var bodyName = extractPrimaryFontName(fs.body);
+      var topbarFontLabel = document.getElementById('topbar-font-label');
+      if (topbarFontLabel) {
+        topbarFontLabel.textContent = '🔤 Tipografía: ' + fs.name.split('·')[0].trim() + ' (' + dispName + ' + ' + bodyName + ')';
+      }
+      var modalTitle = document.getElementById('font-modal-active-title');
+      if (modalTitle) {
+        modalTitle.textContent = '🔤 Tipografía Activa: ' + fs.name + ' (' + dispName + ' + ' + bodyName + ')';
+      }
+
+      renderVisualFontCards();
+      renderFontSlotsGrid();
+      // Re-evaluate wireframe mode
+      var isWf = WIREFRAME_SETS.indexOf(setKey) > -1 || fs.display.indexOf('Inter') > -1;
+      document.body.classList.toggle('is-wireframe-style', isWf);
+    }
+    // =========================================================================
+    
+
+    // 5. Inicialización al cargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+      applyPalettePreset('tierra');
+      applyFontSet('f01');
+    });
+  </script>
+
+  <!-- CONTROL DE APERTURA / CIERRE DE TOPBAR (TECLA M Y BOTÓN FAB) -->
+  <script>
+    (function () {
+      var KEY = 'gestor-assembled-topbar-collapsed';
+      var bar = document.querySelector('.catalog-topbar');
+      var btn = document.getElementById('topbar-toggle-fab');
+      if (!bar || !btn) return;
+
+      function apply(collapsed) {
+        document.body.classList.toggle('topbar-collapsed', collapsed);
+        btn.setAttribute('aria-expanded', String(!collapsed));
+        var icon = document.getElementById('topbar-toggle-icon');
+        var label = document.getElementById('topbar-toggle-label');
+        if (icon) icon.textContent = collapsed ? '▼' : '▲';
+        if (label) label.textContent = collapsed ? 'Mostrar menú' : 'Ocultar menú';
+        try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+      }
+
+      btn.addEventListener('click', function () {
+        apply(!document.body.classList.contains('topbar-collapsed'));
+      });
+
+      document.addEventListener('keydown', function (e) {
+        var t = e.target;
+        if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === 'm' || e.key === 'M') btn.click();
+      });
+
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      if (saved === '1') apply(true);
+    })();
+  </script>
+</body>
+</html>
